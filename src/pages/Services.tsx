@@ -1,590 +1,443 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Brain, Cloud, Code, Shield, Database, Cpu, Network, Lock, BarChart3, Settings, Workflow, Layers, ArrowRight, CheckCircle2, Zap, GitBranch, Server, Container, Key, FileCheck, LineChart, Boxes, MessageSquare, Eye, Smartphone, TrendingUp, Sparkles } from "lucide-react";
+import { ArrowRight, Briefcase, Cpu, Layers, Zap, CheckCircle2, TrendingUp, Globe, ShieldCheck, X, QuoteIcon } from "lucide-react";
 import PageLayout from "@/components/layout/PageLayout";
-import PageHero from "@/components/shared/PageHero";
-import SectionHeader from "@/components/shared/SectionHeader";
-import BlogPreview from "@/components/shared/BlogPreview";
-import { Link } from "react-router-dom";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
-const Services = () => (
-  <PageLayout>
-    <PageHero
-      tag="Our Services"
-      title="Enterprise Technology Services at Global Scale"
-      subtitle="Comprehensive technology services designed for global enterprises. From AI and cloud to security and data engineering, we deliver end-to-end solutions that power mission-critical operations worldwide."
-    />
+// --- Interfaces ---
 
-    {/* Services Overview */}
-    <section className="section-padding bg-white">
-      <div className="enterprise-container">
-        <SectionHeader
-          tag="What We Deliver"
-          title="Full-Spectrum Enterprise Technology Services"
-          subtitle="Five core service domains backed by deep expertise, proven methodologies, and global delivery capabilities serving enterprises across 50+ countries."
-        />
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-          {[
-            { icon: Brain, title: "Enterprise AI Solutions", color: "bg-purple-50 border-purple-200 text-purple-600" },
-            { icon: Cloud, title: "Cloud & DevOps", color: "bg-blue-50 border-blue-200 text-blue-600" },
-            { icon: Code, title: "Enterprise Software", color: "bg-green-50 border-green-200 text-green-600" },
-            { icon: Shield, title: "Cybersecurity", color: "bg-red-50 border-red-200 text-red-600" },
-            { icon: Database, title: "Data Engineering", color: "bg-orange-50 border-orange-200 text-orange-600" },
-          ].map((s, i) => (
-            <motion.div
-              key={s.title}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className={`${s.color} border-2 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300`}
-            >
-              <s.icon className="mx-auto mb-3" size={32} />
-              <span className="text-sm font-bold">{s.title}</span>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
+interface ServiceFeature {
+  title: string;
+  description: string;
+}
 
-    {/* Enterprise AI Solutions - Side-icon feature cards */}
-    <section className="section-padding bg-section">
-      <div className="enterprise-container">
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">
-            Enterprise AI Solutions
+interface ServiceStep {
+  step: string;
+  title: string;
+  desc: string;
+}
+
+interface Service {
+  id: string;
+  title: string;
+  tagline: string;
+  description: string;
+  fullDescription: string;
+  icon: React.ElementType;
+  features: ServiceFeature[];
+  methodology: ServiceStep[];
+}
+
+// --- Data ---
+
+const services: Service[] = [
+  {
+    id: "consulting",
+    title: "Strategic Business Consulting",
+    tagline: "Vision to Value",
+    description: "Unlock new growth pathways with data-driven strategies for market entry, startup scaling, and corporate value enhancement.",
+    fullDescription: "Our strategic consulting services are designed to help you navigate complex market landscapes. We partner with you to identify high-value opportunities, optimize your business model, and execute strategies that deliver measurable ROI.",
+    icon: TrendingUp,
+    features: [
+      { title: "Value Enhancement", description: "Optimizing business models for maximum ROI." },
+      { title: "Market Entry", description: "Strategic roadmaps for new territories." },
+      { title: "Startup Scaling", description: "Growth frameworks for high-potential ventures." },
+    ],
+    methodology: [
+      { step: "01", title: "Assessment", desc: "Thorough analysis of current market position and internal capabilities." },
+      { step: "02", title: "Strategy Formulation", desc: "Developing a tailored roadmap with clear milestones and KPIs." },
+      { step: "03", title: "Execution Support", desc: "Hands-on guidance during the implementation phase." },
+      { step: "04", title: "Review & Optimize", desc: "Continuous monitoring and refinement of the strategy." }
+    ]
+  },
+  {
+    id: "operational",
+    title: "Operational Efficiency",
+    tagline: "Streamline & Scale",
+    description: "Transform your operations with BPO solutions and process optimization that drive sustainability and cost-effectiveness.",
+    fullDescription: "We help organizations achieve operational excellence by eliminating inefficiencies and optimizing resource allocation. Our solutions range from business process outsourcing (BPO) to lean process re-engineering.",
+    icon: Layers,
+    features: [
+      { title: "BPO Solutions", description: "Managed services for core business functions." },
+      { title: "Process Optimization", description: "Lean methodologies to eliminate waste." },
+      { title: "Resource Management", description: "Smart allocation for peak performance." },
+    ],
+    methodology: [
+      { step: "01", title: "Process Mapping", desc: "Visualizing current workflows to identify bottlenecks." },
+      { step: "02", title: "Solution Design", desc: "Creating optimized workflows and selecting appropriate tools." },
+      { step: "03", title: "Implementation", desc: "Rolling out changes with minimal disruption to operations." },
+      { step: "04", title: "Performance Tracking", desc: "Monitoring efficiency gains against baselines." }
+    ]
+  },
+  {
+    id: "digital",
+    title: "Digital Transformation",
+    tagline: "Future-Proof Tech",
+    description: "Modernize your tech stack with AI-driven insights, IoT integration, and comprehensive digital ecosystem building.",
+    fullDescription: "Embrace the future with our comprehensive digital transformation services. We help you leverage cutting-edge technologies like AI, IoT, and cloud computing to create a connected, intelligent, and agile enterprise.",
+    icon: Cpu,
+    features: [
+      { title: "AI-Driven Insights", description: "Leveraging data for predictive decision making." },
+      { title: "IoT Management", description: "Smart building and facility connectivity." },
+      { title: "Tech Modernization", description: "Upgrading legacy systems to cloud-native stacks." },
+    ],
+    methodology: [
+      { step: "01", title: "Digital Audit", desc: "Evaluating your current technology landscape and digital maturity." },
+      { step: "02", title: "Architecture Design", desc: "Designing a scalable and secure future-state architecture." },
+      { step: "03", title: "Agile Development", desc: "Iterative development and deployment of digital solutions." },
+      { step: "04", title: "Change Management", desc: "Ensuring smooth adoption of new technologies by your team." }
+    ]
+  },
+  {
+    id: "project-mgmt",
+    title: "Project Management",
+    tagline: "Execution Excellence",
+    description: "End-to-end execution stewardship for industrial projects, ensuring on-time, on-budget, and high-quality delivery.",
+    fullDescription: "Our project management services ensure that your most critical initiatives are delivered successfully. We bring rigorous structure, risk management, and stakeholder alignment to every project.",
+    icon: Briefcase,
+    features: [
+      { title: "End-to-End Execution", description: "Full lifecycle project oversight." },
+      { title: "Industrial Consultancy", description: "Specialized expertise for heavy industry." },
+      { title: "Facilities Management", description: "Optimizing physical asset performance." },
+    ],
+    methodology: [
+      { step: "01", title: "Project Initiation", desc: "Defining scope, objectives, and governance structure." },
+      { step: "02", title: "Detailed Planning", desc: "Creating comprehensive project plans and resource schedules." },
+      { step: "03", title: "Execution & Monitoring", desc: "Rigorous tracking of progress, risks, and quality." },
+      { step: "04", title: "Closure & Handover", desc: "Formal project closure and transition to operations." }
+    ]
+  }
+];
+
+// --- Components ---
+
+const ServiceCard = ({ service, index, onSelect }: { service: Service; index: number; onSelect: (s: Service) => void }) => {
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ y: -5, transition: { duration: 0.1, ease: "easeOut" } }}
+      className="group relative flex flex-col h-full bg-white/70 backdrop-blur-md border border-white/20 shadow-sm hover:shadow-xl transition-all duration-200 rounded-2xl overflow-hidden cursor-pointer"
+      onClick={() => onSelect(service)}
+    >
+      {/* Frosted Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-gray-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+      <div className="p-8 flex flex-col h-full relative z-10">
+        {/* Header */}
+        <div className="flex items-start justify-between mb-6">
+          <div className="p-3 bg-gray-50 rounded-xl group-hover:bg-black group-hover:text-white transition-colors duration-200">
+            <service.icon className="w-8 h-8" strokeWidth={1.5} />
+          </div>
+          <span className="text-xs font-bold tracking-widest uppercase text-gray-400 group-hover:text-gray-600 transition-colors duration-200">
+            0{index + 1}
           </span>
-          <h2 className="section-title">Transform Operations with Enterprise AI</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed mt-4">
-            AI-powered intelligent systems designed for enterprise scale, security, and compliance across global operations.
+        </div>
+
+        {/* Content */}
+        <div className="mb-6">
+          <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:tracking-tight transition-all duration-200">
+            {service.title}
+          </h3>
+          <p className="text-sm font-medium text-gray-500 mb-4 uppercase tracking-wider">
+            {service.tagline}
           </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {[
-            {
-              icon: Sparkles,
-              title: "Generative AI & Large Language Models",
-              desc: "Enterprise-grade LLM integration, RAG architectures, fine-tuned models, and agentic AI systems",
-              features: [
-                "Custom LLM deployment on private infrastructure",
-                "Retrieval-Augmented Generation (RAG) systems",
-                "Fine-tuning for domain-specific knowledge",
-                "Multi-modal AI (text, image, code generation)"
-              ]
-            },
-            {
-              icon: MessageSquare,
-              title: "Natural Language Processing",
-              desc: "Advanced NLP solutions for document understanding, sentiment analysis, and intelligent automation",
-              features: [
-                "Document classification and entity extraction",
-                "Sentiment analysis and opinion mining",
-                "Chatbots and conversational AI platforms",
-                "Multilingual NLP across 50+ languages"
-              ]
-            },
-            {
-              icon: Eye,
-              title: "Computer Vision Systems",
-              desc: "Visual intelligence for quality control, security, and operational efficiency",
-              features: [
-                "Object detection and image classification",
-                "Facial recognition and biometric systems",
-                "Quality inspection and defect detection",
-                "Video analytics and real-time monitoring"
-              ]
-            },
-            {
-              icon: TrendingUp,
-              title: "Predictive Analytics & ML Ops",
-              desc: "Production-ready machine learning pipelines with automated operations and monitoring",
-              features: [
-                "Demand forecasting and predictive maintenance",
-                "Churn prediction and customer lifetime value",
-                "Automated model retraining and deployment",
-                "Model monitoring and drift detection"
-              ]
-            },
-          ].map((service, i) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="p-8 rounded-xl bg-white border border-border hover:border-purple-300 hover:shadow-xl transition-all duration-300"
-            >
-              <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center shrink-0">
-                  <service.icon className="w-6 h-6 text-purple-600" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                  <p className="text-sm text-muted-foreground">{service.desc}</p>
-                </div>
-              </div>
-              <ul className="space-y-3">
-                {service.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 size={16} className="text-purple-600 mt-0.5 shrink-0" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* Cloud & DevOps - Split panels */}
-    <section className="section-padding bg-white">
-      <div className="enterprise-container">
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">
-            Cloud & DevOps Engineering
-          </span>
-          <h2 className="section-title">Build Resilient Cloud Infrastructure</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed mt-4">
-            Cloud-native architectures and DevOps practices for scalable, reliable enterprise systems across multi-cloud environments.
+          <p className="text-gray-600 leading-relaxed mb-6">
+            {service.description}
           </p>
-        </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="p-8 rounded-xl bg-blue-50 border-2 border-blue-200"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <Cloud className="w-10 h-10 text-blue-600" />
-              <h3 className="text-2xl font-bold">Cloud-Native Architecture</h3>
-            </div>
-            <ul className="space-y-4">
-              {[
-                { title: "Microservices Design", desc: "Distributed, independently scalable service architectures" },
-                { title: "Multi-Cloud Strategy", desc: "AWS, Azure, GCP optimization and workload distribution" },
-                { title: "Serverless Computing", desc: "Event-driven functions and cost-optimized execution" },
-                { title: "Cloud Migration", desc: "Legacy system modernization and cloud transformation" }
-              ].map((item) => (
-                <li key={item.title} className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center shrink-0 mt-1">
-                    <ArrowRight size={14} className="text-white" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-foreground mb-1">{item.title}</div>
-                    <div className="text-sm text-muted-foreground">{item.desc}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="p-8 rounded-xl bg-white border-2 border-border"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <GitBranch className="w-10 h-10 text-accent" />
-              <h3 className="text-2xl font-bold">DevOps & Automation</h3>
-            </div>
-            <ul className="space-y-4">
-              {[
-                { title: "CI/CD Pipelines", desc: "Automated build, test, and deployment workflows" },
-                { title: "Infrastructure as Code", desc: "Terraform, CloudFormation, and Ansible automation" },
-                { title: "Kubernetes Orchestration", desc: "Container management and auto-scaling" },
-                { title: "Monitoring & Observability", desc: "Prometheus, Grafana, ELK stack integration" }
-              ].map((item) => (
-                <li key={item.title} className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center shrink-0 mt-1">
-                    <ArrowRight size={14} className="text-white" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-foreground mb-1">{item.title}</div>
-                    <div className="text-sm text-muted-foreground">{item.desc}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        </div>
-
-        <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-8 rounded-xl border border-blue-200 text-center">
-          <Container className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-          <h4 className="text-xl font-bold mb-3">Kubernetes Expertise</h4>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
-            We specialize in Kubernetes deployments across cloud providers, implementing auto-scaling, service mesh architectures, and enterprise-grade security policies for containerized workloads.
-          </p>
-          <div className="flex flex-wrap gap-3 justify-center">
-            {["EKS", "AKS", "GKE", "Helm Charts", "Istio Service Mesh", "ArgoCD"].map((tech) => (
-              <span key={tech} className="px-4 py-2 bg-white rounded-full text-sm font-semibold text-foreground border border-blue-200">
-                {tech}
-              </span>
+          {/* Micro-features */}
+          <ul className="space-y-2 mb-8 border-t border-gray-100 pt-6">
+            {service.features.map((feature, idx) => (
+              <li key={idx} className="flex items-start gap-2 text-sm text-gray-600">
+                <CheckCircle2 className="w-4 h-4 text-black mt-0.5 shrink-0 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" style={{ transitionDelay: `${idx * 30}ms` }} />
+                <span className="group-hover:translate-x-0 -translate-x-4 transition-transform duration-200" style={{ transitionDelay: `${idx * 30}ms` }}>
+                  {feature.title}
+                </span>
+              </li>
             ))}
+          </ul>
+        </div>
+
+        {/* Footer / CTA */}
+        <div className="mt-auto pt-6 border-t border-gray-100 flex items-center justify-between">
+          <span className="text-sm font-bold text-gray-900">Explore Solution</span>
+          <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all duration-200">
+            <ArrowRight className="w-4 h-4 group-hover:-rotate-45 transition-transform duration-200" />
           </div>
         </div>
       </div>
-    </section>
+    </motion.article>
+  );
+};
 
-    {/* Enterprise Software Development - Step-based workflow */}
-    <section className="section-padding bg-section">
-      <div className="enterprise-container">
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">
-            Enterprise Software Development
-          </span>
-          <h2 className="section-title">Custom Enterprise Applications</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed mt-4">
-            Mission-critical enterprise applications built for performance, security, and global scale.
-          </p>
+// --- Main Page Component ---
+
+const Services = () => {
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+
+  return (
+    <PageLayout>
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 md:pt-16 md:pb-64 overflow-hidden bg-black">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://bairesdev.mo.cloudinary.net/blog/2023/06/Is-Python-good-for-software-development.jpg?tx=w_1920,q_auto"
+            alt="Background"
+            className="w-full h-full object-cover opacity-70"
+          />
+          {/* Enhanced readability overlays */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 to-black/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20"></div>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-6 mb-12">
-          {[
-            {
-              step: "01",
-              title: "Requirements & Architecture",
-              desc: "Deep-dive discovery, system design, and architecture planning",
-              icon: Workflow
-            },
-            {
-              step: "02",
-              title: "Agile Development",
-              desc: "Iterative development with continuous stakeholder feedback",
-              icon: Code
-            },
-            {
-              step: "03",
-              title: "Quality Assurance",
-              desc: "Comprehensive testing, security audits, and performance optimization",
-              icon: CheckCircle2
-            },
-            {
-              step: "04",
-              title: "Deployment & Support",
-              desc: "Seamless rollout and 24/7 enterprise-grade support",
-              icon: Server
-            },
-          ].map((phase, i) => (
-            <motion.div
-              key={phase.step}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="relative"
+        <div className="container px-4 md:px-6 mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-semibold uppercase tracking-widest text-gray-200 mb-8 backdrop-blur-md shadow-lg">
+              <Globe className="w-3 h-3" />
+              Global Services
+            </div>
+            <h1
+              className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-8 leading-tight drop-shadow-2xl"
+              style={{ textShadow: "0 4px 30px rgba(0,0,0,0.8)" }}
             >
-              <div className="absolute -top-3 -left-3 text-6xl font-bold text-green-100">{phase.step}</div>
-              <div className="relative p-6 rounded-xl bg-white border-2 border-green-200 hover:shadow-lg transition-all duration-300">
-                <phase.icon className="w-10 h-10 text-green-600 mb-4" />
-                <h3 className="text-lg font-bold mb-2">{phase.title}</h3>
-                <p className="text-sm text-muted-foreground">{phase.desc}</p>
-              </div>
-              {i < 3 && (
-                <div className="hidden md:block absolute top-20 -right-3 w-6 h-0.5 bg-green-200"></div>
-              )}
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          {[
-            {
-              title: "ERP & CRM Systems",
-              items: [
-                "Custom ERP modules for finance, HR, inventory, and operations",
-                "CRM platforms with sales, marketing, and customer service integration",
-                "Integration with existing enterprise systems and databases",
-                "Multi-tenant SaaS architectures for global deployment"
-              ]
-            },
-            {
-              title: "Executive Dashboards & BI Tools",
-              items: [
-                "Real-time executive dashboards with KPI tracking",
-                "Interactive data visualization and reporting",
-                "Predictive analytics and forecasting modules",
-                "Mobile-responsive design for on-the-go access"
-              ]
-            },
-          ].map((category, i) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="p-8 rounded-xl bg-white border border-border"
+              Excellence in <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-purple-300 to-gray-300 filter drop-shadow-lg">
+                Operations & Strategy
+              </span>
+            </h1>
+            <p
+              className="text-xl md:text-2xl text-gray-100 max-w-8xl leading-relaxed font-medium drop-shadow-xl"
+              style={{ textShadow: "0 2px 10px rgba(0,0,0,0.8)" }}
             >
-              <h3 className="text-xl font-bold mb-6 flex items-center gap-3">
-                <Code className="w-6 h-6 text-green-600" />
-                {category.title}
-              </h3>
-              <ul className="space-y-3">
-                {category.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-600 mt-2 shrink-0"></div>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+              We remove the reasons for doubt. From strategic consulting to full-scale digital transformation, we deliver ROI-driven solutions for the modern enterprise.
+            </p>
+          </motion.div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    {/* Cybersecurity - Shield-style bordered cards */}
-    <section className="section-padding bg-gradient-to-br from-red-50 to-orange-50">
-      <div className="enterprise-container">
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-red-600 mb-4">
-            Cybersecurity & Compliance
-          </span>
-          <h2 className="section-title">Enterprise-Grade Security</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed mt-4">
-            Comprehensive security solutions protecting enterprise assets across global operations and regulatory jurisdictions.
-          </p>
-        </div>
+      {/* Services Grid Section */}
+      <section className="py-20 md:py-32 pt-16 pb-16 bg-gray-50/50">
+        <div className="container px-4 md:px-6 mx-auto">
+          <div className="mb-16">
+            <div className="max-w-3xl mb-12">
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+                What's Included
+              </h2>
+              <p className="text-lg text-gray-600">
+                Every partnership includes end-to-end lifecycle management. We ensure your success through a comprehensive support system designed to scale with you.
+              </p>
+            </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            {
-              icon: Shield,
-              title: "Zero-Trust Architecture",
-              items: [
-                "Identity-based access control",
-                "Micro-segmentation",
-                "Continuous verification",
-                "Least privilege enforcement"
-              ]
-            },
-            {
-              icon: Key,
-              title: "Identity & Access Management",
-              items: [
-                "Single Sign-On (SSO) integration",
-                "Multi-factor authentication (MFA)",
-                "Role-based access control (RBAC)",
-                "Privileged access management"
-              ]
-            },
-            {
-              icon: FileCheck,
-              title: "Compliance Automation",
-              items: [
-                "GDPR, HIPAA, PCI-DSS frameworks",
-                "SOC 2 Type II certification support",
-                "ISO 27001 compliance",
-                "Automated audit logging"
-              ]
-            },
-            {
-              icon: Lock,
-              title: "Data Protection",
-              items: [
-                "End-to-end encryption (at rest & in transit)",
-                "Data loss prevention (DLP)",
-                "Secure key management",
-                "Privacy-preserving analytics"
-              ]
-            },
-            {
-              icon: Eye,
-              title: "Threat Detection & Response",
-              items: [
-                "SIEM integration and monitoring",
-                "Intrusion detection systems",
-                "Incident response playbooks",
-                "24/7 security operations center"
-              ]
-            },
-            {
-              icon: Network,
-              title: "Network Security",
-              items: [
-                "Next-gen firewalls and WAF",
-                "DDoS protection and mitigation",
-                "VPN and secure connectivity",
-                "Network segmentation"
-              ]
-            },
-          ].map((service, i) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className="p-6 rounded-xl bg-white border-4 border-red-200 hover:border-red-400 hover:shadow-2xl transition-all duration-300"
-            >
-              <div className="flex items-center justify-center w-14 h-14 rounded-full bg-red-100 mb-5">
-                <service.icon className="w-7 h-7 text-red-600" />
-              </div>
-              <h3 className="text-lg font-bold mb-4">{service.title}</h3>
-              <ul className="space-y-2">
-                {service.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 size={14} className="text-red-600 mt-1 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
+              {/* Decorative connecting line for desktop */}
+              <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-gray-200 to-transparent -translate-y-1/2 z-0"></div>
 
-        <div className="mt-12 p-8 rounded-xl bg-white border-2 border-red-300 text-center">
-          <Shield className="w-12 h-12 text-red-600 mx-auto mb-4" />
-          <h4 className="text-xl font-bold mb-3">100% Compliance Record</h4>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Zero security breaches across our global client portfolio. Our security-first approach and continuous monitoring ensure enterprise assets remain protected across all threat vectors.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    {/* Data Engineering - Pipeline visual blocks */}
-    <section className="section-padding bg-white">
-      <div className="enterprise-container">
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">
-            Data Engineering & Analytics
-          </span>
-          <h2 className="section-title">Transform Data into Intelligence</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed mt-4">
-            Modern data engineering platforms and analytics solutions that turn raw data into actionable business intelligence.
-          </p>
-        </div>
-
-        {/* Data Pipeline Visualization */}
-        <div className="mb-16">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            {[
-              { icon: Database, title: "Data Sources", desc: "Databases, APIs, Streams" },
-              { icon: Workflow, title: "ETL Pipelines", desc: "Extract, Transform, Load" },
-              { icon: Server, title: "Data Warehouse", desc: "Centralized Storage" },
-              { icon: LineChart, title: "Analytics & BI", desc: "Dashboards, Reports" },
-            ].map((stage, i) => (
-              <div key={stage.title} className="flex items-center gap-6">
+              {[
+                { title: "Consultation", icon: CheckCircle2, color: "from-blue-400 to-blue-600" },
+                { title: "Development", icon: Cpu, color: "from-purple-400 to-purple-600" },
+                { title: "Maintenance", icon: Layers, color: "from-emerald-400 to-emerald-600" },
+                { title: "Security", icon: ShieldCheck, color: "from-indigo-400 to-indigo-600" },
+                { title: "Support", icon: ArrowRight, color: "from-orange-400 to-orange-600" }
+              ].map((item, i) => (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="flex-1 min-w-[200px]"
+                  className="relative z-10"
                 >
-                  <div className="p-6 rounded-xl bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-200 text-center">
-                    <stage.icon className="w-10 h-10 text-orange-600 mx-auto mb-3" />
-                    <h4 className="font-bold mb-1">{stage.title}</h4>
-                    <p className="text-xs text-muted-foreground">{stage.desc}</p>
+                  <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-white border border-gray-100 shadow-lg h-full relative overflow-hidden">
+                    {/* Gradient Glow Effect - Permanent low opacity */}
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${item.color} opacity-10`}></div>
+
+                    {/* Icon with animated background */}
+                    <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${item.color} flex items-center justify-center text-white shadow-lg mb-4 relative z-10`}>
+                      <item.icon size={24} />
+                    </div>
+
+                    <h3 className="font-bold text-gray-900 relative z-10">{item.title}</h3>
+                    <div className={`mt-2 h-1 w-12 rounded-full bg-gradient-to-r ${item.color} opacity-60`}></div>
                   </div>
                 </motion.div>
-                {i < 3 && (
-                  <ArrowRight className="hidden md:block w-6 h-6 text-orange-300 shrink-0" />
-                )}
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {services.map((service, index) => (
+              <div key={service.id} className={`${index === 3 ? "lg:col-start-2" : ""}`}>
+                <ServiceCard service={service} index={index} onSelect={setSelectedService} />
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {[
-            {
-              title: "Big Data Processing",
-              icon: Boxes,
-              items: [
-                "Apache Spark for distributed data processing",
-                "Kafka for real-time data streaming",
-                "Hadoop ecosystem integration",
-                "Petabyte-scale data processing capabilities"
-              ]
-            },
-            {
-              title: "Business Intelligence Dashboards",
-              icon: BarChart3,
-              items: [
-                "Interactive Power BI and Tableau dashboards",
-                "Custom analytics platforms",
-                "Self-service BI tools for business users",
-                "Mobile-responsive data visualization"
-              ]
-            },
-            {
-              title: "Data Warehousing",
-              icon: Database,
-              items: [
-                "Snowflake, Redshift, BigQuery implementation",
-                "Data modeling and schema design",
-                "Performance optimization and indexing",
-                "Multi-region data replication"
-              ]
-            },
-            {
-              title: "Real-Time Analytics",
-              icon: Zap,
-              items: [
-                "Streaming analytics and event processing",
-                "Real-time dashboards and alerts",
-                "Low-latency data pipelines",
-                "Live operational intelligence"
-              ]
-            },
-          ].map((service, i) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="p-8 rounded-xl border-2 border-border hover:border-orange-300 hover:shadow-lg transition-all duration-300 bg-card"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-lg bg-orange-100 flex items-center justify-center">
-                  <service.icon className="w-6 h-6 text-orange-600" />
+      {/* Value Proposition / Trust Section */}
+      {/* Value Proposition / Trust Section */}
+      <section className="pt-16 pb-32 bg-slate-950 text-white overflow-hidden relative">
+        {/* Ambient Background Effects */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+
+        <div className="container px-4 md:px-6 mx-auto relative z-10 box-border">
+          {/* Section Heading - Full Width for Single Line */}
+          <div className="max-w-7xl mx-auto text-center mb-16">
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight tracking-tight drop-shadow-2xl">
+              <span className="text-white drop-shadow-[0_2px_10px_rgba(255,255,255,0.2)]">Why Global Leaders </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-indigo-200 to-white drop-shadow-[0_0_20px_rgba(59,130,246,0.6)]">
+                Choose Us.
+              </span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            <div className="space-y-6">
+              {[
+                { title: "ROI-Focused", desc: "Every strategy is measured by tangible financial impact.", icon: TrendingUp, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+                { title: "Sustainable Growth", desc: "Building systems that last and adapt to future challenges.", icon: Globe, color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
+                { title: "Zero Doubt", desc: "Transparent execution that builds absolute confidence.", icon: ShieldCheck, color: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" }
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className={`flex gap-6 p-6 rounded-2xl border ${item.border} ${item.bg} hover:bg-opacity-20 transition-all duration-300 backdrop-blur-sm group`}
+                >
+                  <div className={`w-12 h-12 rounded-xl ${item.bg} ${item.color} flex items-center justify-center shrink-0 border border-white/5`}>
+                    <item.icon className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-2 text-white group-hover:text-white/90 transition-colors">{item.title}</h3>
+                    <p className="text-slate-300 leading-relaxed text-sm md:text-base">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="relative mt-8 md:mt-0">
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl opacity-30 blur-xl animate-pulse"></div>
+              <div className="relative bg-slate-900/90 border border-white/10 rounded-2xl p-8 md:p-12 backdrop-blur-xl shadow-2xl">
+                <QuoteIcon className="w-8 h-8 text-blue-500 mb-6 opacity-50" />
+                <blockquote className="text-2xl md:text-3xl font-medium leading-relaxed mb-8 text-slate-100">
+                  <span className="text-blue-400">"</span>
+                  They didn't just consult; they executed. The transformation in our operational efficiency was immediate and measurable.
+                  <span className="text-blue-400">"</span>
+                </blockquote>
+                <div className="flex items-center gap-4 pt-6 border-t border-white/5">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg">CP</div>
+                  <div>
+                    <div className="font-bold text-white">Client Partner</div>
+                    <div className="text-sm text-blue-200/70">Global Logistics Firm</div>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold">{service.title}</h3>
               </div>
-              <ul className="space-y-3">
-                {service.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <div className="w-1.5 h-1.5 rounded-full bg-orange-600 mt-2 shrink-0"></div>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    {/* CTA Section */}
-    <section className="section-padding bg-primary">
-      <div className="enterprise-container text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to Transform Your Enterprise Technology?
-          </h2>
-          <p className="text-xl text-white/85 mb-8 max-w-2xl mx-auto">
-            Let's discuss how our enterprise technology services can accelerate your digital transformation goals.
-          </p>
-          <Link to="/contact" className="btn-accent inline-flex items-center px-10 py-4 text-base">
-            Talk to Our Experts <ArrowRight size={18} className="ml-2" />
-          </Link>
-        </motion.div>
-      </div>
-    </section>
+      {/* Service Detail Modal */}
+      <Dialog open={!!selectedService} onOpenChange={(open) => !open && setSelectedService(null)}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 gap-0 sm:rounded-2xl border-none">
+          {selectedService && (
+            <div className="flex flex-col">
+              {/* Modal Header */}
+              <div className="relative bg-gradient-to-br from-gray-900 to-black text-white p-8 md:p-12 overflow-hidden">
+                <div className="absolute top-0 right-0 p-4 z-20">
+                  <button onClick={() => setSelectedService(null)} className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white">
+                    <X size={20} />
+                    <span className="sr-only">Close</span>
+                  </button>
+                </div>
 
-    <BlogPreview />
-  </PageLayout>
-);
+                {/* Background Decor */}
+                <div className="absolute -bottom-24 -right-24 text-white/5 opacity-20 transform rotate-12 pointer-events-none">
+                  <selectedService.icon size={300} strokeWidth={1} />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
+
+                <div className="relative z-10">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-semibold uppercase tracking-widest text-gray-200 mb-6 backdrop-blur-sm border border-white/10">
+                    <selectedService.icon className="w-3 h-3" />
+                    {selectedService.tagline}
+                  </div>
+                  <DialogTitle
+                    className="text-3xl md:text-5xl font-bold mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-100 to-gray-300 drop-shadow-2xl"
+                    style={{ textShadow: "0 0 20px rgba(255,255,255,0.3)" }}
+                  >
+                    {selectedService.title}
+                  </DialogTitle>
+                  <p
+                    className="text-lg text-gray-200 max-w-2xl leading-relaxed drop-shadow-md font-medium"
+                    style={{ textShadow: "0 2px 10px rgba(0,0,0,0.3)" }}
+                  >
+                    {selectedService.fullDescription}
+                  </p>
+                </div>
+              </div>
+
+              {/* Modal Content */}
+              <div className="p-8 md:p-12 bg-white">
+                <div className="grid md:grid-cols-2 gap-12">
+                  <div>
+                    <h4 className="text-xl font-bold mb-6 text-gray-900 flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5" /> Key Capabilities
+                    </h4>
+                    <ul className="space-y-4">
+                      {selectedService.features.map((feature, i) => (
+                        <li key={i} className="p-4 bg-gray-50 rounded-lg border border-gray-100">
+                          <div className="font-bold text-gray-900 mb-1">{feature.title}</div>
+                          <div className="text-sm text-gray-600">{feature.description}</div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xl font-bold mb-6 text-gray-900 flex items-center gap-2">
+                      <Layers className="w-5 h-5" /> Methodology
+                    </h4>
+                    <div className="space-y-6">
+                      {selectedService.methodology.map((step) => (
+                        <div key={step.step} className="flex gap-4">
+                          <span className="text-2xl font-bold text-indigo-600 shrink-0">{step.step}</span>
+                          <div>
+                            <div className="font-bold text-gray-900">{step.title}</div>
+                            <div className="text-sm text-gray-600 leading-relaxed">{step.desc}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-12 pt-8 border-t border-gray-100 text-center">
+                  <p className="text-gray-600 mb-6">Ready to see the impact of {selectedService.title} on your business?</p>
+                  <a href="/contact" className="btn-accent inline-flex items-center px-8 py-3 rounded-full text-sm font-bold bg-black text-white hover:bg-gray-800 transition-colors">
+                    Discuss Requirements <ArrowRight size={16} className="ml-2" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+    </PageLayout>
+  );
+};
 
 export default Services;

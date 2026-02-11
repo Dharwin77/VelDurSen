@@ -12,9 +12,10 @@ interface PageHeroProps {
   bgImage?: string;
   bgImages?: string[];
   overlay?: boolean;
+  centered?: boolean;
 }
 
-const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, bgImages, overlay = true }: PageHeroProps) => {
+const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, bgImages, overlay = true, centered = false }: PageHeroProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = bgImages || (bgImage ? [bgImage] : []);
 
@@ -49,7 +50,7 @@ const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, bgImages, o
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl"
+          className={centered ? "max-w-4xl mx-auto text-center" : "max-w-3xl"}
         >
           {tag && (
             <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">
@@ -59,7 +60,7 @@ const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, bgImages, o
           <h1 className="text-3xl md:text-5xl lg:text-[3.25rem] font-bold text-primary-foreground leading-tight mb-5 drop-shadow-lg">
             {title}
           </h1>
-          <p className="text-lg md:text-xl text-primary-foreground font-medium leading-relaxed mb-8 max-w-2xl drop-shadow-sm">
+          <p className={`text-lg md:text-xl text-primary-foreground font-medium leading-relaxed mb-8 drop-shadow-sm ${centered ? 'mx-auto' : 'max-w-2xl'}`}>
             {subtitle}
           </p>
           {ctaText && ctaLink && (

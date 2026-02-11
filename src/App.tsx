@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 import Industries from "./pages/Industries";
 import Technologies from "./pages/Technologies";
+import TechnologyDetail from "./pages/TechnologyDetail";
 import Achievements from "./pages/Achievements";
 import History from "./pages/History";
 import Blog from "./pages/Blog";
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/industries" element={<Industries />} />
           <Route path="/technologies" element={<Technologies />} />
+          <Route path="/technologies/:slug" element={<TechnologyDetail />} />
           <Route path="/achievements" element={<Achievements />} />
           <Route path="/history" element={<History />} />
           <Route path="/blog" element={<Blog />} />

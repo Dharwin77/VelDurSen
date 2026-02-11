@@ -1,17 +1,53 @@
 const styles = {
   hero: {
-    background: 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)',
+    position: 'relative',
     color: 'white',
-    padding: '3rem 1.5rem',
+    padding: '2rem 1.5rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: '400px',
-    textAlign: 'center'
+    gap: '2rem',
+    minHeight: '180px',
+    textAlign: 'center',
+    borderRadius: '16px',
+    margin: '1.5rem',
+    maxWidth: '1600px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    overflow: 'hidden'
+  },
+  videoBackground: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    zIndex: 1,
+    opacity: 0.7
+  },
+  heroOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    background: 'rgba(30, 58, 138, 0.4)',
+    zIndex: 2
+  },
+  heroImage: {
+    width: '200px',
+    height: '150px',
+    objectFit: 'cover',
+    borderRadius: '12px',
+    flexShrink: 0,
+    zIndex: 3,
+    position: 'relative'
   },
   heroContent: {
-    zIndex: 2,
-    maxWidth: '800px'
+    zIndex: 3,
+    maxWidth: '600px',
+    flex: 1
   },
   h1: {
     fontSize: '3rem',
@@ -54,6 +90,17 @@ const styles = {
 function Hero() {
   return (
     <section style={styles.hero} id="home">
+      <video 
+        style={styles.videoBackground}
+        autoPlay 
+        muted 
+        loop 
+        playsInline
+      >
+        <source src="https://cdn.pixabay.com/vimeo/360960878/video-360960878_small.mp4" type="video/mp4" />
+      </video>
+      <div style={styles.heroOverlay}></div>
+      
       <div style={styles.heroContent}>
         <h1 style={styles.h1}>Innovative Software Solutions</h1>
         <p style={styles.p}>Cutting-edge technology and expertise for your digital transformation</p>
@@ -62,6 +109,11 @@ function Hero() {
           <button style={{...styles.btn, ...styles.btnSecondary}}>Learn More</button>
         </div>
       </div>
+      <img 
+        src="https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=400&h=300&fit=crop" 
+        alt="Software Solutions" 
+        style={styles.heroImage}
+      />
     </section>
   )
 }

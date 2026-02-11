@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 const styles = {
   technologies: {
     padding: '3rem 1.5rem',
@@ -62,58 +64,59 @@ const styles = {
 }
 
 function Technologies() {
+  const navigate = useNavigate()
   const technologies = [
     {
-      id: 1,
+      id: 'react',
       name: 'React',
       description: 'Modern JavaScript library for building dynamic and interactive user interfaces with component-based architecture',
       icon: '⚛️',
       category: 'Frontend Framework'
     },
     {
-      id: 2,
+      id: 'vite',
       name: 'Vite',
       description: 'Next-generation build tool providing lightning-fast development experience and optimized production builds',
       icon: '⚡',
       category: 'Build Tool'
     },
     {
-      id: 3,
+      id: 'nodejs',
       name: 'Node.js',
       description: 'JavaScript runtime for building scalable backend services and APIs with high performance',
       icon: '💚',
       category: 'Backend Runtime'
     },
     {
-      id: 4,
+      id: 'typescript',
       name: 'TypeScript',
       description: 'Strongly-typed JavaScript superset ensuring code reliability, maintainability, and better developer experience',
       icon: '🔵',
       category: 'Language'
     },
     {
-      id: 5,
+      id: 'mongodb',
       name: 'MongoDB',
       description: 'Flexible NoSQL database for storing and managing large-scale data with high availability',
       icon: '🍃',
       category: 'Database'
     },
     {
-      id: 6,
+      id: 'docker',
       name: 'Docker',
       description: 'Containerization platform for consistent deployment across different environments',
       icon: '🐳',
       category: 'DevOps'
     },
     {
-      id: 7,
+      id: 'aws',
       name: 'AWS',
       description: 'Cloud infrastructure services for scalable and reliable application deployment',
       icon: '☁️',
       category: 'Cloud Platform'
     },
     {
-      id: 8,
+      id: 'graphql',
       name: 'GraphQL',
       description: 'Modern API query language enabling efficient data fetching and flexible client requirements',
       icon: '📊',
@@ -144,6 +147,7 @@ function Technologies() {
               style={styles.card}
               onMouseEnter={handleCardHover}
               onMouseLeave={handleCardLeave}
+              onClick={() => navigate(`/technology/${tech.id}`)}
             >
               <div style={styles.icon}>{tech.icon}</div>
               <span style={styles.category}>{tech.category}</span>

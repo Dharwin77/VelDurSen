@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 const styles = {
   benefits: {
     padding: '3rem 1.5rem',
@@ -67,44 +69,45 @@ const styles = {
 }
 
 function Benefits() {
+  const navigate = useNavigate()
   const benefits = [
     {
-      id: 1,
+      id: 'performance',
       title: 'High Performance',
       description: 'Optimized solutions that deliver lightning-fast load times and smooth user experiences across all devices',
       icon: '⚡',
       metrics: '99.9% Uptime'
     },
     {
-      id: 2,
+      id: 'scalability',
       title: 'Scalability',
       description: 'Architecture designed to grow with your business, handling increasing traffic and data seamlessly',
       icon: '📈',
       metrics: '10x Growth Ready'
     },
     {
-      id: 3,
+      id: 'security',
       title: 'Security First',
       description: 'Enterprise-grade security with encryption, authentication, and regular audits to protect your data',
       icon: '🔒',
       metrics: 'ISO 27001 Certified'
     },
     {
-      id: 4,
+      id: 'costefficient',
       title: 'Cost Efficient',
       description: 'Optimized infrastructure and smart development practices reduce operational costs significantly',
       icon: '💰',
       metrics: '40% Cost Savings'
     },
     {
-      id: 5,
+      id: 'speed',
       title: 'Rapid Development',
       description: 'Agile methodology and modern tools enable faster time-to-market for your solutions',
       icon: '🚀',
       metrics: '2x Faster Delivery'
     },
     {
-      id: 6,
+      id: 'support',
       title: '24/7 Support',
       description: 'Dedicated support team available round-the-clock to assist with any technical issues or updates',
       icon: '💬',
@@ -137,6 +140,7 @@ function Benefits() {
               style={styles.card}
               onMouseEnter={handleCardHover}
               onMouseLeave={handleCardLeave}
+              onClick={() => navigate(`/benefit/${benefit.id}`)}
             >
               <div style={styles.icon}>{benefit.icon}</div>
               <h3 style={styles.h3}>{benefit.title}</h3>

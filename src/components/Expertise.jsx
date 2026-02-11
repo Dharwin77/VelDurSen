@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 const styles = {
   expertise: {
     padding: '3rem 1.5rem',
@@ -54,39 +56,40 @@ const styles = {
 }
 
 function Expertise() {
+  const navigate = useNavigate()
   const expertiseAreas = [
     {
-      id: 1,
+      id: 'webdev',
       title: 'Web Development',
       description: 'Modern, responsive web applications built with cutting-edge frameworks and best practices',
       icon: '🌐'
     },
     {
-      id: 2,
+      id: 'frontend',
       title: 'Frontend Engineering',
       description: 'Interactive and performant user interfaces with React, Vue, and modern JavaScript',
       icon: '⚙️'
     },
     {
-      id: 3,
+      id: 'optimization',
       title: 'Build Optimization',
       description: 'Fast compilation and optimized deployments using Vite and advanced bundling techniques',
       icon: '⚡'
     },
     {
-      id: 4,
+      id: 'performance',
       title: 'Performance',
       description: 'High-performance applications with optimized rendering, caching, and resource management',
       icon: '🚀'
     },
     {
-      id: 5,
+      id: 'design',
       title: 'Design Systems',
       description: 'Scalable CSS architectures and component libraries for consistent user experiences',
       icon: '🎨'
     },
     {
-      id: 6,
+      id: 'qa',
       title: 'Quality Assurance',
       description: 'Comprehensive testing and code quality standards ensuring reliability and maintainability',
       icon: '✅'
@@ -118,6 +121,7 @@ function Expertise() {
               style={styles.card}
               onMouseEnter={handleCardHover}
               onMouseLeave={handleCardLeave}
+              onClick={() => navigate(`/expertise/${area.id}`)}
             >
               <div style={styles.icon}>{area.icon}</div>
               <h3 style={styles.h3}>{area.title}</h3>

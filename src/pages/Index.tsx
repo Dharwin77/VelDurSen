@@ -843,10 +843,10 @@ const Index = () => (
             Trusted worldwide for building secure, scalable, and sustainable enterprise systems that power mission-critical operations across industries and continents.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link to="/contact" className="btn-accent hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+            <Link to="/contact" state={{ fromButton: true }} className="btn-accent hover:bg-primary hover:text-primary-foreground transition-all duration-300">
               Talk to Experts <ArrowRight size={16} className="ml-2" />
             </Link>
-            <Link to="/services" className="inline-flex items-center justify-center rounded-md border-2 border-primary-foreground/30 text-primary-foreground px-8 py-3 text-sm font-semibold transition-all duration-300 hover:bg-accent hover:border-accent hover:text-accent-foreground">
+            <Link to="/services" state={{ fromButton: true }} className="inline-flex items-center justify-center rounded-md border-2 border-primary-foreground/30 text-primary-foreground px-8 py-3 text-sm font-semibold transition-all duration-300 hover:bg-accent hover:border-accent hover:text-accent-foreground">
               Explore Services
             </Link>
           </div>
@@ -942,6 +942,7 @@ const Index = () => (
             </p>
             <Link
               to="/about"
+              state={{ fromButton: true }}
               className="btn-enterprise"
             >
               Learn More About Us <ArrowRight size={16} className="ml-2" />

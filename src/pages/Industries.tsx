@@ -45,7 +45,7 @@ const Industries = () => {
               We don't just provide technology; we architect domain-specific ecosystems that redefine what's possible in your sector.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link to="/contact" className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-white hover:text-slate-950 transition-all shadow-2xl shadow-red-600/20">
+              <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-white hover:text-slate-950 transition-all shadow-2xl shadow-red-600/20">
                 Connect with Experts
               </Link>
               <div className="flex items-center gap-4 px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">
@@ -168,7 +168,7 @@ const Industries = () => {
               </div>
 
               <div className="flex items-center gap-6 pt-2">
-                <Link to="/contact" className="btn-enterprise rounded-full px-8 py-3 text-sm">Request Domain Brief</Link>
+                <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise rounded-full px-8 py-3 text-sm">Request Domain Brief</Link>
                 <div className="h-10 w-px bg-slate-200" />
                 <p className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] max-w-[100px]">
                   Impact: Improved Patient Outcomes
@@ -254,7 +254,7 @@ const Industries = () => {
               </div>
 
               <div className="pt-4">
-                <Link to="/contact" className="inline-flex items-center justify-center bg-slate-950 text-white font-black px-10 py-4 rounded-full hover:bg-red-600 transition-all duration-300 shadow-xl shadow-slate-200 hover:shadow-red-200 text-sm">
+                <Link to="/contact" state={{ fromButton: true }} className="inline-flex items-center justify-center bg-slate-950 text-white font-black px-10 py-4 rounded-full hover:bg-red-600 transition-all duration-300 shadow-xl shadow-slate-200 hover:shadow-red-200 text-sm">
                   Expand Academic Horizon <ArrowRight className="ml-4" size={18} />
                 </Link>
               </div>
@@ -307,7 +307,7 @@ const Industries = () => {
               </div>
 
               <div className="pt-4">
-                <Link to="/contact" className="inline-flex items-center gap-6 group">
+                <Link to="/contact" state={{ fromButton: true }} className="inline-flex items-center gap-6 group">
                   <div className="text-xs font-black uppercase tracking-[0.2em] text-slate-950 pb-1 border-b-2 border-slate-950">Implement Industry 4.0</div>
                   <div className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-red-600 group-hover:border-red-600 transition-all">
                     <ArrowRight className="text-slate-400 group-hover:text-white transition-all" size={20} />
@@ -447,7 +447,7 @@ const Industries = () => {
               </div>
 
               <div className="pt-4">
-                <Link to="/contact" className="btn-enterprise bg-white border-2 border-slate-200 text-slate-900 hover:bg-slate-950 hover:text-white hover:border-slate-950 px-8 py-3 text-sm">
+                <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise bg-white border-2 border-slate-200 text-slate-900 hover:bg-slate-950 hover:text-white hover:border-slate-950 px-8 py-3 text-sm">
                   Enhance Commerce Strategy
                 </Link>
               </div>
@@ -496,7 +496,7 @@ const Industries = () => {
               </div>
 
               <div className="pt-4">
-                <Link to="/contact" className="inline-flex items-center gap-4 group">
+                <Link to="/contact" state={{ fromButton: true }} className="inline-flex items-center gap-4 group">
                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-950 pb-1 border-b-2 border-slate-950">Scale Cultivation</span>
                   <div className="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center -rotate-12 group-hover:rotate-0 transition-transform shadow-xl shadow-emerald-200">
                     <Sprout className="text-white" size={16} />

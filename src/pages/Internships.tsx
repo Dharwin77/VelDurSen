@@ -433,10 +433,10 @@ const Internships = () => {
               Applications for our next internship cohort are reviewed on a rolling basis. If you're passionate about technology and ready to learn from real-world enterprise projects, we'd love to hear from you.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/contact" className="btn-enterprise inline-flex items-center">
+              <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise inline-flex items-center">
                 Apply Now <ArrowRight size={16} className="ml-2" />
               </Link>
-              <Link to="/careers" className="px-6 py-3 rounded-lg border-2 border-accent text-accent font-semibold hover:bg-accent hover:text-white transition-all duration-300">
+              <Link to="/careers" state={{ fromButton: true }} className="px-6 py-3 rounded-lg border-2 border-accent text-accent font-semibold hover:bg-accent hover:text-white transition-all duration-300">
                 View Full-Time Careers
               </Link>
             </div>

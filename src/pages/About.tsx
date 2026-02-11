@@ -377,7 +377,7 @@ const About = () => (
         </div>
 
         <div className="text-center mt-12">
-          <Link to="/internships" className="btn-enterprise">
+          <Link to="/internships" state={{ fromButton: true }} className="btn-enterprise">
             Learn About Our Internship Program
           </Link>
         </div>

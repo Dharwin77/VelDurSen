@@ -448,7 +448,7 @@ const History = () => {
               <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto">
                 VelDurSen's commitment has always been to build systems that stand the test of time. As we look to the future, this commitment only grows stronger—pioneering technologies that will power enterprise operations for generations to come.
               </p>
-              <Link to="/contact" className="btn-enterprise inline-flex items-center">
+              <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise inline-flex items-center">
                 Join Our Journey <ArrowRight size={16} className="ml-2" />
               </Link>
             </div>

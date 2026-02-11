@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Youtube } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Twitter, Youtube, Facebook, Instagram } from "lucide-react";
 
 const footerLinks = {
   Company: [
@@ -45,14 +45,20 @@ const Footer = () => {
               Enterprise Technology & Digital Transformation. AI-first, security-first, sustainability-driven.
             </p>
             <div className="flex gap-3">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-md bg-primary-foreground/10 flex items-center justify-center hover:bg-blue-600 transition-colors" aria-label="LinkedIn">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-md bg-primary-foreground/10 flex items-center justify-center hover:bg-[#0A66C2] transition-colors" aria-label="LinkedIn">
                 <Linkedin size={16} />
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-md bg-primary-foreground/10 flex items-center justify-center hover:bg-black transition-colors" aria-label="Twitter">
                 <Twitter size={16} />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-md bg-primary-foreground/10 flex items-center justify-center hover:bg-red-600 transition-colors" aria-label="YouTube">
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-md bg-primary-foreground/10 flex items-center justify-center hover:bg-[#FF0000] transition-colors" aria-label="YouTube">
                 <Youtube size={16} />
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-md bg-primary-foreground/10 flex items-center justify-center hover:bg-[#1877F2] transition-colors" aria-label="Facebook">
+                <Facebook size={16} />
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-md bg-primary-foreground/10 flex items-center justify-center hover:bg-[#E4405F] transition-colors" aria-label="Instagram">
+                <Instagram size={16} />
               </a>
             </div>
           </div>

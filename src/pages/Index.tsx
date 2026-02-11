@@ -1032,34 +1032,7 @@ const Index = () => (
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
     </section>
 
-    {/* Final Global CTA */}
-    <section className="section-padding bg-primary">
-      <div className="enterprise-container text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-5">
-            Ready to Transform?
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-            Partner with a Global Enterprise Technology Leader
-          </h2>
-          <p className="text-xl text-white/85 mb-10 max-w-3xl mx-auto leading-relaxed">
-            Join 500+ global enterprises who trust VelDurSen to build secure, scalable, and sustainable digital systems that power their mission-critical operations worldwide.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/contact" className="btn-accent inline-flex items-center px-10 py-4 text-base">
-              Talk to Our Experts <ArrowRight size={18} className="ml-2" />
-            </Link>
-            <Link to="/services" className="inline-flex items-center px-10 py-4 text-base rounded-md border-2 border-white text-white font-semibold transition-all duration-200 hover:bg-white hover:text-primary">
-              Explore Our Services
-            </Link>
-          </div>
-        </motion.div>
-      </div>
-    </section>
+
   </PageLayout>
 );
 

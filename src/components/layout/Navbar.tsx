@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import logo from "@/assets/logo.png";
+
 const navLinks = [
   { label: "Home", path: "/" },
   { label: "About", path: "/about" },
@@ -26,13 +28,8 @@ const Navbar = () => {
       <div className="enterprise-container">
         <div className="flex items-center justify-between h-16 md:h-[72px]">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-heading font-bold text-sm">V</span>
-            </div>
-            <span className="font-heading font-bold text-xl text-foreground tracking-tight">
-              VelDurSen
-            </span>
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="VelDurSen Logo" className="h-14 w-auto" />
           </Link>
 
           {/* Desktop Links */}
@@ -42,8 +39,8 @@ const Navbar = () => {
                 key={link.path}
                 to={link.path}
                 className={`px-3 py-2 text-[13px] font-medium rounded-md transition-colors ${location.pathname === link.path
-                    ? "text-accent bg-accent/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                  ? "text-accent bg-accent/10"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   }`}
               >
                 {link.label}
@@ -82,8 +79,8 @@ const Navbar = () => {
                   to={link.path}
                   onClick={() => setMobileOpen(false)}
                   className={`block px-4 py-2.5 text-sm rounded-md ${location.pathname === link.path
-                      ? "text-accent bg-accent/10 font-medium"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    ? "text-accent bg-accent/10 font-medium"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
                     }`}
                 >
                   {link.label}

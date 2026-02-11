@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Twitter, Youtube } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const footerLinks = {
   Company: [
@@ -36,10 +37,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-5">
-              <div className="w-8 h-8 rounded-md bg-accent flex items-center justify-center">
-                <span className="text-accent-foreground font-heading font-bold text-sm">V</span>
-              </div>
-              <span className="font-heading font-bold text-lg">VelDurSen</span>
+              <img src={logo} alt="VelDurSen Logo" className="h-12 w-auto brightness-0 invert" />
             </div>
             <p className="text-primary-foreground/70 text-sm leading-relaxed mb-6">
               Enterprise Technology & Digital Transformation. AI-first, security-first, sustainability-driven.

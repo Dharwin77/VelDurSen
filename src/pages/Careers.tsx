@@ -187,12 +187,12 @@ const Careers = () => (
     {/* Hero Section */}
     <PageHero
       tag="Careers"
-      title="Build Your Career at Veldursen"
-      subtitle="Join a team that values innovation, collaboration, and real impact. We're building the future—and we want you to be part of it."
-      bgImage="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=600&fit=crop"
-    />
-
-    {/* Life at Veldursen - Culture Section */}
+      <PageHero
+        tag="Careers"
+        title="Build Your Career at Veldursen"
+        subtitle="Join a team that values innovation, collaboration, and real impact. We're building the future—and we want you to be part of it."
+        bgImage="/images/hero.png"
+      />
     <section className="section-padding bg-slate-50 dark:bg-slate-900">
       <div className="enterprise-container">
         <SectionHeader
@@ -227,7 +227,7 @@ const Careers = () => (
 
     {/* Growth & Learning Section */}
     <section className="section-padding">
-      <div className="enterprise-container">
+      <section className="section-padding">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -270,11 +270,11 @@ const Careers = () => (
             className="rounded-lg overflow-hidden shadow-lg h-96"
           >
             <img
-              src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=600&fit=crop"
-              alt="Software engineer collaborating at desk with dual monitors and code"
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
+              <img
+                src="/images/growth.jpg"
+                alt="Growth and learning at Veldursen"
+                className="w-full h-full object-cover"
+              />
         </div>
       </div>
     </section>
@@ -350,11 +350,11 @@ const Careers = () => (
               </blockquote>
               <div className="flex items-center gap-4 border-t border-slate-200 dark:border-slate-700 pt-4">
                 <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-                <div>
+              <img
+                src="/images/diversity.jpg"
+                alt="Diverse group of tech professionals"
+                className="w-full h-full object-cover"
+              />
                   <p className="font-semibold text-slate-900 dark:text-white">
                     {testimonial.name}
                   </p>

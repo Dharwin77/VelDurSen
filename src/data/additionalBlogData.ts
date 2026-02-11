@@ -3,6 +3,20 @@
 
 import { BlogPost } from "./blogData";
 import blog1Image from "@/assets/blog-1.png";
+import blog2Image from "@/assets/blog-2.png";
+import blog3Image from "@/assets/blog-3.png";
+import blog4Image from "@/assets/blog-4.png";
+import blog5Image from "@/assets/blog-5.png";
+import blog6Image from "@/assets/blog-6.png";
+import blog7Image from "@/assets/blog-7.png";
+import blog8Image from "@/assets/blog-8.png";
+import blog9Image from "@/assets/blog-9.png";
+import blog10Image from "@/assets/blog-10.png";
+import blog11Image from "@/assets/blog-11.png";
+import blog12Image from "@/assets/blog-12.png";
+import blog13Image from "@/assets/blog-13.png";
+import blog14Image from "@/assets/blog-14.png";
+import blog15Image from "@/assets/blog-15.png";
 
 // Helper function to create blog template
 const createBlogPost = (
@@ -221,7 +235,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Intellectual Property Concerns",
             "Bias in Generated Content",
             "Cost of Large Model Usage",
-        ]
+        ],
+        blog2Image
     ),
 
     createBlogPost(
@@ -251,7 +266,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Explainability vs Performance Trade-offs",
             "Measuring and Mitigating Bias",
             "Documentation and Governance Overhead",
-        ]
+        ],
+        blog3Image
     ),
 
     createBlogPost(
@@ -281,7 +297,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Model Drift and Maintenance",
             "Interpretability for Business Users",
             "Integration with Existing BI Tools",
-        ]
+        ],
+        blog4Image
     ),
 
     createBlogPost(
@@ -311,7 +328,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Cross-Functional Coordination",
             "Keeping Pace with AI Advancement",
             "Measuring Ethics and Fairness",
-        ]
+        ],
+        blog5Image
     ),
 
     // Cloud & Multi-Cloud (5 posts - IDs 6-10)
@@ -342,7 +360,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Skills Required for Multiple Platforms",
             "Data Transfer Costs Between Clouds",
             "Tool and Process Standardization",
-        ]
+        ],
+        blog6Image
     ),
 
     createBlogPost(
@@ -372,7 +391,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Complexity of Multi-Region Systems",
             "Data Consistency Across Regions",
             "Testing DR Without Disruption",
-        ]
+        ],
+        blog7Image
     ),
 
     createBlogPost(
@@ -402,7 +422,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Engineering Resistance to Cost Concerns",
             "Complexity of Multi-Account Optimization",
             "Balancing Cost with Performance",
-        ]
+        ],
+        blog8Image
     ),
 
     createBlogPost(
@@ -432,7 +453,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Data Governance Across Environments",
             "Complexity of Hybrid Management",
             "Skills for Both On-Prem and Cloud",
-        ]
+        ],
+        blog9Image
     ),
 
     createBlogPost(
@@ -462,7 +484,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Monolith Decomposition Complexity",
             "Container Security and Governance",
             "Skills Gap in Cloud-Native Technologies",
-        ]
+        ],
+        blog10Image
     ),
 
     // Cybersecurity (5 posts - IDs 11-15)
@@ -494,7 +517,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "User Experience Impact",
             "Implementation Complexity",
             "Cost of Infrastructure Upgrades",
-        ]
+        ],
+        blog11Image
     ),
 
     createBlogPost(
@@ -524,7 +548,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Secrets Management",
             "Network Policy Enforcement",
             "Compliance in Dynamic Environments",
-        ]
+        ],
+        blog12Image
     ),
 
     createBlogPost(
@@ -554,7 +579,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "User Adoption of MFA",
             "Privileged Account Sprawl",
             "Regulatory Compliance Complexity",
-        ]
+        ],
+        blog13Image
     ),
 
     createBlogPost(
@@ -584,7 +610,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Home Network Vulnerabilities",
             "Security Tool Deployment",
             "User Training Effectiveness",
-        ]
+        ],
+        blog14Image
     ),
 
     createBlogPost(
@@ -614,7 +641,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Regulatory Requirement Changes",
             "Legacy System Compliance",
             "Audit Evidence Collection",
-        ]
+        ],
+        blog15Image
     ),
 
     // Data Engineering & Analytics (5 posts - IDs 16-20)
@@ -645,7 +673,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Data Schema Evolution",
             "Late-Arriving Data",
             "System Scaling Complexity",
-        ]
+        ],
+        blog1Image
     ),
 
     createBlogPost(
@@ -675,7 +704,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Query Performance Optimization",
             "Cost Management at Scale",
             "Schema Management",
-        ]
+        ],
+        blog2Image
     ),
 
     createBlogPost(
@@ -705,7 +735,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Cost Control at Scale",
             "Data Freshness Requirements",
             "User Adoption and Training",
-        ]
+        ],
+        blog3Image
     ),
 
     createBlogPost(
@@ -735,7 +766,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Cross-System Data Quality",
             "Privacy Regulation Complexity",
             "Legacy Data Management",
-        ]
+        ],
+        blog4Image
     ),
 
     createBlogPost(
@@ -765,7 +797,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Analytics Skills Gap",
             "Tool and Platform Selection",
             "Demonstrating Analytics ROI",
-        ]
+        ],
+        blog5Image
     ),
 
     // Sustainability & Green Tech (5 posts - IDs 21-25)
@@ -796,7 +829,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Workload Performance Trade-offs",
             "Multi-Cloud Carbon Tracking",
             "Renewable Energy Access",
-        ]
+        ],
+        blog6Image
     ),
 
     createBlogPost(
@@ -826,7 +860,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Balancing Performance and Efficiency",
             "Team Awareness and Training",
             "Tool and Platform Limitations",
-        ]
+        ],
+        blog7Image
     ),
 
     createBlogPost(
@@ -856,7 +891,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Geographic Renewable Availability",
             "Cooling Technology Integration",
             "Legacy Infrastructure Upgrades",
-        ]
+        ],
+        blog8Image
     ),
 
     createBlogPost(
@@ -886,7 +922,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Data Quality for Sustainability",
             "Balancing Business and Environmental Goals",
             "Measuring AI Sustainability Impact",
-        ]
+        ],
+        blog9Image
     ),
 
     createBlogPost(
@@ -916,7 +953,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Scope 3 Measurement Complexity",
             "Attribution to Business Units",
             "Real-Time vs Periodic Measurement",
-        ]
+        ],
+        blog10Image
     ),
 
     // Industry Insights (5 posts - IDs 26-30)
@@ -947,7 +985,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Legacy System Integration",
             "Clinical Staff Technology Adoption",
             "Interoperability Standards",
-        ]
+        ],
+        blog11Image
     ),
 
     createBlogPost(
@@ -977,7 +1016,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Sophisticated Fraud Techniques",
             "Open Banking Security Risks",
             "Customer Friction vs Security",
-        ]
+        ],
+        blog12Image
     ),
 
     createBlogPost(
@@ -1007,7 +1047,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Workforce Skills Gap",
             "Cybersecurity for OT Systems",
             "ROI Justification for Automation",
-        ]
+        ],
+        blog13Image
     ),
 
     createBlogPost(
@@ -1037,7 +1078,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Multi-Channel Data Integration",
             "Real-Time Inventory Visibility",
             "Privacy in Personalization",
-        ]
+        ],
+        blog14Image
     ),
 
     createBlogPost(
@@ -1067,7 +1109,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Data Privacy for Citizens",
             "Infrastructure Investment",
             "Technology Integration Complexity",
-        ]
+        ],
+        blog15Image
     ),
 
     // Engineering & Architecture (5 posts - IDs 31-35)
@@ -1098,7 +1141,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Stateful Component Scaling",
             "Cost Management at Scale",
             "Complexity in Distributed Systems",
-        ]
+        ],
+        blog1Image
     ),
 
     createBlogPost(
@@ -1128,7 +1172,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Data Consistency Across Services",
             "Service Discovery and Coordination",
             "Monitoring and Debugging",
-        ]
+        ],
+        blog2Image
     ),
 
     createBlogPost(
@@ -1158,7 +1203,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Debugging Distributed Events",
             "Event Ordering Guarantees",
             "Operational Complexity",
-        ]
+        ],
+        blog3Image
     ),
 
     createBlogPost(
@@ -1188,7 +1234,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Backend System Integration",
             "Security and Access Control",
             "Documentation and Developer Support",
-        ]
+        ],
+        blog4Image
     ),
 
     createBlogPost(
@@ -1218,7 +1265,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Meaningful SLO Definition",
             "Automating Toil at Scale",
             "On-Call Sustainability",
-        ]
+        ],
+        blog5Image
     ),
 
     // Innovation & Future Tech (5 posts - IDs 36-40)
@@ -1249,7 +1297,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "AI Talent and Expertise",
             "Computing Infrastructure Requirements",
             "Regulatory Uncertainty",
-        ]
+        ],
+        blog6Image
     ),
 
     createBlogPost(
@@ -1279,7 +1328,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Security in Distributed Environments",
             "Application Deployment Complexity",
             "Data Synchronization",
-        ]
+        ],
+        blog7Image
     ),
 
     createBlogPost(
@@ -1309,7 +1359,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "IoT Security at Scale",
             "Network Connectivity Reliability",
             "Power Consumption Management",
-        ]
+        ],
+        blog8Image
     ),
 
     createBlogPost(
@@ -1339,7 +1390,8 @@ export const additionalBlogPosts: BlogPost[] = [
             "Regulatory Compliance",
             "Human-in-the-Loop Balance",
             "Unexpected Scenario Handling",
-        ]
+        ],
+        blog9Image
     ),
 
     createBlogPost(
@@ -1369,6 +1421,7 @@ export const additionalBlogPosts: BlogPost[] = [
             "Talent and Skills Evolution",
             "Investment Prioritization",
             "Cultural Transformation",
-        ]
+        ],
+        blog10Image
     ),
 ];

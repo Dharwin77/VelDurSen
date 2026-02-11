@@ -11,6 +11,7 @@ import Technologies from "./pages/Technologies";
 import Achievements from "./pages/Achievements";
 import History from "./pages/History";
 import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
 import Careers from "./pages/Careers";
 import Internships from "./pages/Internships";
 import Contact from "./pages/Contact";
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/achievements" element={<Achievements />} />
           <Route path="/history" element={<History />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/internships" element={<Internships />} />
           <Route path="/contact" element={<Contact />} />
@@ -44,3 +46,4 @@ const App = () => (
 );
 
 export default App;
+

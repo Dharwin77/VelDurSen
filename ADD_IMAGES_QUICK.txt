@@ -1,0 +1,74 @@
+# Blog Images - Quick Add Instructions
+
+## Where to Get Images (FREE):
+- **Unsplash.com** ← Recommended
+- Pexels.com
+- Pixabay.com
+
+## Search Term:
+Search for: **"technology abstract light"** or **"minimal tech blue"**
+
+## How Many:
+**40 images** (one per blog post)
+
+## Where to Save:
+Save ALL images to: `E:\VelDurSen\src\assets\blog\`
+
+## File Names (Copy/Paste These):
+```
+enterprise-ai-adoption.jpg
+generative-ai-beyond.jpg
+responsible-ai-regulated.jpg
+ai-predictive-intelligence.jpg
+ai-governance-ethics.jpg
+multi-cloud-management.jpg
+resilient-cloud-architecture.jpg
+cloud-cost-optimization.jpg
+hybrid-cloud-enterprises.jpg
+cloud-native-transformation.jpg
+zero-trust-security-models.jpg
+cloud-native-application-security.jpg
+enterprise-iam-best-practices.jpg
+cybersecurity-distributed-teams.jpg
+compliance-driven-security-architecture.jpg
+real-time-data-pipelines.jpg
+data-lakes-vs-warehouses.jpg
+enterprise-analytics-at-scale.jpg
+data-governance-compliance.jpg
+big-data-business-value.jpg
+carbon-aware-cloud-computing.jpg
+sustainable-devops-practices.jpg
+green-data-centers.jpg
+ethical-ai-sustainable-growth.jpg
+measuring-it-carbon-footprint.jpg
+digital-transformation-healthcare.jpg
+fintech-security-compliance.jpg
+manufacturing-industry-4.0.jpg
+retail-analytics-demand-forecasting.jpg
+smart-cities-powered-by-ai.jpg
+designing-scalable-enterprise-systems.jpg
+microservices-vs-monoliths.jpg
+event-driven-architecture-explained.jpg
+api-first-enterprise-design.jpg
+system-reliability-engineering.jpg
+future-of-enterprise-ai.jpg
+edge-computing-global-systems.jpg
+ai-iot-integration.jpg
+autonomous-systems-enterprises.jpg
+next-decade-digital-transformation.jpg
+```
+
+## Quick Steps:
+1. Go to unsplash.com
+2. Search "technology abstract light"
+3. Download 40 different images
+4. Rename them using the list above
+5. Save to `E:\VelDurSen\src\assets\blog\`
+6. Refresh browser at http://localhost:5173/blog
+7. Done! ✅
+
+## Note:
+- Images appear automatically when you add them
+- No code changes needed
+- Gradient backgrounds show until images are added
+- Recommended size: 1200x630px (16:9 ratio)

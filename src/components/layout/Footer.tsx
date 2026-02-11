@@ -45,18 +45,22 @@ const Footer = () => {
               Enterprise Technology & Digital Transformation. AI-first, security-first, sustainability-driven.
             </p>
             <div className="flex gap-3">
-              {[Linkedin, Twitter, Youtube].map((Icon, i) => (
-                <a key={i} href="#" className="w-9 h-9 rounded-md bg-primary-foreground/10 flex items-center justify-center hover:bg-accent transition-colors">
-                  <Icon size={16} />
-                </a>
-              ))}
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-md bg-primary-foreground/10 flex items-center justify-center hover:bg-blue-600 transition-colors" aria-label="LinkedIn">
+                <Linkedin size={16} />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-md bg-primary-foreground/10 flex items-center justify-center hover:bg-black transition-colors" aria-label="Twitter">
+                <Twitter size={16} />
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-md bg-primary-foreground/10 flex items-center justify-center hover:bg-red-600 transition-colors" aria-label="YouTube">
+                <Youtube size={16} />
+              </a>
             </div>
           </div>
 
           {/* Link Columns */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h4 className="font-heading font-semibold text-sm uppercase tracking-wider mb-4 text-primary-foreground/90">
+              <h4 className="font-heading font-semibold text-sm uppercase tracking-wider mb-4 text-primary-foreground/90 transition-colors hover:text-white-footer">
                 {title}
               </h4>
               <ul className="space-y-2.5">
@@ -64,7 +68,7 @@ const Footer = () => {
                   <li key={link.label}>
                     <Link
                       to={link.path}
-                      className="text-sm text-primary-foreground/60 hover:text-accent transition-colors"
+                      className="text-sm text-primary-foreground/60 transition-colors hover:text-primary-foreground/80"
                     >
                       {link.label}
                     </Link>

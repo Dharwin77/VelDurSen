@@ -189,6 +189,7 @@ const Careers = () => (
       tag="Careers"
       title="Build Your Career at Veldursen"
       subtitle="Join a team that values innovation, collaboration, and real impact. We're building the future—and we want you to be part of it."
+      bgImage="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=600&fit=crop"
     />
 
     {/* Life at Veldursen - Culture Section */}
@@ -209,8 +210,8 @@ const Careers = () => (
               transition={{ delay: i * 0.1 }}
               className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
             >
-              <div className="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-4">
-                <value.icon className="text-blue-600 dark:text-blue-400" size={24} />
+              <div className="w-12 h-12 rounded-lg bg-red-100 dark:bg-red-900 flex items-center justify-center mb-4">
+                <value.icon className="text-red-600 dark:text-red-400" size={24} />
               </div>
               <h3 className="text-lg font-semibold mb-2 text-slate-900 dark:text-white">
                 {value.title}
@@ -256,7 +257,7 @@ const Careers = () => (
                   transition={{ delay: i * 0.1 }}
                   className="flex items-start gap-3"
                 >
-                  <CheckCircle className="text-blue-600 dark:text-blue-400 mt-1 flex-shrink-0" size={20} />
+                  <CheckCircle className="text-red-600 dark:text-red-400 mt-1 flex-shrink-0" size={20} />
                   <span className="text-slate-700 dark:text-slate-300">{item}</span>
                 </motion.li>
               ))}
@@ -269,8 +270,8 @@ const Careers = () => (
             className="rounded-lg overflow-hidden shadow-lg h-96"
           >
             <img
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=600&fit=crop"
-              alt="Team collaborating and learning together"
+              src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=600&fit=crop"
+              alt="Software engineer collaborating at desk with dual monitors and code"
               className="w-full h-full object-cover"
             />
           </motion.div>
@@ -296,8 +297,8 @@ const Careers = () => (
               transition={{ delay: i * 0.1 }}
               className="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-sm"
             >
-              <div className="w-12 h-12 rounded-lg bg-green-100 dark:bg-green-900 flex items-center justify-center mb-4">
-                <benefit.icon className="text-green-600 dark:text-green-400" size={24} />
+                <div className="w-12 h-12 rounded-lg bg-amber-100 dark:bg-amber-900 flex items-center justify-center mb-4">
+                <benefit.icon className="text-amber-700 dark:text-amber-300" size={24} />
               </div>
               <h3 className="text-lg font-semibold mb-4 text-slate-900 dark:text-white">
                 {benefit.title}
@@ -308,7 +309,7 @@ const Careers = () => (
                     key={idx}
                     className="text-sm text-slate-600 dark:text-slate-400 flex items-start gap-2"
                   >
-                    <span className="text-green-600 dark:text-green-400 font-bold">•</span>
+                    <span className="text-red-600 dark:text-red-400 font-bold">•</span>
                     {item}
                   </li>
                 ))}
@@ -369,7 +370,7 @@ const Careers = () => (
     </section>
 
     {/* Hiring Process Section */}
-    <section className="section-padding bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-slate-800">
+    <section className="section-padding bg-gradient-to-br from-red-50 to-orange-50 dark:from-slate-900 dark:to-slate-800">
       <div className="enterprise-container">
         <SectionHeader
           tag="Process"
@@ -389,11 +390,11 @@ const Careers = () => (
               >
                 {/* Connector line */}
                 {i < hiringSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-12 left-1/2 w-full h-1 bg-gradient-to-r from-blue-300 to-transparent dark:from-blue-600" />
+                  <div className="hidden md:block absolute top-12 left-1/2 w-full h-1 bg-gradient-to-r from-red-300 to-transparent dark:from-red-600" />
                 )}
 
                 <div className="relative bg-white dark:bg-slate-800 rounded-lg p-6 text-center shadow-sm">
-                  <div className="w-12 h-12 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center mx-auto mb-4 text-lg">
+                  <div className="w-12 h-12 rounded-full bg-red-600 text-white font-bold flex items-center justify-center mx-auto mb-4 text-lg">
                     {item.step}
                   </div>
                   <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
@@ -434,7 +435,7 @@ const Careers = () => (
                     <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
                       {job.role}
                     </h3>
-                    <span className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded">
+                  <span className="text-xs px-2 py-1 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 rounded">
                       {job.department}
                     </span>
                   </div>
@@ -454,7 +455,7 @@ const Careers = () => (
                 </div>
                 <a
                   href={`mailto:careers@veldursen.com?subject=Application for ${job.role}`}
-                  className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 py-2 whitespace-nowrap inline-flex items-center gap-2 transition-colors"
+                  className="bg-red-600 hover:bg-red-700 text-white rounded-lg px-6 py-2 whitespace-nowrap inline-flex items-center gap-2 transition-colors"
                   aria-label={`Apply for ${job.role}`}
                 >
                   Apply Now
@@ -468,32 +469,46 @@ const Careers = () => (
     </section>
 
     {/* Diversity & Inclusion Section */}
-    <section className="section-padding bg-slate-50 dark:bg-slate-900">
-      <div className="enterprise-container max-w-3xl">
-        <div className="text-center">
-          <div className="w-16 h-16 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mx-auto mb-6">
-            <Users className="text-purple-600 dark:text-purple-400" size={32} />
-          </div>
-          <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
-            Diversity & Inclusion
-          </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-            Veldursen is an Equal Opportunity Employer. We celebrate diversity and are committed
-            to creating an inclusive environment for all employees. We actively encourage
-            applications from people of all backgrounds, experiences, and perspectives. Diversity
-            makes us stronger, and we believe the best ideas come from teams with different
-            viewpoints and experiences.
-          </p>
-          <p className="text-slate-600 dark:text-slate-400">
-            If you have any accessibility needs or accommodations during the hiring process, please
-            let us know. We're here to support you.
-          </p>
+    <section className="section-padding">
+      <div className="enterprise-container">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
+              Diversity & Inclusion
+            </h2>
+            <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+              Veldursen is an Equal Opportunity Employer. We celebrate diversity and are committed
+              to creating an inclusive environment for all employees. We actively encourage
+              applications from people of all backgrounds, experiences, and perspectives.
+            </p>
+            <p className="text-slate-600 dark:text-slate-400 mb-6">
+              Diversity makes us stronger, and we believe the best ideas come from teams with different
+              viewpoints and experiences. If you have any accessibility needs or accommodations during
+              the hiring process, please let us know. We're here to support you.
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="rounded-lg overflow-hidden shadow-lg h-96"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=600&fit=crop"
+              alt="Diverse team of tech professionals in modern office"
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
         </div>
       </div>
     </section>
 
     {/* Final CTA Section */}
-    <section className="section-padding bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+    <section className="section-padding bg-gradient-to-r from-red-600 to-red-700 text-white">
       <div className="enterprise-container max-w-3xl text-center">
         <h2 className="text-4xl font-bold mb-6">Ready to Join the Team?</h2>
         <p className="text-xl text-blue-100 mb-8 leading-relaxed">
@@ -503,14 +518,14 @@ const Careers = () => (
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="mailto:careers@veldursen.com?subject=Application - Veldursen Careers"
-            className="flex items-center justify-center gap-2 bg-white text-blue-600 hover:bg-blue-50 rounded-lg px-8 py-3 font-semibold transition-colors"
+            className="flex items-center justify-center gap-2 bg-white text-red-600 hover:bg-red-50 rounded-lg px-8 py-3 font-semibold transition-colors"
           >
             Apply Now
             <ArrowRight size={16} />
           </a>
           <a
             href="mailto:careers@veldursen.com"
-            className="flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-700 text-white rounded-lg px-8 py-3 font-semibold transition-colors"
+            className="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-700 text-white rounded-lg px-8 py-3 font-semibold transition-colors"
           >
             <MessageSquare size={16} />
             Contact HR

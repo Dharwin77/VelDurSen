@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 import {
   ArrowRight, Brain, Cloud, Shield, Database, Code, Leaf,
   Heart, Landmark, Factory, ShoppingCart, Building2, Sprout,
@@ -11,7 +12,121 @@ import SectionHeader from "@/components/shared/SectionHeader";
 import BlogPreview from "@/components/shared/BlogPreview";
 import heroBg from "@/assets/hero-bg.jpg";
 import aboutTeam from "@/assets/about-team.jpg";
+import aboutImage1 from "@/assets/Gemini_Generated_Image_ello0sello0sello.png";
+import aboutImage2 from "@/assets/Gemini_Generated_Image_zh56h0zh56h0zh56.png";
 import globalMap from "@/assets/global-map.jpg";
+import backgroundVideo from "@/assets/Video_generation_prompt_202602102223.mp4";
+
+// Image Carousel Component
+const ImageCarousel = ({ images, interval = 4000 }: { images: string[]; interval?: number }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, interval);
+    return () => clearInterval(timer);
+  }, [images.length, interval]);
+
+  return (
+    <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl">
+      {images.map((image, index) => (
+        <img
+          key={index}
+          src={image}
+          alt={`VelDurSen team ${index + 1}`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+            index === currentIndex ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+      ))}
+      {/* Dot Indicators */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+              index === currentIndex
+                ? 'bg-white scale-125 shadow-lg'
+                : 'bg-white/50 hover:bg-white/70'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Counter Animation Component
+const AnimatedCounter = ({ value, suffix = "" }: { value: string; suffix?: string }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  
+  // Extract numeric value and handle different formats
+  const parseValue = (val: string) => {
+    // Handle percentage values
+    if (val.includes('%')) {
+      return { numeric: parseFloat(val.replace(/[^0-9.]/g, '')), suffix: '%', isDecimal: val.includes('.') };
+    }
+    // Handle values with + suffix
+    if (val.includes('+')) {
+      return { numeric: parseFloat(val.replace(/[^0-9.]/g, '')), suffix: '+', isDecimal: val.includes('.') };
+    }
+    // Handle 24/7 format
+    if (val.includes('/')) {
+      return { numeric: 0, suffix: val, isDecimal: false, isSpecial: true };
+    }
+    // Handle M+ values (millions)
+    if (val.includes('M+')) {
+      return { numeric: parseFloat(val.replace(/[^0-9.]/g, '')), suffix: 'M+', isDecimal: val.includes('.') };
+    }
+    // Handle K+ values (thousands)  
+    if (val.includes('K+')) {
+      return { numeric: parseFloat(val.replace(/[^0-9.]/g, '')), suffix: 'K+', isDecimal: val.includes('.') };
+    }
+    // Default numeric extraction
+    return { numeric: parseFloat(val.replace(/[^0-9.]/g, '')), suffix: '', isDecimal: val.includes('.') };
+  };
+
+  const { numeric: numericValue, suffix: valueSuffix, isDecimal, isSpecial } = parseValue(value);
+  
+  useEffect(() => {
+    if (!isInView || isSpecial) return;
+    
+    let start = 0;
+    const end = numericValue;
+    const duration = 2000; // 2 seconds
+    const incrementTime = 20; // Update every 20ms
+    const steps = duration / incrementTime;
+    const increment = end / steps;
+    
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(start);
+      }
+    }, incrementTime);
+    
+    return () => clearInterval(timer);
+  }, [isInView, numericValue, isSpecial]);
+  
+  if (isSpecial) {
+    return <span ref={ref}>{value}</span>;
+  }
+  
+  const displayValue = isDecimal ? count.toFixed(1) : Math.floor(count);
+  
+  return (
+    <span ref={ref}>
+      {displayValue}{valueSuffix}{suffix}
+    </span>
+  );
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 25 },
@@ -74,20 +189,32 @@ const Index = () => (
             Global Enterprise Technology Partner
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-[4rem] font-bold text-primary-foreground leading-[1.1] mb-6">
-            AI-Driven Digital Transformation for Global Enterprises
+            AI-Driven Digital Transformation for <span className="text-accent">Global Enterprises</span>
           </h1>
           <p className="text-lg md:text-xl text-primary-foreground/80 leading-relaxed mb-8 max-w-2xl">
             Trusted worldwide for building secure, scalable, and sustainable enterprise systems that power mission-critical operations across industries and continents.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link to="/contact" className="btn-accent">
+            <Link to="/contact" className="btn-accent hover:bg-primary hover:text-primary-foreground transition-all duration-300">
               Talk to Experts <ArrowRight size={16} className="ml-2" />
             </Link>
-            <Link to="/services" className="inline-flex items-center justify-center rounded-md border-2 border-primary-foreground/30 text-primary-foreground px-8 py-3 text-sm font-semibold transition-all hover:bg-primary-foreground/10">
+            <Link to="/services" className="inline-flex items-center justify-center rounded-md border-2 border-primary-foreground/30 text-primary-foreground px-8 py-3 text-sm font-semibold transition-all duration-300 hover:bg-accent hover:border-accent hover:text-accent-foreground">
               Explore Services
             </Link>
           </div>
         </motion.div>
+      </div>
+      
+      {/* Scrolling News Ticker */}
+      <div className="absolute bottom-0 left-0 right-0 bg-accent/95 backdrop-blur-sm py-3 overflow-hidden z-20">
+        <div className="flex whitespace-nowrap animate-scroll hover:pause-animation transition-all duration-300">
+          <span className="inline-flex items-center text-sm font-medium text-primary-foreground px-4">
+            🚀 VelDurSen delivers Enterprise AI & Cloud Solutions  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  🤖 Intelligent Systems for Digital Transformation  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ☁️ Scalable Cloud Architecture & DevOps Services  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  📊 Data Analytics, ML & Automation Solutions  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  🌐 Secure, High-Performance IT Infrastructure  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  💼 Industry-ready Solutions for Healthcare, Finance & Manufacturing  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  🏆 Trusted by Growing Enterprises  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  📈 Engineering the Digital Backbone of Modern Businesses
+          </span>
+          <span className="inline-flex items-center text-sm font-medium text-primary-foreground px-4">
+            🚀 VelDurSen delivers Enterprise AI & Cloud Solutions  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  🤖 Intelligent Systems for Digital Transformation  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ☁️ Scalable Cloud Architecture & DevOps Services  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  📊 Data Analytics, ML & Automation Solutions  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  🌐 Secure, High-Performance IT Infrastructure  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  💼 Industry-ready Solutions for Healthcare, Finance & Manufacturing  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  🏆 Trusted by Growing Enterprises  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  📈 Engineering the Digital Backbone of Modern Businesses
+          </span>
+        </div>
       </div>
     </section>
 
@@ -110,34 +237,42 @@ const Index = () => (
               transition={{ delay: i * 0.1 }}
               className="text-center p-6 md:p-8 rounded-xl border-2 border-accent/20 bg-card hover:shadow-xl hover:border-accent/40 transition-all duration-300"
             >
-              <div className="metric-value mb-2">{stat.value}</div>
+              <div className="metric-value mb-2">
+                <AnimatedCounter value={stat.value} />
+              </div>
               <div className="text-base font-semibold text-foreground mb-1">{stat.label}</div>
               <div className="text-xs text-muted-foreground">{stat.sublabel}</div>
             </motion.div>
           ))}
         </div>
+      </div>
+    </section>
 
-        {/* World Map Visualization */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="relative h-72 md:h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-muted via-muted/80 to-muted/50 flex items-center justify-center border-2 border-border"
-        >
-          <div className="absolute inset-0 opacity-20" style={{
-            backgroundImage: `radial-gradient(circle at 20% 50%, rgba(24, 119, 242, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(24, 119, 242, 0.3) 0%, transparent 50%)`
-          }}></div>
-          <div className="relative z-10 text-center px-6">
-            <Globe2 className="w-16 h-16 md:w-20 md:h-20 text-accent mx-auto mb-6" />
-            <h3 className="text-2xl font-bold text-foreground mb-3">Global Delivery Network</h3>
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              <span className="font-semibold">North America</span> • <span className="font-semibold">Europe</span> • <span className="font-semibold">Asia-Pacific</span> • <span className="font-semibold">Middle East</span> • <span className="font-semibold">Latin America</span>
-            </p>
-            <p className="text-sm text-muted-foreground mt-4 max-w-xl mx-auto">
-              Our distributed teams enable continuous deployment, faster response times, and seamless collaboration across time zones.
-            </p>
-          </div>
-        </motion.div>
+    {/* World Map Visualization - Full Screen */}
+    <section className="relative w-full min-h-screen max-h-screen overflow-hidden bg-gradient-to-br from-muted via-muted/80 to-muted/50 flex items-center justify-center">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-70"
+      >
+        <source src={backgroundVideo} type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/50 z-10"></div>
+      <div className="absolute inset-0 opacity-20 z-10" style={{
+        backgroundImage: `radial-gradient(circle at 20% 50%, rgba(24, 119, 242, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(24, 119, 242, 0.3) 0%, transparent 50%)`
+      }}></div>
+      <div className="relative z-20 text-center px-6">
+        <Globe2 className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 text-white mx-auto mb-8 drop-shadow-lg" />
+        <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-accent mb-6 drop-shadow-lg">Global Delivery Network</h3>
+        <p className="text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto drop-shadow-sm mb-6">
+          <span className="font-semibold text-white">North America</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Europe</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Asia-Pacific</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Middle East</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Latin America</span>
+        </p>
+        <p className="text-base md:text-lg lg:text-xl text-white/80 mt-6 max-w-3xl mx-auto drop-shadow-sm">
+          Our distributed teams enable continuous deployment, faster response times, and seamless collaboration across time zones.
+        </p>
       </div>
     </section>
 
@@ -147,7 +282,7 @@ const Index = () => (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-3 block">About VelDurSen</span>
-            <h2 className="section-title">Your Trusted Partner in Enterprise Digital Transformation</h2>
+            <h2 className="section-title leading-snug mb-6">Your Trusted Partner in<br />Enterprise Digital Transformation</h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
               VelDurSen is a global Enterprise Technology & Digital Transformation company specializing in AI-first, security-first, and sustainability-driven solutions for the world's most demanding enterprises.
             </p>
@@ -157,12 +292,17 @@ const Index = () => (
             <p className="text-muted-foreground leading-relaxed mb-8">
               From Fortune 500 enterprises to high-growth organizations across healthcare, finance, manufacturing, and beyond—our architecture-first engineering approach ensures every system we build is resilient, performant, and future-proof for global operations.
             </p>
-            <Link to="/about" className="btn-enterprise">
+            <Link
+              to="/about"
+              className="btn-enterprise"
+              onMouseEnter={() => document.documentElement.classList.add('color-shift')}
+              onMouseLeave={() => document.documentElement.classList.remove('color-shift')}
+            >
               Learn More About Us <ArrowRight size={16} className="ml-2" />
             </Link>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <img src={aboutTeam} alt="VelDurSen global team" className="rounded-2xl shadow-2xl w-full" />
+            <ImageCarousel images={[aboutTeam, aboutImage1, aboutImage2]} interval={4000} />
           </motion.div>
         </div>
       </div>
@@ -289,7 +429,9 @@ const Index = () => (
               transition={{ delay: i * 0.1 }}
               className="p-8 rounded-xl bg-gradient-to-br from-accent/5 to-accent/10 border-2 border-accent/20 hover:border-accent/40 hover:shadow-lg transition-all duration-300 text-center"
             >
-              <div className="text-4xl md:text-5xl font-bold text-accent mb-3">{achievement.value}</div>
+              <div className="text-4xl md:text-5xl font-bold text-accent mb-3">
+                <AnimatedCounter value={achievement.value} />
+              </div>
               <div className="text-sm font-semibold text-foreground uppercase tracking-wider">{achievement.label}</div>
             </motion.div>
           ))}

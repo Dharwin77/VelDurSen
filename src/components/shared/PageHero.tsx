@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
 
 interface PageHeroProps {
   tag?: string;
@@ -9,16 +10,40 @@ interface PageHeroProps {
   ctaText?: string;
   ctaLink?: string;
   bgImage?: string;
+  bgImages?: string[];
   overlay?: boolean;
 }
 
-const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, overlay = true }: PageHeroProps) => (
+const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, bgImages, overlay = true }: PageHeroProps) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const images = bgImages || (bgImage ? [bgImage] : []);
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  return (
   <section
     className="relative min-h-[480px] md:min-h-[540px] flex items-center overflow-hidden"
-    style={bgImage ? { backgroundImage: `url(${bgImage})`, backgroundSize: "cover", backgroundPosition: "center" } : {}}
   >
+    {images.length > 0 && images.map((img, index) => (
+      <div
+        key={index}
+        className="absolute inset-0 transition-opacity duration-1000"
+        style={{
+          backgroundImage: `url(${img})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          opacity: index === currentIndex ? 1 : 0,
+        }}
+      />
+    ))}
     {overlay && <div className="absolute inset-0 bg-primary/85" />}
-    {!bgImage && <div className="absolute inset-0 bg-primary" />}
+    {images.length === 0 && <div className="absolute inset-0 bg-primary" />}
     <div className="enterprise-container relative z-10 py-20">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -45,6 +70,7 @@ const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, overlay = t
       </motion.div>
     </div>
   </section>
-);
+  );
+};
 
 export default PageHero;

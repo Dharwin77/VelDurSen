@@ -5,6 +5,8 @@ import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import BlogPreview from "@/components/shared/BlogPreview";
 import aboutTeam from "@/assets/about-team.jpg";
+import aboutImage1 from "@/assets/Gemini_Generated_Image_uugaqruugaqruuga.png";
+import aboutImage2 from "@/assets/Gemini_Generated_Image_zh56h0zh56h0zh56.png";
 import { Link } from "react-router-dom";
 
 const coreValues = [
@@ -19,10 +21,10 @@ const coreValues = [
 const About = () => (
   <PageLayout>
     <PageHero
-      tag="About VelDurSen"
+      tag="About"
       title="Enterprise Technology & Digital Transformation Company"
       subtitle="We are a global technology company dedicated to building secure, scalable, and sustainable digital systems for the world's most ambitious enterprises across industries and continents."
-      bgImage={aboutTeam}
+      bgImages={[aboutTeam, aboutImage1, aboutImage2]}
     />
 
     {/* Company Overview - Different layout: text-heavy with side stats */}

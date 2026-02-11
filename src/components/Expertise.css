@@ -42,8 +42,8 @@
 
 .expertise-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.2);
-  border-color: #667eea;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.2);
+  border-color: #2563eb;
 }
 
 .expertise-icon {

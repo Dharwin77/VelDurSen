@@ -24,9 +24,9 @@ function Footer() {
         <div className="footer-section">
           <h4>Connect</h4>
           <ul>
-            <li><a href="https://github.com" target="_blank">GitHub</a></li>
-            <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
-            <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+            <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a></li>
             <li><a href="mailto:info@veldursen.com">Email</a></li>
           </ul>
         </div>

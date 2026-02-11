@@ -36,12 +36,12 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1.5">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-3 py-2 text-[13px] font-medium rounded-md transition-colors ${
+                className={`px-3.5 py-2.5 text-sm md:text-[15px] font-semibold rounded-md transition-colors ${
                   location.pathname === link.path
                     ? "text-accent bg-accent/10"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted"
@@ -54,7 +54,7 @@ const Navbar = () => {
 
           {/* CTA + Mobile Toggle */}
           <div className="flex items-center gap-3">
-            <Link to="/contact" className="hidden md:inline-flex btn-enterprise text-xs py-2 px-5">
+            <Link to="/contact" className="hidden md:inline-flex btn-enterprise text-sm py-2.5 px-6">
               Talk to Experts
             </Link>
             <button

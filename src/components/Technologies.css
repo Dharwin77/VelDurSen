@@ -1,0 +1,79 @@
+.technologies {
+  padding: 5rem 2rem;
+  background: white;
+}
+
+.technologies h2 {
+  font-size: 2.8rem;
+  text-align: center;
+  margin: 0 0 1rem 0;
+  color: #222;
+}
+
+.technologies-subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 3rem;
+}
+
+.technologies-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.technology-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+  transition: all 0.3s ease;
+  text-align: center;
+  color: white;
+}
+
+.technology-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.3);
+}
+
+.tech-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.technology-card h3 {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  color: white;
+}
+
+.technology-card p {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .technologies {
+    padding: 3rem 1rem;
+  }
+
+  .technologies h2 {
+    font-size: 2rem;
+  }
+
+  .technologies-subtitle {
+    font-size: 1rem;
+  }
+
+  .technologies-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

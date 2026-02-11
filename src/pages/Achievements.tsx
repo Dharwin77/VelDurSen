@@ -40,42 +40,42 @@ const Achievements = () => {
             title="Enterprise Scale & Global Reach"
             subtitle="Measurable impact across enterprise systems, global deployments, and mission-critical operations."
           />
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {[
-              { 
-                value: "1000+", 
-                label: "Enterprise Projects Delivered", 
+              {
+                value: "1000+",
+                label: "Enterprise Projects Delivered",
                 desc: "Across 50+ countries serving global organizations",
                 icon: Target
               },
-              { 
-                value: "150+", 
-                label: "Multi-Region Cloud Platforms", 
+              {
+                value: "150+",
+                label: "Multi-Region Cloud Platforms",
                 desc: "Deployed across AWS, Azure, and GCP worldwide",
                 icon: Cloud
               },
-              { 
-                value: "500+", 
-                label: "AI Models in Production", 
+              {
+                value: "500+",
+                label: "AI Models in Production",
                 desc: "Powering intelligent automation at enterprise scale",
                 icon: Brain
               },
-              { 
-                value: "50M+", 
-                label: "Users Supported Daily", 
+              {
+                value: "50M+",
+                label: "Users Supported Daily",
                 desc: "On systems we've built and maintain globally",
                 icon: Users
               },
-              { 
-                value: "99.9%", 
-                label: "Average System Uptime", 
+              {
+                value: "99.9%",
+                label: "Average System Uptime",
                 desc: "High-availability architecture across all deployments",
                 icon: TrendingUp
               },
-              { 
-                value: "100%", 
-                label: "Zero Security Breaches", 
+              {
+                value: "100%",
+                label: "Zero Security Breaches",
                 desc: "Across mission-critical workloads secured",
                 icon: Shield
               },
@@ -173,7 +173,7 @@ const Achievements = () => {
                   "Petabyte-scale data warehouse deployments",
                   "Sub-second query performance at scale"
                 ],
-                color: "orange"
+                color: "sky"
               },
               {
                 icon: Zap,
@@ -262,8 +262,8 @@ const Achievements = () => {
               {
                 icon: Factory,
                 industry: "Manufacturing",
-                color: "bg-orange-50 border-orange-200",
-                iconColor: "text-orange-600",
+                color: "bg-slate-50 border-slate-200",
+                iconColor: "text-slate-600",
                 achievements: [
                   "Smart factory data platforms optimizing 100+ production lines",
                   "Predictive maintenance reducing downtime by 40%",
@@ -298,8 +298,8 @@ const Achievements = () => {
               {
                 icon: Wheat,
                 industry: "Agriculture & AgriTech",
-                color: "bg-yellow-50 border-yellow-200",
-                iconColor: "text-yellow-700",
+                color: "bg-emerald-50 border-emerald-200",
+                iconColor: "text-emerald-700",
                 achievements: [
                   "Precision farming platforms optimizing 500K+ acres",
                   "AI-driven crop intelligence improving yields by 30%",

@@ -77,7 +77,7 @@ const History = () => {
               2014-2016
             </span>
             <h2 className="section-title mb-8">Foundation Phase: Building the Core</h2>
-            
+
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed mb-12">
               <p>
                 The early years were focused on establishing our core competencies and proving our approach in the enterprise market. We started with <span className="font-semibold text-foreground">enterprise software development and cloud systems</span>, working with mid-sized organizations looking to modernize their technology infrastructure.
@@ -120,7 +120,7 @@ const History = () => {
               2017-2019
             </span>
             <h2 className="section-title mb-8">Evolution: AI, Cloud & Cybersecurity Leadership</h2>
-            
+
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed mb-12">
               <p>
                 This period marked <span className="font-bold text-foreground">VelDurSen's transformation from a software development company to a comprehensive digital transformation partner</span>. We made strategic investments in three critical areas that would define the future of enterprise technology:
@@ -202,7 +202,7 @@ const History = () => {
               2020-2022
             </span>
             <h2 className="section-title mb-8">Global Expansion & Worldwide Delivery</h2>
-            
+
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed mb-12">
               <p>
                 As our client base grew more global, we recognized the need for <span className="font-bold text-foreground">true worldwide delivery capabilities</span>. This wasn't just about having offices in different countries—it was about building a distributed engineering organization that could deliver seamlessly across time zones, cultures, and regulatory environments.
@@ -269,7 +269,7 @@ const History = () => {
               2023-2024
             </span>
             <h2 className="section-title mb-8">Sustainability & Responsible Technology Integration</h2>
-            
+
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed mb-12">
               <p>
                 As the technology industry grappled with its environmental impact, <span className="font-bold text-foreground">VelDurSen made sustainability a core value</span>, not a marketing initiative. We recognized that building technology responsibly meant considering not just performance and cost, but also environmental impact and ethical implications.
@@ -341,7 +341,7 @@ const History = () => {
               2025-Present
             </span>
             <h2 className="section-title mb-8">Present Day: Global Enterprise Technology Partner</h2>
-            
+
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed mb-12">
               <p>
                 Today, <span className="font-bold text-foreground">VelDurSen stands as a global enterprise technology partner</span> trusted by Fortune 500 companies and high-growth organizations across 50+ countries. We power mission-critical systems that serve millions of users, process billions of transactions, and manage petabytes of data daily.

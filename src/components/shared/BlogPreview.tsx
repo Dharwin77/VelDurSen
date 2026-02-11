@@ -27,11 +27,11 @@ const blogPosts = [
   },
 ];
 
-const BlogPreview = () => (
+const BlogPreview = ({ tag = "Insights" }: { tag?: string }) => (
   <section className="section-padding">
     <div className="enterprise-container">
       <SectionHeader
-        tag="Insights"
+        tag={tag}
         title="Latest from Our Blog"
         subtitle="Thought leadership and expert perspectives on enterprise technology trends."
       />

@@ -28,7 +28,7 @@ const Services = () => (
             { icon: Cloud, title: "Cloud & DevOps", color: "bg-blue-50 border-blue-200 text-blue-600" },
             { icon: Code, title: "Enterprise Software", color: "bg-green-50 border-green-200 text-green-600" },
             { icon: Shield, title: "Cybersecurity", color: "bg-red-50 border-red-200 text-red-600" },
-            { icon: Database, title: "Data Engineering", color: "bg-orange-50 border-orange-200 text-orange-600" },
+            { icon: Database, title: "Data Engineering", color: "bg-sky-50 border-sky-200 text-sky-600" },
           ].map((s, i) => (
             <motion.div
               key={s.title}
@@ -338,7 +338,7 @@ const Services = () => (
     </section>
 
     {/* Cybersecurity - Shield-style bordered cards */}
-    <section className="section-padding bg-gradient-to-br from-red-50 to-orange-50">
+    <section className="section-padding bg-gradient-to-br from-red-50 to-rose-50">
       <div className="enterprise-container">
         <div className="max-w-4xl mx-auto text-center mb-12">
           <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-red-600 mb-4">
@@ -477,14 +477,14 @@ const Services = () => (
                   transition={{ delay: i * 0.1 }}
                   className="flex-1 min-w-[200px]"
                 >
-                  <div className="p-6 rounded-xl bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-200 text-center">
-                    <stage.icon className="w-10 h-10 text-orange-600 mx-auto mb-3" />
+                  <div className="p-6 rounded-xl bg-gradient-to-br from-sky-50 to-cyan-50 border-2 border-sky-200 text-center">
+                    <stage.icon className="w-10 h-10 text-sky-600 mx-auto mb-3" />
                     <h4 className="font-bold mb-1">{stage.title}</h4>
                     <p className="text-xs text-muted-foreground">{stage.desc}</p>
                   </div>
                 </motion.div>
                 {i < 3 && (
-                  <ArrowRight className="hidden md:block w-6 h-6 text-orange-300 shrink-0" />
+                  <ArrowRight className="hidden md:block w-6 h-6 text-sky-300 shrink-0" />
                 )}
               </div>
             ))}
@@ -540,18 +540,18 @@ const Services = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="p-8 rounded-xl border-2 border-border hover:border-orange-300 hover:shadow-lg transition-all duration-300 bg-card"
+              className="p-8 rounded-xl border-2 border-border hover:border-sky-300 hover:shadow-lg transition-all duration-300 bg-card"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-lg bg-orange-100 flex items-center justify-center">
-                  <service.icon className="w-6 h-6 text-orange-600" />
+                <div className="w-12 h-12 rounded-lg bg-sky-100 flex items-center justify-center">
+                  <service.icon className="w-6 h-6 text-sky-600" />
                 </div>
                 <h3 className="text-xl font-bold">{service.title}</h3>
               </div>
               <ul className="space-y-3">
                 {service.items.map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <div className="w-1.5 h-1.5 rounded-full bg-orange-600 mt-2 shrink-0"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-sky-600 mt-2 shrink-0"></div>
                     <span>{item}</span>
                   </li>
                 ))}

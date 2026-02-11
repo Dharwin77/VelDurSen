@@ -202,10 +202,10 @@ const BlogDetail = () => {
                             {blog.content.challenges.map((item, index) => (
                                 <div
                                     key={index}
-                                    className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-6"
+                                    className="bg-gradient-to-br from-indigo-50 to-blue-50 border border-indigo-200 rounded-xl p-6"
                                 >
                                     <div className="flex items-start gap-3 mb-4">
-                                        <AlertTriangle size={20} className="text-amber-600 flex-shrink-0 mt-0.5" />
+                                        <AlertTriangle size={20} className="text-indigo-600 flex-shrink-0 mt-0.5" />
                                         <h3 className="text-xl font-bold text-foreground">
                                             {item.challenge}
                                         </h3>

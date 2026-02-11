@@ -63,9 +63,9 @@ const Internships = () => {
             ))}
           </div>
 
-          <div className="mt-12 p-8 rounded-xl bg-amber-50 border-2 border-amber-200">
+          <div className="mt-12 p-8 rounded-xl bg-blue-50 border-2 border-blue-200">
             <div className="flex items-start gap-4">
-              <Lightbulb className="w-6 h-6 text-amber-600 mt-1 shrink-0" />
+              <Lightbulb className="w-6 h-6 text-blue-600 mt-1 shrink-0" />
               <div>
                 <h4 className="text-lg font-bold mb-2">Important Note</h4>
                 <p className="text-sm text-muted-foreground leading-relaxed">
@@ -83,7 +83,7 @@ const Internships = () => {
           <SectionHeader
             tag="Learning Domains"
             title="Technology Focus Areas"
-            description="Interns gain exposure to enterprise-grade systems across multiple technology domains, guided by experienced engineers and mentors."
+            subtitle="Interns gain exposure to enterprise-grade systems across multiple technology domains, guided by experienced engineers and mentors."
           />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -167,7 +167,7 @@ const Internships = () => {
           <SectionHeader
             tag="How It Works"
             title="Internship Program Structure"
-            description="A structured learning journey combining mentorship, hands-on project work, and exposure to enterprise engineering practices."
+            subtitle="A structured learning journey combining mentorship, hands-on project work, and exposure to enterprise engineering practices."
           />
 
           <div className="max-w-5xl mx-auto space-y-6">
@@ -269,7 +269,7 @@ const Internships = () => {
             <SectionHeader
               tag="Eligibility"
               title="Who Can Apply"
-              description="We welcome applications from motivated learners across various educational backgrounds and career stages."
+              subtitle="We welcome applications from motivated learners across various educational backgrounds and career stages."
             />
 
             <div className="grid md:grid-cols-2 gap-8">
@@ -340,7 +340,7 @@ const Internships = () => {
           <SectionHeader
             tag="What You'll Gain"
             title="Learning Outcomes & Skill Development"
-            description="Beyond technical skills, interns develop professional competencies that prepare them for long-term careers in enterprise technology."
+            subtitle="Beyond technical skills, interns develop professional competencies that prepare them for long-term careers in enterprise technology."
           />
 
           <div className="grid md:grid-cols-3 gap-8">

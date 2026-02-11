@@ -49,7 +49,7 @@ const About = () => (
               </p>
             </div>
           </div>
-          
+
           {/* Stats sidebar - different from Home */}
           <div className="space-y-4">
             {[
@@ -82,25 +82,25 @@ const About = () => (
       <div className="enterprise-container">
         <div className="max-w-5xl mx-auto space-y-8">
           {[
-            { 
-              icon: Eye, 
-              title: "Our Vision", 
+            {
+              icon: Eye,
+              title: "Our Vision",
               text: "To be the world's most trusted enterprise technology partner, enabling organizations across every continent to thrive in the digital age through intelligent, secure, and sustainable solutions that respect both people and planet.",
               color: "border-blue-500"
             },
-            { 
-              icon: Target, 
-              title: "Our Mission", 
+            {
+              icon: Target,
+              title: "Our Mission",
               text: "To deliver architecture-first, AI-driven technology systems that empower global enterprises to achieve operational excellence, digital resilience, regulatory compliance, and sustainable growth while maintaining the highest standards of security and ethical practices.",
               color: "border-green-500"
             },
           ].map((item, i) => (
-            <motion.div 
-              key={item.title} 
-              initial={{ opacity: 0, y: 20 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              viewport={{ once: true }} 
-              transition={{ delay: i * 0.15 }} 
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15 }}
               className={`p-8 md:p-10 rounded-xl bg-white border-l-8 ${item.color} shadow-lg`}
             >
               <div className="flex items-start gap-6">
@@ -123,19 +123,19 @@ const About = () => (
     {/* Core Values - Grid with different card style */}
     <section className="section-padding bg-white">
       <div className="enterprise-container">
-        <SectionHeader 
-          tag="Core Values" 
-          title="Principles That Define Us" 
-          subtitle="The unwavering values that guide every decision, every system we build, and every relationship we nurture across our global organization." 
+        <SectionHeader
+          tag="Core Values"
+          title="Principles That Define Us"
+          subtitle="The unwavering values that guide every decision, every system we build, and every relationship we nurture across our global organization."
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {coreValues.map((v, i) => (
-            <motion.div 
-              key={v.title} 
-              initial={{ opacity: 0, y: 20 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              viewport={{ once: true }} 
-              transition={{ delay: i * 0.08 }} 
+            <motion.div
+              key={v.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
               className="p-6 rounded-lg border-2 border-border hover:border-accent/50 transition-all duration-300 bg-card"
             >
               <div className="flex items-start gap-4 mb-4">
@@ -164,19 +164,19 @@ const About = () => (
 
         <div className="grid md:grid-cols-3 gap-6 mb-12">
           {[
-            { 
-              icon: Brain, 
-              title: "Generative AI & LLM Integration", 
+            {
+              icon: Brain,
+              title: "Generative AI & LLM Integration",
               desc: "Enterprise-grade large language models, RAG architectures, and agentic AI systems for intelligent automation"
             },
-            { 
-              icon: Sparkles, 
-              title: "Predictive Analytics & ML Ops", 
+            {
+              icon: Sparkles,
+              title: "Predictive Analytics & ML Ops",
               desc: "Production-ready machine learning pipelines with automated retraining, monitoring, and drift detection"
             },
-            { 
-              icon: Shield, 
-              title: "Responsible & Ethical AI Governance", 
+            {
+              icon: Shield,
+              title: "Responsible & Ethical AI Governance",
               desc: "Bias detection, explainability frameworks, and compliance with global AI ethics standards"
             },
           ].map((item, i) => (
@@ -313,49 +313,49 @@ const About = () => (
     {/* CSR & Education Initiatives - Numbered blocks style */}
     <section className="section-padding bg-white">
       <div className="enterprise-container">
-        <SectionHeader 
-          tag="CSR & Education" 
-          title="Giving Back, Building Forward" 
-          subtitle="Our commitment extends beyond technology to education, community empowerment, and creating positive social impact across the regions we serve." 
+        <SectionHeader
+          tag="CSR & Education"
+          title="Giving Back, Building Forward"
+          subtitle="Our commitment extends beyond technology to education, community empowerment, and creating positive social impact across the regions we serve."
         />
-        
+
         <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto mt-12">
           {[
-            { 
-              icon: GraduationCap, 
+            {
+              icon: GraduationCap,
               number: "01",
-              title: "Student Technology Workshops", 
+              title: "Student Technology Workshops",
               desc: "We conduct free workshops on AI, cloud computing, cybersecurity, and data science for university students across 30+ countries. Our educational programs have reached over 15,000 students, providing hands-on exposure to enterprise-grade technology and industry best practices.",
               details: ["AI & Machine Learning fundamentals", "Cloud architectures & DevOps practices", "Cybersecurity awareness & ethical hacking", "Data engineering & analytics pipelines"]
             },
-            { 
-              icon: Users, 
+            {
+              icon: Users,
               number: "02",
-              title: "Community Tech Programs", 
+              title: "Community Tech Programs",
               desc: "Digital literacy programs, open-source contributions, and mentorship initiatives focused on underrepresented communities in technology. We're building pathways for diverse talent to enter and thrive in the global technology industry.",
               details: ["Coding bootcamps for underserved communities", "Open-source contribution mentorship", "Women in tech leadership programs", "Scholarship programs for STEM education"]
             },
-            { 
-              icon: Heart, 
+            {
+              icon: Heart,
               number: "03",
-              title: "Pro Bono Enterprise Consulting", 
+              title: "Pro Bono Enterprise Consulting",
               desc: "We provide pro bono enterprise technology consulting to non-profit organizations working in healthcare, education, environmental conservation, and social justice. Helping mission-driven organizations leverage technology for greater impact.",
               details: ["Healthcare systems for underserved regions", "Educational platforms for remote learning", "Environmental monitoring systems", "Disaster response coordination tools"]
             },
-            { 
-              icon: BookOpen, 
+            {
+              icon: BookOpen,
               number: "04",
-              title: "Knowledge Sharing & Thought Leadership", 
+              title: "Knowledge Sharing & Thought Leadership",
               desc: "Publishing research papers, technical blogs, and open-source tools that advance the global technology community. Contributing to industry standards, best practices, and emerging technology frameworks.",
               details: ["Research publications on AI ethics", "Open-source enterprise frameworks", "Industry conference speaking engagements", "Technical blog series and tutorials"]
             },
           ].map((item, i) => (
-            <motion.div 
-              key={item.title} 
-              initial={{ opacity: 0, y: 20 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              viewport={{ once: true }} 
-              transition={{ delay: i * 0.1 }} 
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
               className="relative"
             >
               <div className="absolute -left-4 -top-4 text-6xl font-bold text-accent/10">{item.number}</div>

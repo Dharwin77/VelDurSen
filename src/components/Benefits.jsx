@@ -1,4 +1,70 @@
-import './Benefits.css'
+const styles = {
+  benefits: {
+    padding: '3rem 1.5rem',
+    background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)'
+  },
+  container: {
+    maxWidth: '1280px',
+    margin: '0 auto'
+  },
+  h2: {
+    fontSize: '2.8rem',
+    textAlign: 'center',
+    margin: '0 0 0.5rem 0',
+    color: '#1e3a8a'
+  },
+  intro: {
+    textAlign: 'center',
+    fontSize: '1.2rem',
+    color: '#1e40af',
+    marginBottom: '2rem',
+    maxWidth: '600px',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+  grid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(330px, 1fr))',
+    gap: '1.5rem'
+  },
+  card: {
+    background: 'white',
+    padding: '2rem 1.5rem',
+    borderRadius: '12px',
+    boxShadow: '0 4px 15px rgba(37, 99, 235, 0.1)',
+    transition: 'all 0.3s ease',
+    border: '2px solid transparent',
+    borderTop: '4px solid #1e3a8a',
+    position: 'relative',
+    overflow: 'hidden',
+    cursor: 'pointer'
+  },
+  icon: {
+    fontSize: '3rem',
+    marginBottom: '1rem',
+    display: 'inline-block'
+  },
+  h3: {
+    fontSize: '1.5rem',
+    margin: '1rem 0',
+    color: '#1e3a8a'
+  },
+  cardP: {
+    color: '#4b5563',
+    lineHeight: 1.7,
+    fontSize: '0.95rem',
+    marginBottom: '1.5rem'
+  },
+  metric: {
+    background: 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)',
+    color: 'white',
+    padding: '0.8rem 1.2rem',
+    borderRadius: '8px',
+    textAlign: 'center',
+    fontWeight: 600,
+    fontSize: '0.9rem'
+  }
+}
 
 function Benefits() {
   const benefits = [
@@ -46,19 +112,36 @@ function Benefits() {
     }
   ]
 
+  const handleCardHover = (e) => {
+    e.currentTarget.style.transform = 'translateY(-8px)'
+    e.currentTarget.style.boxShadow = '0 12px 30px rgba(37, 99, 235, 0.2)'
+    e.currentTarget.style.borderColor = '#2563eb'
+  }
+
+  const handleCardLeave = (e) => {
+    e.currentTarget.style.transform = 'translateY(0)'
+    e.currentTarget.style.boxShadow = '0 4px 15px rgba(37, 99, 235, 0.1)'
+    e.currentTarget.style.borderColor = 'transparent'
+  }
+
   return (
-    <section className="benefits" id="benefits">
-      <div className="benefits-container">
-        <h2>Why Choose Veldursen?</h2>
-        <p className="benefits-intro">Comprehensive benefits that deliver real value to your business</p>
+    <section style={styles.benefits} id="benefits">
+      <div style={styles.container}>
+        <h2 style={styles.h2}>Why Choose Veldursen?</h2>
+        <p style={styles.intro}>Comprehensive benefits that deliver real value to your business</p>
         
-        <div className="benefits-grid">
+        <div style={styles.grid}>
           {benefits.map((benefit) => (
-            <div key={benefit.id} className="benefit-card">
-              <div className="benefit-icon">{benefit.icon}</div>
-              <h3>{benefit.title}</h3>
-              <p>{benefit.description}</p>
-              <div className="benefit-metric">{benefit.metrics}</div>
+            <div 
+              key={benefit.id} 
+              style={styles.card}
+              onMouseEnter={handleCardHover}
+              onMouseLeave={handleCardLeave}
+            >
+              <div style={styles.icon}>{benefit.icon}</div>
+              <h3 style={styles.h3}>{benefit.title}</h3>
+              <p style={styles.cardP}>{benefit.description}</p>
+              <div style={styles.metric}>{benefit.metrics}</div>
             </div>
           ))}
         </div>

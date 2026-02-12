@@ -15,7 +15,7 @@ import securityBg from "@/assets/internships/security-bg.jpg";
 import cloudBg from "@/assets/internships/cloud-bg.jpg";
 
 const InternshipTicker = () => {
-  const messages = [
+  const messages = [  
     "HIRING NOW: SUMMER 2025 COHORT",
     "DON'T MISS THE OPPORTUNITY TO COLLABORATE WITH US",
     "JOIN THE FUTURE OF ENTERPRISE TECHNOLOGY",

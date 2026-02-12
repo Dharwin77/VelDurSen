@@ -24,6 +24,7 @@ const About = () => {
 
   return (
     <PageLayout>
+      <div className="about-theme">
       <section
         className="relative min-h-screen flex items-center overflow-hidden"
         style={{ backgroundImage: `url(${aboutTeam})`, backgroundSize: "cover", backgroundPosition: "center" }}
@@ -77,12 +78,12 @@ const About = () => {
           {[{
             title: "Our Vision",
             text: "To be the global catalyst for sustainable digital transformation, creating a world where technology amplifies human potential without compromising our planet.",
-            gradient: "from-blue-500/90 via-blue-600/90 to-indigo-600/90",
+            gradient: "from-[#C0392B]/90 via-[#5D4037]/90 to-[#3E2723]/90",
             icon: Eye,
           }, {
             title: "Our Mission",
             text: "To deliver architecture-first, AI-driven technology systems that empower global enterprises to achieve operational excellence, digital resilience, regulatory compliance, and sustainable growth while maintaining the highest standards of security and ethical practices.",
-            gradient: "from-emerald-500/90 via-emerald-600/90 to-teal-600/90",
+            gradient: "from-[#5D4037]/90 via-[#3E2723]/90 to-[#C0392B]/90",
             icon: Target,
           }].map((item, i) => (
             <motion.div
@@ -121,7 +122,7 @@ const About = () => {
     </section>
 
     {/* Photo spotlight + Company Overview */}
-    <section className="section-padding bg-white pt-8 md:pt-10">
+    <section className="section-padding bg-[#FBFBF9] pt-8 md:pt-10">
       <div className="enterprise-container grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
         <div className="lg:col-span-2 space-y-6">
           <motion.div
@@ -164,7 +165,7 @@ const About = () => {
               className="relative overflow-hidden group min-h-[140px] rounded-xl border border-border bg-accent/5 shadow-sm transition-transform duration-200 hover:ring-2 hover:ring-accent/30"
             >
               <div className="pointer-events-none absolute inset-0 rounded-[14px] opacity-0 group-hover:opacity-100 transition duration-500">
-                <div className="absolute inset-0 rounded-[14px] bg-[conic-gradient(from_0deg,rgba(59,130,246,0.55),rgba(79,70,229,0.5),rgba(59,130,246,0.55))] animate-[spin_8s_linear_infinite]" />
+                <div className="absolute inset-0 rounded-[14px] bg-[conic-gradient(from_0deg,rgba(192,57,43,0.55),rgba(93,64,55,0.5),rgba(62,39,35,0.5),rgba(192,57,43,0.55))] animate-[spin_8s_linear_infinite]" />
                 <div className="absolute inset-[1px] rounded-[12px] bg-gradient-to-br from-white/88 via-white/86 to-slate-200/75" />
               </div>
               <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.5),transparent)] translate-x-[-140%] group-hover:translate-x-[140%] transition-transform duration-700 ease-out" />
@@ -184,7 +185,7 @@ const About = () => {
               className="relative overflow-hidden group min-h-[140px] rounded-xl border border-border bg-accent/5 shadow-sm transition-transform duration-200 hover:ring-2 hover:ring-accent/30"
             >
               <div className="pointer-events-none absolute inset-0 rounded-[14px] opacity-0 group-hover:opacity-100 transition duration-500">
-                <div className="absolute inset-0 rounded-[14px] bg-[conic-gradient(from_0deg,rgba(59,130,246,0.55),rgba(79,70,229,0.5),rgba(59,130,246,0.55))] animate-[spin_8s_linear_infinite]" />
+                <div className="absolute inset-0 rounded-[14px] bg-[conic-gradient(from_0deg,rgba(192,57,43,0.55),rgba(93,64,55,0.5),rgba(62,39,35,0.5),rgba(192,57,43,0.55))] animate-[spin_8s_linear_infinite]" />
                 <div className="absolute inset-[1px] rounded-[12px] bg-gradient-to-br from-white/88 via-white/86 to-slate-200/75" />
               </div>
               <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.5),transparent)] translate-x-[-140%] group-hover:translate-x-[140%] transition-transform duration-700 ease-out" />
@@ -231,7 +232,7 @@ const About = () => {
                 className="relative overflow-hidden group min-h-[140px] rounded-xl border border-border bg-accent/5 shadow-sm transition-transform duration-200 hover:ring-2 hover:ring-accent/30"
               >
                 <div className="pointer-events-none absolute inset-0 rounded-[14px] opacity-0 group-hover:opacity-100 transition duration-500">
-                  <div className="absolute inset-0 rounded-[14px] bg-[conic-gradient(from_0deg,rgba(59,130,246,0.55),rgba(79,70,229,0.5),rgba(59,130,246,0.55))] animate-[spin_8s_linear_infinite]" />
+                  <div className="absolute inset-0 rounded-[14px] bg-[conic-gradient(from_0deg,rgba(192,57,43,0.55),rgba(93,64,55,0.5),rgba(62,39,35,0.5),rgba(192,57,43,0.55))] animate-[spin_8s_linear_infinite]" />
                   <div className="absolute inset-[1px] rounded-[12px] bg-gradient-to-br from-white/88 via-white/86 to-slate-200/75" />
                 </div>
                 <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.5),transparent)] translate-x-[-140%] group-hover:translate-x-[140%] transition-transform duration-700 ease-out" />
@@ -248,7 +249,7 @@ const About = () => {
     </section>
 
     {/* Core Values - Grid with different card style */}
-    <section className="section-padding bg-white">
+    <section className="section-padding bg-[#FBFBF9]">
       <div className="enterprise-container">
         <SectionHeader 
           tag="Core Values" 
@@ -265,7 +266,7 @@ const About = () => {
           transition={{ duration: 0.45 }}
           className="relative overflow-hidden rounded-2xl border border-border/80 shadow-xl mb-10 bg-cover bg-center group transition-all duration-300 hover:border-primary/70 hover:ring-4 hover:ring-primary/50 hover:ring-offset-2 hover:ring-offset-transparent"
           style={{
-            backgroundImage: `linear-gradient(115deg, rgba(6, 24, 44, 0.75), rgba(6, 24, 44, 0.4)), url(${aboutTeam})`,
+            backgroundImage: `linear-gradient(115deg, rgba(62, 39, 35, 0.82), rgba(93, 64, 55, 0.65)), url(${aboutTeam})`,
           }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(255,255,255,0.08),transparent_35%)]" />
@@ -289,7 +290,7 @@ const About = () => {
               }}
             >
               <div className="pointer-events-none absolute inset-0 rounded-[14px] opacity-0 group-hover:opacity-100 transition duration-500">
-                <div className="absolute inset-0 rounded-[14px] bg-[conic-gradient(from_0deg,rgba(59,130,246,0.55),rgba(79,70,229,0.5),rgba(59,130,246,0.55))] animate-[spin_8s_linear_infinite]" />
+                <div className="absolute inset-0 rounded-[14px] bg-[conic-gradient(from_0deg,rgba(192,57,43,0.55),rgba(93,64,55,0.5),rgba(62,39,35,0.5),rgba(192,57,43,0.55))] animate-[spin_8s_linear_infinite]" />
                 <div className="absolute inset-[1px] rounded-[12px] bg-gradient-to-br from-white/86 via-white/84 to-slate-200/78" />
               </div>
               <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.5),transparent)] translate-x-[-140%] group-hover:translate-x-[140%] transition-transform duration-700 ease-out" />
@@ -309,7 +310,7 @@ const About = () => {
     </section>
 
     {/* AI-First Philosophy - Full-width alternating layout */}
-    <section className="section-padding bg-gradient-to-br from-blue-50 to-indigo-50">
+    <section className="section-padding bg-gradient-to-br from-[#FBFBF9] to-[#f1e8e5]">
       <div className="enterprise-container">
         <div className="max-w-4xl mx-auto text-center mb-12">
           <span className="inline-block text-lg md:text-xl lg:text-2xl font-semibold uppercase tracking-[0.22em] text-accent mb-5">AI-First Philosophy</span>
@@ -346,7 +347,7 @@ const About = () => {
               className="relative overflow-hidden group p-8 rounded-xl bg-white border border-border shadow-md transition-transform duration-200"
             >
               <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500">
-                <div className="absolute inset-0 rounded-2xl bg-[conic-gradient(from_0deg,rgba(59,130,246,0.55),rgba(79,70,229,0.5),rgba(59,130,246,0.55))] animate-[spin_8s_linear_infinite]" />
+                <div className="absolute inset-0 rounded-2xl bg-[conic-gradient(from_0deg,rgba(192,57,43,0.55),rgba(93,64,55,0.5),rgba(62,39,35,0.5),rgba(192,57,43,0.55))] animate-[spin_8s_linear_infinite]" />
                 <div className="absolute inset-[1px] rounded-[18px] bg-gradient-to-br from-white/86 via-white/84 to-slate-200/78" />
               </div>
               <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.5),transparent)] translate-x-[-140%] group-hover:translate-x-[140%] transition-transform duration-700 ease-out" />
@@ -368,7 +369,7 @@ const About = () => {
     </section>
 
     {/* Enterprise-Grade Security Culture */}
-    <section className="section-padding bg-white">
+    <section className="section-padding bg-[#FBFBF9]">
       <div className="enterprise-container">
         <div className="max-w-4xl mx-auto">
           <span className="inline-block text-lg md:text-xl lg:text-2xl font-semibold uppercase tracking-[0.22em] text-accent mb-5">Security Culture</span>
@@ -396,7 +397,7 @@ const About = () => {
                 className="relative overflow-hidden group p-6 rounded-lg bg-section border border-border"
               >
                 <div className="pointer-events-none absolute inset-0 rounded-[14px] opacity-0 group-hover:opacity-100 transition duration-500">
-                  <div className="absolute inset-0 rounded-[14px] bg-[conic-gradient(from_0deg,rgba(59,130,246,0.55),rgba(79,70,229,0.5),rgba(59,130,246,0.55))] animate-[spin_8s_linear_infinite]" />
+                  <div className="absolute inset-0 rounded-[14px] bg-[conic-gradient(from_0deg,rgba(192,57,43,0.55),rgba(93,64,55,0.5),rgba(62,39,35,0.5),rgba(192,57,43,0.55))] animate-[spin_8s_linear_infinite]" />
                   <div className="absolute inset-[1px] rounded-[12px] bg-gradient-to-br from-white/88 via-white/86 to-slate-200/75" />
                 </div>
                 <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.5),transparent)] translate-x-[-140%] group-hover:translate-x-[140%] transition-transform duration-700 ease-out" />
@@ -422,11 +423,11 @@ const About = () => {
     </section>
 
     {/* Sustainability Commitment - Different from Home */}
-    <section className="section-padding bg-gradient-to-br from-green-50 to-emerald-50">
+    <section className="section-padding bg-gradient-to-br from-[#FBFBF9] to-[#efe4e0]">
       <div className="enterprise-container">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <span className="inline-block text-lg md:text-xl lg:text-2xl font-semibold uppercase tracking-[0.22em] text-green-600 mb-5">Sustainability Commitment</span>
+            <span className="inline-block text-lg md:text-xl lg:text-2xl font-semibold uppercase tracking-[0.22em] text-accent mb-5">Sustainability Commitment</span>
             <h2 className="section-title">Technology with Environmental Responsibility</h2>
             <p className="text-lg text-muted-foreground leading-relaxed mt-6 max-w-3xl mx-auto">
               We're committed to building technology that respects our planet and future generations. Our green computing initiatives, carbon-aware cloud deployments, and ethical AI frameworks ensure sustainable innovation across all our global operations and client engagements.
@@ -460,22 +461,22 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="relative overflow-hidden group bg-white p-8 rounded-xl shadow-lg border-2 border-green-200"
+                className="relative overflow-hidden group bg-white p-8 rounded-xl shadow-lg border-2 border-accent/25"
               >
                 <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500">
-                  <div className="absolute inset-0 rounded-2xl bg-[conic-gradient(from_0deg,rgba(74,222,128,0.52),rgba(34,197,94,0.48),rgba(74,222,128,0.52))] animate-[spin_8s_linear_infinite]" />
-                  <div className="absolute inset-[1px] rounded-[18px] bg-gradient-to-br from-white/88 via-white/86 to-emerald-100/80" />
+                  <div className="absolute inset-0 rounded-2xl bg-[conic-gradient(from_0deg,rgba(192,57,43,0.52),rgba(93,64,55,0.5),rgba(62,39,35,0.48),rgba(192,57,43,0.52))] animate-[spin_8s_linear_infinite]" />
+                  <div className="absolute inset-[1px] rounded-[18px] bg-gradient-to-br from-white/88 via-white/86 to-[#f1e8e5]/80" />
                 </div>
                 <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.45),transparent)] translate-x-[-140%] group-hover:translate-x-[140%] transition-transform duration-700 ease-out" />
                 <div className="relative z-20">
                   <h3 className="text-xl font-bold mb-6 flex items-center gap-3">
-                    <Leaf className="w-6 h-6 text-green-600" />
+                    <Leaf className="w-6 h-6 text-accent" />
                     {cat.title}
                   </h3>
                   <ul className="space-y-3">
                     {cat.points.map((point) => (
                       <li key={point} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <CheckCircle size={16} className="text-green-600 mt-0.5 shrink-0" />
+                        <CheckCircle size={16} className="text-accent mt-0.5 shrink-0" />
                         <span>{point}</span>
                       </li>
                     ))}
@@ -489,7 +490,7 @@ const About = () => {
     </section>
 
     {/* CSR & Education Initiatives - Numbered blocks style */}
-    <section className="section-padding bg-white">
+    <section className="section-padding bg-[#FBFBF9]">
       <div className="enterprise-container">
         <SectionHeader 
           tag="CSR & Education" 
@@ -540,7 +541,7 @@ const About = () => {
               <div className="absolute -left-4 -top-4 text-6xl font-bold text-accent/10">{item.number}</div>
                 <div className="relative overflow-hidden group p-8 rounded-xl border-2 border-border hover:border-accent/30 hover:shadow-lg transition-all duration-300 bg-card">
                   <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500">
-                    <div className="absolute inset-0 rounded-2xl bg-[conic-gradient(from_0deg,rgba(59,130,246,0.55),rgba(79,70,229,0.5),rgba(59,130,246,0.55))] animate-[spin_8s_linear_infinite]" />
+                    <div className="absolute inset-0 rounded-2xl bg-[conic-gradient(from_0deg,rgba(192,57,43,0.55),rgba(93,64,55,0.5),rgba(62,39,35,0.5),rgba(192,57,43,0.55))] animate-[spin_8s_linear_infinite]" />
                     <div className="absolute inset-[1px] rounded-[18px] bg-gradient-to-br from-white/86 via-white/84 to-slate-200/78" />
                   </div>
                   <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.5),transparent)] translate-x-[-140%] group-hover:translate-x-[140%] transition-transform duration-700 ease-out" />
@@ -571,6 +572,7 @@ const About = () => {
     </section>
 
       <BlogPreview />
+      </div>
     </PageLayout>
   );
 };

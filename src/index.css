@@ -48,6 +48,40 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  /* About page palette: Modern Brick / IT Warmth */
+  .about-theme {
+    --background: 60 20% 98%;
+    --foreground: 9 28% 19%; /* Espresso */
+
+    --card: 0 0% 100%;
+    --card-foreground: 9 28% 19%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 9 28% 19%;
+
+    --primary: 14 26% 29%; /* Warm Taupe */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 60 20% 95%; /* Linen wash */
+    --secondary-foreground: 9 28% 19%;
+
+    --muted: 60 18% 93%;
+    --muted-foreground: 12 12% 45%;
+
+    --accent: 6 63% 46%; /* Crimson Tech */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 6 63% 46%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 14 18% 80%;
+    --input: 14 18% 80%;
+    --ring: 6 63% 46%;
+
+    --section-bg: 60 18% 94%;
+    --hero-overlay: 14 26% 29%;
+  }
 }
 
 @layer base {

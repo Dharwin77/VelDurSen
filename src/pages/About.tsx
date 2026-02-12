@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
-import { CheckCircle, Eye, Target, Shield, Leaf, Heart, GraduationCap, Globe, Sparkles, Award, Users, Brain, Lock, Zap, BookOpen, Lightbulb } from "lucide-react";
+import { CheckCircle, Eye, Target, Shield, Leaf, Heart, GraduationCap, Globe, Sparkles, Award, Users, Brain, Lock, Zap, BookOpen, Lightbulb, Globe2 } from "lucide-react";
 import PageLayout from "@/components/layout/PageLayout";
-import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import BlogPreview from "@/components/shared/BlogPreview";
 import aboutTeam from "@/assets/about-team.jpg";
 import aboutImage1 from "@/assets/Gemini_Generated_Image_uugaqruugaqruuga.png";
 import aboutImage2 from "@/assets/Gemini_Generated_Image_zh56h0zh56h0zh56.png";
+import aboutVideo from "@/assets/about.mp4";
 import { Link } from "react-router-dom";
 
 const coreValues = [
@@ -20,12 +20,50 @@ const coreValues = [
 
 const About = () => (
   <PageLayout>
-    <PageHero
-      tag="About"
-      title="Enterprise Technology & Digital Transformation Company"
-      subtitle="We are a global technology company dedicated to building secure, scalable, and sustainable digital systems for the world's most ambitious enterprises across industries and continents."
-      bgImages={[aboutTeam, aboutImage1, aboutImage2]}
-    />
+    {/* HERO SECTION - Matching Industry Page Style */}
+    <section className="relative h-[80vh] flex items-center overflow-hidden">
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]"
+      >
+        <source src={aboutVideo} type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent z-10" />
+
+      <div className="enterprise-container relative z-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl"
+        >
+          <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+            About VelDurSen
+          </span>
+          <h1 className="text-[4rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+            Digital <br />
+            <span className="text-red-600">Transformation.</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-slate-300 font-medium mb-12 max-w-3xl leading-relaxed drop-shadow-md">
+            We are a global technology company dedicated to building secure, scalable, and sustainable digital systems for the world's most ambitious enterprises across industries and continents.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20">
+              Our Story
+            </Link>
+            <div className="flex items-center gap-4 px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">
+              <Globe2 size={16} className="text-red-600 shadow-sm" /> Presence in 50+ Countries
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Floating Abstract Element */}
+      <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[120px] -z-0" />
+    </section>
 
     {/* Company Overview - Different layout: text-heavy with side stats */}
     <section className="section-padding bg-white">

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Trophy, MapPin, Calendar, Award, Bookmark, TrendingUp, BarChart3, Briefcase, Building2 } from "lucide-react";
+import { ArrowRight, Trophy, MapPin, Calendar, Award, Bookmark, TrendingUp, BarChart3, Briefcase, Building2, Globe, Globe2 } from "lucide-react";
 import PageLayout from "@/components/layout/PageLayout";
 import { achievementsData } from "@/data/achievements";
 
@@ -44,6 +44,30 @@ const Achievements = () => {
 
         {/* Floating Abstract Element */}
         <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[120px] -z-0" />
+      </section>
+
+      {/* 1.5 CRISPY ACHIEVEMENTS HIGHLIGHTS - REFINED TEXT VERSION */}
+      <section className="py-16 bg-white border-b border-slate-100">
+        <div className="enterprise-container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl"
+          >
+            <span className="text-red-600 font-bold uppercase tracking-widest text-xs mb-4 block">
+              Global Excellence & Recognition
+            </span>
+            <div className="space-y-6 text-slate-500 leading-relaxed text-lg font-medium">
+              <p>
+                VelDurSen’s achievements represent a decade of relentless engineering innovation and architectural integrity. We have successfully deployed mission-critical systems across 150+ countries, earning over 50 global awards for our pioneering work in AI safety and cloud resilience.
+              </p>
+              <p>
+                Our journey is defined by transforming complex legacy environments into high-performance digital ecosystems that empower the world’s most ambitious enterprises. Every award is a milestone in our mission to build a more secure, intelligent, and sustainable future for global technology.
+              </p>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* 2. DYNAMIC ACHIEVEMENT GRID - WITH STACKED-TO-SPLIT ANIMATION */}

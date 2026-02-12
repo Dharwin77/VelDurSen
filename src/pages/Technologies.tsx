@@ -13,6 +13,7 @@ const techCategories = [
     title: "AI & Machine Learning",
     desc: "Cutting-edge artificial intelligence and machine learning solutions for intelligent automation.",
     techs: ["TensorFlow", "PyTorch", "OpenAI", "LangChain", "Hugging Face", "MLflow", "Kubeflow", "ONNX Runtime"],
+    image: "/tech-images/ai ml.png",
   },
   {
     slug: "cloud-platforms",
@@ -20,6 +21,7 @@ const techCategories = [
     title: "Cloud Platforms",
     desc: "Multi-cloud infrastructure expertise delivering scalable, secure, and reliable cloud solutions.",
     techs: ["AWS", "Microsoft Azure", "Google Cloud", "Digital Ocean", "Cloud Foundry", "Serverless"],
+    image: "/tech-images/cloud.png",
   },
   {
     slug: "devops-automation",
@@ -27,6 +29,7 @@ const techCategories = [
     title: "DevOps & Automation",
     desc: "Modern DevOps practices enabling continuous integration, delivery, and infrastructure automation.",
     techs: ["Kubernetes", "Docker", "Terraform", "Jenkins", "GitHub Actions", "ArgoCD", "Ansible", "Prometheus"],
+    image: "/tech-images/devops.png",
   },
   {
     slug: "data-engineering",
@@ -34,6 +37,7 @@ const techCategories = [
     title: "Data Engineering",
     desc: "Robust data platforms for real-time processing, analytics, and business intelligence at scale.",
     techs: ["Apache Kafka", "Apache Spark", "Hadoop", "Snowflake", "Databricks", "Airflow", "Elasticsearch"],
+    image: "/tech-images/data.png",
   },
   {
     slug: "security-compliance",
@@ -41,6 +45,7 @@ const techCategories = [
     title: "Security & Compliance",
     desc: "Enterprise-grade security solutions ensuring data protection, compliance, and risk management.",
     techs: ["CrowdStrike", "Vault", "Okta", "Auth0", "Splunk", "Snyk", "Aqua Security", "Fortinet"],
+    image: "/tech-images/security.png",
   },
   {
     slug: "backend-technologies",
@@ -48,6 +53,7 @@ const techCategories = [
     title: "Backend Technologies",
     desc: "High-performance backend systems built with industry-leading languages and frameworks.",
     techs: ["Java", "Python", "Go", "C#", "Node.js", "PHP", "Ruby", "Rust"],
+    image: "/tech-images/backend.png",
   },
   {
     slug: "api-integration",
@@ -55,6 +61,7 @@ const techCategories = [
     title: "API & Integration",
     desc: "Seamless API development and system integration for connected enterprise ecosystems.",
     techs: ["REST API", "GraphQL", "gRPC", "WebSockets", "Apache Camel", "MuleSoft", "Kong", "Apigee"],
+    image: "/tech-images/api.png",
   },
   {
     slug: "iot-edge-computing",
@@ -103,27 +110,32 @@ const Technologies = () => (
               <div className="relative h-full bg-white rounded-xl overflow-hidden border border-slate-200 transition-all duration-300 hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1 hover:border-slate-300">
                 {/* Image/Visual Header */}
                 <div className="relative h-48 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
-                  {/* Decorative Pattern */}
-                  <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-4 right-4 w-32 h-32 border border-white/20 rounded-full"></div>
-                    <div className="absolute bottom-4 left-4 w-24 h-24 border border-white/20 rounded-full"></div>
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-white/10 rounded-full"></div>
-                  </div>
-                  {/* Icon */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-20 h-20 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                      <category.icon className="text-white" size={40} strokeWidth={1.5} />
-                    </div>
-                  </div>
+                  {category.image ? (
+                    /* Actual Image */
+                    <img 
+                      src={category.image} 
+                      alt={category.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    /* Fallback: Decorative Pattern + Icon */
+                    <>
+                      <div className="absolute inset-0 opacity-10">
+                        <div className="absolute top-4 right-4 w-32 h-32 border border-white/20 rounded-full"></div>
+                        <div className="absolute bottom-4 left-4 w-24 h-24 border border-white/20 rounded-full"></div>
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-white/10 rounded-full"></div>
+                      </div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-20 h-20 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                          <category.icon className="text-white" size={40} strokeWidth={1.5} />
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 {/* Content */}
                 <div className="p-6">
-                  {/* Category Badge */}
-                  <span className="inline-block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-3">
-                    Technology Stack
-                  </span>
-
                   {/* Title */}
                   <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-slate-700 transition-colors line-clamp-2">
                     {category.title}

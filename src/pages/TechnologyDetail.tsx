@@ -1024,10 +1024,10 @@ const TechnologyDetail = () => {
 
           {/* Key Features */}
           <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
             className="mb-16"
           >
             <h2 className="text-3xl font-bold mb-8 text-slate-900">Key Features & Capabilities</h2>
@@ -1043,10 +1043,10 @@ const TechnologyDetail = () => {
 
           {/* Use Cases */}
           <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
             className="mb-16"
           >
             <h2 className="text-3xl font-bold mb-8 text-slate-900">Real-World Use Cases</h2>
@@ -1065,10 +1065,10 @@ const TechnologyDetail = () => {
 
           {/* Benefits & ROI */}
           <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
             className="mb-16"
           >
             <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-8">
@@ -1087,10 +1087,10 @@ const TechnologyDetail = () => {
 
           {/* Implementation Steps */}
           <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
             className="mb-16"
           >
             <h2 className="text-3xl font-bold mb-8 text-slate-900">Implementation Roadmap</h2>
@@ -1111,10 +1111,10 @@ const TechnologyDetail = () => {
 
           {/* Best Practices */}
           <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
             className="mb-16"
           >
             <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-8">
@@ -1132,10 +1132,10 @@ const TechnologyDetail = () => {
 
           {/* Tools & Technologies */}
           <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
             className="mb-16"
           >
             <h2 className="text-3xl font-bold mb-6 text-slate-900">Tools & Technologies</h2>
@@ -1153,30 +1153,15 @@ const TechnologyDetail = () => {
 
           {/* Conclusion */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
             className="mb-16"
           >
             <h2 className="text-3xl font-bold mb-6 text-slate-900">Conclusion</h2>
             <p className="text-base leading-relaxed text-slate-700">{technology.conclusion}</p>
           </motion.div>
-
-          {/* CTA */}
-          <div className="text-center pt-8 border-t border-slate-200">
-            <p className="text-lg text-slate-700 mb-6">
-              Ready to leverage {technology.title} for your business?
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button onClick={() => navigate("/contact")} className="btn-primary">
-                Get in Touch
-              </button>
-              <button onClick={() => navigate("/technologies")} className="btn-secondary">
-                ← Back to All Technologies
-              </button>
-            </div>
-          </div>
         </div>
       </article>
     </PageLayout>

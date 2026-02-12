@@ -11,10 +11,11 @@ interface PageHeroProps {
   ctaLink?: string;
   bgImage?: string;
   bgImages?: string[];
+  videoSrc?: string;
   overlay?: boolean;
 }
 
-const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, bgImages, overlay = true }: PageHeroProps) => {
+const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, bgImages, videoSrc, overlay = true }: PageHeroProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = bgImages || (bgImage ? [bgImage] : []);
 
@@ -42,8 +43,26 @@ const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, bgImages, o
           }}
         />
       ))}
-      {overlay && <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/50 to-transparent md:from-primary/90 md:via-primary/30 md:to-transparent" />}
-      {images.length === 0 && <div className="absolute inset-0 bg-primary" />}
+      {videoSrc && (
+        <div className="absolute inset-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src={videoSrc} type="video/mp4" />
+          </video>
+        </div>
+      )}
+      {overlay && (
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/60 to-transparent md:from-primary/90 md:via-primary/40 md:to-transparent" />
+      )}
+      {videoSrc && (
+        <div className="absolute inset-0 bg-black/40" />
+      )}
+      {images.length === 0 && !videoSrc && <div className="absolute inset-0 bg-primary" />}
       <div className="enterprise-container relative z-10 py-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

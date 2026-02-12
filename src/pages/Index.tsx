@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -39,6 +39,7 @@ import footerVideo from "@/assets/footer_above.mp4";
 import founder1 from "@/assets/founder1.png";
 import founder2 from "@/assets/founder2.png";
 import founder3 from "@/assets/founder3.png";
+import logo from "@/assets/logo.png";
 
 // Image Carousel Component
 const ImageCarousel = ({ images, interval = 4000 }: { images: string[]; interval?: number }) => {
@@ -813,228 +814,242 @@ const TrustedPartnersLogos = () => {
   );
 };
 
-const Index = () => (
-  <PageLayout>
-    {/* Hero */}
-    <section className="relative min-h-[600px] md:min-h-[680px] flex items-center overflow-hidden group">
-      {/* Background Image with Brightness Boost */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center brightness-125 transition-all duration-700 group-hover:brightness-140"
-        style={{ backgroundImage: `url(${heroBg})` }}
-      />
+const Index = () => {
+  const [scrollY, setScrollY] = useState(false);
 
-      {/* Modern Gradient Overlay for Text Readability - Dark on left for text, clear on right for image */}
-      <div className="absolute inset-0 z-1 bg-gradient-to-r from-primary/95 via-primary/70 to-primary/20 md:from-primary/90 md:via-primary/50 md:to-transparent" />
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-      <div className="enterprise-container relative z-10 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="max-w-3xl"
-        >
-          <span className="inline-block text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4 drop-shadow-sm">
-            Global Enterprise Technology Partner
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-[4rem] font-bold text-primary-foreground leading-[1.1] mb-6 drop-shadow-2xl">
-            AI-Driven Digital Transformation for Global Enterprises
-          </h1>
-          <p className="text-lg md:text-xl text-primary-foreground font-medium leading-relaxed mb-8 max-w-2xl drop-shadow-lg">
-            Trusted worldwide for building secure, scalable, and sustainable enterprise systems that power mission-critical operations across industries and continents.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Link to="/contact" state={{ fromButton: true }} className="btn-accent hover:bg-primary hover:text-primary-foreground transition-all duration-300">
-              Talk to Experts <ArrowRight size={16} className="ml-2" />
-            </Link>
-            <Link to="/services" state={{ fromButton: true }} className="inline-flex items-center justify-center rounded-md border-2 border-primary-foreground/30 text-primary-foreground px-8 py-3 text-sm font-semibold transition-all duration-300 hover:bg-accent hover:border-accent hover:text-accent-foreground">
-              Explore Services
-            </Link>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Scrolling News Ticker */}
-      <div className="absolute bottom-0 left-0 right-0 bg-accent/95 backdrop-blur-sm py-3 overflow-hidden z-20 group">
-        <div className="flex whitespace-nowrap animate-scroll group-hover:[animation-play-state:paused] transition-all duration-300">
-          <span className="inline-flex items-center text-sm font-medium text-primary-foreground px-4">
-            🚀 VelDurSen delivers Enterprise AI & Cloud Solutions  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  🤖 Intelligent Systems for Digital Transformation  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ☁️ Scalable Cloud Architecture & DevOps Services  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  📊 Data Analytics, ML & Automation Solutions  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  🌐 Secure, High-Performance IT Infrastructure  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  💼 Industry-ready Solutions for Healthcare, Finance & Manufacturing  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  🏆 Trusted by Growing Enterprises  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  📈 Engineering the Digital Backbone of Modern Businesses
-          </span>
-          <span className="inline-flex items-center text-sm font-medium text-primary-foreground px-4">
-            🚀 VelDurSen delivers Enterprise AI & Cloud Solutions  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  🤖 Intelligent Systems for Digital Transformation  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ☁️ Scalable Cloud Architecture & DevOps Services  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  📊 Data Analytics, ML & Automation Solutions  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  🌐 Secure, High-Performance IT Infrastructure  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  💼 Industry-ready Solutions for Healthcare, Finance & Manufacturing  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  🏆 Trusted by Growing Enterprises  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  📈 Engineering the Digital Backbone of Modern Businesses
-          </span>
-        </div>
-      </div>
-    </section>
-
-    {/* Global Presence Snapshot - NEW SECTION */}
-    <section className="section-padding bg-white">
-      <div className="enterprise-container">
-        <SectionHeader
-          tag="Global Operations"
-          title="Worldwide Presence, Local Expertise"
-          subtitle="Operating across multiple continents with a follow-the-sun delivery model, serving global enterprises around the clock."
+  return (
+    <PageLayout>
+      {/* 1. HERO SECTION - Redesigned to match Premium Industry Style */}
+      <section className="relative h-[90vh] flex items-center overflow-hidden bg-white">
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[10s] brightness-110 hover:scale-105"
+          style={{ backgroundImage: `url(${heroBg})` }}
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent z-10" />
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-16">
-          {globalMetrics.map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="text-center p-6 md:p-8 rounded-xl border-2 border-accent/20 bg-card hover:shadow-xl hover:border-accent/40 transition-all duration-300"
-            >
-              <div className="metric-value mb-2">
-                <AnimatedCounter value={stat.value} />
+
+        <div className="enterprise-container relative z-20">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl"
+          >
+            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-600 mb-6 px-4 py-1.5 bg-red-50 rounded-full border border-red-100 backdrop-blur-md shadow-sm">
+              Global Enterprise Technology Partner
+            </span>
+            <h1 className="text-[3.5rem] md:text-[6.5rem] font-bold text-slate-900 leading-[0.95] mb-8 tracking-tighter">
+              Digital <br />
+              <span className="text-red-600">Transformation.</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-slate-600 font-medium mb-12 max-w-2xl leading-relaxed">
+              We architect intelligent, secure, and sustainable enterprise ecosystems that power mission-critical operations across industries worldwide.
+            </p>
+            <div className="flex flex-wrap gap-4 items-center">
+              <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-xl shadow-red-600/10">
+                Talk to Experts <ArrowRight size={18} className="ml-2" />
+              </Link>
+              <div className="flex items-center gap-4 px-6 text-slate-500 font-bold uppercase tracking-widest text-[10px]">
+                <Globe2 size={16} className="text-red-600" /> Trusted in 150+ Countries
               </div>
-              <div className="text-base font-semibold text-foreground mb-1">{stat.label}</div>
-              <div className="text-xs text-muted-foreground">{stat.sublabel}</div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Floating Abstract Element */}
+        <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[120px] -z-0" />
+
+        {/* Scrolling News Ticker - Integrated with new design */}
+        <div className="absolute bottom-0 left-0 right-0 bg-red-600/90 backdrop-blur-sm py-4 overflow-hidden z-20">
+          <div className="flex whitespace-nowrap animate-scroll-slow hover:[animation-play-state:paused] transition-all duration-300">
+            <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-white px-8">
+              🚀 VelDurSen delivers Enterprise AI & Cloud Solutions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🤖 Intelligent Systems for Digital Transformation &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ☁️ Scalable Cloud Architecture & DevOps &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 📊 Data Analytics & Automation Solutions
+            </span>
+            <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-white px-8">
+              🚀 VelDurSen delivers Enterprise AI & Cloud Solutions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🤖 Intelligent Systems for Digital Transformation &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ☁️ Scalable Cloud Architecture & DevOps &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 📊 Data Analytics & Automation Solutions
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Global Presence Snapshot - NEW SECTION */}
+      <section className="section-padding bg-white">
+        <div className="enterprise-container">
+          <SectionHeader
+            tag="Global Operations"
+            title="Worldwide Presence, Local Expertise"
+            subtitle="Operating across multiple continents with a follow-the-sun delivery model, serving global enterprises around the clock."
+          />
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-16">
+            {globalMetrics.map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center p-6 md:p-8 rounded-xl border-2 border-accent/20 bg-card hover:shadow-xl hover:border-accent/40 transition-all duration-300"
+              >
+                <div className="metric-value mb-2">
+                  <AnimatedCounter value={stat.value} />
+                </div>
+                <div className="text-base font-semibold text-foreground mb-1">{stat.label}</div>
+                <div className="text-xs text-muted-foreground">{stat.sublabel}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* World Map Visualization - Full Screen */}
+      <section className="relative w-full min-h-screen max-h-screen overflow-hidden bg-gradient-to-br from-muted via-muted/80 to-muted/50 flex items-center justify-center">
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-70"
+        >
+          <source src={backgroundVideo} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/50 z-10"></div>
+        <div className="absolute inset-0 opacity-20 z-10" style={{
+          backgroundImage: `radial-gradient(circle at 20% 50%, rgba(24, 119, 242, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(24, 119, 242, 0.3) 0%, transparent 50%)`
+        }}></div>
+        <div className="relative z-20 text-center px-6">
+          <Globe2 className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 text-white mx-auto mb-8 drop-shadow-lg" />
+          <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-accent mb-6 drop-shadow-lg">Global Delivery Network</h3>
+          <p className="text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto drop-shadow-sm mb-6">
+            <span className="font-semibold text-white">North America</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Europe</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Asia-Pacific</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Middle East</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Latin America</span>
+          </p>
+          <p className="text-base md:text-lg lg:text-xl text-white/80 mt-6 max-w-3xl mx-auto drop-shadow-sm">
+            Our distributed teams enable continuous deployment, faster response times, and seamless collaboration across time zones.
+          </p>
+        </div>
+      </section>
+
+      {/* About Brief */}
+      <section className="section-padding bg-section">
+        <div className="enterprise-container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-3 block">About VelDurSen</span>
+              <h2 className="section-title leading-snug mb-6">Your Trusted Partner in<br />Enterprise Digital Transformation</h2>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                VelDurSen is a global Enterprise Technology & Digital Transformation company specializing in AI-first, security-first, and sustainability-driven solutions for the world's most demanding enterprises.
+              </p>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                With operations spanning multiple continents and regional delivery centers worldwide, we deliver cutting-edge technology solutions that help organizations achieve their digital transformation goals while maintaining the highest standards of security, scalability, and sustainability.
+              </p>
+              <p className="text-muted-foreground leading-relaxed mb-8">
+                From Fortune 500 enterprises to high-growth organizations across healthcare, finance, manufacturing, and beyond—our architecture-first engineering approach ensures every system we build is resilient, performant, and future-proof for global operations.
+              </p>
+              <Link
+                to="/about"
+                state={{ fromButton: true }}
+                className="btn-enterprise"
+              >
+                Learn More About Us <ArrowRight size={16} className="ml-2" />
+              </Link>
             </motion.div>
-          ))}
+            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+              <ImageCarousel images={[aboutTeam, aboutImage1, aboutImage2]} interval={4000} />
+            </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    {/* World Map Visualization - Full Screen */}
-    <section className="relative w-full min-h-screen max-h-screen overflow-hidden bg-gradient-to-br from-muted via-muted/80 to-muted/50 flex items-center justify-center">
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-70"
-      >
-        <source src={backgroundVideo} type="video/mp4" />
-      </video>
-      <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/50 z-10"></div>
-      <div className="absolute inset-0 opacity-20 z-10" style={{
-        backgroundImage: `radial-gradient(circle at 20% 50%, rgba(24, 119, 242, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(24, 119, 242, 0.3) 0%, transparent 50%)`
-      }}></div>
-      <div className="relative z-20 text-center px-6">
-        <Globe2 className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 text-white mx-auto mb-8 drop-shadow-lg" />
-        <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-accent mb-6 drop-shadow-lg">Global Delivery Network</h3>
-        <p className="text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto drop-shadow-sm mb-6">
-          <span className="font-semibold text-white">North America</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Europe</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Asia-Pacific</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Middle East</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Latin America</span>
-        </p>
-        <p className="text-base md:text-lg lg:text-xl text-white/80 mt-6 max-w-3xl mx-auto drop-shadow-sm">
-          Our distributed teams enable continuous deployment, faster response times, and seamless collaboration across time zones.
-        </p>
-      </div>
-    </section>
 
-    {/* About Brief */}
-    <section className="section-padding bg-section">
-      <div className="enterprise-container">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-3 block">About VelDurSen</span>
-            <h2 className="section-title leading-snug mb-6">Your Trusted Partner in<br />Enterprise Digital Transformation</h2>
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              VelDurSen is a global Enterprise Technology & Digital Transformation company specializing in AI-first, security-first, and sustainability-driven solutions for the world's most demanding enterprises.
-            </p>
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              With operations spanning multiple continents and regional delivery centers worldwide, we deliver cutting-edge technology solutions that help organizations achieve their digital transformation goals while maintaining the highest standards of security, scalability, and sustainability.
-            </p>
-            <p className="text-muted-foreground leading-relaxed mb-8">
-              From Fortune 500 enterprises to high-growth organizations across healthcare, finance, manufacturing, and beyond—our architecture-first engineering approach ensures every system we build is resilient, performant, and future-proof for global operations.
-            </p>
-            <Link
-              to="/about"
-              state={{ fromButton: true }}
-              className="btn-enterprise"
+
+
+
+
+
+
+
+
+      {/* Rapid Support Section */}
+      <RapidSupportSection />
+      <TrustedPartnersLogos />
+      <WhatWeAreUptoSection />
+
+      {/* What We Provide Section */}
+      <section className="section-padding bg-white">
+        <div className="enterprise-container">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-5xl font-bold mb-4"
             >
-              Learn More About Us <ArrowRight size={16} className="ml-2" />
-            </Link>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <ImageCarousel images={[aboutTeam, aboutImage1, aboutImage2]} interval={4000} />
-          </motion.div>
+              What we provide
+            </motion.h2>
+          </div>
+
+          {/* Tab Navigation */}
+          <WhatWeProvideSection />
         </div>
-      </div>
-    </section>
+      </section>
 
+      {/* Testimonials Carousel */}
+      <section className="section-padding bg-gradient-to-b from-slate-50 to-white">
+        <div className="enterprise-container">
+          <div className="text-center max-w-5xl mx-auto mb-16">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-block text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4"
+            >
+              Testimonials
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-3xl md:text-5xl font-bold mb-4 whitespace-nowrap"
+            >
+              Few words from our happy customers
+            </motion.h2>
+          </div>
 
-
-
-
-
-
-
-
-
-    {/* Rapid Support Section */}
-    <RapidSupportSection />
-    <TrustedPartnersLogos />
-    <WhatWeAreUptoSection />
-
-    {/* What We Provide Section */}
-    <section className="section-padding bg-white">
-      <div className="enterprise-container">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-bold mb-4"
-          >
-            What we provide
-          </motion.h2>
+          <TestimonialsCarousel />
         </div>
+      </section>
 
-        {/* Tab Navigation */}
-        <WhatWeProvideSection />
-      </div>
-    </section>
+      {/* Founders Section */}
+      <FoundersSection />
 
-    {/* Testimonials Carousel */}
-    <section className="section-padding bg-gradient-to-b from-slate-50 to-white">
-      <div className="enterprise-container">
-        <div className="text-center max-w-5xl mx-auto mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-block text-xs font-bold uppercase tracking-[0.2em] text-accent mb-4"
-          >
-            Testimonials
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-3xl md:text-5xl font-bold mb-4 whitespace-nowrap"
-          >
-            Few words from our happy customers
-          </motion.h2>
-        </div>
-
-        <TestimonialsCarousel />
-      </div>
-    </section>
-
-    {/* Founders Section */}
-    <FoundersSection />
-
-    {/* Video Section Above Footer */}
-    <section className="w-full h-screen overflow-hidden relative bg-slate-900">
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="w-full h-full object-cover opacity-90"
-      >
-        <source src={footerVideo} type="video/mp4" />
-      </video>
-      {/* Subtle overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-    </section>
+      {/* Video Section Above Footer */}
+      <section className="w-full h-screen overflow-hidden relative bg-slate-900">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-90"
+        >
+          <source src={footerVideo} type="video/mp4" />
+        </video>
+        {/* Subtle overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+      </section>
 
 
-  </PageLayout>
-);
+    </PageLayout>
+  );
+};
 
 export default Index;

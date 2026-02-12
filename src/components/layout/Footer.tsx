@@ -44,7 +44,7 @@ const Footer = () => {
             </p>
             <div className="flex gap-3">
               {[Linkedin, Twitter, Youtube].map((Icon, i) => (
-                <a key={i} href="#" className="w-9 h-9 rounded-md bg-primary-foreground/10 flex items-center justify-center hover:bg-accent transition-colors">
+                <a key={i} href="#" className="w-9 h-9 rounded-md bg-primary-foreground/10 flex items-center justify-center hover:bg-blue-600 transition-colors">
                   <Icon size={16} />
                 </a>
               ))}
@@ -62,7 +62,7 @@ const Footer = () => {
                   <li key={link.label}>
                     <Link
                       to={link.path}
-                      className="text-sm text-primary-foreground/60 hover:text-accent transition-colors"
+                      className="text-sm text-primary-foreground/60 hover:text-blue-400 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -79,9 +79,9 @@ const Footer = () => {
             © 2025 VelDurSen Technologies. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-primary-foreground/50">
-            <a href="#" className="hover:text-primary-foreground/80">Privacy Policy</a>
-            <a href="#" className="hover:text-primary-foreground/80">Terms of Service</a>
-            <a href="#" className="hover:text-primary-foreground/80">Security</a>
+            <a href="#" className="hover:text-blue-400 transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-blue-400 transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-blue-400 transition-colors">Security</a>
           </div>
         </div>
       </div>

@@ -33,7 +33,7 @@ const Achievements = () => {
       </section>
 
       {/* Enterprise Impact Metrics - Large statistic blocks */}
-      <section className="section-padding bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <section className="section-padding bg-gradient-to-br from-red-50 via-slate-50 to-white">
         <div className="enterprise-container">
           <SectionHeader
             tag="Impact Metrics"
@@ -140,7 +140,7 @@ const Achievements = () => {
                   "NLP platforms processing 100M+ documents",
                   "Computer vision systems with 99%+ accuracy"
                 ],
-                color: "purple"
+                color: "red"
               },
               {
                 icon: Cloud,
@@ -151,7 +151,7 @@ const Achievements = () => {
                   "Cloud-native migrations for Fortune 500",
                   "Kubernetes clusters managing 100K+ pods"
                 ],
-                color: "blue"
+                color: "slate"
               },
               {
                 icon: Shield,
@@ -173,7 +173,7 @@ const Achievements = () => {
                   "Petabyte-scale data warehouse deployments",
                   "Sub-second query performance at scale"
                 ],
-                color: "sky"
+                color: "red"
               },
               {
                 icon: Zap,
@@ -184,7 +184,7 @@ const Achievements = () => {
                   "Automated testing frameworks (90%+ coverage)",
                   "GitOps workflows with zero-downtime deploys"
                 ],
-                color: "green"
+                color: "slate"
               },
               {
                 icon: Server,
@@ -195,7 +195,7 @@ const Achievements = () => {
                   "Auto-scaling handling 10x traffic spikes",
                   "Disaster recovery with <1 hour RTO"
                 ],
-                color: "indigo"
+                color: "red"
               },
             ].map((milestone, i) => (
               <motion.div
@@ -250,8 +250,8 @@ const Achievements = () => {
               {
                 icon: Landmark,
                 industry: "FinTech & Banking",
-                color: "bg-blue-50 border-blue-200",
-                iconColor: "text-blue-600",
+                color: "bg-slate-50 border-slate-200",
+                iconColor: "text-slate-900",
                 achievements: [
                   "Fraud detection systems processing $10B+ in transactions daily",
                   "Core banking platforms supporting 20M+ active accounts",
@@ -274,8 +274,8 @@ const Achievements = () => {
               {
                 icon: ShoppingCart,
                 industry: "Retail & E-Commerce",
-                color: "bg-purple-50 border-purple-200",
-                iconColor: "text-purple-600",
+                color: "bg-red-50 border-red-200",
+                iconColor: "text-red-600",
                 achievements: [
                   "Omnichannel platforms serving 50M+ customers globally",
                   "AI-powered demand forecasting improving accuracy by 35%",
@@ -286,8 +286,8 @@ const Achievements = () => {
               {
                 icon: Building2,
                 industry: "Smart Cities",
-                color: "bg-green-50 border-green-200",
-                iconColor: "text-green-600",
+                color: "bg-slate-50 border-slate-200",
+                iconColor: "text-slate-900",
                 achievements: [
                   "Traffic analytics platforms deployed in 45+ cities",
                   "Smart energy management reducing consumption by 20%",
@@ -298,8 +298,8 @@ const Achievements = () => {
               {
                 icon: Wheat,
                 industry: "Agriculture & AgriTech",
-                color: "bg-emerald-50 border-emerald-200",
-                iconColor: "text-emerald-700",
+                color: "bg-red-50 border-red-200",
+                iconColor: "text-red-700",
                 achievements: [
                   "Precision farming platforms optimizing 500K+ acres",
                   "AI-driven crop intelligence improving yields by 30%",
@@ -341,10 +341,10 @@ const Achievements = () => {
       </section>
 
       {/* Sustainability & Green Tech Achievements */}
-      <section className="section-padding bg-gradient-to-br from-green-100 to-emerald-100">
+      <section className="section-padding bg-gradient-to-br from-red-50 to-white">
         <div className="enterprise-container">
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-green-700 mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-red-700 mb-4">
               Sustainability Leadership
             </span>
             <h2 className="section-title">Green Tech Enterprise Achievements</h2>
@@ -386,17 +386,17 @@ const Achievements = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-6 rounded-xl bg-white border-2 border-green-300 hover:shadow-xl transition-all duration-300"
+                className="p-6 rounded-xl bg-white border-2 border-red-100 hover:shadow-xl transition-all duration-300"
               >
-                <achievement.icon className="w-10 h-10 text-green-600 mb-4" />
-                <div className="text-4xl font-bold text-green-600 mb-2">{achievement.metric}</div>
+                <achievement.icon className="w-10 h-10 text-red-600 mb-4" />
+                <div className="text-4xl font-bold text-red-600 mb-2">{achievement.metric}</div>
                 <h4 className="text-lg font-bold mb-3">{achievement.title}</h4>
                 <p className="text-sm text-muted-foreground">{achievement.desc}</p>
               </motion.div>
             ))}
           </div>
 
-          <div className="bg-white p-8 rounded-2xl border-2 border-green-300">
+          <div className="bg-white p-8 rounded-2xl border-2 border-red-100">
             <h3 className="text-2xl font-bold mb-6 text-center">Environmental Impact Reduction Initiatives</h3>
             <div className="grid md:grid-cols-3 gap-6">
               {[
@@ -408,7 +408,7 @@ const Achievements = () => {
                 "Environmental metrics tracked per deployment"
               ].map((initiative) => (
                 <div key={initiative} className="flex items-start gap-3">
-                  <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle2 size={18} className="text-red-600 mt-0.5 shrink-0" />
                   <span className="text-sm font-medium">{initiative}</span>
                 </div>
               ))}

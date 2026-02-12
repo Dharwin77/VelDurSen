@@ -195,7 +195,7 @@ const History = () => {
       </section>
 
       {/* Global Growth Journey */}
-      <section className="section-padding bg-gradient-to-br from-blue-50 to-indigo-50">
+      <section className="section-padding bg-gradient-to-br from-red-50 to-slate-50">
         <div className="enterprise-container">
           <div className="max-w-5xl mx-auto">
             <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">
@@ -265,7 +265,7 @@ const History = () => {
       <section className="section-padding bg-white">
         <div className="enterprise-container">
           <div className="max-w-5xl mx-auto">
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-green-600 mb-4">
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-red-600 mb-4">
               2023-2024
             </span>
             <h2 className="section-title mb-8">Sustainability & Responsible Technology Integration</h2>
@@ -308,14 +308,14 @@ const History = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="p-8 rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200"
+                  className="p-8 rounded-xl bg-gradient-to-br from-red-50 to-slate-50 border-2 border-red-100"
                 >
-                  <area.icon className="w-12 h-12 text-green-600 mb-4" />
+                  <area.icon className="w-12 h-12 text-red-600 mb-4" />
                   <h4 className="text-xl font-bold mb-6">{area.title}</h4>
                   <ul className="space-y-3">
                     {area.achievements.map((achievement) => (
                       <li key={achievement} className="flex items-start gap-3 text-sm">
-                        <CheckCircle2 size={16} className="text-green-600 mt-0.5 shrink-0" />
+                        <CheckCircle2 size={16} className="text-red-600 mt-0.5 shrink-0" />
                         <span>{achievement}</span>
                       </li>
                     ))}
@@ -397,7 +397,7 @@ const History = () => {
       </section>
 
       {/* Future Roadmap */}
-      <section className="section-padding bg-gradient-to-br from-purple-50 to-pink-50">
+      <section className="section-padding bg-gradient-to-br from-red-50 to-white">
         <div className="enterprise-container">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">

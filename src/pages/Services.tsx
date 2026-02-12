@@ -24,11 +24,11 @@ const Services = () => (
         />
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
           {[
-            { icon: Brain, title: "Enterprise AI Solutions", color: "bg-purple-50 border-purple-200 text-purple-600" },
-            { icon: Cloud, title: "Cloud & DevOps", color: "bg-blue-50 border-blue-200 text-blue-600" },
-            { icon: Code, title: "Enterprise Software", color: "bg-green-50 border-green-200 text-green-600" },
-            { icon: Shield, title: "Cybersecurity", color: "bg-red-50 border-red-200 text-red-600" },
-            { icon: Database, title: "Data Engineering", color: "bg-sky-50 border-sky-200 text-sky-600" },
+            { icon: Brain, title: "Enterprise AI Solutions", color: "bg-red-50 border-red-200 text-red-600" },
+            { icon: Cloud, title: "Cloud & DevOps", color: "bg-slate-50 border-slate-200 text-slate-900" },
+            { icon: Code, title: "Enterprise Software", color: "bg-red-50 border-red-200 text-red-600" },
+            { icon: Shield, title: "Cybersecurity", color: "bg-slate-50 border-slate-200 text-slate-900" },
+            { icon: Database, title: "Data Engineering", color: "bg-red-50 border-red-200 text-red-600" },
           ].map((s, i) => (
             <motion.div
               key={s.title}
@@ -112,11 +112,11 @@ const Services = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="p-8 rounded-xl bg-white border border-border hover:border-purple-300 hover:shadow-xl transition-all duration-300"
+              className="p-8 rounded-xl bg-white border border-border hover:border-red-300 hover:shadow-xl transition-all duration-300"
             >
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center shrink-0">
-                  <service.icon className="w-6 h-6 text-purple-600" />
+                <div className="w-12 h-12 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
+                  <service.icon className="w-6 h-6 text-red-600" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold mb-2">{service.title}</h3>
@@ -126,7 +126,7 @@ const Services = () => (
               <ul className="space-y-3">
                 {service.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 size={16} className="text-purple-600 mt-0.5 shrink-0" />
+                    <CheckCircle2 size={16} className="text-red-600 mt-0.5 shrink-0" />
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -155,10 +155,10 @@ const Services = () => (
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-8 rounded-xl bg-blue-50 border-2 border-blue-200"
+            className="p-8 rounded-xl bg-slate-50 border-2 border-slate-100"
           >
             <div className="flex items-center gap-3 mb-6">
-              <Cloud className="w-10 h-10 text-blue-600" />
+              <Cloud className="w-10 h-10 text-red-600" />
               <h3 className="text-2xl font-bold">Cloud-Native Architecture</h3>
             </div>
             <ul className="space-y-4">
@@ -169,7 +169,7 @@ const Services = () => (
                 { title: "Cloud Migration", desc: "Legacy system modernization and cloud transformation" }
               ].map((item) => (
                 <li key={item.title} className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center shrink-0 mt-1">
+                  <div className="w-6 h-6 rounded-full bg-red-600 flex items-center justify-center shrink-0 mt-1">
                     <ArrowRight size={14} className="text-white" />
                   </div>
                   <div>
@@ -212,15 +212,15 @@ const Services = () => (
           </motion.div>
         </div>
 
-        <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-8 rounded-xl border border-blue-200 text-center">
-          <Container className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+        <div className="bg-gradient-to-r from-red-50 to-slate-50 p-8 rounded-xl border border-red-100 text-center">
+          <Container className="w-12 h-12 text-red-600 mx-auto mb-4" />
           <h4 className="text-xl font-bold mb-3">Kubernetes Expertise</h4>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
             We specialize in Kubernetes deployments across cloud providers, implementing auto-scaling, service mesh architectures, and enterprise-grade security policies for containerized workloads.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             {["EKS", "AKS", "GKE", "Helm Charts", "Istio Service Mesh", "ArgoCD"].map((tech) => (
-              <span key={tech} className="px-4 py-2 bg-white rounded-full text-sm font-semibold text-foreground border border-blue-200">
+              <span key={tech} className="px-4 py-2 bg-white rounded-full text-sm font-semibold text-foreground border border-red-100">
                 {tech}
               </span>
             ))}
@@ -277,14 +277,14 @@ const Services = () => (
               transition={{ delay: i * 0.1 }}
               className="relative"
             >
-              <div className="absolute -top-3 -left-3 text-6xl font-bold text-green-100">{phase.step}</div>
-              <div className="relative p-6 rounded-xl bg-white border-2 border-green-200 hover:shadow-lg transition-all duration-300">
-                <phase.icon className="w-10 h-10 text-green-600 mb-4" />
+              <div className="absolute -top-3 -left-3 text-6xl font-bold text-red-50">{phase.step}</div>
+              <div className="relative p-6 rounded-xl bg-white border-2 border-red-100 hover:shadow-lg transition-all duration-300">
+                <phase.icon className="w-10 h-10 text-red-600 mb-4" />
                 <h3 className="text-lg font-bold mb-2">{phase.title}</h3>
                 <p className="text-sm text-muted-foreground">{phase.desc}</p>
               </div>
               {i < 3 && (
-                <div className="hidden md:block absolute top-20 -right-3 w-6 h-0.5 bg-green-200"></div>
+                <div className="hidden md:block absolute top-20 -right-3 w-6 h-0.5 bg-red-100"></div>
               )}
             </motion.div>
           ))}
@@ -320,13 +320,13 @@ const Services = () => (
               className="p-8 rounded-xl bg-white border border-border"
             >
               <h3 className="text-xl font-bold mb-6 flex items-center gap-3">
-                <Code className="w-6 h-6 text-green-600" />
+                <Code className="w-6 h-6 text-red-600" />
                 {category.title}
               </h3>
               <ul className="space-y-3">
                 {category.items.map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-600 mt-2 shrink-0"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-red-600 mt-2 shrink-0"></div>
                     <span>{item}</span>
                   </li>
                 ))}

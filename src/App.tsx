@@ -16,12 +16,14 @@ import Careers from "./pages/Careers";
 import Internships from "./pages/Internships";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Preloader from "./components/shared/Preloader";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <Preloader />
       <Toaster />
       <Sonner />
       <BrowserRouter>

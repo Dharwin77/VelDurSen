@@ -10,6 +10,11 @@ import industryVideo from "@/assets/industry.mp4";
 import aboutTeam from "@/assets/about-team.jpg";
 import industryImg1 from "@/assets/Gemini_Generated_Image_ello0sello0sello.png";
 import industryImg2 from "@/assets/Gemini_Generated_Image_zh56h0zh56h0zh56.png";
+import manufacturingImg from "@/assets/industries/manufacturing.jpg";
+import retailMainImg from "@/assets/industries/retail-main.jpg";
+import retailDetailImg from "@/assets/industries/retail-detail.jpg";
+import smartFarmingImg from "@/assets/industries/smart-farming.jpg";
+
 
 const Industries = () => {
   return (
@@ -45,7 +50,7 @@ const Industries = () => {
               We don't just provide technology; we architect domain-specific ecosystems that redefine what's possible in your sector.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-white hover:text-slate-950 transition-all shadow-2xl shadow-red-600/20">
+              <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20">
                 Connect with Experts
               </Link>
               <div className="flex items-center gap-4 px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">
@@ -330,7 +335,7 @@ const Industries = () => {
 
                 <div className="rounded-[2.5rem] overflow-hidden shadow-2xl group">
                   <img
-                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200"
+                    src={manufacturingImg}
                     alt="Manufacturing"
                     className="w-full aspect-square object-cover transition-transform duration-[4s] group-hover:scale-105"
                   />
@@ -387,7 +392,7 @@ const Industries = () => {
                 viewport={{ once: true }}
                 className="absolute top-0 left-0 w-[80%] h-[80%] rounded-[2rem] overflow-hidden shadow-2xl"
               >
-                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1200" alt="Retail Main" className="w-full h-full object-cover" />
+                <img src={retailMainImg} alt="Retail Main" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-slate-950/10" />
               </motion.div>
 
@@ -399,7 +404,7 @@ const Industries = () => {
                 transition={{ delay: 0.2 }}
                 className="absolute bottom-6 right-0 w-[45%] h-[50%] rounded-[1.5rem] overflow-hidden shadow-2xl border-4 border-white z-10"
               >
-                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80&w=800" alt="Retail Detail" className="w-full h-full object-cover" />
+                <img src={retailDetailImg} alt="Retail Detail" className="w-full h-full object-cover" />
               </motion.div>
 
               {/* Overlapping Visual Element */}
@@ -469,11 +474,11 @@ const Industries = () => {
               className="space-y-6"
             >
               <header className="space-y-2">
-                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-emerald-600 px-3 py-1 bg-emerald-50 rounded-full w-fit">Sustainable High-Yield</span>
-                <h2 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter leading-none">Agri<span className="italic text-emerald-600">Tech.</span></h2>
+                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-red-600 px-3 py-1 bg-red-50 rounded-full w-fit">Sustainable High-Yield</span>
+                <h2 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter leading-none">Agri<span className="italic text-red-600">Tech.</span></h2>
               </header>
 
-              <p className="text-xl text-slate-500 font-medium leading-relaxed italic border-l-4 border-emerald-200 pl-6">
+              <p className="text-xl text-slate-500 font-medium leading-relaxed italic border-l-4 border-red-200 pl-6">
                 Empowering the global food supply with precision digital farming, predictive yield intelligence, and autonomous IoT systems.
               </p>
 
@@ -483,10 +488,10 @@ const Industries = () => {
                   { title: "Yield Prediction", desc: "Machine learning for harvest forecasting." },
                   { title: "Autonomous Monitoring", desc: "Drone spectral imaging health detection." }
                 ].map((item, i) => (
-                  <div key={i} className="group flex items-center justify-between p-4 bg-slate-50 rounded-xl hover:bg-emerald-600 transition-all duration-500 hover:-translate-y-1">
+                  <div key={i} className="group flex items-center justify-between p-4 bg-slate-50 rounded-xl hover:bg-red-600 transition-all duration-500 hover:-translate-y-1">
                     <div className="space-y-0.5">
                       <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-900 group-hover:text-white transition-colors">{item.title}</h4>
-                      <p className="text-[9px] text-slate-400 font-bold group-hover:text-emerald-100 transition-colors uppercase">{item.desc}</p>
+                      <p className="text-[9px] text-slate-400 font-bold group-hover:text-red-100 transition-colors uppercase">{item.desc}</p>
                     </div>
                     <div className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-white transition-all">
                       <ArrowRight size={14} className="text-slate-300 group-hover:text-white group-hover:translate-x-1" />
@@ -498,7 +503,7 @@ const Industries = () => {
               <div className="pt-4">
                 <Link to="/contact" state={{ fromButton: true }} className="inline-flex items-center gap-4 group">
                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-950 pb-1 border-b-2 border-slate-950">Scale Cultivation</span>
-                  <div className="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center -rotate-12 group-hover:rotate-0 transition-transform shadow-xl shadow-emerald-200">
+                  <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center -rotate-12 group-hover:rotate-0 transition-transform shadow-xl shadow-red-200">
                     <Sprout className="text-white" size={16} />
                   </div>
                 </Link>
@@ -514,26 +519,26 @@ const Industries = () => {
             >
               <div className="relative z-10 w-full aspect-square rounded-[3rem] overflow-hidden rotate-2 shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80&w=1200"
+                  src={smartFarmingImg}
                   alt="Smart Farming"
                   className="w-full h-full object-cover -rotate-2 scale-110"
                 />
-                <div className="absolute inset-0 bg-emerald-950/20 mix-blend-overlay" />
+                <div className="absolute inset-0 bg-red-950/20 mix-blend-overlay" />
               </div>
 
               {/* Geometric Accent */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border-2 border-emerald-100/50 rounded-[4rem] -rotate-6 -z-0" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border-2 border-red-100/50 rounded-[4rem] -rotate-6 -z-0" />
 
               {/* Floating Metric Bubble */}
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-6 -left-6 bg-white/90 backdrop-blur-xl p-6 rounded-[2rem] shadow-2xl border border-emerald-50 z-20"
+                className="absolute -top-6 -left-6 bg-white/90 backdrop-blur-xl p-6 rounded-[2rem] shadow-2xl border border-red-50 z-20"
               >
-                <p className="text-[9px] font-black text-emerald-600 uppercase tracking-widest mb-1">Yield Index</p>
+                <p className="text-[9px] font-black text-red-600 uppercase tracking-widest mb-1">Yield Index</p>
                 <div className="flex items-end gap-1">
                   <p className="text-3xl font-black text-slate-900 tracking-tighter">+24%</p>
-                  <p className="text-[9px] font-bold text-emerald-500 mb-1">Growth</p>
+                  <p className="text-[9px] font-bold text-red-500 mb-1">Growth</p>
                 </div>
               </motion.div>
             </motion.div>

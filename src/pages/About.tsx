@@ -86,13 +86,13 @@ const About = () => (
               icon: Eye,
               title: "Our Vision",
               text: "To be the world's most trusted enterprise technology partner, enabling organizations across every continent to thrive in the digital age through intelligent, secure, and sustainable solutions that respect both people and planet.",
-              color: "border-blue-500"
+              color: "border-red-500"
             },
             {
               icon: Target,
               title: "Our Mission",
               text: "To deliver architecture-first, AI-driven technology systems that empower global enterprises to achieve operational excellence, digital resilience, regulatory compliance, and sustainable growth while maintaining the highest standards of security and ethical practices.",
-              color: "border-green-500"
+              color: "border-slate-900"
             },
           ].map((item, i) => (
             <motion.div
@@ -152,7 +152,7 @@ const About = () => (
     </section>
 
     {/* AI-First Philosophy - Full-width alternating layout */}
-    <section className="section-padding bg-gradient-to-br from-blue-50 to-indigo-50">
+    <section className="section-padding bg-gradient-to-br from-red-50 to-slate-50">
       <div className="enterprise-container">
         <div className="max-w-4xl mx-auto text-center mb-12">
           <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">AI-First Philosophy</span>
@@ -251,11 +251,11 @@ const About = () => (
     </section>
 
     {/* Sustainability Commitment - Different from Home */}
-    <section className="section-padding bg-gradient-to-br from-green-50 to-emerald-50">
+    <section className="section-padding bg-gradient-to-br from-red-50 to-white">
       <div className="enterprise-container">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-green-600 mb-4">Sustainability Commitment</span>
+            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-red-600 mb-4">Sustainability Commitment</span>
             <h2 className="section-title">Technology with Environmental Responsibility</h2>
             <p className="text-lg text-muted-foreground leading-relaxed mt-6 max-w-3xl mx-auto">
               We're committed to building technology that respects our planet and future generations. Our green computing initiatives, carbon-aware cloud deployments, and ethical AI frameworks ensure sustainable innovation across all our global operations and client engagements.
@@ -289,16 +289,16 @@ const About = () => (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white p-8 rounded-xl shadow-lg border-2 border-green-200"
+                className="bg-white p-8 rounded-xl shadow-lg border-2 border-red-100"
               >
                 <h3 className="text-xl font-bold mb-6 flex items-center gap-3">
-                  <Leaf className="w-6 h-6 text-green-600" />
+                  <Leaf className="w-6 h-6 text-red-600" />
                   {cat.title}
                 </h3>
                 <ul className="space-y-3">
                   {cat.points.map((point) => (
                     <li key={point} className="flex items-start gap-3 text-sm text-muted-foreground">
-                      <CheckCircle size={16} className="text-green-600 mt-0.5 shrink-0" />
+                      <CheckCircle size={16} className="text-red-600 mt-0.5 shrink-0" />
                       <span>{point}</span>
                     </li>
                   ))}

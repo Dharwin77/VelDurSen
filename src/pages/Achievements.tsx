@@ -12,6 +12,8 @@ const Achievements = () => {
         tag="Achievements"
         title="Proven Enterprise Excellence at Global Scale"
         subtitle="Years of enterprise technology delivery across AI, Cloud, Cybersecurity, and Data platforms. Our achievements reflect scale, trust, and measurable impact across industries worldwide."
+        bgVideo="/achievements-video/achievementsvedio1.mp4"
+        overlay={true}
       />
 
       {/* Achievements Overview */}
@@ -23,7 +25,9 @@ const Achievements = () => {
             </span>
             <h2 className="section-title">Building Trust Through Delivery Excellence</h2>
             <p className="text-lg text-muted-foreground leading-relaxed mt-6">
-              VelDurSen's achievements reflect years of dedicated enterprise technology delivery across AI, Cloud, Cybersecurity, and Data platforms serving global organizations. Our track record demonstrates scale, reliability, and the trust that Fortune 500 companies and high-growth enterprises place in our systems that power their mission-critical operations worldwide.
+             VelDurSen’s achievements represent sustained enterprise delivery across AI, cloud platforms, cybersecurity, and data engineering for organizations operating at global scale. Our track record showcases platform reliability, large-scale execution, and the trust placed in our systems by Fortune 500 companies and fast-growing enterprises supporting mission-critical operations worldwide.
+
+Every metric reflects live systems, active users, and real business impact delivered across continents and industries.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed mt-4">
               Every metric represents real systems, real users, and real business value delivered to enterprises operating at global scale across multiple continents and industries.
@@ -33,50 +37,50 @@ const Achievements = () => {
       </section>
 
       {/* Enterprise Impact Metrics - Large statistic blocks */}
-      <section className="section-padding bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <section className="section-padding bg-gray-100">
         <div className="enterprise-container">
           <SectionHeader
             tag="Impact Metrics"
-            title="Enterprise Scale & Global Reach"
-            subtitle="Measurable impact across enterprise systems, global deployments, and mission-critical operations."
+            title="Powering Enterprises Worldwide"
+            subtitle="Creating sustained business impact across enterprise platforms, global deployments, and mission-critical operations"
           />
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {[
               { 
-                value: "1000+", 
-                label: "Enterprise Projects Delivered", 
-                desc: "Across 50+ countries serving global organizations",
+                value: "900+", 
+                label: "Global Enterprise Programs", 
+                desc: "Mission-critical systems delivered globally.",
                 icon: Target
               },
               { 
-                value: "150+", 
-                label: "Multi-Region Cloud Platforms", 
-                desc: "Deployed across AWS, Azure, and GCP worldwide",
+                value: "250+", 
+                label: "Cloud Footprint", 
+                desc: "Multi-region platforms across top clouds",
                 icon: Cloud
               },
               { 
-                value: "500+", 
-                label: "AI Models in Production", 
-                desc: "Powering intelligent automation at enterprise scale",
+                value: "750+", 
+                label: "AI in Action", 
+                desc: "Production-grade intelligence at scale",
                 icon: Brain
               },
               { 
                 value: "50M+", 
                 label: "Users Supported Daily", 
-                desc: "On systems we've built and maintain globally",
+                desc: "Trusted by users worldwide, every day",
                 icon: Users
               },
               { 
-                value: "99.9%", 
-                label: "Average System Uptime", 
-                desc: "High-availability architecture across all deployments",
+                value: "99%", 
+                label: "Always On", 
+                desc: "High availability, built into every system",
                 icon: TrendingUp
               },
               { 
                 value: "100%", 
-                label: "Zero Security Breaches", 
-                desc: "Across mission-critical workloads secured",
+                label: "Secure by Default", 
+                desc: "Compliance-first, zero-trust protection",
                 icon: Shield
               },
             ].map((metric, i) => (
@@ -101,8 +105,8 @@ const Achievements = () => {
             {[
               { value: "10B+", label: "Transactions Processed Daily" },
               { value: "5PB+", label: "Data Managed Globally" },
-              { value: "24/7", label: "Global Support Coverage" },
-              { value: "3500+", label: "Engineers Worldwide" },
+              { value: "24/7", label: "Always Available" },
+              { value: "3500+", label: "Experts Worldwide" },
             ].map((stat, i) => (
               <motion.div
                 key={i}
@@ -224,195 +228,94 @@ const Achievements = () => {
         </div>
       </section>
 
-      {/* Industry-Specific Achievements */}
-      <section className="section-padding bg-section">
+      {/* Enterprise Solutions Grid */}
+      <section className="section-padding bg-gray-100">
         <div className="enterprise-container">
           <SectionHeader
-            tag="Industry Impact"
-            title="Transforming Industries Through Technology"
-            subtitle="Sector-specific achievements demonstrating deep domain expertise and measurable business outcomes."
+            tag="Enterprise Solutions"
+            title="Solutions Built for Enterprise Success"
+            subtitle="Comprehensive technology platforms designed to address critical enterprise challenges across all business operations."
           />
 
-          <div className="space-y-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                icon: Heart,
-                industry: "Healthcare",
-                color: "bg-red-50 border-red-200",
-                iconColor: "text-red-600",
-                achievements: [
-                  "Secure HIPAA-compliant patient data platforms serving 5M+ patients",
-                  "AI-powered diagnostic support systems with 95%+ accuracy",
-                  "Telemedicine platforms handling 100K+ consultations monthly",
-                  "Real-time clinical analytics dashboards across 50+ hospitals"
-                ]
+                title: "Powering Global Enterprises",
+                description: "Enabling complex enterprise operations worldwide through secure, scalable digital platforms built for growth.",
+                tag: "Enterprise Scale",
+                image: "/achievementsimages/powering global enterprises.png"
               },
               {
-                icon: Landmark,
-                industry: "FinTech & Banking",
-                color: "bg-blue-50 border-blue-200",
-                iconColor: "text-blue-600",
-                achievements: [
-                  "Fraud detection systems processing $10B+ in transactions daily",
-                  "Core banking platforms supporting 20M+ active accounts",
-                  "PCI-DSS compliant payment gateways across 30+ countries",
-                  "Real-time risk assessment engines with <100ms latency"
-                ]
+                title: "AI That Delivers Results",
+                description: "Driving measurable business outcomes with production-ready AI solutions embedded into core enterprise workflows.",
+                tag: "Artificial Intelligence",
+                image: "/achievementsimages/AI That Delivers Results.png"
               },
               {
-                icon: Factory,
-                industry: "Manufacturing",
-                color: "bg-orange-50 border-orange-200",
-                iconColor: "text-orange-600",
-                achievements: [
-                  "Smart factory data platforms optimizing 100+ production lines",
-                  "Predictive maintenance reducing downtime by 40%",
-                  "Supply chain visibility systems tracking 1M+ shipments",
-                  "Quality control automation with 99.5% defect detection"
-                ]
+                title: "Cloud Built for Scale",
+                description: "Designing cloud platforms that grow seamlessly with enterprise demand while ensuring performance and resilience.",
+                tag: "Cloud Solutions",
+                image: "/achievementsimages/loud Built for Scale.png"
               },
               {
-                icon: ShoppingCart,
-                industry: "Retail & E-Commerce",
-                color: "bg-purple-50 border-purple-200",
-                iconColor: "text-purple-600",
-                achievements: [
-                  "Omnichannel platforms serving 50M+ customers globally",
-                  "AI-powered demand forecasting improving accuracy by 35%",
-                  "Real-time inventory systems across 1000+ locations",
-                  "Personalization engines increasing conversions by 25%"
-                ]
+                title: "Security Without Compromise",
+                description: "Protecting critical enterprise systems with zero-trust security models and compliance-first architectures.",
+                tag: "Cybersecurity",
+                image: "/achievementsimages/Security Without Compromise.png"
               },
               {
-                icon: Building2,
-                industry: "Smart Cities",
-                color: "bg-green-50 border-green-200",
-                iconColor: "text-green-600",
-                achievements: [
-                  "Traffic analytics platforms deployed in 45+ cities",
-                  "Smart energy management reducing consumption by 20%",
-                  "Public safety systems integrating 10K+ sensors",
-                  "Citizen engagement platforms with 2M+ active users"
-                ]
+                title: "Data That Drives Decisions",
+                description: "Turning enterprise data into real-time intelligence that fuels faster, smarter business decisions.",
+                tag: "Data & Analytics",
+                image: "/achievementsimages/Data That Drives Decisions.png"
               },
               {
-                icon: Wheat,
-                industry: "Agriculture & AgriTech",
-                color: "bg-yellow-50 border-yellow-200",
-                iconColor: "text-yellow-700",
-                achievements: [
-                  "Precision farming platforms optimizing 500K+ acres",
-                  "AI-driven crop intelligence improving yields by 30%",
-                  "IoT sensor networks monitoring soil and weather",
-                  "Supply chain traceability from farm to consumer"
-                ]
+                title: "Reliability at Enterprise Grade",
+                description: "Keeping mission-critical systems always available through resilient engineering and continuous operations excellence.",
+                tag: "Infrastructure",
+                image: "/achievementsimages/Reliability at Enterprise Grade.png"
               },
-            ].map((industry, i) => (
+            ].map((solution, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className={`p-8 rounded-2xl ${industry.color} border-2`}
+                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
-                <div className="flex items-start gap-6">
-                  <div className="shrink-0">
-                    <div className={`w-16 h-16 rounded-xl bg-white flex items-center justify-center shadow-md`}>
-                      <industry.icon className={`w-8 h-8 ${industry.iconColor}`} />
+                {/* Image Placeholder */}
+                <div className="relative w-full h-48 bg-gradient-to-br from-blue-200 to-indigo-200 overflow-hidden">
+                  {solution.image ? (
+                    <img
+                      src={solution.image}
+                      alt={solution.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-indigo-100 group-hover:from-blue-200 group-hover:to-indigo-200 transition-all">
+                      <div className="text-center">
+                        <div className="text-4xl mb-2">📸</div>
+                        <p className="text-sm text-muted-foreground">Image Coming Soon</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold mb-6">{industry.industry}</h3>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      {industry.achievements.map((achievement) => (
-                        <div key={achievement} className="flex items-start gap-3">
-                          <Award size={16} className={`${industry.iconColor} mt-1 shrink-0`} />
-                          <span className="text-sm text-foreground font-medium">{achievement}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  )}
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  <span className="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-accent mb-3">
+                    {solution.tag}
+                  </span>
+                  <h3 className="text-lg font-bold text-foreground mb-3 line-clamp-2">
+                    {solution.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
+                    {solution.description}
+                  </p>
                 </div>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Sustainability & Green Tech Achievements */}
-      <section className="section-padding bg-gradient-to-br from-green-100 to-emerald-100">
-        <div className="enterprise-container">
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-green-700 mb-4">
-              Sustainability Leadership
-            </span>
-            <h2 className="section-title">Green Tech Enterprise Achievements</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed mt-6">
-              VelDurSen is committed to sustainable technology practices and environmental responsibility across all global operations and client engagements.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {[
-              {
-                icon: Leaf,
-                title: "Carbon-Aware Cloud Deployments",
-                metric: "35%",
-                desc: "Reduction in cloud carbon footprint through intelligent workload scheduling"
-              },
-              {
-                icon: Zap,
-                title: "Energy-Efficient Data Pipelines",
-                metric: "40%",
-                desc: "Decrease in computational energy consumption through optimization"
-              },
-              {
-                icon: Database,
-                title: "Sustainable DevOps Practices",
-                metric: "50+",
-                desc: "Projects implementing green CI/CD and infrastructure patterns"
-              },
-              {
-                icon: Brain,
-                title: "Ethical AI Governance",
-                metric: "100%",
-                desc: "Of AI systems adhering to responsible AI frameworks"
-              },
-            ].map((achievement, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="p-6 rounded-xl bg-white border-2 border-green-300 hover:shadow-xl transition-all duration-300"
-              >
-                <achievement.icon className="w-10 h-10 text-green-600 mb-4" />
-                <div className="text-4xl font-bold text-green-600 mb-2">{achievement.metric}</div>
-                <h4 className="text-lg font-bold mb-3">{achievement.title}</h4>
-                <p className="text-sm text-muted-foreground">{achievement.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="bg-white p-8 rounded-2xl border-2 border-green-300">
-            <h3 className="text-2xl font-bold mb-6 text-center">Environmental Impact Reduction Initiatives</h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                "Renewable energy-powered cloud regions preference",
-                "Code optimization reducing computational requirements",
-                "Green software engineering training for all engineers",
-                "Carbon offsetting for legacy infrastructure",
-                "Circular economy principles in system design",
-                "Environmental metrics tracked per deployment"
-              ].map((initiative) => (
-                <div key={initiative} className="flex items-start gap-3">
-                  <CheckCircle2 size={18} className="text-green-600 mt-0.5 shrink-0" />
-                  <span className="text-sm font-medium">{initiative}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>

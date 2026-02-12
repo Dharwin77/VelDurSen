@@ -11,10 +11,11 @@ interface PageHeroProps {
   ctaLink?: string;
   bgImage?: string;
   bgImages?: string[];
+  bgVideo?: string;
   overlay?: boolean;
 }
 
-const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, bgImages, overlay = true }: PageHeroProps) => {
+const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, bgImages, bgVideo, overlay = true }: PageHeroProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = bgImages || (bgImage ? [bgImage] : []);
 
@@ -30,6 +31,16 @@ const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, bgImages, o
   <section
     className="relative min-h-[480px] md:min-h-[540px] flex items-center overflow-hidden"
   >
+    {bgVideo && (
+      <video
+        autoPlay
+        muted
+        loop
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src={bgVideo} type="video/mp4" />
+      </video>
+    )}
     {images.length > 0 && images.map((img, index) => (
       <div
         key={index}
@@ -43,7 +54,7 @@ const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, bgImages, o
       />
     ))}
     {overlay && <div className="absolute inset-0 bg-primary/85" />}
-    {images.length === 0 && <div className="absolute inset-0 bg-primary" />}
+    {images.length === 0 && !bgVideo && <div className="absolute inset-0 bg-primary" />}
     <div className="enterprise-container relative z-10 py-20">
       <motion.div
         initial={{ opacity: 0, y: 30 }}

@@ -1,5 +1,9 @@
-
-import aboutTeam from "@/assets/about-team.jpg";
+import img1 from "@/assets/Gemini_Generated_Image_ello0sello0sello.png";
+import img2 from "@/assets/Gemini_Generated_Image_uugaqruugaqruuga.png";
+import img3 from "@/assets/Gemini_Generated_Image_zh56h0zh56h0zh56.png";
+import img4 from "@/assets/blog-10.png";
+import img5 from "@/assets/blog-2.png";
+import img6 from "@/assets/blog-3.png";
 
 export interface Achievement {
     id: string;
@@ -23,7 +27,7 @@ export const achievementsData: Achievement[] = [
         venue: "International Tech Summit, Singapore",
         date: "March 2025",
         description: "Awarded for deploying scalable enterprise AI systems that transformed multi-region operations and automated critical business workflows.",
-        image: aboutTeam,
+        image: img1,
         fullDescription: "VelDurSen was recognized for designing and deploying enterprise AI systems that improved operational efficiency, automated workflows, and delivered measurable ROI across global business units. Our innovative approach to AI integration allowed seamless adoption within existing infrastructures, minimizing disruption while maximizing output.",
         delivered: [
             "AI model deployment at enterprise scale",
@@ -46,7 +50,7 @@ export const achievementsData: Achievement[] = [
         venue: "Global Cloud Expo, Dubai",
         date: "November 2024",
         description: "Recognized for designing resilient cloud-native architectures supporting high-availability enterprise platforms.",
-        image: aboutTeam,
+        image: img2,
         fullDescription: "VelDurSen led a massive cloud transformation initiative for a Fortune 500 logistics partner, migrating legacy systems to a robust, multi-cloud environment. This project set new benchmarks for speed, reliability, and cost-efficiency in cloud architectural design.",
         delivered: [
             "Multi-cloud strategy implementation",
@@ -69,7 +73,7 @@ export const achievementsData: Achievement[] = [
         venue: "World Cyber Defense Forum, London",
         date: "August 2024",
         description: "Honored for implementing enterprise-grade cybersecurity models across regulated industries.",
-        image: aboutTeam,
+        image: img3,
         fullDescription: "In an era of increasing digital threats, VelDurSen implemented a pioneering Zero-Trust Security Framework for a global financial institution. This initiative secured critical assets and customer data against sophisticated cyber attacks while maintaining user accessibility.",
         delivered: [
             "Zero-Trust architecture rollout",
@@ -92,7 +96,7 @@ export const achievementsData: Achievement[] = [
         venue: "Global Sustainability Tech Forum, Berlin",
         date: "January 2025",
         description: "Recognized for integrating carbon-aware cloud solutions and responsible AI governance into enterprise ecosystems.",
-        image: aboutTeam,
+        image: img4,
         fullDescription: "VelDurSen champions sustainable technology. This award acknowledges our work in developing carbon-aware software solutions that optimize energy consumption in data centers without compromising performance, setting a standard for eco-friendly enterprise computing.",
         delivered: [
             "Carbon footprint analytics dashboard",
@@ -115,7 +119,7 @@ export const achievementsData: Achievement[] = [
         venue: "International Industry Innovation Expo, Tokyo",
         date: "May 2023",
         description: "Awarded for implementing predictive maintenance and real-time analytics in manufacturing operations.",
-        image: aboutTeam,
+        image: img5,
         fullDescription: "Transforming traditional manufacturing into smart factories, VelDurSen deployed IoT sensors and predictive analytics to foresee equipment failures before they occurred. This Industry 4.0 initiative revolutionized production lines for a leading automotive manufacturer.",
         delivered: [
             "IoT sensor network deployment",
@@ -138,7 +142,7 @@ export const achievementsData: Achievement[] = [
         venue: "World AgriTech Summit, Amsterdam",
         date: "September 2024",
         description: "Recognized for delivering AI-powered crop intelligence and IoT-based sustainable farming platforms.",
-        image: aboutTeam,
+        image: img6,
         fullDescription: "VelDurSen's AgriTech solution utilized satellite imagery and soil sensors to provide farmers with actionable insights. This precision agriculture platform optimized resource usage and maximized crop yields, contributing to global food security efforts.",
         delivered: [
             "Satellite & drone data integration",

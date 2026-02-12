@@ -36,8 +36,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-5">
-              <img src={logo} alt="VelDurSen Logo" className="h-12 w-auto brightness-0 invert" />
+            <div className="flex items-center gap-4 mb-8">
+              <img src={logo} alt="VelDurSen Logo" className="h-12 w-auto brightness-0 invert shrink-0" />
+              <span className="text-xl font-black text-white tracking-[0.1em] uppercase leading-none">
+                VelDur<span className="text-white">Sen</span>
+              </span>
             </div>
             <p className="text-primary-foreground/70 text-sm leading-relaxed mb-6">
               Enterprise Technology & Digital Transformation. AI-first, security-first, sustainability-driven.

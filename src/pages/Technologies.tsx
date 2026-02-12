@@ -672,12 +672,8 @@ const Technologies = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/40 to-white/90" />
         </div>
         <div className="enterprise-container text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-8 tracking-tighter max-w-4xl mx-auto leading-[0.95]">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-8 tracking-tighter leading-[0.95]">
               Powering the Next Generation <br />
               of <span className="text-red-600">Enterprise Systems.</span>
             </h2>
@@ -687,7 +683,7 @@ const Technologies = () => {
             <Link to="/contact" state={{ fromButton: true }} className="inline-flex items-center px-12 py-5 text-lg font-black text-white bg-slate-900 rounded-full hover:bg-red-600 transition-all shadow-2xl hover:shadow-red-600/30 group">
               Schedule a Technology Consultation <ArrowRight size={22} className="ml-3 group-hover:translate-x-1 transition-transform" />
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
     </PageLayout>

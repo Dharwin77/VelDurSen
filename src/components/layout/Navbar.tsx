@@ -74,8 +74,11 @@ const Navbar = () => {
         <div className="enterprise-container">
           <div className="flex items-center justify-between h-16 md:h-[72px]">
             {/* Logo */}
-            <Link to="/" className="flex items-center">
-              <img src={logo} alt="VelDurSen Logo" className="h-14 w-auto" />
+            <Link to="/" className="flex items-center gap-3">
+              <img src={logo} alt="VelDurSen Logo" className="h-12 w-auto" />
+              <span className="text-xl font-black text-slate-950 tracking-tighter uppercase leading-none">
+                VelDur<span className="text-red-600">Sen</span>
+              </span>
             </Link>
 
             {/* Desktop Links */}

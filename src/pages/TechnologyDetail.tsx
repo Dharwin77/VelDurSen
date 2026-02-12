@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, CheckCircle2, Code, Zap, Shield } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Code2 } from "lucide-react";
 import { motion } from "framer-motion";
 import PageLayout from "@/components/layout/PageLayout";
-import { Brain, Cloud, Settings, Database, Code2, Server, Smartphone, Globe, Layers, Cpu } from "lucide-react";
+import { Brain, Cloud, Settings, Database, Server, Smartphone, Globe, Layers, Cpu, Zap, Shield } from "lucide-react";
 import { useEffect } from "react";
 
 interface TechnologyContent {
@@ -973,8 +973,6 @@ const TechnologyDetail = () => {
     );
   }
 
-  const Icon = technology.icon;
-
   return (
     <PageLayout>
       {/* Header Section */}
@@ -999,14 +997,9 @@ const TechnologyDetail = () => {
               {technology.category}
             </span>
             
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                <Icon className="text-white" size={32} strokeWidth={1.5} />
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
-                {technology.title}
-              </h1>
-            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+              {technology.title}
+            </h1>
 
             <p className="text-xl text-white/90 leading-relaxed">
               {technology.description}
@@ -1129,7 +1122,7 @@ const TechnologyDetail = () => {
               <ul className="space-y-3">
                 {technology.bestPractices.map((practice, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <Code size={20} className="text-blue-600 flex-shrink-0 mt-0.5" />
+                    <Code2 size={20} className="text-blue-600 flex-shrink-0 mt-0.5" />
                     <span className="text-slate-700 leading-relaxed">{practice}</span>
                   </li>
                 ))}

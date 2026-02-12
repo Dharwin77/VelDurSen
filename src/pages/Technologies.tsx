@@ -43,20 +43,6 @@ const techCategories = [
     techs: ["CrowdStrike", "Vault", "Okta", "Auth0", "Splunk", "Snyk", "Aqua Security", "Fortinet"],
   },
   {
-    slug: "development-frameworks",
-    icon: Code2,
-    title: "Development Frameworks",
-    desc: "Modern development frameworks for building scalable web and mobile applications.",
-    techs: ["React", "Angular", "Vue.js", "Node.js", "Next.js", "Django", "Spring Boot", ".NET Core"],
-  },
-  {
-    slug: "mobile-development",
-    icon: Smartphone,
-    title: "Mobile Development",
-    desc: "Native and cross-platform mobile solutions delivering exceptional user experiences.",
-    techs: ["React Native", "Flutter", "iOS (Swift)", "Android (Kotlin)", "Xamarin", "Ionic"],
-  },
-  {
     slug: "backend-technologies",
     icon: Server,
     title: "Backend Technologies",
@@ -69,13 +55,6 @@ const techCategories = [
     title: "API & Integration",
     desc: "Seamless API development and system integration for connected enterprise ecosystems.",
     techs: ["REST API", "GraphQL", "gRPC", "WebSockets", "Apache Camel", "MuleSoft", "Kong", "Apigee"],
-  },
-  {
-    slug: "microservices",
-    icon: Layers,
-    title: "Microservices",
-    desc: "Scalable microservices architecture enabling flexible, maintainable enterprise systems.",
-    techs: ["Service Mesh", "Istio", "Consul", "Spring Cloud", "Event Driven", "CQRS", "Saga Pattern"],
   },
   {
     slug: "iot-edge-computing",

@@ -33,6 +33,7 @@ const BlogPreview = () => (
       <SectionHeader
         tag="Insights"
         title="Latest from Our Blog"
+        tagSize="xxl"
         subtitle="Thought leadership and expert perspectives on enterprise technology trends."
       />
 

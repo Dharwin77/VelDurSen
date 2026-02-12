@@ -62,7 +62,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-10"
         >
-          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-accent">
+          <span className="inline-flex items-center gap-2 text-lg md:text-xl lg:text-2xl font-semibold uppercase tracking-[0.22em] text-accent">
             <span className="h-[1px] w-8 bg-accent/60" />
             Vision & Mission
             <span className="h-[1px] w-8 bg-accent/60" />
@@ -253,7 +253,8 @@ const About = () => {
         <SectionHeader 
           tag="Core Values" 
           title="Principles That Define Us" 
-          titleSize="large"
+          titleSize="default"
+          tagSize="xl"
           subtitle="The unwavering values that guide every decision, every system we build, and every relationship we nurture across our global organization." 
         />
 
@@ -262,16 +263,16 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45 }}
-          className="relative overflow-hidden rounded-2xl border border-border/80 shadow-xl mb-10 bg-cover bg-center"
+          className="relative overflow-hidden rounded-2xl border border-border/80 shadow-xl mb-10 bg-cover bg-center group transition-all duration-300 hover:border-primary/70 hover:ring-4 hover:ring-primary/50 hover:ring-offset-2 hover:ring-offset-transparent"
           style={{
             backgroundImage: `linear-gradient(115deg, rgba(6, 24, 44, 0.75), rgba(6, 24, 44, 0.4)), url(${aboutTeam})`,
           }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(255,255,255,0.08),transparent_35%)]" />
           <div className="relative p-8 md:p-10 text-white max-w-2xl space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/80">Values in Action</p>
-            <h3 className="text-2xl md:text-3xl font-extrabold leading-snug">Where strategy, security, and sustainability meet disciplined delivery</h3>
-            <p className="text-white/80 leading-relaxed">A glimpse into the teams that live these principles daily—architecting resilient systems, protecting trust, and driving innovation for enterprises in 50+ countries.</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/80 transition-colors duration-300 group-hover:text-white">Values in Action</p>
+            <h3 className="text-2xl md:text-3xl font-extrabold leading-snug transition-all duration-300 group-hover:text-accent group-hover:translate-y-[-2px]">Where strategy, security, and sustainability meet disciplined delivery</h3>
+            <p className="text-white/80 leading-relaxed transition-colors duration-300 group-hover:text-white">A glimpse into the teams that live these principles daily—architecting resilient systems, protecting trust, and driving innovation for enterprises in 50+ countries.</p>
           </div>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -282,7 +283,7 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }} 
               viewport={{ once: true }} 
               transition={{ delay: i * 0.08 }} 
-              className="relative overflow-hidden group p-6 rounded-lg border-2 border-border bg-card bg-center bg-cover transition-all duration-300 hover:border-accent/50"
+              className="relative overflow-hidden group p-6 rounded-lg border-2 border-border bg-card bg-center bg-cover transition-all duration-300 hover:border-accent/80 hover:ring-4 hover:ring-accent/50 hover:ring-offset-2 hover:ring-offset-white"
               style={{
                 backgroundImage: `linear-gradient(135deg, rgba(255,255,255,0.94), rgba(255,255,255,0.9)), url(${globalMap})`,
               }}
@@ -311,7 +312,7 @@ const About = () => {
     <section className="section-padding bg-gradient-to-br from-blue-50 to-indigo-50">
       <div className="enterprise-container">
         <div className="max-w-4xl mx-auto text-center mb-12">
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">AI-First Philosophy</span>
+          <span className="inline-block text-lg md:text-xl lg:text-2xl font-semibold uppercase tracking-[0.22em] text-accent mb-5">AI-First Philosophy</span>
           <h2 className="section-title">Intelligence at the Core of Everything We Build</h2>
           <p className="text-lg text-muted-foreground leading-relaxed mt-6">
             AI isn't an add-on or afterthought at VelDurSen—it's the foundation of everything we build. From intelligent automation and predictive analytics to natural language processing, computer vision, and generative AI, we embed AI capabilities into every layer of our enterprise solutions.
@@ -370,7 +371,7 @@ const About = () => {
     <section className="section-padding bg-white">
       <div className="enterprise-container">
         <div className="max-w-4xl mx-auto">
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">Security Culture</span>
+          <span className="inline-block text-lg md:text-xl lg:text-2xl font-semibold uppercase tracking-[0.22em] text-accent mb-5">Security Culture</span>
           <h2 className="section-title mb-6">Enterprise-Grade Security by Design</h2>
           <div className="space-y-6 text-muted-foreground leading-relaxed mb-10">
             <p>
@@ -425,7 +426,7 @@ const About = () => {
       <div className="enterprise-container">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-green-600 mb-4">Sustainability Commitment</span>
+            <span className="inline-block text-lg md:text-xl lg:text-2xl font-semibold uppercase tracking-[0.22em] text-green-600 mb-5">Sustainability Commitment</span>
             <h2 className="section-title">Technology with Environmental Responsibility</h2>
             <p className="text-lg text-muted-foreground leading-relaxed mt-6 max-w-3xl mx-auto">
               We're committed to building technology that respects our planet and future generations. Our green computing initiatives, carbon-aware cloud deployments, and ethical AI frameworks ensure sustainable innovation across all our global operations and client engagements.
@@ -493,6 +494,7 @@ const About = () => {
         <SectionHeader 
           tag="CSR & Education" 
           title="Giving Back, Building Forward" 
+          tagSize="xxl"
           subtitle="Our commitment extends beyond technology to education, community empowerment, and creating positive social impact across the regions we serve." 
         />
         

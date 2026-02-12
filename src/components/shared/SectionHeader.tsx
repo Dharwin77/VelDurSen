@@ -7,9 +7,18 @@ interface SectionHeaderProps {
   centered?: boolean;
   light?: boolean;
   titleSize?: "default" | "large";
+  tagSize?: "sm" | "md" | "lg" | "xl" | "xxl";
 }
 
-const SectionHeader = ({ tag, title, subtitle, centered = true, light = false, titleSize = "default" }: SectionHeaderProps) => (
+const tagSizeClasses = {
+  sm: "text-xs md:text-sm",
+  md: "text-sm md:text-base",
+  lg: "text-base md:text-lg lg:text-xl",
+  xl: "text-lg md:text-xl lg:text-2xl",
+  xxl: "text-xl md:text-2xl lg:text-3xl",
+};
+
+const SectionHeader = ({ tag, title, subtitle, centered = true, light = false, titleSize = "default", tagSize = "md" }: SectionHeaderProps) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -18,7 +27,7 @@ const SectionHeader = ({ tag, title, subtitle, centered = true, light = false, t
     className={`mb-12 md:mb-16 ${centered ? "text-center" : ""}`}
   >
     {tag && (
-      <span className={`inline-block text-sm md:text-base font-semibold uppercase tracking-[0.22em] mb-3 ${light ? "text-accent" : "text-accent"}`}>
+      <span className={`inline-block font-semibold uppercase tracking-[0.22em] mb-3 ${tagSizeClasses[tagSize]} ${light ? "text-accent" : "text-accent"}`}>
         {tag}
       </span>
     )}

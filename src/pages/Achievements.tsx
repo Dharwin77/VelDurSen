@@ -29,12 +29,12 @@ const Achievements = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl"
           >
-            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
               Global Recognition
             </span>
             <h1 className="text-[4rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
               Recognizing <br />
-              <span className="text-amber-500">Excellence.</span>
+              <span className="text-red-600">Excellence.</span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-300 font-medium mb-12 max-w-2xl leading-relaxed drop-shadow-md">
               A journey of innovation, enterprise performance, and industry recognition across global technology landscapes. VelDurSen is honored to be acknowledged by world leaders in technology.
@@ -43,7 +43,7 @@ const Achievements = () => {
         </div>
 
         {/* Floating Abstract Element */}
-        <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-amber-600/5 rounded-full blur-[120px] -z-0" />
+        <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[120px] -z-0" />
       </section>
 
       {/* 2. DYNAMIC ACHIEVEMENT GRID - WITH STACKED-TO-SPLIT ANIMATION */}

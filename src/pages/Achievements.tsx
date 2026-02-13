@@ -144,7 +144,8 @@ Every metric reflects live systems, active users, and real business impact deliv
                   "NLP platforms processing 100M+ documents",
                   "Computer vision systems with 99%+ accuracy"
                 ],
-                color: "purple"
+                bgColor: "bg-purple-100",
+                iconColor: "text-purple-600"
               },
               {
                 icon: Cloud,
@@ -155,7 +156,8 @@ Every metric reflects live systems, active users, and real business impact deliv
                   "Cloud-native migrations for Fortune 500",
                   "Kubernetes clusters managing 100K+ pods"
                 ],
-                color: "blue"
+                bgColor: "bg-blue-100",
+                iconColor: "text-blue-600"
               },
               {
                 icon: Shield,
@@ -166,7 +168,8 @@ Every metric reflects live systems, active users, and real business impact deliv
                   "HIPAA, PCI-DSS, SOC2 implementations",
                   "Global IAM systems for 1M+ users"
                 ],
-                color: "red"
+                bgColor: "bg-red-100",
+                iconColor: "text-red-600"
               },
               {
                 icon: Database,
@@ -177,7 +180,8 @@ Every metric reflects live systems, active users, and real business impact deliv
                   "Petabyte-scale data warehouse deployments",
                   "Sub-second query performance at scale"
                 ],
-                color: "orange"
+                bgColor: "bg-orange-100",
+                iconColor: "text-orange-600"
               },
               {
                 icon: Zap,
@@ -188,7 +192,8 @@ Every metric reflects live systems, active users, and real business impact deliv
                   "Automated testing frameworks (90%+ coverage)",
                   "GitOps workflows with zero-downtime deploys"
                 ],
-                color: "green"
+                bgColor: "bg-green-100",
+                iconColor: "text-green-600"
               },
               {
                 icon: Server,
@@ -199,7 +204,8 @@ Every metric reflects live systems, active users, and real business impact deliv
                   "Auto-scaling handling 10x traffic spikes",
                   "Disaster recovery with <1 hour RTO"
                 ],
-                color: "indigo"
+                bgColor: "bg-indigo-100",
+                iconColor: "text-indigo-600"
               },
             ].map((milestone, i) => (
               <motion.div
@@ -210,8 +216,8 @@ Every metric reflects live systems, active users, and real business impact deliv
                 transition={{ delay: i * 0.08 }}
                 className="p-8 rounded-xl bg-card border-2 border-border hover:shadow-2xl transition-all duration-300 group"
               >
-                <div className={`w-16 h-16 rounded-xl bg-${milestone.color}-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  <milestone.icon className={`w-8 h-8 text-${milestone.color}-600`} />
+                <div className={`w-16 h-16 rounded-xl ${milestone.bgColor} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  <milestone.icon className={`w-8 h-8 ${milestone.iconColor}`} />
                 </div>
                 <h3 className="text-xl font-bold mb-6">{milestone.title}</h3>
                 <ul className="space-y-3">
@@ -255,7 +261,7 @@ Every metric reflects live systems, active users, and real business impact deliv
                 title: "Cloud Built for Scale",
                 description: "Designing cloud platforms that grow seamlessly with enterprise demand while ensuring performance and resilience.",
                 tag: "Cloud Solutions",
-                image: "/achievementsimages/loud Built for Scale.png"
+                image: "/achievementsimages/Cloud Built for Scale.png"
               },
               {
                 title: "Security Without Compromise",

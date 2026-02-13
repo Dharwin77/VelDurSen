@@ -16,6 +16,7 @@ import BlogDetail from "./pages/BlogDetail";
 import Careers from "./pages/Careers";
 import Internships from "./pages/Internships";
 import Contact from "./pages/Contact";
+import ServiceDetail from "./pages/ServiceDetail";
 import NotFound from "./pages/NotFound";
 import Preloader from "./components/shared/Preloader";
 
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/services/:id" element={<ServiceDetail />} />
           <Route path="/industries" element={<Industries />} />
           <Route path="/technologies" element={<Technologies />} />
           <Route path="/achievements" element={<Achievements />} />

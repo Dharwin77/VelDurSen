@@ -130,7 +130,7 @@ const History = () => {
 
   return (
     <PageLayout>
-      <section className="relative h-[80vh] flex items-center overflow-hidden">
+      <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
         <video
           autoPlay
           muted
@@ -152,7 +152,7 @@ const History = () => {
             <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md">
               Our Legacy of Excellence
             </span>
-            <h1 className="text-[4rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter">
+            <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter">
               Vision to <br />
               <span className="text-red-600">Global Impact.</span>
             </h1>

@@ -33,7 +33,7 @@ const coreValues = [
 const About = () => (
   <PageLayout>
     {/* HERO SECTION - Matching Industry Page Style */}
-    <section className="relative h-[80vh] flex items-center overflow-hidden">
+    <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
       <video
         autoPlay
         muted
@@ -55,7 +55,7 @@ const About = () => (
           <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
             About VelDurSen
           </span>
-          <h1 className="text-[4rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+          <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
             Digital <br />
             <span className="text-red-600">Transformation.</span>
           </h1>
@@ -147,8 +147,8 @@ const About = () => (
           </div>
 
           {/* Right Column: Isometric Unfolding Stats */}
-          <div className="lg:col-span-5 relative mt-4">
-            <div className="sticky top-32 grid grid-cols-1 gap-5 perspective-[2000px]">
+          <div className="lg:col-span-5 relative mt-12 lg:mt-4">
+            <div className="lg:sticky lg:top-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5 perspective-[2000px]">
               {[
                 { value: "500+", label: "Enterprise Clients", sublabel: "Worldwide" },
                 { value: "3,500+", label: "Engineers", sublabel: "Across 5 continents" },

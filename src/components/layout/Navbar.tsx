@@ -19,9 +19,20 @@ const navLinks = [
   { label: "Contact", path: "/contact" },
 ];
 
+const useWindowSize = () => {
+  const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
+  useEffect(() => {
+    const handleResize = () => setWindowSize([window.innerWidth, window.innerHeight]);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  return windowSize;
+};
+
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [windowWidth] = useWindowSize();
   const location = useLocation();
 
   const isHomePage = location.pathname === "/";
@@ -35,13 +46,13 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navbarVisible = !isHomePage || scrolled;
+  const navbarVisible = !isHomePage || scrolled || windowWidth < 1400; // 1400px is the 2xl breakpoint
 
   return (
     <>
       {/* 1. Initial Stylish Branding - Only on Home + Not Scrolled */}
       <AnimatePresence>
-        {isHomePage && !scrolled && (
+        {isHomePage && !scrolled && windowWidth >= 1400 && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -52,10 +63,10 @@ const Navbar = () => {
             <div className="flex items-center gap-4">
               <img src={logo} alt="VelDurSen Logo" className="h-10 md:h-12 w-auto" />
               <div className="flex flex-col">
-                <span className="text-xl md:text-2xl font-black text-slate-950 tracking-tighter uppercase leading-none">
+                <span className="text-base xs:text-lg md:text-2xl font-black text-slate-950 tracking-tighter uppercase leading-none">
                   VelDur<span className="text-red-600">Sen</span>
                 </span>
-                <span className="text-[7px] md:text-[8px] font-bold text-slate-500 uppercase tracking-[0.4em] mt-1">
+                <span className="block text-[7px] md:text-[8px] font-bold text-slate-500 uppercase tracking-[0.4em] mt-1">
                   Enterprise Technology Partner
                 </span>
               </div>
@@ -75,14 +86,19 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-16 md:h-[72px]">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3">
-              <img src={logo} alt="VelDurSen Logo" className="h-12 w-auto" />
-              <span className="text-xl font-black text-slate-950 tracking-tighter uppercase leading-none">
-                VelDur<span className="text-red-600">Sen</span>
-              </span>
+              <img src={logo} alt="VelDurSen Logo" className="h-10 md:h-12 w-auto" />
+              <div className="flex flex-col">
+                <span className="text-lg md:text-xl font-black text-slate-950 tracking-tighter uppercase leading-none shrink-0">
+                  VelDur<span className="text-red-600">Sen</span>
+                </span>
+                <span className="block text-[7px] md:text-[8px] font-bold text-slate-500 uppercase tracking-[0.4em] mt-0.5 leading-none">
+                  Enterprise Technology Partner
+                </span>
+              </div>
             </Link>
 
             {/* Desktop Links */}
-            <div className="hidden lg:flex items-center gap-1">
+            <div className="hidden 2xl:flex items-center gap-0.5">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
@@ -99,12 +115,12 @@ const Navbar = () => {
 
             {/* CTA + Mobile Toggle */}
             <div className="flex items-center gap-3">
-              <Link to="/contact" className="hidden md:inline-flex btn-enterprise text-xs py-2 px-5">
+              <Link to="/contact" className="hidden xl:inline-flex btn-enterprise text-xs py-2 px-5">
                 Talk to Experts
               </Link>
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="lg:hidden p-2 rounded-md text-foreground hover:bg-muted"
+                className="2xl:hidden p-2 rounded-md text-foreground hover:bg-muted"
               >
                 {mobileOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
@@ -112,34 +128,45 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {mobileOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden border-t border-border bg-card overflow-hidden"
-            >
-              <div className="enterprise-container py-4 space-y-1">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    onClick={() => setMobileOpen(false)}
-                    className={`block px-4 py-2.5 text-sm rounded-md ${location.pathname === link.path
-                      ? "text-accent bg-accent/10 font-medium"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                      }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </motion.nav>
+
+      {/* Mobile Menu - Positioned effectively thanks to being outside the transformed nav */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="2xl:hidden fixed inset-x-0 top-16 md:top-[72px] bottom-0 z-[90] bg-background/95 backdrop-blur-md border-t border-border overflow-y-auto"
+          >
+            <div className="enterprise-container py-4 space-y-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setMobileOpen(false)}
+                  className={`block px-4 py-2.5 text-sm rounded-md ${location.pathname === link.path
+                    ? "text-accent bg-accent/10 font-medium"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              {/* Mobile CTA */}
+              <div className="pt-4 mt-2 px-4">
+                <Link
+                  to="/contact"
+                  onClick={() => setMobileOpen(false)}
+                  className="btn-enterprise w-full justify-center"
+                >
+                  Talk to Experts
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

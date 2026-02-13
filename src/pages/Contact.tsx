@@ -65,7 +65,7 @@ const Contact = () => {
   return (
     <PageLayout>
       {/* 1. HERO SECTION WITH VIDEO BACKGROUND */}
-      <section className="relative h-[80vh] flex items-center overflow-hidden bg-slate-900">
+      <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden bg-slate-900">
         <video
           autoPlay
           muted
@@ -87,7 +87,7 @@ const Contact = () => {
             <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
               Contact & Support
             </span>
-            <h1 className="text-[4rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+            <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
               Let's Build the <br />
               <span className="text-red-600">Extraordinary.</span>
             </h1>

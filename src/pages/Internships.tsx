@@ -15,7 +15,7 @@ import securityBg from "@/assets/internships/security-bg.jpg";
 import cloudBg from "@/assets/internships/cloud-bg.jpg";
 
 const InternshipTicker = () => {
-  const messages = [  
+  const messages = [
     "HIRING NOW: SUMMER 2025 COHORT",
     "DON'T MISS THE OPPORTUNITY TO COLLABORATE WITH US",
     "JOIN THE FUTURE OF ENTERPRISE TECHNOLOGY",
@@ -43,7 +43,7 @@ const Internships = () => {
   return (
     <PageLayout>
       {/* HERO SECTION - Redesigned to match Industry Page */}
-      <section className="relative h-[80vh] flex items-center overflow-hidden">
+      <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
         <video
           autoPlay
           muted
@@ -65,7 +65,7 @@ const Internships = () => {
             <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
               Early Talent Development
             </span>
-            <h1 className="text-[4rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+            <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
               Growing <br />
               <span className="text-red-600">Future Tech.</span>
             </h1>

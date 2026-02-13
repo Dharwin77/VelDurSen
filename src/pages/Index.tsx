@@ -141,7 +141,7 @@ const TestimonialsCarousel = () => {
     <div className="max-w-4xl mx-auto">
       <div className="relative">
         {/* Testimonial Cards */}
-        <div className="relative h-[500px] md:h-[420px]">
+        <div className="relative min-h-[550px] md:min-h-[420px]">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
@@ -507,7 +507,7 @@ const WhatWeAreUptoSection = () => {
             {/* Decorative background circle */}
             <div className="absolute -right-20 top-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-slate-50 rounded-full -z-10" />
 
-            <div className="relative z-10 grid grid-cols-12 gap-4">
+            <div className="relative z-10 grid grid-cols-4 md:grid-cols-12 gap-4">
               {/* Decorative dots - top left */}
               <div className="absolute -top-10 -left-10 grid grid-cols-4 gap-2 opacity-20">
                 {[...Array(16)].map((_, i) => (
@@ -520,7 +520,7 @@ const WhatWeAreUptoSection = () => {
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="col-span-12 relative"
+                className="col-span-4 md:col-span-12 relative"
               >
                 <div className="rounded-2xl overflow-hidden shadow-2xl border-l-[12px] border-red-600">
                   <img
@@ -537,7 +537,7 @@ const WhatWeAreUptoSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="col-start-4 col-span-9 -mt-24 relative z-20"
+                className="col-start-2 col-span-3 md:col-start-4 md:col-span-9 -mt-12 md:-mt-24 relative z-20"
               >
                 <div className="rounded-2xl overflow-hidden shadow-2xl border-b-[12px] border-red-600 bg-white">
                   <img
@@ -828,7 +828,7 @@ const Index = () => {
   return (
     <PageLayout>
       {/* 1. HERO SECTION - Redesigned to match Premium Industry Style */}
-      <section className="relative h-[90vh] flex items-center overflow-hidden bg-white">
+      <section className="relative h-[90vh] min-h-[600px] flex items-center overflow-hidden bg-white">
         <div
           className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[10s] brightness-110 hover:scale-105"
           style={{ backgroundImage: `url(${heroBg})` }}
@@ -846,7 +846,7 @@ const Index = () => {
             <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-600 mb-6 px-4 py-1.5 bg-red-50 rounded-full border border-red-100 backdrop-blur-md shadow-sm">
               Global Enterprise Technology Partner
             </span>
-            <h1 className="text-[3.5rem] md:text-[6.5rem] font-bold text-slate-900 leading-[0.95] mb-8 tracking-tighter">
+            <h1 className="text-[2.25rem] xs:text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-slate-900 leading-[0.95] mb-8 tracking-tighter break-words hyphens-auto">
               Digital <br />
               <span className="text-red-600">Transformation.</span>
             </h1>
@@ -889,7 +889,7 @@ const Index = () => {
             subtitle="Operating across multiple continents with a follow-the-sun delivery model, serving global enterprises around the clock."
           />
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-16">
             {globalMetrics.map((stat, i) => (
               <motion.div
                 key={i}
@@ -911,7 +911,7 @@ const Index = () => {
       </section>
 
       {/* World Map Visualization - Full Screen */}
-      <section className="relative w-full min-h-screen max-h-screen overflow-hidden bg-gradient-to-br from-muted via-muted/80 to-muted/50 flex items-center justify-center">
+      <section className="relative w-full min-h-[600px] lg:h-screen overflow-hidden bg-gradient-to-br from-muted via-muted/80 to-muted/50 flex items-center justify-center">
         {/* Background Video */}
         <video
           autoPlay
@@ -1019,7 +1019,7 @@ const Index = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-3xl md:text-5xl font-bold mb-4 whitespace-nowrap"
+              className="text-3xl md:text-5xl font-bold mb-4"
             >
               Few words from our happy customers
             </motion.h2>

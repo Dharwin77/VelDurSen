@@ -283,6 +283,7 @@ const ServiceCard = ({ service, index, onSelect }: { service: Service; index: nu
 const Services = () => {
   const [activeWheelService, setActiveWheelService] = useState<Service | null>(null);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const [currentReview, setCurrentReview] = useState(0);
   const [windowWidth] = useWindowSize();
 
   // Auto-play for the Service Wheel focus

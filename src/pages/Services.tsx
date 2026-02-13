@@ -355,7 +355,7 @@ const Services = () => {
       </section>
 
       {/* Services Breakdown - What's Included */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="pt-24 pb-8 bg-white relative overflow-hidden">
         {/* Architectural Background Pattern */}
         <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(#0f172a 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
@@ -459,7 +459,7 @@ const Services = () => {
       {/* Our Services Section - Interactive Service Wheel */}
       <section className="py-12 bg-gray-50/50 overflow-hidden relative">
         <div className="enterprise-container">
-          <div className="text-center mb-12 relative z-10">
+          <div className="text-center mb-12 mt-20 relative z-10">
             <motion.span
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -479,7 +479,7 @@ const Services = () => {
           </div>
 
           {/* Interactive Service Wheel Container - Compact Size */}
-          <div className="relative max-w-3xl mx-auto h-[480px] flex flex-col items-center justify-end group">
+          <div className="relative max-w-6xl mx-auto h-[480px] flex flex-col items-center justify-end group">
             {/* The Rotating Circle - Scaled Down */}
             <motion.div
               className="absolute top-[-100px] md:top-[-180px] w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] md:w-[600px] md:h-[600px] border border-slate-200 rounded-full flex items-center justify-center transition-all duration-700 pointer-events-none"
@@ -539,7 +539,7 @@ const Services = () => {
             </motion.div>
 
             {/* Service Content Reveal Area - Tighter Layout */}
-            <div className="relative w-full max-w-xl bg-white p-6 md:p-8 rounded-[1.8rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.05)] border border-slate-50 z-20 text-center mb-6 overflow-hidden">
+            <div className="relative w-full max-w-4xl bg-white p-6 md:p-8 rounded-[1.8rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.05)] border border-slate-50 z-20 text-center mb-6 overflow-hidden">
               {/* Decorative Background Image Overlay */}
               <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
                 <AnimatePresence mode="wait">

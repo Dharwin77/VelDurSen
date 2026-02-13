@@ -40,9 +40,9 @@ const AchievementDetail = () => {
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-4xl leading-tight"
+                        className="text-4xl md:text-5xl lg:text-6xl font-black text-white max-w-4xl leading-none tracking-tighter"
                     >
-                        {achievement.title}
+                        {achievement.title.split(" ").slice(0, -1).join(" ")} <span className="text-red-600">{achievement.title.split(" ").slice(-1)}</span>
                     </motion.h1>
                 </div>
             </section>
@@ -57,7 +57,7 @@ const AchievementDetail = () => {
 
                             {/* Project Overview */}
                             <div>
-                                <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-4">Project Overview</h3>
+                                <h3 className="text-sm font-black uppercase tracking-widest text-red-600 mb-4">Project Overview</h3>
                                 <p className="text-xl md:text-2xl text-slate-700 leading-relaxed font-serif">
                                     {achievement.fullDescription}
                                 </p>
@@ -65,7 +65,7 @@ const AchievementDetail = () => {
 
                             {/* What We Delivered */}
                             <div>
-                                <h3 className="text-2xl font-bold text-slate-900 mb-6">What We Delivered</h3>
+                                <h3 className="text-3xl font-black text-slate-900 tracking-tighter mb-8">What We <span className="text-red-600">Delivered.</span></h3>
                                 <div className="grid md:grid-cols-2 gap-4">
                                     {achievement.delivered.map((item, i) => (
                                         <motion.div
@@ -84,8 +84,8 @@ const AchievementDetail = () => {
 
                             {/* Business Impact */}
                             <div>
-                                <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-                                    <TrendingUp className="text-amber-500" /> Business Impact
+                                <h3 className="text-3xl font-black text-slate-900 tracking-tighter mb-8 flex items-center gap-3">
+                                    <TrendingUp className="text-amber-500" /> Business <span className="text-red-600">Impact.</span>
                                 </h3>
                                 <div className="grid md:grid-cols-2 gap-4">
                                     {achievement.impact.map((item, i) => (
@@ -123,7 +123,7 @@ const AchievementDetail = () => {
                         {/* Right Column: Metadata Sidebar */}
                         <div className="lg:col-span-4 space-y-8">
                             <div className="p-8 rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/50 bg-white sticky top-24">
-                                <h4 className="text-lg font-bold text-slate-900 mb-6 pb-4 border-b border-slate-100">Award Details</h4>
+                                <h4 className="text-xl font-black text-slate-900 tracking-tight mb-6 pb-4 border-b border-slate-100">Award <span className="text-red-600">Details.</span></h4>
 
                                 <div className="space-y-6">
                                     <div className="flex items-start gap-4">

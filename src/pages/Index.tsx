@@ -729,7 +729,7 @@ const RapidSupportSection = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-5xl font-bold mb-6 text-foreground"
           >
-            Strategic Global Talent on Demand
+            Strategic Global Talent on <span className="text-red-600">Demand</span>
           </motion.h2>
 
           <motion.p
@@ -885,7 +885,7 @@ const Index = () => {
         <div className="enterprise-container">
           <SectionHeader
             tag="Global Operations"
-            title="Worldwide Presence, Local Expertise"
+            title={<><span className="text-red-600">Worldwide</span> Presence, Local Expertise</>}
             subtitle="Operating across multiple continents with a follow-the-sun delivery model, serving global enterprises around the clock."
           />
 
@@ -944,7 +944,7 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-3 block">About VelDurSen</span>
-              <h2 className="section-title leading-snug mb-6">Your Trusted Partner in<br />Enterprise Digital Transformation</h2>
+              <h2 className="section-title leading-snug mb-6">Your Trusted Partner in<br /><span className="text-red-600">Enterprise Digital Transformation</span></h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 VelDurSen is a global Enterprise Technology & Digital Transformation company specializing in AI-first, security-first, and sustainability-driven solutions for the world's most demanding enterprises.
               </p>
@@ -993,7 +993,7 @@ const Index = () => {
               viewport={{ once: true }}
               className="text-3xl md:text-5xl font-bold mb-4"
             >
-              What we provide
+              What we <span className="text-red-600">provide</span>
             </motion.h2>
           </div>
 
@@ -1021,7 +1021,7 @@ const Index = () => {
               transition={{ delay: 0.1 }}
               className="text-3xl md:text-5xl font-bold mb-4"
             >
-              Few words from our happy customers
+              Few words from our <span className="text-red-600">happy customers</span>
             </motion.h2>
           </div>
 

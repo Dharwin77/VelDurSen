@@ -184,7 +184,7 @@ const Industries = () => {
                 <span className="flex items-center gap-3 text-red-600 font-bold uppercase tracking-widest text-[10px] mb-4">
                   <div className="w-10 h-0.5 bg-red-600" /> Intelligent Care Ecosystems
                 </span>
-                <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4 tracking-tighter">Healthcare</h2>
+                <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4 tracking-tighter">Health<span className="text-red-600">care</span></h2>
                 <p className="text-xl text-slate-600 font-medium leading-relaxed max-w-xl underline decoration-red-600/20 underline-offset-8">
                   Transforming healthcare delivery through secure, intelligent, and compliant platforms.
                 </p>
@@ -263,7 +263,7 @@ const Industries = () => {
             >
               <header className="space-y-2">
                 <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-red-600">The Academic Evolution</span>
-                <h2 className="text-4xl md:text-6xl font-bold text-slate-950 tracking-tighter leading-none">Education</h2>
+                <h2 className="text-4xl md:text-6xl font-bold text-slate-950 tracking-tighter leading-none"><span className="text-red-600">Edu</span>cation</h2>
               </header>
 
               <div className="space-y-6">
@@ -312,7 +312,7 @@ const Industries = () => {
               <div className="space-y-4">
                 <span className="inline-block px-4 py-1.5 bg-slate-950 text-white rounded-full text-[9px] font-black uppercase tracking-[0.2em]">Precision Engineering</span>
                 <h2 className="text-4xl md:text-7xl font-bold text-slate-900 tracking-tighter leading-none italic">
-                  Manufacturing
+                  Manu<span className="text-red-600">facturing</span>
                 </h2>
                 <p className="text-xl text-slate-500 font-medium leading-tight max-w-xl">
                   Bridging the gap between physical assets and digital intelligence with enterprise-grade IoT ecosystems.
@@ -444,7 +444,7 @@ const Industries = () => {
             >
               <div className="space-y-3">
                 <div className="w-10 h-1 bg-red-600" />
-                <h2 className="text-5xl lg:text-7xl font-bold text-slate-900 tracking-tighter">Retail</h2>
+                <h2 className="text-5xl lg:text-7xl font-bold text-slate-900 tracking-tighter">Re<span className="text-red-600">tail</span></h2>
                 <p className="text-lg text-slate-400 font-bold uppercase tracking-widest italic leading-tight">Consumer experience <br /> re-architected.</p>
               </div>
 
@@ -828,12 +828,12 @@ const Industries = () => {
       </section>
 
       {/* 4. CROSS-INDUSTRY ADVANTAGE */}
-      <section className="py-12 bg-slate-900">
+      <section className="py-12 bg-red-600">
         <div className="enterprise-container">
           <div className="flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
             <div className="max-w-sm">
               <h4 className="text-white text-2xl font-bold mb-2">The VelDurSen Advantage</h4>
-              <p className="text-slate-400 text-sm font-medium">Standardized excellence across every vertical we serve.</p>
+              <p className="text-white/90 text-sm font-medium">Standardized excellence across every vertical we serve.</p>
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
               {[
@@ -843,7 +843,7 @@ const Industries = () => {
                 { label: "Global Scale", icon: TrendingUp }
               ].map((item, i) => (
                 <div key={i} className="flex flex-col items-center md:items-start gap-3">
-                  <item.icon className="text-red-500" size={24} />
+                  <item.icon className="text-white" size={24} />
                   <span className="text-[10px] font-bold text-white uppercase tracking-widest">{item.label}</span>
                 </div>
               ))}

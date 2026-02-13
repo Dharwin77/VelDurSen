@@ -18,6 +18,10 @@ import Internships from "./pages/Internships";
 import Contact from "./pages/Contact";
 import ServiceDetail from "./pages/ServiceDetail";
 import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import Security from "./pages/Security";
+import Sitemap from "./pages/Sitemap";
 import Preloader from "./components/shared/Preloader";
 
 const queryClient = new QueryClient();
@@ -44,6 +48,10 @@ const App = () => (
           <Route path="/careers" element={<Careers />} />
           <Route path="/internships" element={<Internships />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/security" element={<Security />} />
+          <Route path="/sitemap" element={<Sitemap />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

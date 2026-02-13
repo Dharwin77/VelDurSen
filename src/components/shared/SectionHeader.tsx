@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 interface SectionHeaderProps {
   tag?: string;
-  title: string;
+  title: string | React.ReactNode;
   subtitle?: string;
   centered?: boolean;
   light?: boolean;

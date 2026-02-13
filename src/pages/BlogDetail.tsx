@@ -51,7 +51,9 @@ const BlogDetail = () => {
                         <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-6">
                             {blog.category}
                         </span>
-                        <h1 className="text-5xl font-bold mb-6 text-slate-900 leading-tight">{blog.title}</h1>
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-slate-900 leading-none tracking-tighter">
+                            {blog.title.split(" ").slice(0, -1).join(" ")} <span className="text-red-600">{blog.title.split(" ").slice(-1).join("").replace(/\.$/, "")}.</span>
+                        </h1>
 
                         <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
                             <div className="flex items-center gap-2">
@@ -110,8 +112,8 @@ const BlogDetail = () => {
                             transition={{ duration: 0.6, ease: "easeOut" }}
                             className="mb-12"
                         >
-                            <h2 className="text-3xl font-bold mb-6 text-foreground">
-                                {section.heading}
+                            <h2 className="text-3xl font-black mb-6 text-slate-900 tracking-tighter">
+                                {section.heading.split(" ").slice(0, -1).join(" ")} <span className="text-red-600">{section.heading.split(" ").slice(-1).join("").replace(/\.$/, "")}.</span>
                             </h2>
 
                             {section.content.map((paragraph, pIndex) => (
@@ -141,8 +143,8 @@ const BlogDetail = () => {
                         transition={{ duration: 0.6, ease: "easeOut" }}
                         className="mb-16"
                     >
-                        <h2 className="text-3xl font-bold mb-8 text-foreground">
-                            Real-World Applications
+                        <h2 className="text-3xl font-black mb-8 text-slate-900 tracking-tighter">
+                            Real-World <span className="text-red-600">Applications.</span>
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {blog.content.realWorldApplications.map((app, index) => (
@@ -170,8 +172,8 @@ const BlogDetail = () => {
                         className="mb-16"
                     >
                         <div className="bg-gradient-to-br from-red-50 to-slate-50 border border-red-100 rounded-xl p-8">
-                            <h2 className="text-3xl font-bold mb-4 text-foreground">
-                                {blog.content.benefits.heading}
+                            <h2 className="text-3xl font-black mb-4 text-slate-900 tracking-tighter">
+                                {blog.content.benefits.heading.split(" ").slice(0, -1).join(" ")} <span className="text-red-600">{blog.content.benefits.heading.split(" ").slice(-1).join("").replace(/\.$/, "")}.</span>
                             </h2>
                             <p className="text-base text-muted-foreground mb-6">
                                 {blog.content.benefits.description}
@@ -195,8 +197,8 @@ const BlogDetail = () => {
                         transition={{ duration: 0.6, ease: "easeOut" }}
                         className="mb-16"
                     >
-                        <h2 className="text-3xl font-bold mb-8 text-foreground">
-                            Challenges & Mitigation Strategies
+                        <h2 className="text-3xl font-black mb-8 text-slate-900 tracking-tighter">
+                            Challenges & Mitigation <span className="text-red-600">Strategies.</span>
                         </h2>
                         <div className="space-y-6">
                             {blog.content.challenges.map((item, index) => (
@@ -227,8 +229,8 @@ const BlogDetail = () => {
                         transition={{ duration: 0.6, ease: "easeOut" }}
                         className="mb-16"
                     >
-                        <h2 className="text-3xl font-bold mb-6 text-foreground">
-                            Conclusion
+                        <h2 className="text-3xl font-black mb-6 text-slate-900 tracking-tighter">
+                            <span className="text-red-600">Conclusion.</span>
                         </h2>
                         <p className="text-base leading-relaxed text-muted-foreground">
                             {blog.content.conclusion}
@@ -244,8 +246,8 @@ const BlogDetail = () => {
                         className="mb-16"
                     >
                         <div className="bg-gradient-to-br from-red-50 via-slate-50 to-white border border-red-100 rounded-xl p-8">
-                            <h2 className="text-3xl font-bold mb-6 text-foreground">
-                                Key Takeaways
+                            <h2 className="text-3xl font-black mb-6 text-slate-900 tracking-tighter">
+                                Key <span className="text-red-600">Takeaways.</span>
                             </h2>
                             <ul className="space-y-4">
                                 {blog.content.keyTakeaways.map((takeaway, index) => (

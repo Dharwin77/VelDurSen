@@ -291,9 +291,13 @@ const Careers = () => {
       <section id="culture" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <span className="text-[#C0392B] font-semibold text-sm uppercase tracking-wider">Culture</span>
-            <h2 className="text-5xl font-bold text-slate-900 mt-4 mb-6">Life at Veldursen</h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">We're built on trust, creativity, and a passion for solving complex problems.</p>
+            <span className="text-red-600 font-bold text-sm uppercase tracking-[0.2em]">Culture</span>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mt-4 mb-6 tracking-tighter">
+              Life at <span className="text-red-600">Veldursen.</span>
+            </h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto font-medium leading-relaxed">
+              We're built on trust, creativity, and a passion for solving complex problems.
+            </p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {[{ end: 150, suffix: "+", label: "Team Members" }, { end: 25, suffix: "+", label: "Countries" }, { end: 500, suffix: "+", label: "Projects Delivered" }].map((stat, i) => (
@@ -344,8 +348,10 @@ const Careers = () => {
       <section className="py-24 bg-slate-50">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Your Growth Path at Veldursen</h2>
-            <p className="text-xl text-slate-600">Explore your potential career trajectory</p>
+            <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter text-slate-900">
+              Your Growth Path at <span className="text-red-600">Veldursen.</span>
+            </h2>
+            <p className="text-xl text-slate-600 font-medium">Explore your potential career trajectory</p>
           </motion.div>
           <div className="bg-white rounded-2xl p-8 shadow-xl">
             <label className="block mb-4 font-semibold">Experience Level: {experienceLevel} years</label>
@@ -367,8 +373,10 @@ const Careers = () => {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">A Day in the Life</h2>
-            <p className="text-xl text-slate-600">Click to explore employee journeys</p>
+            <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter text-slate-900">
+              A Day in the <span className="text-red-600">Life.</span>
+            </h2>
+            <p className="text-xl text-slate-600 font-medium">Click to explore employee journeys</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {employeeProfiles.map((emp, i) => (
@@ -428,7 +436,9 @@ const Careers = () => {
       <section id="openings" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-6">Find Your Perfect Role</h2>
+            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter text-slate-900">
+              Find Your Perfect <span className="text-red-600">Role.</span>
+            </h2>
           </motion.div>
           <div className="mb-12 space-y-4">
             <div className="relative max-w-2xl mx-auto">
@@ -474,7 +484,9 @@ const Careers = () => {
       <section className="py-24 bg-gradient-to-br from-slate-50 to-orange-50">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-6">Our Hiring Journey</h2>
+            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter text-slate-900">
+              Our Hiring <span className="text-red-600">Journey.</span>
+            </h2>
           </motion.div>
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
@@ -498,7 +510,9 @@ const Careers = () => {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-6">Hear From Our Team</h2>
+            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter text-slate-900">
+              Hear From Our <span className="text-red-600">Team.</span>
+            </h2>
           </motion.div>
           <div className="max-w-4xl mx-auto relative">
             <AnimatePresence mode="wait">
@@ -527,7 +541,9 @@ const Careers = () => {
       <section className="py-24 bg-gradient-to-br from-[#C0392B] to-[#5D4037]">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-5xl font-bold text-white mb-6">Not Sure Which Role Suits You?</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tighter">
+              Not Sure Which Role Suits You?
+            </h2>
           </motion.div>
           <div className="bg-white rounded-2xl p-8 shadow-2xl">
             {!showQuizResult ? (
@@ -563,7 +579,9 @@ const Careers = () => {
       <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-6">Frequently Asked Questions</h2>
+            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter text-slate-900">
+              Frequently Asked <span className="text-red-600">Questions.</span>
+            </h2>
           </motion.div>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
@@ -583,7 +601,9 @@ const Careers = () => {
       <section className="py-24 bg-[#FBFBF9]">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-5xl font-bold mb-6 text-[#3E2723]">Ready to Make an Impact?</h2>
+            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter text-[#3E2723]">
+              Ready to Make an <span className="text-red-600">Impact?</span>
+            </h2>
             <p className="text-2xl text-[#5D4037] mb-10">Send us your resume and tell us what you're working on.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <a href="#openings" className="bg-[#C0392B] hover:bg-[#a02f24] text-white rounded-lg px-10 py-4 text-lg font-semibold inline-flex items-center justify-center gap-2 transition-all transform hover:scale-105">Apply Today <ArrowRight size={20} /></a>

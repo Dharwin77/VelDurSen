@@ -150,7 +150,7 @@ const History = () => {
             className="max-w-4xl"
           >
             <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md">
-              Our Legacy of Excellence
+              Our History
             </span>
             <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter">
               Vision to <br />
@@ -172,11 +172,17 @@ const History = () => {
         </div>
 
         <div className="enterprise-container relative z-10">
-          <SectionHeader
-            tag="Chronicle"
-            title="Our Journey of Innovation"
-            subtitle="From foundation to global scaling, explore the milestones that defined our evolution."
-          />
+          <div className="mb-16 text-center">
+            <span className="inline-block text-xs font-black uppercase tracking-[0.2em] mb-4 text-red-600">
+              Chronicle
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-6">
+              Our Journey of <span className="text-red-600">Innovation.</span>
+            </h2>
+            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
+              From foundation to global scaling, explore the milestones that defined our evolution.
+            </p>
+          </div>
 
           <div ref={containerRef} className="relative mt-20 max-w-5xl mx-auto px-4 md:px-0">
             {/* The Snake Path SVG (Vertical zig-zag/snake) */}
@@ -375,9 +381,9 @@ const History = () => {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tighter leading-none">
               Building the Future of <br />
-              <span className="text-red-600">Enterprise Technology</span>
+              <span className="text-red-600">Enterprise Technology.</span>
             </h2>
             <p className="text-lg md:text-xl text-slate-500 font-medium mb-10 leading-relaxed">
               From foundation to global innovation, VelDurSen continues to evolve with intelligence, security, and sustainability at its core.

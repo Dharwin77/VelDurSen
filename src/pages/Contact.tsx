@@ -332,12 +332,17 @@ const Contact = () => {
       {/* 3. GLOBAL PRESENCE MAP */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="enterprise-container">
-          <SectionHeader
-            tag="Global Reach"
-            title="Operational Across 4 Continents"
-            subtitle="Strategically located delivery centers ensuring seamless 24/7 operations."
-            centered
-          />
+          <div className="mb-16 text-center">
+            <span className="inline-block text-xs font-black uppercase tracking-[0.2em] mb-4 text-red-600">
+              Global Reach
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-6">
+              Operational Across 4 <span className="text-red-600">Continents.</span>
+            </h2>
+            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
+              Strategically located delivery centers ensuring seamless 24/7 operations.
+            </p>
+          </div>
 
           <div className="relative mt-16 max-w-6xl mx-auto">
             {/* Map Image */}

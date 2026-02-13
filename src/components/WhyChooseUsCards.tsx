@@ -50,8 +50,10 @@ const WhyChooseUsCards = () => {
                     viewport={{ once: true }}
                     className="text-center mb-8"
                 >
-                    <span className="text-[#C0392B] font-semibold text-sm uppercase tracking-wider">Our Approach</span>
-                    <h2 className="text-5xl font-bold mt-4 mb-6 text-slate-900">Why Choose Us for Software Development</h2>
+                    <span className="text-red-600 font-bold text-xs uppercase tracking-[0.2em]">Our Approach</span>
+                    <h2 className="text-4xl md:text-5xl font-black mt-4 mb-6 text-slate-900 tracking-tighter">
+                        Why Choose Us for Software <span className="text-red-600">Development.</span>
+                    </h2>
                     <p className="text-xl text-slate-600 max-w-3xl mx-auto">
                         Fueling lasting growth by aligning talent, process excellence, and measurable performance.
                     </p>

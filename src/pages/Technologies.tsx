@@ -174,7 +174,7 @@ const Technologies = () => {
         <div className="enterprise-container">
           <div className="mb-12">
             <span className="text-red-600 font-black uppercase tracking-widest text-xs mb-4 block">Core Competencies</span>
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Technology Pillars.</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Technology <span className="text-red-600">Pillars.</span></h2>
           </div>
 
           <div className="flex flex-col lg:flex-row gap-6 h-auto lg:h-[550px]">
@@ -385,7 +385,7 @@ const Technologies = () => {
 
                     {/* Node Icon */}
                     <motion.div
-                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      whileHover={{ scale: 1.1 }}
                       className="w-24 h-24 rounded-3xl bg-white shadow-xl flex items-center justify-center relative z-10 border border-slate-100 group-hover:border-red-600 transition-all duration-300"
                     >
                       <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center group-hover:bg-red-600 transition-colors duration-500">
@@ -548,7 +548,7 @@ const Technologies = () => {
                   <motion.div
                     key={i}
                     onClick={() => setSelectedLab(i)}
-                    whileHover={{ x: 10 }}
+
                     className={`p-6 rounded-2xl border transition-all duration-300 flex items-center justify-between group cursor-pointer ${selectedLab === i
                       ? "bg-white border-red-600 shadow-xl shadow-red-600/5 translate-x-4"
                       : "bg-white/50 border-slate-100 shadow-sm"

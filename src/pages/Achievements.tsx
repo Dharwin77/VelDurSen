@@ -30,7 +30,7 @@ const Achievements = () => {
             className="max-w-4xl"
           >
             <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-              Global Recognition
+              Our Achievements
             </span>
             <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
               Recognizing <br />
@@ -110,20 +110,20 @@ const Achievements = () => {
                     rotate: 0,
                     scale: 1
                   }}
-                  viewport={{ once: false, amount: 0.3 }}
+                  viewport={{ once: true, amount: 0.2 }}
                   transition={{
                     type: "spring",
-                    stiffness: 40,
-                    damping: 15,
+                    stiffness: 300, // Increased for snappier response
+                    damping: 25,
                     delay: idx * 0.05,
-                    duration: 0.8
+                    mass: 0.5
                   }}
-                  whileHover={{ y: -15, rotateZ: idx % 2 === 0 ? 2 : -2, scale: 1.02, zIndex: 50 }}
-                  className="group relative h-[480px] w-full"
+                  whileHover={{ y: -10, rotateZ: idx % 2 === 0 ? 1 : -1, scale: 1.02, zIndex: 50, transition: { duration: 0.2, ease: "easeOut" } }}
+                  className="group relative h-[420px] w-full"
                 >
                   <Link to={`/achievements/${achievement.id}`} className="block h-full w-full">
                     {/* Main Card Body */}
-                    <div className={`relative h-full w-full ${style.bg} rounded-[2.5rem] p-8 shadow-2xl transition-shadow duration-500 overflow-hidden`}>
+                    <div className={`relative h-full w-full ${style.bg} rounded-[2.5rem] p-8 shadow-2xl transition-shadow duration-300 overflow-hidden will-change-transform`}>
 
                       {/* Top Header */}
                       <div className="flex justify-between items-start mb-4">
@@ -141,12 +141,12 @@ const Achievements = () => {
                       {/* Floating Image Section */}
                       <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-center z-10 px-8">
                         <motion.div className="relative">
-                          <div className={`absolute inset-0 rounded-full blur-2xl opacity-40 ${style.bg} transition-transform group-hover:scale-150`} />
-                          <div className="relative w-48 h-48 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white/30 transform group-hover:-translate-y-6 transition-transform duration-700 ease-out">
+                          <div className={`absolute inset-0 rounded-full blur-2xl opacity-40 ${style.bg} transition-transform duration-300 group-hover:scale-125 will-change-transform`} />
+                          <div className="relative w-48 h-48 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white/30 transform group-hover:-translate-y-4 transition-transform duration-300 ease-out will-change-transform">
                             <img
                               src={achievement.image}
                               alt={achievement.title}
-                              className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
+                              className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-300"
                             />
                           </div>
                         </motion.div>
@@ -204,8 +204,8 @@ const Achievements = () => {
             {/* Right Column: Progress Bars */}
             <div className="w-full lg:w-2/3 space-y-5">
               <div className="mb-8">
-                <h2 className="text-3xl font-bold text-slate-900">Our Growth Trajectory</h2>
-                <p className="text-slate-500 mt-2">Consistent performance and measurable impact year over year.</p>
+                <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-4">Our Growth <span className="text-red-600">Trajectory.</span></h2>
+                <p className="text-lg text-slate-500 font-medium">Consistent performance and measurable impact year over year.</p>
               </div>
 
               {[
@@ -248,8 +248,8 @@ const Achievements = () => {
         <div className="enterprise-container">
           {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Global Deployment Milestones</h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-6">Global Deployment <span className="text-red-600">Milestones.</span></h2>
+            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
               Enterprise achievements in scale, reliability, and transformation. We deliver large-scale platforms that power mission-critical operations globally.
             </p>
           </div>

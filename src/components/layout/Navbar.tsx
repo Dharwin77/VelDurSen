@@ -4,16 +4,39 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import logo from "@/assets/logo.png";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { cn } from "@/lib/utils";
 
-const navLinks = [
+type NavLinkItem = {
+  label: string;
+  path?: string;
+  children?: { label: string; path: string }[];
+};
+
+const navLinks: NavLinkItem[] = [
   { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Services", path: "/services" },
-  { label: "Industries", path: "/industries" },
-  { label: "Technologies", path: "/technologies" },
-  { label: "Achievements", path: "/achievements" },
-  { label: "History", path: "/history" },
-  { label: "Blog", path: "/blog" },
+  { label: "About Us", path: "/about" },
+  {
+    label: "What We Do",
+    children: [
+      { label: "Services", path: "/services" },
+      { label: "Industries", path: "/industries" },
+      { label: "Technologies", path: "/technologies" },
+    ],
+  },
+  {
+    label: "Insights",
+    children: [
+      { label: "Blog", path: "/blog" },
+      { label: "Achievements", path: "/achievements" },
+      { label: "History", path: "/history" },
+    ],
+  },
   { label: "Careers", path: "/careers" },
   { label: "Internships", path: "/internships" },
   { label: "Contact", path: "/contact" },
@@ -98,18 +121,50 @@ const Navbar = () => {
             </Link>
 
             {/* Desktop Links */}
-            <div className="hidden 2xl:flex items-center gap-0.5">
+            <div className="hidden 2xl:flex items-center gap-6">
               {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`px-3 py-2 text-[13px] font-medium rounded-md transition-colors ${location.pathname === link.path
-                    ? "text-accent bg-accent/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                    }`}
-                >
-                  {link.label}
-                </Link>
+                <div key={link.label} className="relative group">
+                  {link.children ? (
+                    <>
+                      <button className="flex items-center gap-1.5 px-1 py-2 text-[13px] font-medium text-muted-foreground transition-colors group-hover:text-red-600 focus:outline-none">
+                        {link.label}
+                        <ChevronDown size={14} className="transition-transform duration-200 group-hover:rotate-180" />
+                      </button>
+
+                      {/* Dropdown Menu */}
+                      <div className="absolute left-0 top-full pt-2 opacity-0 translate-y-2 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-200 ease-out z-50">
+                        <div className="w-56 p-2 bg-white rounded-md shadow-xl border border-border/50 ring-1 ring-black/5">
+                          <div className="flex flex-col gap-1">
+                            {link.children.map((child) => (
+                              <Link
+                                key={child.path}
+                                to={child.path}
+                                className={cn(
+                                  "block px-4 py-2 text-sm text-slate-600 rounded-sm hover:bg-slate-50 hover:text-red-600 transition-colors",
+                                  location.pathname === child.path && "bg-red-50 text-red-600 font-medium"
+                                )}
+                              >
+                                {child.label}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <Link
+                      to={link.path!}
+                      className={cn(
+                        "px-1 py-2 text-[13px] font-medium transition-colors hover:text-red-600",
+                        location.pathname === link.path
+                          ? "text-red-600 font-semibold"
+                          : "text-muted-foreground"
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  )}
+                </div>
               ))}
             </div>
 
@@ -127,10 +182,9 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-
       </motion.nav>
 
-      {/* Mobile Menu - Positioned effectively thanks to being outside the transformed nav */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -140,21 +194,52 @@ const Navbar = () => {
             className="2xl:hidden fixed inset-x-0 top-16 md:top-[72px] bottom-0 z-[90] bg-background/95 backdrop-blur-md border-t border-border overflow-y-auto"
           >
             <div className="enterprise-container py-4 space-y-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setMobileOpen(false)}
-                  className={`block px-4 py-2.5 text-sm rounded-md ${location.pathname === link.path
-                    ? "text-accent bg-accent/10 font-medium"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                    }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              <Accordion type="single" collapsible className="w-full">
+                {navLinks.map((link, index) =>
+                  link.children ? (
+                    <AccordionItem value={`item-${index}`} key={link.label} className="border-b-0">
+                      <AccordionTrigger className="px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:no-underline">
+                        {link.label}
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="flex flex-col space-y-1 pl-4">
+                          {link.children.map((child) => (
+                            <Link
+                              key={child.path}
+                              to={child.path}
+                              onClick={() => setMobileOpen(false)}
+                              className={cn(
+                                "block px-4 py-2 text-sm rounded-md transition-colors",
+                                location.pathname === child.path
+                                  ? "text-red-600 bg-red-50/50 font-medium"
+                                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                              )}
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ) : (
+                    <Link
+                      key={link.path}
+                      to={link.path!}
+                      onClick={() => setMobileOpen(false)}
+                      className={cn(
+                        "block px-4 py-2.5 text-sm rounded-md transition-colors",
+                        location.pathname === link.path
+                          ? "text-red-600 bg-red-50/50 font-medium"
+                          : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
+              </Accordion>
               {/* Mobile CTA */}
-              <div className="pt-4 mt-2 px-4">
+              <div className="pt-4 mt-2 px-4 xl:hidden">
                 <Link
                   to="/contact"
                   onClick={() => setMobileOpen(false)}

@@ -47,7 +47,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.6 }}
-            className="fixed top-0 left-0 right-0 z-[60] h-16 md:h-[72px] flex items-center justify-center bg-white pointer-events-none"
+            className="fixed top-0 left-0 right-0 z-[110] h-16 md:h-[72px] flex items-center justify-center bg-white pointer-events-none"
           >
             <div className="flex items-center gap-4">
               <img src={logo} alt="VelDurSen Logo" className="h-10 md:h-12 w-auto" />
@@ -69,7 +69,7 @@ const Navbar = () => {
         initial={isHomePage ? { y: -100 } : { y: 0 }}
         animate={{ y: navbarVisible ? 0 : -100 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b border-border"
+        className="fixed top-0 left-0 right-0 z-[100] bg-card/95 backdrop-blur-md border-b border-border"
       >
         <div className="enterprise-container">
           <div className="flex items-center justify-between h-16 md:h-[72px]">

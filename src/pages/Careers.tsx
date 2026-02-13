@@ -155,8 +155,8 @@ const Careers = () => {
   };
 
   const employeeProfiles = [
-    { name: "Alex Rivera", role: "Senior Engineer", schedule: ["9:00 AM - Stand-up", "10:00 AM - Code Review", "2:00 PM - Architecture Planning", "4:00 PM - Mentoring"], tools: ["VS Code", "Docker", "Kubernetes"], journey: "Junior Dev → Senior in 3 years" },
-    { name: "Maya Patel", role: "Product Designer", schedule: ["9:30 AM - Design Critique", "11:00 AM - User Research", "1:00 PM - Prototyping", "3:30 PM - Team Sync"], tools: ["Figma", "Miro", "Notion"], journey: "Intern → Lead Designer in 4 years" },
+    { name: "Alex Rivera", role: "Senior Engineer", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=800&fit=crop", schedule: ["9:00 AM - Stand-up", "10:00 AM - Code Review", "2:00 PM - Architecture Planning", "4:00 PM - Mentoring"], tools: ["VS Code", "Docker", "Kubernetes"], journey: "Junior Dev → Senior in 3 years" },
+    { name: "Maya Patel", role: "Product Designer", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=800&fit=crop", schedule: ["9:30 AM - Design Critique", "11:00 AM - User Research", "1:00 PM - Prototyping", "3:30 PM - Team Sync"], tools: ["Figma", "Miro", "Notion"], journey: "Intern → Lead Designer in 4 years" },
   ];
 
   return (
@@ -172,7 +172,7 @@ const Careers = () => {
 
       {/* Quick Apply Modal */}
       <AnimatePresence>
-        {showQuickApply && (
+        {showQuickApply && !showResumeUpload && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowQuickApply(false)}>
             <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-slate-800 rounded-2xl p-8 max-w-md w-full relative">
               <button onClick={() => setShowQuickApply(false)} className="absolute top-4 right-4"><X size={24} /></button>
@@ -180,6 +180,51 @@ const Careers = () => {
               <input type="text" placeholder="Full Name" className="w-full p-3 border rounded-lg mb-3" />
               <input type="email" placeholder="Email" className="w-full p-3 border rounded-lg mb-3" />
               <button onClick={() => setShowResumeUpload(true)} className="w-full bg-[#C0392B] text-white py-3 rounded-lg font-semibold">Upload Resume</button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Resume Upload Modal */}
+      <AnimatePresence>
+        {showResumeUpload && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowResumeUpload(false)}>
+            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-slate-800 rounded-2xl p-8 max-w-md w-full relative">
+              <button onClick={() => setShowResumeUpload(false)} className="absolute top-4 right-4"><X size={24} /></button>
+              <h3 className="text-2xl font-bold mb-4 flex items-center gap-2"><Upload size={24} className="text-[#C0392B]" />Upload Resume</h3>
+              <p className="text-slate-600 mb-6">Upload your resume (PDF, JPG, or PNG)</p>
+              <div className="relative">
+                <input 
+                  type="file" 
+                  accept=".pdf,.jpg,.jpeg,.png" 
+                  onChange={handleResumeUpload}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                />
+                <div className="border-2 border-dashed border-[#C0392B] rounded-lg p-8 text-center hover:bg-[#C0392B]/5 transition-colors">
+                  <Upload size={40} className="mx-auto mb-3 text-[#C0392B]" />
+                  <p className="font-semibold mb-1">Click to upload or drag & drop</p>
+                  <p className="text-sm text-slate-500">PDF, JPG, or PNG</p>
+                </div>
+              </div>
+              {resumeFile && (
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
+                  <div className="flex items-center gap-2 text-green-700 font-semibold mb-2">
+                    <CheckCircle size={20} /> Resume uploaded successfully
+                  </div>
+                  <p className="text-sm text-green-600">{resumeFile.name}</p>
+                  <div className="mt-4 bg-green-200 h-2 rounded-full">
+                    <div className="bg-green-600 h-2 rounded-full" style={{ width: `${profileStrength}%` }}></div>
+                  </div>
+                  <p className="text-xs text-green-700 mt-2">Profile strength: {profileStrength}%</p>
+                </motion.div>
+              )}
+              <button 
+                onClick={() => { setShowResumeUpload(false); setShowQuickApply(false); }}
+                className="w-full mt-6 bg-[#C0392B] hover:bg-[#a02f24] text-white py-3 rounded-lg font-semibold transition-all transform hover:scale-105 disabled:opacity-50"
+                disabled={!resumeFile}
+              >
+                {resumeFile ? "Complete Application" : "Continue"}
+              </button>
             </motion.div>
           </motion.div>
         )}
@@ -291,13 +336,15 @@ const Careers = () => {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {employeeProfiles.map((emp, i) => (
-              <motion.div key={i} whileHover={{ scale: 1.02 }} className="bg-slate-50 rounded-2xl p-6 cursor-pointer" onClick={() => setSelectedEmployee(i)}>
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 rounded-full bg-[#C0392B] text-white flex items-center justify-center font-bold text-xl">{emp.name.charAt(0)}</div>
-                  <div>
-                    <h3 className="font-bold text-lg">{emp.name}</h3>
-                    <p className="text-slate-600">{emp.role}</p>
+              <motion.div key={i} whileHover={{ scale: 1.02 }} className="bg-slate-50 rounded-2xl p-8 cursor-pointer overflow-hidden text-center" onClick={() => setSelectedEmployee(i)}>
+                <div className="mb-6 flex justify-center">
+                  <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-[#C0392B]/20 shadow-lg">
+                    <img src={emp.image} alt={emp.name} className="w-full h-full object-cover" />
                   </div>
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg">{emp.name}</h3>
+                  <p className="text-slate-600 mb-4">{emp.role}</p>
                 </div>
                 <p className="text-sm text-slate-500">Click to see their daily schedule →</p>
               </motion.div>
@@ -309,44 +356,132 @@ const Careers = () => {
       {/* Employee Modal */}
       <AnimatePresence>
         {selectedEmployee !== null && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setSelectedEmployee(null)}>
-            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }} onClick={(e) => e.stopPropagation()} className="bg-white rounded-2xl p-8 max-w-2xl w-full relative">
-              <button onClick={() => setSelectedEmployee(null)} className="absolute top-4 right-4"><X size={24} /></button>
-              <h3 className="text-2xl font-bold mb-4">{employeeProfiles[selectedEmployee].name}</h3>
-              <p className="text-lg text-slate-600 mb-6">{employeeProfiles[selectedEmployee].role}</p>
-              <div className="mb-6">
-                <h4 className="font-bold mb-3">Daily Schedule:</h4>
-                {employeeProfiles[selectedEmployee].schedule.map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 mb-2">
-                    <Clock size={16} className="text-[#C0392B]" />
-                    <span>{item}</span>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/50 backdrop-blur-md z-50 flex items-center justify-center p-4" onClick={() => setSelectedEmployee(null)}>
+            <button onClick={() => setSelectedEmployee(null)} className="absolute top-6 right-6 z-50 bg-white rounded-full p-3 hover:bg-slate-100 shadow-lg transition-all"><X size={24} className="text-slate-800" /></button>
+            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }} onClick={(e) => e.stopPropagation()} className="overflow-hidden max-w-6xl w-full relative flex flex-col md:flex-row items-center justify-center">
+              <div className="flex-1 flex flex-col items-center justify-center p-8 md:p-12">
+                <div className="w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl">
+                  <img src={employeeProfiles[selectedEmployee].image} alt={employeeProfiles[selectedEmployee].name} className="w-full h-full object-cover" />
+                </div>
+              </div>
+              <div className="flex-1 p-8 md:p-12 flex flex-col justify-center bg-white/90 backdrop-blur-sm rounded-2xl">
+                <h3 className="text-2xl font-bold mb-2">{employeeProfiles[selectedEmployee].name}</h3>
+                <p className="text-lg text-slate-600 mb-6">{employeeProfiles[selectedEmployee].role}</p>
+                  <div className="mb-6">
+                    <h4 className="font-bold mb-3">Daily Schedule:</h4>
+                    {employeeProfiles[selectedEmployee].schedule.map((item, i) => (
+                      <div key={i} className="flex items-center gap-3 mb-2">
+                        <Clock size={16} className="text-[#C0392B]" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-              <div className="mb-6">
-                <h4 className="font-bold mb-3">Tools:</h4>
-                <div className="flex gap-2">{employeeProfiles[selectedEmployee].tools.map((tool, i) => <span key={i} className="px-3 py-1 bg-[#C0392B]/10 text-[#C0392B] rounded-full text-sm">{tool}</span>)}</div>
-              </div>
-              <div>
-                <h4 className="font-bold mb-2">Career Journey:</h4>
-                <p className="text-slate-600">{employeeProfiles[selectedEmployee].journey}</p>
-              </div>
+                  <div className="mb-6">
+                    <h4 className="font-bold mb-3">Tools:</h4>
+                    <div className="flex gap-2">{employeeProfiles[selectedEmployee].tools.map((tool, i) => <span key={i} className="px-3 py-1 bg-[#C0392B]/10 text-[#C0392B] rounded-full text-sm">{tool}</span>)}</div>
+                  </div>
+                  <div>
+                    <h4 className="font-bold mb-2">Career Journey:</h4>
+                    <p className="text-slate-600">{employeeProfiles[selectedEmployee].journey}</p>
+                  </div>
+                </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Benefits Section */}
+      {/* Why Join Veldursen - New Layout */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+            <span className="text-[#C0392B] font-semibold text-sm uppercase">Our Approach</span>
+            <h2 className="text-5xl font-bold mt-4 mb-6">Why Choose Us for Software Development</h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">Fueling lasting growth by aligning talent, process excellence, and measurable performance.</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left side - Image */}
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="flex justify-center"
+            >
+              <div className="relative">
+                <div className="absolute -inset-2 bg-gradient-to-br from-[#C0392B]/20 to-[#3E2723]/20 rounded-3xl blur-2xl"></div>
+                <img src="/images/benefits-bg.png" alt="Team collaboration" className="relative rounded-3xl shadow-2xl w-full max-w-md object-cover" />
+              </div>
+            </motion.div>
+
+            {/* Right side - Benefit Items */}
+            <div className="space-y-6">
+              {[
+                {
+                  title: "Scalable teams for sustainable growth",
+                  description: "Expand confidently with teams built for long-term success and cost efficiency. We create the ideal structure and ensure effortless scaling to match your evolving business goals."
+                },
+                {
+                  title: "Operational excellence",
+                  description: "Leverage optimized tools and refined processes that drive measurable efficiency, consistent performance, and continuous productivity improvements."
+                },
+                {
+                  title: "Transparent collaboration",
+                  description: "Work with clarity and confidence through open communication and hands-on leadership from experienced Technical and Delivery Managers who keep your projects aligned and on schedule."
+                },
+                {
+                  title: "Dependable delivery and lasting knowledge",
+                  description: "Preserve quality, speed, and continuity with structured knowledge sharing and flexible scalability — enabling smooth onboarding, ramp-ups, or downsizing whenever needed."
+                }
+              ].map((benefit, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: 50, scale: 0.95 }}
+                  whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ delay: index * 0.2, duration: 0.7, ease: "easeOut" }}
+                  whileHover={{ x: 8, transition: { duration: 0.3 } }}
+                  className="group border-l-4 border-[#C0392B] pl-6 py-3 cursor-pointer relative overflow-hidden"
+                >
+                  <div className="absolute -left-1 top-0 h-full w-1 bg-gradient-to-b from-[#C0392B] to-[#a02f24] transform origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500"></div>
+                  <motion.h3 
+                    className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#C0392B] transition-colors duration-300"
+                    initial={{ letterSpacing: "0px" }}
+                    whileHover={{ letterSpacing: "0.5px" }}
+                  >
+                    {benefit.title}
+                  </motion.h3>
+                  <motion.p 
+                    className="text-slate-600 leading-relaxed group-hover:text-slate-700 transition-colors duration-300"
+                    initial={{ opacity: 0.8 }}
+                    whileHover={{ opacity: 1 }}
+                  >
+                    {benefit.description}
+                  </motion.p>
+                  <motion.div 
+                    className="absolute bottom-0 left-6 right-6 h-0.5 bg-gradient-to-r from-[#C0392B] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ duration: 0.3 }}
+                  ></motion.div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Cards Section */}
       <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <span className="text-[#C0392B] font-semibold text-sm uppercase">Benefits</span>
-            <h2 className="text-5xl font-bold mt-4 mb-6">Why Join Veldursen?</h2>
+            <h2 className="text-4xl font-bold mb-6">What We Offer You</h2>
+            <p className="text-xl text-slate-600">Comprehensive benefits designed to support your wellbeing and growth</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="group">
-                <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl h-[340px] flex flex-col">
+                <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl h-[340px] flex flex-col transition-all">
                   <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#C0392B] to-[#5D4037] flex items-center justify-center mb-6"><benefit.icon className="text-white" size={32} /></div>
                   <h3 className="text-2xl font-bold mb-4">{benefit.title}</h3>
                   <ul className="space-y-3">
@@ -513,23 +648,6 @@ const Careers = () => {
           </div>
         </div>
       </section>
-
-      {/* Talent Network Signup */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <Sparkles className="mx-auto mb-4 text-[#C0392B]" size={48} />
-            <h2 className="text-4xl font-bold mb-4">Join Our Talent Network</h2>
-            <p className="text-xl text-slate-600 mb-8">Be the first to know about new opportunities</p>
-            <div className="flex gap-4 max-w-md mx-auto">
-              <input type="email" value={talentEmail} onChange={(e) => setTalentEmail(e.target.value)} placeholder="your@email.com" className="flex-1 px-4 py-3 rounded-lg border-2 focus:border-[#C0392B] outline-none" />
-              <button onClick={handleTalentSignup} className="bg-[#C0392B] hover:bg-[#a02f24] text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2"><Send size={20} />Join</button>
-            </div>
-            {showConfetti && <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="mt-8 text-green-600 font-semibold">🎉 Welcome to our talent network!</motion.div>}
-          </motion.div>
-        </div>
-      </section>
-
       {/* Growth & Diversity */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
@@ -566,7 +684,7 @@ const Careers = () => {
             <p className="text-2xl text-[#5D4037] mb-10">Send us your resume and tell us what you're working on.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <a href="#openings" className="bg-[#C0392B] hover:bg-[#a02f24] text-white rounded-lg px-10 py-4 text-lg font-semibold inline-flex items-center justify-center gap-2 transition-all transform hover:scale-105">Apply Today <ArrowRight size={20} /></a>
-              <a href="mailto:careers@veldursen.com" className="bg-[#3E2723] hover:bg-[#5D4037] text-white rounded-lg px-10 py-4 text-lg font-semibold inline-flex items-center justify-center gap-2 transition-all transform hover:scale-105"><MessageSquare size={20} />Contact HR</a>
+              <a href="mailto:careers@veldursen.com" className="btn-outline-enterprise"><MessageSquare size={20} />Contact HR</a>
             </div>
             <p className="text-[#5D4037] text-lg"><a href="mailto:careers@veldursen.com" className="hover:text-[#C0392B]">careers@veldursen.com</a></p>
           </motion.div>

@@ -15,29 +15,29 @@
     --popover: 0 0% 100%;
     --popover-foreground: 215 35% 15%;
 
-    --primary: 215 60% 22%;
+    --primary: 0 72% 51%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 25% 95%;
-    --secondary-foreground: 215 35% 15%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
 
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 15% 50%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 187 70% 42%;
+    --accent: 0 72% 51%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214 20% 90%;
-    --input: 214 20% 90%;
-    --ring: 215 60% 22%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 72% 51%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --section-bg: 210 20% 96%;
-    --hero-overlay: 215 60% 22%;
+    --section-bg: 0 0% 98%;
+    --hero-overlay: 0 72% 51%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -47,33 +47,6 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  :root.color-shift {
-    --background: 270 20% 98%;
-    --foreground: 270 35% 15%;
-
-    --card: 280 10% 100%;
-    --card-foreground: 270 35% 15%;
-
-    --primary: 265 55% 30%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 270 25% 95%;
-    --secondary-foreground: 270 35% 15%;
-
-    --muted: 270 20% 96%;
-    --muted-foreground: 270 15% 50%;
-
-    --accent: 35 90% 52%;
-    --accent-foreground: 0 0% 100%;
-
-    --border: 270 20% 88%;
-    --input: 270 20% 88%;
-    --ring: 265 55% 30%;
-
-    --section-bg: 270 20% 96%;
-    --hero-overlay: 265 55% 30%;
   }
 }
 
@@ -91,14 +64,19 @@
     transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading font-bold tracking-tight text-foreground;
   }
 }
 
 @layer components {
   .enterprise-container {
-    @apply mx-auto w-full max-w-[1320px] px-6 md:px-10 lg:px-16;
+    @apply mx-auto w-full max-w-[1400px] px-8 md:px-16 lg:px-24;
   }
 
   .section-padding {
@@ -122,11 +100,11 @@
   }
 
   .btn-enterprise {
-    @apply inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-8 py-3 text-sm font-semibold transition-all duration-300 hover:bg-accent hover:text-accent-foreground;
+    @apply inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-8 py-3 text-sm font-semibold transition-all duration-300 hover:bg-slate-950 hover:text-white;
   }
 
   .btn-accent {
-    @apply inline-flex items-center justify-center rounded-md bg-accent text-accent-foreground px-8 py-3 text-sm font-semibold transition-all duration-200 hover:bg-accent/90;
+    @apply inline-flex items-center justify-center rounded-md bg-accent text-accent-foreground px-8 py-3 text-sm font-semibold transition-all duration-200 hover:bg-slate-950 hover:text-white;
   }
 
   .btn-outline-enterprise {
@@ -146,19 +124,24 @@
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .animate-scroll {
     animation: scroll 15s linear infinite;
   }
-  
+
   .hover\:pause-animation:hover {
     animation-play-state: paused;
   }
-  
+
+  .animate-scroll-slow {
+    animation: scroll 40s linear infinite;
+  }
+
   @keyframes scroll {
     0% {
       transform: translateX(0);
     }
+
     100% {
       transform: translateX(-50%);
     }

@@ -9,6 +9,7 @@ import Services from "./pages/Services";
 import Industries from "./pages/Industries";
 import Technologies from "./pages/Technologies";
 import Achievements from "./pages/Achievements";
+import AchievementDetail from "./pages/AchievementDetail";
 import History from "./pages/History";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
@@ -16,12 +17,14 @@ import Careers from "./pages/Careers";
 import Internships from "./pages/Internships";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Preloader from "./components/shared/Preloader";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <Preloader />
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -32,6 +35,7 @@ const App = () => (
           <Route path="/industries" element={<Industries />} />
           <Route path="/technologies" element={<Technologies />} />
           <Route path="/achievements" element={<Achievements />} />
+          <Route path="/achievements/:slug" element={<AchievementDetail />} />
           <Route path="/history" element={<History />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />

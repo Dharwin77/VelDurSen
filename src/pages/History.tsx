@@ -1,463 +1,399 @@
-import { motion } from "framer-motion";
-import { Rocket, Target, Globe2, Brain, Cloud, Shield, Leaf, TrendingUp, Users, Building2, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import {
+  Rocket, Shield, Brain, Cloud, Target, Users,
+  CheckCircle2, ArrowRight, TrendingUp, Globe2,
+  Leaf, Code, Building2, Globe, X, Calendar
+} from "lucide-react";
 import PageLayout from "@/components/layout/PageLayout";
 import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
-import BlogPreview from "@/components/shared/BlogPreview";
 import { Link } from "react-router-dom";
+import historyVideo from "@/assets/history.mp4";
+
+// Image Imports
+import aboutTeam from "@/assets/about-team.jpg";
+import aboutImage1 from "@/assets/Gemini_Generated_Image_ello0sello0sello.png";
+import aboutImage2 from "@/assets/Gemini_Generated_Image_zh56h0zh56h0zh56.png";
+import globalMap from "@/assets/global-map.jpg";
+import img1 from "@/assets/img1.png";
+import img2 from "@/assets/img2.png";
+import highlight1 from "@/assets/highlight1.png";
+import highlight2 from "@/assets/highlight2.png";
+
+const milestones = [
+  {
+    year: "2018",
+    title: "Foundation of VelDurSen",
+    desc: "VelDurSen was established with a vision to build secure, scalable, and AI-driven enterprise technology solutions. Focus on enterprise-grade web applications and digital transformation consulting.",
+    icon: Rocket,
+    image: aboutTeam,
+    pos: "right",
+    y: 0,
+    yearColor: "text-blue-500",
+    iconColor: "text-blue-600",
+    iconBg: "bg-blue-50"
+  },
+  {
+    year: "2019",
+    title: "Enterprise Software Expansion",
+    desc: "Expanded into custom ERP & CRM systems and scalable web platforms. Successfully delivered multiple enterprise-grade solutions across early industry partners.",
+    icon: Code,
+    image: img1,
+    pos: "left",
+    y: 300,
+    yearColor: "text-indigo-500",
+    iconColor: "text-indigo-600",
+    iconBg: "bg-indigo-50"
+  },
+  {
+    year: "2020",
+    title: "Cloud & DevOps Integration",
+    desc: "Introduced cloud-native engineering: Multi-cloud architecture (AWS/Azure-style), CI/CD pipelines, and Kubernetes-based container orchestration. Shifted toward resilient systems.",
+    icon: Cloud,
+    image: highlight1,
+    pos: "right",
+    y: 600,
+    yearColor: "text-sky-500",
+    iconColor: "text-sky-600",
+    iconBg: "bg-sky-50"
+  },
+  {
+    year: "2021",
+    title: "Cybersecurity & Compliance",
+    desc: "Launched a dedicated cybersecurity vertical. Implemented Zero-trust frameworks, identity & access management, and regulatory-compliant infrastructure. Security became a core foundation.",
+    icon: Shield,
+    image: img2,
+    pos: "left",
+    y: 900,
+    yearColor: "text-rose-500",
+    iconColor: "text-rose-600",
+    iconBg: "bg-rose-50"
+  },
+  {
+    year: "2022",
+    title: "AI & Data Engineering Adoption",
+    desc: "Transitioned into an AI-first company. Introduced Generative AI solutions, predictive analytics, computer vision, and real-time data engineering pipelines across workflows.",
+    icon: Brain,
+    image: aboutImage2,
+    pos: "right",
+    y: 1200,
+    yearColor: "text-purple-500",
+    iconColor: "text-purple-600",
+    iconBg: "bg-purple-50"
+  },
+  {
+    year: "2023",
+    title: "Industry-Wise Specialization",
+    desc: "Expanded into Healthcare, FinTech, Manufacturing, Retail, Smart Cities, and AgriTech. Built domain-specific technology frameworks for enterprise verticals.",
+    icon: Building2,
+    image: highlight2,
+    pos: "left",
+    y: 1500,
+    yearColor: "text-emerald-500",
+    iconColor: "text-emerald-600",
+    iconBg: "bg-emerald-50"
+  },
+  {
+    year: "2024",
+    title: "Global Delivery & Workforce Growth",
+    desc: "Expanded operations internationally with multi-region project execution and global collaboration models. Infrastructure handling extremely large user bases.",
+    icon: Globe,
+    image: globalMap,
+    pos: "right",
+    y: 1800,
+    yearColor: "text-cyan-500",
+    iconColor: "text-cyan-600",
+    iconBg: "bg-cyan-50"
+  },
+  {
+    year: "2025",
+    title: "Sustainable & Future-Ready Innovation",
+    desc: "Integrated sustainability into transformation. Focused on carbon-aware cloud systems, ethical AI governance, and green computing frameworks. Positioned as a Green Tech Enterprise.",
+    icon: Leaf,
+    image: aboutImage1,
+    pos: "left",
+    y: 2100,
+    yearColor: "text-lime-500",
+    iconColor: "text-lime-600",
+    iconBg: "bg-lime-50"
+  }
+];
 
 const History = () => {
+  const [selectedMilestone, setSelectedMilestone] = useState<typeof milestones[0] | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 0.9", "end 0.5"]
+  });
+
   return (
     <PageLayout>
-      <PageHero
-        tag="Our History"
-        title="From Vision to Global Impact"
-        subtitle="The story of VelDurSen: a journey of innovation, growth, and digital transformation excellence spanning over a decade of enterprise technology leadership."
-      />
+      <section className="relative h-[80vh] flex items-center overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 z-0 w-full h-full object-cover"
+        >
+          <source src={historyVideo} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent z-10" />
 
-      {/* Company Origin */}
-      <section className="section-padding bg-white">
-        <div className="enterprise-container">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-8 items-center mb-12">
-              <div className="md:col-span-1 flex justify-center">
-                <div className="w-32 h-32 rounded-full bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center">
-                  <Rocket className="w-16 h-16 text-accent" />
+        <div className="enterprise-container relative z-20">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl"
+          >
+            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md">
+              Our Legacy of Excellence
+            </span>
+            <h1 className="text-[4rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter">
+              Vision to <br />
+              <span className="text-red-600">Global Impact.</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-slate-300 font-medium mb-12 max-w-2xl leading-relaxed">
+              The story of VelDurSen: a journey of innovation, growth, and digital transformation excellence spanning over a decade of enterprise leadership.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 2. JOURNEY SNAKE TIMELINE SECTION */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        {/* Abstract background decorations */}
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+          <div className="absolute top-[10%] -left-[10%] w-[400px] h-[400px] bg-red-50 rounded-full blur-[120px] opacity-60" />
+          <div className="absolute bottom-[20%] -right-[5%] w-[300px] h-[300px] bg-slate-100 rounded-full blur-[100px] opacity-70" />
+        </div>
+
+        <div className="enterprise-container relative z-10">
+          <SectionHeader
+            tag="Chronicle"
+            title="Our Journey of Innovation"
+            subtitle="From foundation to global scaling, explore the milestones that defined our evolution."
+          />
+
+          <div ref={containerRef} className="relative mt-20 max-w-5xl mx-auto px-4 md:px-0">
+            {/* The Snake Path SVG (Vertical zig-zag/snake) */}
+            <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-full hidden md:block">
+              <svg
+                className="w-full h-full"
+                viewBox="0 0 800 2400"
+                fill="none"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M 400 0 
+                     C 400 150, 700 150, 700 300 
+                     C 700 450, 100 450, 100 600
+                     C 100 750, 700 750, 700 900
+                     C 700 1050, 100 1050, 100 1200
+                     C 100 1350, 700 1350, 700 1500
+                     C 700 1650, 100 1650, 100 1800
+                     C 100 1950, 700 1950, 700 2100
+                     C 700 2250, 100 2250, 100 2400"
+                  stroke="#E2E8F0"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                />
+                {/* Animated Glowing Path */}
+                <motion.path
+                  style={{ pathLength: scrollYProgress }}
+                  d="M 400 0 
+                     C 400 150, 700 150, 700 300 
+                     C 700 450, 100 450, 100 600
+                     C 100 750, 700 750, 700 900
+                     C 700 1050, 100 1050, 100 1200
+                     C 100 1350, 700 1350, 700 1500
+                     C 700 1650, 100 1650, 100 1800
+                     C 100 1950, 700 1950, 700 2100
+                     C 700 2250, 100 2250, 100 2400"
+                  stroke="url(#gradient-timeline)"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                  className="shadow-xl"
+                />
+                <defs>
+                  <linearGradient id="gradient-timeline" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#F59E0B" /> {/* Amber-500 */}
+                    <stop offset="100%" stopColor="#FBBF24" /> {/* Amber-400 */}
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+
+            {/* Mobile Vertical Line */}
+            <div className="absolute left-[21px] top-0 bottom-0 w-[2px] bg-slate-100 md:hidden" />
+
+            {/* Milestones */}
+            <div className="space-y-32 md:space-y-0 relative">
+              {milestones.map((m, i) => (
+                <div key={i} className="md:relative w-full h-auto md:h-[300px]">
+                  <motion.div
+                    initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className={`flex flex-col md:flex-row items-start md:items-center w-full ${i % 2 === 0 ? "md:justify-start" : "md:justify-end"
+                      }`}
+                  >
+                    {/* Content Card - Clickable, Subtitle Only */}
+                    <button
+                      onClick={() => setSelectedMilestone(m)}
+                      className={`w-full md:w-[42%] bg-white p-6 md:p-8 rounded-3xl border border-slate-100 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] hover:border-yellow-200 transition-all duration-500 group relative z-20 text-left outline-none ${i % 2 === 0 ? "md:mr-auto" : "md:ml-auto"
+                        }`}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className={`w-12 h-12 rounded-2xl ${m.iconBg} border border-slate-100 flex items-center justify-center ${m.iconColor} group-hover:bg-red-600 group-hover:text-white transition-all duration-300`}>
+                          <m.icon size={24} />
+                        </div>
+                        <div>
+                          <span className={`text-sm font-black ${m.yearColor} opacity-80 tracking-widest uppercase`}>{m.year}</span>
+                          <h3 className="text-xl md:text-2xl font-bold text-red-600 leading-tight group-hover:text-red-700 transition-colors">
+                            {m.title}
+                          </h3>
+                        </div>
+                      </div>
+
+                      {/* Explore indicator */}
+                      <div className="mt-4 flex items-center gap-2 text-xs font-bold text-yellow-600 opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
+                        <span>LEARN MORE</span>
+                        <ArrowRight size={14} />
+                      </div>
+                    </button>
+
+                    {/* Milestone Node on Snake Line */}
+                    <div className={`absolute hidden md:flex items-center justify-center z-30 transition-transform duration-500 hover:scale-125`} style={{
+                      left: m.pos === "center" || m.pos === "center-top" ? '50%' : m.pos === "right" ? '87.5%' : '12.5%',
+                      transform: 'translateX(-50%)'
+                    }}>
+                      <div className="w-6 h-6 rounded-full bg-white border-[4px] border-yellow-500 shadow-xl shadow-yellow-500/20" />
+                      {/* Glowing Ring */}
+                      <div className="absolute inset-0 w-10 h-10 rounded-full border-2 border-yellow-200 animate-ping opacity-20" />
+                    </div>
+
+                    {/* Mobile Node */}
+                    <div className="absolute left-[21px] -translate-x-1/2 flex md:hidden items-center justify-center z-30">
+                      <div className="w-3 h-3 rounded-full bg-yellow-600 border-2 border-white" />
+                    </div>
+                  </motion.div>
                 </div>
-              </div>
-              <div className="md:col-span-2">
-                <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">
-                  The Beginning
-                </span>
-                <h2 className="section-title">Company Origin & Founding Vision</h2>
-              </div>
-            </div>
-
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
-              <p>
-                <span className="font-bold text-foreground">VelDurSen was founded</span> with a clear and unwavering vision: to build secure, scalable, AI-first enterprise systems that solve real-world business challenges at global scale. From day one, we set out not to be another software vendor, but to become a trusted long-term technology partner for enterprises navigating digital transformation.
-              </p>
-              <p>
-                Our founders recognized early that the future of enterprise technology would be defined by three pillars: <span className="font-semibold text-foreground">artificial intelligence</span>, <span className="font-semibold text-foreground">cloud-native architectures</span>, and <span className="font-semibold text-foreground">security-by-design</span>. This insight shaped our DNA and continues to guide every system we build today.
-              </p>
-              <p>
-                The founding principle was simple but powerful: <span className="font-bold text-foreground">enterprise-first mindset</span>. We committed to building systems designed for decades of operation, not short-term projects. Every architecture decision, every technology choice, every line of code written would prioritize longevity, scalability, and the ability to evolve with changing business needs.
-              </p>
-            </div>
-
-            <div className="mt-12 grid md:grid-cols-3 gap-6">
-              {[
-                { icon: Target, title: "Mission-Driven", desc: "Solve real enterprise challenges, not build technology for its own sake" },
-                { icon: Users, title: "Long-Term Focus", desc: "Build partners systems that last decades, not months" },
-                { icon: Shield, title: "Security Foundation", desc: "Security as a core principle from the first line of code" }
-              ].map((principle, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="p-6 rounded-xl bg-section border border-border text-center"
-                >
-                  <principle.icon className="w-10 h-10 text-accent mx-auto mb-4" />
-                  <h4 className="font-bold mb-2">{principle.title}</h4>
-                  <p className="text-sm text-muted-foreground">{principle.desc}</p>
-                </motion.div>
               ))}
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Early Foundation Phase */}
-      <section className="section-padding bg-section">
-        <div className="enterprise-container">
-          <div className="max-w-5xl mx-auto">
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">
-              2014-2016
-            </span>
-            <h2 className="section-title mb-8">Foundation Phase: Building the Core</h2>
-            
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed mb-12">
-              <p>
-                The early years were focused on establishing our core competencies and proving our approach in the enterprise market. We started with <span className="font-semibold text-foreground">enterprise software development and cloud systems</span>, working with mid-sized organizations looking to modernize their technology infrastructure.
-              </p>
-              <p>
-                From the beginning, we adopted <span className="font-semibold text-foreground">data-driven architectures</span> and invested heavily in understanding how to build systems that could scale from hundreds to millions of users. Every project was an opportunity to refine our methodologies, strengthen our engineering practices, and build the foundation for what would become our global delivery model.
-              </p>
-              <p>
-                <span className="font-bold text-foreground">Security-by-design principles</span> were non-negotiable from day one. While many companies treated security as an afterthought, we embedded it into every layer of our systems—from authentication and authorization to data encryption and network security. This early commitment would later become one of our key differentiators.
-              </p>
-            </div>
+        {/* Milestone Detail Modal */}
+        <AnimatePresence>
+          {selectedMilestone && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+            >
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedMilestone(null)}
+                className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
+              />
 
-            <div className="bg-white p-8 rounded-xl border-2 border-border">
-              <h4 className="text-xl font-bold mb-6">Early Foundation Achievements</h4>
-              <div className="grid md:grid-cols-2 gap-6">
-                {[
-                  "First cloud-native enterprise platform deployed",
-                  "Security-first development practices established",
-                  "Data-driven architecture patterns documented",
-                  "Initial engineering team across 3 cities",
-                  "Agile delivery methodologies refined",
-                  "First long-term enterprise partnerships formed"
-                ].map((achievement) => (
-                  <div key={achievement} className="flex items-start gap-3">
-                    <CheckCircle2 size={18} className="text-accent mt-0.5 shrink-0" />
-                    <span className="text-sm">{achievement}</span>
+              {/* Modal Container */}
+              <motion.div
+                layoutId={`card-${selectedMilestone.year}`}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                className="relative w-full max-w-6xl bg-white rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row h-auto max-h-[90vh]"
+              >
+                {/* Close Button at Top */}
+                <button
+                  onClick={() => setSelectedMilestone(null)}
+                  className="absolute top-6 right-6 z-50 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-slate-900 transition-all border border-white/20"
+                >
+                  <X size={20} />
+                </button>
+
+                {/* Left Side: Image */}
+                <div className="w-full md:w-1/2 h-[300px] md:h-auto relative overflow-hidden">
+                  <img
+                    src={selectedMilestone.image}
+                    alt={selectedMilestone.title}
+                    className="w-full h-full object-cover transition-transform duration-[10s] hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent md:hidden" />
+                  <div className="absolute bottom-8 left-8 text-white md:hidden">
+                    <span className="text-sm font-bold opacity-60 uppercase tracking-widest">{selectedMilestone.year}</span>
+                    <h2 className="text-3xl font-bold leading-tight">{selectedMilestone.title}</h2>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                </div>
 
-      {/* Expansion into AI, Cloud & Cybersecurity */}
-      <section className="section-padding bg-white">
-        <div className="enterprise-container">
-          <div className="max-w-5xl mx-auto">
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">
-              2017-2019
-            </span>
-            <h2 className="section-title mb-8">Evolution: AI, Cloud & Cybersecurity Leadership</h2>
-            
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed mb-12">
-              <p>
-                This period marked <span className="font-bold text-foreground">VelDurSen's transformation from a software development company to a comprehensive digital transformation partner</span>. We made strategic investments in three critical areas that would define the future of enterprise technology:
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              {[
-                {
-                  icon: Brain,
-                  title: "Enterprise AI Adoption",
-                  points: [
-                    "Built first ML platforms for predictive analytics",
-                    "Implemented NLP systems for document processing",
-                    "Deployed computer vision for quality control",
-                    "Established AI ethics and governance frameworks"
-                  ]
-                },
-                {
-                  icon: Cloud,
-                  title: "Cloud-Native Engineering",
-                  points: [
-                    "Adopted Kubernetes for container orchestration",
-                    "Built multi-cloud deployment capabilities",
-                    "Implemented CI/CD pipelines at scale",
-                    "Achieved AWS and Azure certifications"
-                  ]
-                },
-                {
-                  icon: Shield,
-                  title: "Cybersecurity Core Pillar",
-                  points: [
-                    "Zero-trust architecture implementations",
-                    "SOC 2 Type II certification achieved",
-                    "Enterprise IAM platforms deployed",
-                    "24/7 security operations center established"
-                  ]
-                }
-              ].map((pillar, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="p-6 rounded-xl bg-section border-2 border-border"
-                >
-                  <pillar.icon className="w-12 h-12 text-accent mb-4" />
-                  <h4 className="text-xl font-bold mb-4">{pillar.title}</h4>
-                  <ul className="space-y-2">
-                    {pillar.points.map((point) => (
-                      <li key={point} className="flex items-start gap-2 text-sm">
-                        <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"></div>
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
-              <p>
-                This evolution meant <span className="font-semibold text-foreground">shifting from software delivery to complete digital transformation</span>. Our clients were no longer just asking us to build applications—they were asking us to reimagine their entire technology landscape, migrate to the cloud, implement AI across operations, and secure their digital assets against growing cyber threats.
-              </p>
-              <p>
-                We were ready. Our architecture-first approach, combined with deep expertise in emerging technologies, positioned us perfectly to help enterprises navigate these complex transformations while maintaining security, compliance, and operational continuity.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Global Growth Journey */}
-      <section className="section-padding bg-gradient-to-br from-blue-50 to-indigo-50">
-        <div className="enterprise-container">
-          <div className="max-w-5xl mx-auto">
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">
-              2020-2022
-            </span>
-            <h2 className="section-title mb-8">Global Expansion & Worldwide Delivery</h2>
-            
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed mb-12">
-              <p>
-                As our client base grew more global, we recognized the need for <span className="font-bold text-foreground">true worldwide delivery capabilities</span>. This wasn't just about having offices in different countries—it was about building a distributed engineering organization that could deliver seamlessly across time zones, cultures, and regulatory environments.
-              </p>
-              <p>
-                We established <span className="font-semibold text-foreground">regional delivery centers across multiple continents</span>: North America, Europe, Asia-Pacific, and the Middle East. This wasn't expansion for expansion's sake—each location was chosen for its talent pool, proximity to major client hubs, and ability to support our follow-the-sun delivery model.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-white p-8 rounded-xl border-2 border-border">
-                <Globe2 className="w-12 h-12 text-accent mb-4" />
-                <h4 className="text-xl font-bold mb-4">Global Footprint Established</h4>
-                <ul className="space-y-3">
-                  {[
-                    "Delivery centers across 5 continents",
-                    "Operations in 50+ countries",
-                    "Engineering teams in 20+ cities",
-                    "Support for 30+ languages and time zones",
-                    "Local compliance expertise in all major markets"
-                  ].map((point) => (
-                    <li key={point} className="flex items-start gap-3 text-sm">
-                      <ArrowRight size={16} className="text-accent mt-0.5 shrink-0" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl border-2 border-border">
-                <Users className="w-12 h-12 text-accent mb-4" />
-                <h4 className="text-xl font-bold mb-4">Follow-the-Sun Delivery Model</h4>
-                <ul className="space-y-3">
-                  {[
-                    "24/7 continuous development cycles",
-                    "Faster time-to-market for global clients",
-                    "Round-the-clock support coverage",
-                    "Cultural diversity driving innovation",
-                    "Seamless handoffs between regional teams"
-                  ].map((point) => (
-                    <li key={point} className="flex items-start gap-3 text-sm">
-                      <ArrowRight size={16} className="text-accent mt-0.5 shrink-0" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
-              <p>
-                This global expansion enabled us to <span className="font-semibold text-foreground">support enterprises operating across multiple continents</span> with the local expertise they needed, while maintaining the consistent quality and security standards that defined our brand.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Sustainability & Responsible Technology */}
-      <section className="section-padding bg-white">
-        <div className="enterprise-container">
-          <div className="max-w-5xl mx-auto">
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-green-600 mb-4">
-              2023-2024
-            </span>
-            <h2 className="section-title mb-8">Sustainability & Responsible Technology Integration</h2>
-            
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed mb-12">
-              <p>
-                As the technology industry grappled with its environmental impact, <span className="font-bold text-foreground">VelDurSen made sustainability a core value</span>, not a marketing initiative. We recognized that building technology responsibly meant considering not just performance and cost, but also environmental impact and ethical implications.
-              </p>
-              <p>
-                We integrated <span className="font-semibold text-foreground">green computing principles</span> into every aspect of our operations—from how we write code to which cloud regions we deploy to, from our infrastructure choices to our development practices. Carbon awareness became as important as security and performance in our architectural decisions.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              {[
-                {
-                  icon: Leaf,
-                  title: "Green Cloud Computing",
-                  achievements: [
-                    "Carbon-aware workload scheduling implemented",
-                    "Preference for renewable energy-powered regions",
-                    "35% reduction in cloud carbon footprint",
-                    "Energy-efficient code optimization practices"
-                  ]
-                },
-                {
-                  icon: Brain,
-                  title: "Ethical AI Adoption",
-                  achievements: [
-                    "AI ethics governance frameworks established",
-                    "Bias detection and mitigation protocols",
-                    "Explainable AI for enterprise decision-making",
-                    "Responsible data practices across all projects"
-                  ]
-                }
-              ].map((area, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="p-8 rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200"
-                >
-                  <area.icon className="w-12 h-12 text-green-600 mb-4" />
-                  <h4 className="text-xl font-bold mb-6">{area.title}</h4>
-                  <ul className="space-y-3">
-                    {area.achievements.map((achievement) => (
-                      <li key={achievement} className="flex items-start gap-3 text-sm">
-                        <CheckCircle2 size={16} className="text-green-600 mt-0.5 shrink-0" />
-                        <span>{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
-              <p>
-                <span className="font-bold text-foreground">Sustainability became a core competitive advantage</span>, not just a corporate responsibility initiative. Our clients increasingly sought partners who could help them meet their own environmental goals, and our early investments in green tech positioned us as leaders in this emerging space.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Present-Day VelDurSen */}
-      <section className="section-padding bg-section">
-        <div className="enterprise-container">
-          <div className="max-w-5xl mx-auto">
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">
-              2025-Present
-            </span>
-            <h2 className="section-title mb-8">Present Day: Global Enterprise Technology Partner</h2>
-            
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed mb-12">
-              <p>
-                Today, <span className="font-bold text-foreground">VelDurSen stands as a global enterprise technology partner</span> trusted by Fortune 500 companies and high-growth organizations across 50+ countries. We power mission-critical systems that serve millions of users, process billions of transactions, and manage petabytes of data daily.
-              </p>
-              <p>
-                Our evolution from a software development company to a comprehensive digital transformation partner reflects a decade of consistent investment in technology leadership, engineering excellence, and client success. We are:
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
-              {[
-                { icon: Brain, label: "AI-Driven", desc: "Leading enterprise AI adoption across industries" },
-                { icon: Shield, label: "Security-First", desc: "100% compliance record, zero breaches" },
-                { icon: Leaf, label: "Sustainability-Focused", desc: "Pioneer in green tech and ethical AI" }
-              ].map((pillar, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="p-6 rounded-xl bg-white border-2 border-accent/20 text-center"
-                >
-                  <pillar.icon className="w-12 h-12 text-accent mx-auto mb-4" />
-                  <h4 className="text-lg font-bold mb-2">{pillar.label}</h4>
-                  <p className="text-sm text-muted-foreground">{pillar.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="bg-white p-8 rounded-xl border-2 border-border">
-              <h4 className="text-xl font-bold mb-6">Current Global Positioning</h4>
-              <div className="grid md:grid-cols-2 gap-6">
-                {[
-                  "500+ global enterprise clients across 50+ countries",
-                  "3,500+ engineers delivering from multiple continents",
-                  "1000+ enterprise projects successfully delivered",
-                  "99.9% average uptime across all systems",
-                  "24/7 global support with follow-the-sun model",
-                  "Zero security breaches across entire portfolio",
-                  "Systems supporting 50M+ users daily",
-                  "Leader in cloud-native and AI-first transformations"
-                ].map((fact) => (
-                  <div key={fact} className="flex items-start gap-3">
-                    <TrendingUp size={18} className="text-accent mt-0.5 shrink-0" />
-                    <span className="text-sm font-medium">{fact}</span>
+                {/* Right Side: Content */}
+                <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center overflow-y-auto">
+                  <div className="hidden md:block mb-8">
+                    <span className="inline-block px-4 py-1 rounded-full bg-red-50 text-red-600 text-sm font-black tracking-widest uppercase mb-4">
+                      {selectedMilestone.year} Milestone
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-black text-slate-900 leading-[1.1] tracking-tighter">
+                      {selectedMilestone.title}
+                    </h2>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
+
+                  <div className="space-y-6">
+                    <p className="text-lg md:text-xl text-slate-600 font-medium leading-relaxed">
+                      {selectedMilestone.desc}
+                    </p>
+
+                    <div className="pt-8 border-t border-slate-100">
+                      <div className="flex items-center gap-4 text-red-600">
+                        <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center">
+                          <selectedMilestone.icon size={24} />
+                        </div>
+                        <span className="font-bold tracking-tight">Enterprise Innovation Standard</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* SECTION FOOTER CTA */}
+        <div className="enterprise-container mt-32 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
+              Building the Future of <br />
+              <span className="text-red-600">Enterprise Technology</span>
+            </h2>
+            <p className="text-lg md:text-xl text-slate-500 font-medium mb-10 leading-relaxed">
+              From foundation to global innovation, VelDurSen continues to evolve with intelligence, security, and sustainability at its core.
+            </p>
+            <Link
+              to="/services"
+              state={{ fromButton: true }}
+              className="inline-flex items-center justify-center gap-3 bg-slate-950 text-white font-bold py-5 px-10 rounded-full hover:bg-red-600 hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-slate-200"
+            >
+              Explore Our Capabilities <ArrowRight size={20} />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
       {/* Future Roadmap */}
-      <section className="section-padding bg-gradient-to-br from-purple-50 to-pink-50">
-        <div className="enterprise-container">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-accent mb-4">
-                Looking Ahead
-              </span>
-              <h2 className="section-title">Future Roadmap: Technology Built for Decades</h2>
-              <p className="text-lg text-muted-foreground mt-6 max-w-3xl mx-auto">
-                Our vision extends far beyond the next quarter or year. We're building technology partnerships and systems designed to evolve over decades, adapting to changing business needs while maintaining security, performance, and sustainability.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: Sparkles,
-                  title: "Advanced Enterprise AI Platforms",
-                  vision: "Next-generation AI systems with autonomous decision-making, multi-modal intelligence, and self-improving architectures powering enterprise operations globally."
-                },
-                {
-                  icon: Leaf,
-                  title: "Sustainable Digital Ecosystems",
-                  vision: "Carbon-neutral cloud deployments, circular economy principles in system design, and technology that actively contributes to environmental restoration."
-                },
-                {
-                  icon: Building2,
-                  title: "Long-Term Global Partnerships",
-                  vision: "Decades-long relationships with enterprises, evolving their technology landscapes through continuous innovation, support, and collaborative growth."
-                }
-              ].map((future, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="p-8 rounded-xl bg-white border-2 border-border hover:shadow-2xl transition-all duration-300"
-                >
-                  <future.icon className="w-14 h-14 text-accent mb-6" />
-                  <h4 className="text-xl font-bold mb-4">{future.title}</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{future.vision}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="mt-12 p-8 rounded-2xl bg-white border-2 border-accent/20 text-center">
-              <h4 className="text-2xl font-bold mb-4">Technology Built for Decades, Not Trends</h4>
-              <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto">
-                VelDurSen's commitment has always been to build systems that stand the test of time. As we look to the future, this commitment only grows stronger—pioneering technologies that will power enterprise operations for generations to come.
-              </p>
-              <Link to="/contact" className="btn-enterprise inline-flex items-center">
-                Join Our Journey <ArrowRight size={16} className="ml-2" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Blog Preview */}
-      <BlogPreview />
     </PageLayout>
   );
 };

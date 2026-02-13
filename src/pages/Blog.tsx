@@ -24,36 +24,41 @@ const Blog = () => {
 
   return (
     <PageLayout>
-      {/* Blog Hero with Video Background */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-white min-h-[70vh] flex items-center overflow-hidden border-b border-border">
-        {/* Background Video */}
+      {/* HERO SECTION - Redesigned to match Premium Industry Style */}
+      <section className="relative h-[80vh] flex items-center overflow-hidden">
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]"
         >
           <source src={blogHeroVideo} type="video/mp4" />
         </video>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent z-10" />
 
-        {/* Dark Overlay for Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/60 via-blue-900/50 to-slate-800/60"></div>
-
-        {/* Content Overlay */}
-        <div className="enterprise-container relative z-10 py-20">
-          <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-block px-4 py-1.5 bg-white/20 text-white text-sm font-semibold rounded-full mb-6 backdrop-blur-sm">
-              Blog
+        <div className="enterprise-container relative z-20">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl"
+          >
+            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+              Architecture & Strategy
             </span>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
-              VelDurSen Insights
+            <h1 className="text-[4rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+              VelDurSen <br />
+              <span className="text-red-600">Insights.</span>
             </h1>
-            <p className="text-xl text-white/90 leading-relaxed drop-shadow-md">
+            <p className="text-xl md:text-2xl text-slate-300 font-medium mb-12 max-w-2xl leading-relaxed drop-shadow-md">
               Enterprise technology, AI, cloud, security, and sustainability insights from our global engineering teams.
             </p>
-          </div>
+          </motion.div>
         </div>
+
+        {/* Floating Abstract Element */}
+        <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[120px] -z-0" />
       </section>
 
       <section className="section-padding">
@@ -86,7 +91,7 @@ const Blog = () => {
                 className="bg-white border border-border rounded-xl group cursor-pointer overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
               >
                 {/* Blog Image - Full Width, No Padding */}
-                <div className="aspect-video w-full overflow-hidden bg-gradient-to-br from-blue-100 via-indigo-50 to-purple-100">
+                <div className="aspect-video w-full overflow-hidden bg-gradient-to-br from-red-100 via-slate-50 to-white">
                   <img
                     src={post.image}
                     alt={post.title}
@@ -112,7 +117,7 @@ const Blog = () => {
                   </h3>
 
                   {/* Blog Excerpt - Large and Unique Color */}
-                  <p className="text-lg text-indigo-700 leading-relaxed mb-4 line-clamp-3 flex-grow font-serif">
+                  <p className="text-lg text-slate-700 leading-relaxed mb-4 line-clamp-3 flex-grow font-serif">
                     {post.excerpt}
                   </p>
 

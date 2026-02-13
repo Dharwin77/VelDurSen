@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Trophy, MapPin, Calendar, Award, Bookmark, TrendingUp, BarChart3, Briefcase, Building2, Globe, Globe2 } from "lucide-react";
+import { ArrowRight, Trophy, MapPin, Calendar, Award, Bookmark, TrendingUp, BarChart3, Briefcase, Building2, Globe, Globe2, Lightbulb, Layers, Shield, Zap, Server, BarChart, Lock, Gauge, CheckCircle } from "lucide-react";
 import PageLayout from "@/components/layout/PageLayout";
 import { achievementsData } from "@/data/achievements";
 
@@ -209,24 +209,29 @@ const Achievements = () => {
               </div>
 
               {[
-                { label: "Increase Client ROI", value: "300%", bg: "bg-[#a3e635]", width: "w-[85%]", icon: TrendingUp, text: "text-lime-900" },
-                { label: "Revenue Growth", value: "150%", bg: "bg-[#4ade80]", width: "w-[90%]", icon: BarChart3, text: "text-green-900" },
-                { label: "Special Projects Delivered", value: "2500+", bg: "bg-[#2dd4bf]", width: "w-[95%]", icon: Briefcase, text: "text-teal-900" },
-                { label: "Best IT Service Company", value: "2026", bg: "bg-[#0d9488]", width: "w-[100%]", icon: Building2, text: "text-white" },
-                { label: "Industry Awards Won", value: "50+", bg: "bg-[#0f766e]", width: "w-[100%]", icon: Award, text: "text-white" },
+                { label: "Increase Client ROI", value: "300%", bg: "bg-[#a3e635]", hoverBg: "hover:bg-[#a3e635]", width: "w-[85%]", icon: TrendingUp, text: "text-lime-900" },
+                { label: "Revenue Growth", value: "150%", bg: "bg-[#4ade80]", hoverBg: "hover:bg-[#4ade80]", width: "w-[90%]", icon: BarChart3, text: "text-green-900" },
+                { label: "Special Projects Delivered", value: "2500+", bg: "bg-[#2dd4bf]", hoverBg: "hover:bg-[#2dd4bf]", width: "w-[95%]", icon: Briefcase, text: "text-teal-900" },
+                { label: "Best IT Service Company", value: "2026", bg: "bg-[#0d9488]", hoverBg: "hover:bg-[#0d9488]", width: "w-[100%]", icon: Building2, text: "text-white" },
+                { label: "Industry Awards Won", value: "50+", bg: "bg-[#0f766e]", hoverBg: "hover:bg-[#0f766e]", width: "w-[100%]", icon: Award, text: "text-white" },
               ].map((item, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, x: 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
+                  whileHover={{ scale: 1.08, transition: { duration: 0.3 } }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className={`relative flex items-center justify-between p-4 pl-8 rounded-r-full shadow-md ${item.bg} ${item.width} hover:scale-[1.01] transition-transform`}
+                  className={`relative flex items-center justify-between p-4 pl-8 rounded-r-full shadow-md ${item.bg} ${item.width} hover:shadow-2xl transition-all duration-300 cursor-pointer group`}
+                  style={{ originX: 0 }}
                 >
-                  <span className={`font-bold text-lg ${item.text}`}>{item.label}</span>
-                  <div className="flex items-center gap-6 pr-2">
+                  {/* Hover Background Overlay */}
+                  <div className={`absolute inset-0 rounded-r-full ${item.hoverBg} opacity-0 group-hover:opacity-20 transition-opacity duration-300`}></div>
+                  
+                  <span className={`font-bold text-lg ${item.text} relative z-10`}>{item.label}</span>
+                  <div className="flex items-center gap-6 pr-2 relative z-10">
                     <span className={`font-bold text-xl ${item.text}`}>{item.value}</span>
-                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm">
+                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
                       <item.icon className="w-6 h-6 text-slate-700" />
                     </div>
                   </div>
@@ -238,7 +243,245 @@ const Achievements = () => {
         </div>
       </section>
 
-      {/* Decorative footer element */}
+      {/* Global Deployment Milestones - 6 Achievement Cards Section */}
+      <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-slate-50">
+        <div className="enterprise-container">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">Global Deployment Milestones</h2>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+              Enterprise achievements in scale, reliability, and transformation. We deliver large-scale platforms that power mission-critical operations globally.
+            </p>
+          </div>
+
+          {/* 6 Cards Grid - 3x2 Layout */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" style={{ gridAutoRows: '1fr' }}>
+            {/* Card 1 - Global Deployment Milestones */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0 }}
+              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 bg-white flex flex-col h-full"
+            >
+              {/* Colored Header Bar */}
+              <div className="bg-gradient-to-r from-amber-400 to-orange-500 px-6 py-6 relative flex-shrink-0 min-h-[100px] flex items-center">
+                <h3 className="text-white font-bold text-lg italic">GLOBAL DEPLOYMENT MILESTONES</h3>
+                {/* Icon Badge - Positioned to overlap */}
+                <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform z-10">
+                  <Globe2 className="w-12 h-12 text-amber-600" />
+                </div>
+              </div>
+
+              {/* Content Area */}
+              <div className="p-6 flex-1 flex flex-col">
+                <h4 className="text-lg font-bold text-slate-900 mb-3">🏆 Large-Scale Enterprise Platforms</h4>
+                <p className="text-sm font-semibold text-slate-700 mb-2">What we achieved:</p>
+                <ul className="space-y-2 mb-4 flex-shrink-0">
+                  <li className="flex gap-2 text-xs text-slate-600">
+                    <span className="text-amber-500 font-bold">✓</span>
+                    <span>Multi-region deployments across global infrastructure</span>
+                  </li>
+                  <li className="flex gap-2 text-xs text-slate-600">
+                    <span className="text-amber-500 font-bold">✓</span>
+                    <span>Continuous operations for distributed business units</span>
+                  </li>
+                </ul>
+                <p className="text-xs text-slate-600 leading-relaxed flex-1">
+                  Successfully delivered large-scale enterprise platforms across multiple regions, enabling continuous operations for globally distributed business units.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 2 - Enterprise System Modernization */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 bg-white flex flex-col h-full"
+            >
+              {/* Colored Header Bar */}
+              <div className="bg-gradient-to-r from-red-400 to-rose-500 px-6 py-6 relative flex-shrink-0 min-h-[100px] flex items-center">
+                <h3 className="text-white font-bold text-lg italic">SYSTEM MODERNIZATION</h3>
+                {/* Icon Badge */}
+                <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform z-10">
+                  <Layers className="w-12 h-12 text-red-600" />
+                </div>
+              </div>
+
+              {/* Content Area */}
+              <div className="p-6 flex-1 flex flex-col">
+                <h4 className="text-lg font-bold text-slate-900 mb-3">🏆 Legacy to Digital Transformation</h4>
+                <p className="text-sm font-semibold text-slate-700 mb-2">What we achieved:</p>
+                <ul className="space-y-2 mb-4 flex-shrink-0">
+                  <li className="flex gap-2 text-xs text-slate-600">
+                    <span className="text-red-500 font-bold">✓</span>
+                    <span>Modernized complex legacy environments</span>
+                  </li>
+                  <li className="flex gap-2 text-xs text-slate-600">
+                    <span className="text-red-500 font-bold">✓</span>
+                    <span>High-performance digital ecosystems for enterprises</span>
+                  </li>
+                </ul>
+                <p className="text-xs text-slate-600 leading-relaxed flex-1">
+                  Transformed complex legacy environments into high-performance digital ecosystems, improving platform reliability, scalability, and operational efficiency.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 3 - Mission-Critical Reliability */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 bg-white flex flex-col h-full"
+            >
+              {/* Colored Header Bar */}
+              <div className="bg-gradient-to-r from-blue-400 to-indigo-500 px-6 py-6 relative flex-shrink-0 min-h-[100px] flex items-center">
+                <h3 className="text-white font-bold text-lg italic">MISSION-CRITICAL RELIABILITY</h3>
+                {/* Icon Badge */}
+                <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform z-10">
+                  <Server className="w-12 h-12 text-blue-600" />
+                </div>
+              </div>
+
+              {/* Content Area */}
+              <div className="p-6 flex-1 flex flex-col">
+                <h4 className="text-lg font-bold text-slate-900 mb-3">🏆 Enterprise Uptime Excellence</h4>
+                <p className="text-sm font-semibold text-slate-700 mb-2">What we achieved:</p>
+                <ul className="space-y-2 mb-4 flex-shrink-0">
+                  <li className="flex gap-2 text-xs text-slate-600">
+                    <span className="text-blue-500 font-bold">✓</span>
+                    <span>Engineered highly available enterprise systems</span>
+                  </li>
+                  <li className="flex gap-2 text-xs text-slate-600">
+                    <span className="text-blue-500 font-bold">✓</span>
+                    <span>Consistent uptime across global workloads</span>
+                  </li>
+                </ul>
+                <p className="text-xs text-slate-600 leading-relaxed flex-1">
+                  Engineered and operated highly available enterprise systems supporting critical business operations with consistent uptime across global workloads.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 4 - Security & Compliance Excellence */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 bg-white flex flex-col h-full"
+            >
+              {/* Colored Header Bar */}
+              <div className="bg-gradient-to-r from-green-400 to-emerald-500 px-6 py-6 relative flex-shrink-0 min-h-[100px] flex items-center">
+                <h3 className="text-white font-bold text-lg italic">SECURITY & COMPLIANCE</h3>
+                {/* Icon Badge */}
+                <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform z-10">
+                  <Lock className="w-12 h-12 text-green-600" />
+                </div>
+              </div>
+
+              {/* Content Area */}
+              <div className="p-6 flex-1 flex flex-col">
+                <h4 className="text-lg font-bold text-slate-900 mb-3">🏆 Regulated Industry Excellence</h4>
+                <p className="text-sm font-semibold text-slate-700 mb-2">What we achieved:</p>
+                <ul className="space-y-2 mb-4 flex-shrink-0">
+                  <li className="flex gap-2 text-xs text-slate-600">
+                    <span className="text-green-500 font-bold">✓</span>
+                    <span>Enterprise-wide security modernization programs</span>
+                  </li>
+                  <li className="flex gap-2 text-xs text-slate-600">
+                    <span className="text-green-500 font-bold">✓</span>
+                    <span>Aligned with regulatory and compliance frameworks</span>
+                  </li>
+                </ul>
+                <p className="text-xs text-slate-600 leading-relaxed flex-1">
+                  Enabled enterprise-wide security modernization programs aligned with regulatory and compliance frameworks across regulated industries.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 5 - Large-Scale Digital Transformation Programs */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 bg-white flex flex-col h-full"
+            >
+              {/* Colored Header Bar */}
+              <div className="bg-gradient-to-r from-purple-400 to-violet-500 px-6 py-6 relative flex-shrink-0 min-h-[100px] flex items-center">
+                <h3 className="text-white font-bold text-lg italic">DIGITAL TRANSFORMATION</h3>
+                {/* Icon Badge */}
+                <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform z-10">
+                  <CheckCircle className="w-12 h-12 text-purple-600" />
+                </div>
+              </div>
+
+              {/* Content Area */}
+              <div className="p-6 flex-1 flex flex-col">
+                <h4 className="text-lg font-bold text-slate-900 mb-3">🏆 Multi-Year Enterprise Initiatives</h4>
+                <p className="text-sm font-semibold text-slate-700 mb-2">What we achieved:</p>
+                <ul className="space-y-2 mb-4 flex-shrink-0">
+                  <li className="flex gap-2 text-xs text-slate-600">
+                    <span className="text-purple-500 font-bold">✓</span>
+                    <span>Led multi-year enterprise transformation initiatives</span>
+                  </li>
+                  <li className="flex gap-2 text-xs text-slate-600">
+                    <span className="text-purple-500 font-bold">✓</span>
+                    <span>Cloud migration, re-architecture, and modernization</span>
+                  </li>
+                </ul>
+                <p className="text-xs text-slate-600 leading-relaxed flex-1">
+                  Led multi-year enterprise transformation initiatives spanning cloud migration, platform re-architecture, and operational modernization.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Card 6 - Recognized Industry Impact */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 bg-white flex flex-col h-full"
+            >
+              {/* Colored Header Bar */}
+              <div className="bg-gradient-to-r from-cyan-400 to-teal-500 px-6 py-6 relative flex-shrink-0 min-h-[100px] flex items-center">
+                <h3 className="text-white font-bold text-lg italic">INDUSTRY RECOGNITION</h3>
+                {/* Icon Badge */}
+                <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform z-10">
+                  <Trophy className="w-12 h-12 text-teal-600" />
+                </div>
+              </div>
+
+              {/* Content Area */}
+              <div className="p-6 flex-1 flex flex-col">
+                <h4 className="text-lg font-bold text-slate-900 mb-3">🏆 Global Technology Leadership</h4>
+                <p className="text-sm font-semibold text-slate-700 mb-2">What we achieved:</p>
+                <ul className="space-y-2 mb-4 flex-shrink-0">
+                  <li className="flex gap-2 text-xs text-slate-600">
+                    <span className="text-teal-500 font-bold">✓</span>
+                    <span>Acknowledged across global technology forums</span>
+                  </li>
+                  <li className="flex gap-2 text-xs text-slate-600">
+                    <span className="text-teal-500 font-bold">✓</span>
+                    <span>Contributions to cloud resilience and AI safety</span>
+                  </li>
+                </ul>
+                <p className="text-xs text-slate-600 leading-relaxed flex-1">
+                  Acknowledged across global technology forums and industry platforms for contributions to enterprise cloud resilience, AI safety, and secure digital transformation.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      
       <section className="py-20 bg-slate-50 text-center">
         <div className="enterprise-container">
           <Award size={48} className="text-amber-400 mx-auto mb-6 opacity-50" />

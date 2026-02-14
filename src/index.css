@@ -59,7 +59,12 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading font-bold tracking-tight text-foreground;
   }
 }
@@ -143,7 +148,7 @@
 
   /* Background grid pattern */
   .bg-grid-pattern {
-    background-image: 
+    background-image:
       linear-gradient(to right, currentColor 1px, transparent 1px),
       linear-gradient(to bottom, currentColor 1px, transparent 1px);
     background-size: 40px 40px;
@@ -157,5 +162,16 @@
   /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
+  }
+
+  /* Full-screen scroll sections */
+  .scroll-section {
+    min-height: 100vh;
+    scroll-snap-align: start;
+  }
+
+  /* Optional scroll snap container */
+  .scroll-container {
+    scroll-snap-type: y proximity;
   }
 }

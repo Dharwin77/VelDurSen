@@ -9,6 +9,7 @@ import {
   BarChart3, PieChart, Activity, UserCheck, Sparkles
 } from "lucide-react";
 import PageLayout from "@/components/layout/PageLayout";
+import WhyChooseUsCards from "@/components/WhyChooseUsCards";
 
 // ... (keeping all existing data: allJobs, cultureValues, benefits, testimonials, hiringSteps, faqs, quizQuestions)
 
@@ -164,8 +165,21 @@ const Careers = () => {
       {/* Floating Quick Apply Button */}
       <AnimatePresence>
         {!showQuickApply && (
-          <motion.button initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} onClick={() => setShowQuickApply(true)} className="fixed bottom-8 right-8 z-50 bg-[#C0392B] hover:bg-[#a02f24] text-white px-6 py-4 rounded-full shadow-2xl flex items-center gap-2 font-semibold">
-            <Rocket size={20} /> Quick Apply
+          <motion.button
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+            onClick={() => setShowQuickApply(true)}
+            className="group fixed bottom-8 right-8 z-50 bg-white hover:bg-gray-50 text-[#C0392B] border-2 border-red-300 hover:border-[#C0392B] rounded-full shadow-2xl flex items-center gap-2 font-semibold transition-all duration-300 overflow-hidden"
+            style={{ width: '64px', height: '64px' }}
+            whileHover={{ width: '180px' }}
+          >
+            <div className="flex items-center justify-center w-16 h-16 flex-shrink-0">
+              <Rocket size={24} />
+            </div>
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pr-4">
+              Quick Apply
+            </span>
           </motion.button>
         )}
       </AnimatePresence>
@@ -194,9 +208,9 @@ const Careers = () => {
               <h3 className="text-2xl font-bold mb-4 flex items-center gap-2"><Upload size={24} className="text-[#C0392B]" />Upload Resume</h3>
               <p className="text-slate-600 mb-6">Upload your resume (PDF, JPG, or PNG)</p>
               <div className="relative">
-                <input 
-                  type="file" 
-                  accept=".pdf,.jpg,.jpeg,.png" 
+                <input
+                  type="file"
+                  accept=".pdf,.jpg,.jpeg,.png"
                   onChange={handleResumeUpload}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 />
@@ -218,7 +232,7 @@ const Careers = () => {
                   <p className="text-xs text-green-700 mt-2">Profile strength: {profileStrength}%</p>
                 </motion.div>
               )}
-              <button 
+              <button
                 onClick={() => { setShowResumeUpload(false); setShowQuickApply(false); }}
                 className="w-full mt-6 bg-[#C0392B] hover:bg-[#a02f24] text-white py-3 rounded-lg font-semibold transition-all transform hover:scale-105 disabled:opacity-50"
                 disabled={!resumeFile}
@@ -277,7 +291,23 @@ const Careers = () => {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {[{ end: 150, suffix: "+", label: "Team Members" }, { end: 25, suffix: "+", label: "Countries" }, { end: 500, suffix: "+", label: "Projects Delivered" }].map((stat, i) => (
-              <motion.div key={i} initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.2 }} className="text-center p-8 bg-slate-50 rounded-2xl shadow-lg">
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: i * 0.2,
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 15
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  transition: { duration: 0.3 }
+                }}
+                className="text-center p-8 bg-slate-50 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"
+              >
                 <div className="text-5xl font-bold text-[#C0392B] mb-2"><AnimatedCounter end={stat.end} suffix={stat.suffix} /></div>
                 <div className="text-lg text-slate-600">{stat.label}</div>
               </motion.div>
@@ -367,134 +397,33 @@ const Careers = () => {
               <div className="flex-1 p-8 md:p-12 flex flex-col justify-center bg-white/90 backdrop-blur-sm rounded-2xl">
                 <h3 className="text-2xl font-bold mb-2">{employeeProfiles[selectedEmployee].name}</h3>
                 <p className="text-lg text-slate-600 mb-6">{employeeProfiles[selectedEmployee].role}</p>
-                  <div className="mb-6">
-                    <h4 className="font-bold mb-3">Daily Schedule:</h4>
-                    {employeeProfiles[selectedEmployee].schedule.map((item, i) => (
-                      <div key={i} className="flex items-center gap-3 mb-2">
-                        <Clock size={16} className="text-[#C0392B]" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mb-6">
-                    <h4 className="font-bold mb-3">Tools:</h4>
-                    <div className="flex gap-2">{employeeProfiles[selectedEmployee].tools.map((tool, i) => <span key={i} className="px-3 py-1 bg-[#C0392B]/10 text-[#C0392B] rounded-full text-sm">{tool}</span>)}</div>
-                  </div>
-                  <div>
-                    <h4 className="font-bold mb-2">Career Journey:</h4>
-                    <p className="text-slate-600">{employeeProfiles[selectedEmployee].journey}</p>
-                  </div>
+                <div className="mb-6">
+                  <h4 className="font-bold mb-3">Daily Schedule:</h4>
+                  {employeeProfiles[selectedEmployee].schedule.map((item, i) => (
+                    <div key={i} className="flex items-center gap-3 mb-2">
+                      <Clock size={16} className="text-[#C0392B]" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
                 </div>
+                <div className="mb-6">
+                  <h4 className="font-bold mb-3">Tools:</h4>
+                  <div className="flex gap-2">{employeeProfiles[selectedEmployee].tools.map((tool, i) => <span key={i} className="px-3 py-1 bg-[#C0392B]/10 text-[#C0392B] rounded-full text-sm">{tool}</span>)}</div>
+                </div>
+                <div>
+                  <h4 className="font-bold mb-2">Career Journey:</h4>
+                  <p className="text-slate-600">{employeeProfiles[selectedEmployee].journey}</p>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Why Join Veldursen - New Layout */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <span className="text-[#C0392B] font-semibold text-sm uppercase">Our Approach</span>
-            <h2 className="text-5xl font-bold mt-4 mb-6">Why Choose Us for Software Development</h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">Fueling lasting growth by aligning talent, process excellence, and measurable performance.</p>
-          </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left side - Image */}
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }} 
-              whileInView={{ opacity: 1, x: 0 }} 
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="flex justify-center"
-            >
-              <div className="relative">
-                <div className="absolute -inset-2 bg-gradient-to-br from-[#C0392B]/20 to-[#3E2723]/20 rounded-3xl blur-2xl"></div>
-                <img src="/images/benefits-bg.png" alt="Team collaboration" className="relative rounded-3xl shadow-2xl w-full max-w-md object-cover" />
-              </div>
-            </motion.div>
+      {/* Why Choose Us - Polaroid Cards */}
+      <WhyChooseUsCards />
 
-            {/* Right side - Benefit Items */}
-            <div className="space-y-6">
-              {[
-                {
-                  title: "Scalable teams for sustainable growth",
-                  description: "Expand confidently with teams built for long-term success and cost efficiency. We create the ideal structure and ensure effortless scaling to match your evolving business goals."
-                },
-                {
-                  title: "Operational excellence",
-                  description: "Leverage optimized tools and refined processes that drive measurable efficiency, consistent performance, and continuous productivity improvements."
-                },
-                {
-                  title: "Transparent collaboration",
-                  description: "Work with clarity and confidence through open communication and hands-on leadership from experienced Technical and Delivery Managers who keep your projects aligned and on schedule."
-                },
-                {
-                  title: "Dependable delivery and lasting knowledge",
-                  description: "Preserve quality, speed, and continuity with structured knowledge sharing and flexible scalability — enabling smooth onboarding, ramp-ups, or downsizing whenever needed."
-                }
-              ].map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 50, scale: 0.95 }}
-                  whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ delay: index * 0.2, duration: 0.7, ease: "easeOut" }}
-                  whileHover={{ x: 8, transition: { duration: 0.3 } }}
-                  className="group border-l-4 border-[#C0392B] pl-6 py-3 cursor-pointer relative overflow-hidden"
-                >
-                  <div className="absolute -left-1 top-0 h-full w-1 bg-gradient-to-b from-[#C0392B] to-[#a02f24] transform origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500"></div>
-                  <motion.h3 
-                    className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#C0392B] transition-colors duration-300"
-                    initial={{ letterSpacing: "0px" }}
-                    whileHover={{ letterSpacing: "0.5px" }}
-                  >
-                    {benefit.title}
-                  </motion.h3>
-                  <motion.p 
-                    className="text-slate-600 leading-relaxed group-hover:text-slate-700 transition-colors duration-300"
-                    initial={{ opacity: 0.8 }}
-                    whileHover={{ opacity: 1 }}
-                  >
-                    {benefit.description}
-                  </motion.p>
-                  <motion.div 
-                    className="absolute bottom-0 left-6 right-6 h-0.5 bg-gradient-to-r from-[#C0392B] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    initial={{ scaleX: 0 }}
-                    whileHover={{ scaleX: 1 }}
-                    transition={{ duration: 0.3 }}
-                  ></motion.div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Cards Section */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6">What We Offer You</h2>
-            <p className="text-xl text-slate-600">Comprehensive benefits designed to support your wellbeing and growth</p>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {benefits.map((benefit, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="group">
-                <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl h-[340px] flex flex-col transition-all">
-                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#C0392B] to-[#5D4037] flex items-center justify-center mb-6"><benefit.icon className="text-white" size={32} /></div>
-                  <h3 className="text-2xl font-bold mb-4">{benefit.title}</h3>
-                  <ul className="space-y-3">
-                    {benefit.items.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-slate-600"><CheckCircle className="text-[#C0392B] flex-shrink-0 mt-1" size={18} /><span>{item}</span></li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Job Search Section */}
       <section id="openings" className="py-24 bg-white">
@@ -531,7 +460,7 @@ const Careers = () => {
                         <span className="flex items-center gap-1"><Briefcase size={16} />{job.type}</span>
                       </div>
                     </div>
-                    <a href={`mailto:careers@veldursen.com?subject=Application for ${job.role}`} className="bg-[#C0392B] hover:bg-[#a02f24] text-white rounded-lg px-6 py-3 font-semibold inline-flex items-center gap-2 transition-all transform hover:scale-105 whitespace-nowrap">Apply Now <ArrowRight size={18} /></a>
+                    <a href="/contact" className="bg-[#C0392B] hover:bg-[#a02f24] text-white rounded-lg px-6 py-3 font-semibold inline-flex items-center gap-2 transition-all transform hover:scale-105 whitespace-nowrap">Apply Now <ArrowRight size={18} /></a>
                   </div>
                 </motion.div>
               ))}

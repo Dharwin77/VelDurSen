@@ -1,7 +1,9 @@
+
 import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Calendar, Clock, User, CheckCircle2, AlertTriangle } from "lucide-react";
 import { motion } from "framer-motion";
 import PageLayout from "@/components/layout/PageLayout";
+import { SEO } from "@/components/shared/SEO";
 import { allBlogPosts as blogPosts } from "@/data";
 import { useEffect } from "react";
 
@@ -19,6 +21,7 @@ const BlogDetail = () => {
     if (!blog) {
         return (
             <PageLayout>
+                <SEO title="Blog Post Not Found | VelDurSen" description="The requested blog post could not be found." />
                 <div className="section-padding">
                     <div className="enterprise-container text-center">
                         <h1 className="heading-1 mb-4">Blog Post Not Found</h1>
@@ -34,8 +37,40 @@ const BlogDetail = () => {
         );
     }
 
+    const blogSchema = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": blog.title,
+        "description": blog.excerpt,
+        "image": blog.image,
+        "author": {
+            "@type": "Person",
+            "name": blog.author
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "VelDurSen Technologies",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://veldursen.com/logo.png"
+            }
+        },
+        "datePublished": blog.date,
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `https://veldursen.com/blog/${blog.slug}`
+        }
+    };
+
     return (
         <PageLayout>
+            <SEO
+                title={`${blog.title} | VelDurSen Blog`}
+                description={blog.excerpt}
+                ogType="article"
+                ogImage={blog.image}
+                schemas={[blogSchema]}
+            />
             {/* Header Section */}
             <section className="bg-gradient-to-br from-red-50 to-white py-16 border-b border-border">
                 <div className="enterprise-container">

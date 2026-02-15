@@ -1,7 +1,9 @@
+
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, CheckCircle2, ChevronRight, Share2, Printer, Mail } from "lucide-react";
 import PageLayout from "@/components/layout/PageLayout";
+import { SEO } from "@/components/shared/SEO";
 import { services } from "./Services";
 
 const ServiceDetail = () => {
@@ -11,6 +13,7 @@ const ServiceDetail = () => {
     if (!service) {
         return (
             <PageLayout>
+                <SEO title="Service Not Found | VelDurSen" description="The requested technology service could not be found." />
                 <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
                     <h1 className="text-4xl font-black text-[#0f172a] mb-4">Service Not Found</h1>
                     <p className="text-slate-500 mb-8 max-w-md">The service you are looking for does not exist or has been moved to a new architectural layer.</p>
@@ -26,10 +29,41 @@ const ServiceDetail = () => {
         );
     }
 
+    const serviceSchema = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": service.title,
+        "description": service.description,
+        "provider": {
+            "@type": "Organization",
+            "name": "VelDurSen Technologies",
+            "url": "https://veldursen.com"
+        },
+        "image": service.image,
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": service.title,
+            "itemListElement": service.features.map((feature, index) => ({
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": feature.title,
+                    "description": feature.description
+                }
+            }))
+        }
+    };
+
     const Icon = service.icon;
 
     return (
         <PageLayout>
+            <SEO
+                title={`${service.title} Solutions | VelDurSen Technologies`}
+                description={service.fullDescription}
+                ogImage={service.image}
+                schemas={[serviceSchema]}
+            />
             <div className="bg-white">
                 {/* Premium Enterprise Header Section - Reduced Scale */}
                 <section className="relative pt-28 pb-16 bg-[#0f172a] text-white overflow-hidden">

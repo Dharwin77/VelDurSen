@@ -2,8 +2,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import logo from "@/assets/logo.png";
 import loadingBg from "@/assets/loading.png";
-import loadingLeft from "@/assets/loading1.png";
-import loadingRight from "@/assets/loading2.png";
+import loadingLeft from "@/assets/coptercode8.png.jpeg";
+import loadingRight from "@/assets/coptercode7.png.jpeg";
 
 const Preloader = () => {
     const [loading, setLoading] = useState(true);
@@ -73,9 +73,10 @@ const Preloader = () => {
                                 initial={{ y: "100%" }}
                                 animate={{ y: 0 }}
                                 transition={{ delay: 0.5, duration: 0.8, ease: "circOut" }}
-                                className="text-white text-2xl md:text-3xl font-black tracking-[0.2em] uppercase text-center drop-shadow-lg"
+                                className="text-center drop-shadow-lg"
                             >
-                                Welcome to <span className="text-red-600">VelDurSen</span>
+                                <span className="text-white text-3xl md:text-4xl font-['Inter'] font-black tracking-tighter mr-3">Welcome to</span>
+                                <span className="text-red-600 text-3xl md:text-4xl font-['Inter'] font-black tracking-tighter">VelDurSen</span>
                             </motion.h1>
                         </div>
 

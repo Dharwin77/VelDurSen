@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import PageLayout from "@/components/layout/PageLayout";
+import { SEO } from "@/components/shared/SEO";
 import { allBlogPosts as blogPosts, blogCategories } from "@/data";
 import blogHeroVideo from "@/assets/Enterprise_IT_Blog_Background_Video_Generation.mp4";
 
@@ -24,6 +25,27 @@ const Blog = () => {
 
   return (
     <PageLayout>
+      <SEO
+        title="Enterprise Tech Insights & Blog | VelDurSen Technologies"
+        description="Latest insights on Enterprise AI, Cloud Engineering, and Digital Transformation from VelDurSen's global engineering teams."
+        keywords={["Tech blog", "Enterprise AI insights", "Cloud computing trends", "Digital transformation blog"]}
+        schemas={[{
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          "blogPost": blogPosts.map((post) => ({
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "alternativeHeadline": post.excerpt,
+            "image": post.image,
+            "author": {
+              "@type": "Organization",
+              "name": "VelDurSen Technologies"
+            },
+            "url": `https://veldursen.com/blog/${post.slug}`,
+            "datePublished": "2024-01-01" // Placeholder or from post.date if parsed
+          }))
+        }]}
+      />
       {/* HERO SECTION - Redesigned to match Premium Industry Style */}
       <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
         <video

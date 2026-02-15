@@ -3,9 +3,9 @@ import { CheckCircle, Eye, Target, Shield, Leaf, Heart, GraduationCap, Globe, Sp
 import PageLayout from "@/components/layout/PageLayout";
 import SectionHeader from "@/components/shared/SectionHeader";
 import BlogPreview from "@/components/shared/BlogPreview";
-import aboutTeam from "@/assets/about-team.jpg";
-import aboutImage1 from "@/assets/Gemini_Generated_Image_uugaqruugaqruuga.png";
-import aboutImage2 from "@/assets/Gemini_Generated_Image_zh56h0zh56h0zh56.png";
+import aboutTeam from "@/assets/coptercode3.png.jpeg";
+import aboutImage1 from "@/assets/coptercode3.png.jpeg";
+import aboutImage2 from "@/assets/coptercode2.jpeg";
 import aboutVideo from "@/assets/about.mp4";
 import { Link } from "react-router-dom";
 import globalMap from "@/assets/global-map.jpg";
@@ -30,8 +30,17 @@ const coreValues = [
   { icon: Lightbulb, title: "Innovation DNA", desc: "Continuous innovation, experimentation, and adoption of emerging technologies to stay ahead of industry curves." },
 ];
 
+import { SEO } from "@/components/shared/SEO";
+import { ORGANIZATION_SCHEMA } from "@/data/schemas";
+
 const About = () => (
   <PageLayout>
+    <SEO
+      title="About VelDurSen Technologies | Global Digital Transformation"
+      description="VelDurSen is a global enterprise technology partner. We build secure, scalable, and sustainable digital systems for Fortune 500 clients worldwide."
+      keywords={["About VelDurSen", "Global IT company", "Digital transformation partner", "Enterprise technology leadership"]}
+      schemas={[ORGANIZATION_SCHEMA]}
+    />
     {/* HERO SECTION - Matching Industry Page Style */}
     <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
       <video

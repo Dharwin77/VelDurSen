@@ -5,7 +5,9 @@ import PageHero from "@/components/shared/PageHero";
 import SectionHeader from "@/components/shared/SectionHeader";
 import BlogPreview from "@/components/shared/BlogPreview";
 import { Link } from "react-router-dom";
+import { SEO } from "@/components/shared/SEO";
 import internshipVideo from "@/assets/internship.mp4";
+
 import csrBg from "@/assets/internships/csr-bg.jpg";
 import experienceBg from "@/assets/internships/experience-bg.jpg";
 import growthBg from "@/assets/internships/growth-bg.jpg";
@@ -42,6 +44,23 @@ const InternshipTicker = () => {
 const Internships = () => {
   return (
     <PageLayout>
+      <SEO
+        title="Enterprise Tech Internships | VelDurSen CSR Initiative"
+        description="VelDurSen's CSR-driven internship program for future tech leaders. Real-world experience in AI, Cloud, and Software Engineering."
+        keywords={["Tech internships", "Software engineering internship", "CSR internship program", "VelDurSen internships", "Summer 2024 intern"]}
+        schemas={[{
+          "@context": "https://schema.org",
+          "@type": "EducationalOccupationalProgram",
+          "name": "VelDurSen Enterprise Tech Internship",
+          "description": "A 12-week intensive internship program focusing on real-world enterprise technology.",
+          "provider": {
+            "@type": "Organization",
+            "name": "VelDurSen Technologies"
+          },
+          "educationalCredentialAwarded": "Certificate of Completion",
+          "occupationalCategory": "Software Engineer"
+        }]}
+      />
       {/* HERO SECTION - Redesigned to match Industry Page */}
       <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
         <video

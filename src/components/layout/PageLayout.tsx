@@ -1,5 +1,5 @@
 import { ReactNode, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useNavigationType, NavigationType } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "./Navbar";
@@ -8,10 +8,15 @@ import Footer from "./Footer";
 const PageLayout = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const navType = useNavigationType();
   const { pathname } = location;
   const showBack = (location.state as any)?.fromButton;
 
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  useEffect(() => {
+    if (navType !== NavigationType.Pop) {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, navType]);
 
   return (
     <div className="min-h-screen flex flex-col">

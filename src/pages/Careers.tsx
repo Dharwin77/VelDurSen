@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import PageLayout from "@/components/layout/PageLayout";
 import WhyChooseUsCards from "@/components/WhyChooseUsCards";
+import { SEO } from "@/components/shared/SEO";
 import careerVideo from "@/assets/career.mp4";
 
 const allJobs = [
@@ -140,6 +141,37 @@ const Careers = () => {
 
   return (
     <PageLayout>
+      <SEO
+        title="Careers at VelDurSen | Build the Future of Enterprise Tech"
+        description="Join VelDurSen's global team of engineers and innovators. Explore career opportunities in AI, Cloud, Data, and Cybersecurity. Remote-first culture."
+        keywords={["VelDurSen careers", "Tech jobs", "Remote engineering jobs", "AI engineer roles", "Cloud architect careers"]}
+        schemas={[{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": allJobs.map((job, index) => ({
+            "@type": "JobPosting",
+            "position": index + 1,
+            "title": job.role,
+            "description": job.description,
+            "datePosted": "2024-05-20",
+            "validThrough": "2024-12-31",
+            "employmentType": job.type,
+            "hiringOrganization": {
+              "@type": "Organization",
+              "name": "VelDurSen Technologies",
+              "sameAs": "https://veldursen.com"
+            },
+            "jobLocation": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": job.location,
+                "addressCountry": "Global"
+              }
+            }
+          }))
+        }]}
+      />
       {/* Floating Quick Apply Button */}
       <AnimatePresence>
         {!showQuickApply && (

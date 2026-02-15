@@ -1,10 +1,15 @@
 
 import React from 'react';
 import PageLayout from '@/components/layout/PageLayout';
+import { SEO } from '@/components/shared/SEO';
 
 const Security = () => {
     return (
         <PageLayout>
+            <SEO
+                title="Security & Compliance | VelDurSen Technologies"
+                description="Learn about VelDurSen's enterprise-grade security philosophy, frameworks, and continuous monitoring systems."
+            />
             <div className="bg-white min-h-screen">
                 {/* Hero Section */}
                 <section className="bg-slate-50 py-24 border-b border-slate-200">

@@ -8,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import PageLayout from "@/components/layout/PageLayout";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { SEO } from "@/components/shared/SEO";
 import serviceVideo from "@/assets/service.mp4";
 
 // --- Custom Hook for Windows Resize ---
@@ -309,7 +310,41 @@ const Services = () => {
 
   return (
     <PageLayout>
+      <SEO
+        title="Digital Transformation Company | VelDurSen Technologies"
+        description="Accelerate your digital evolution with VelDurSen's enterprise services in AI, Cloud, Data Engineering, and Cybersecurity. Tailored solutions for global scale."
+        keywords={["Digital transformation company", "IT consulting", "Enterprise software development", "Cloud migration", "AI implementation"]}
+        schemas={[{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": services.map((service, index) => ({
+            "@type": "Service",
+            "position": index + 1,
+            "name": service.title,
+            "description": service.description,
+            "provider": {
+              "@type": "Organization",
+              "name": "VelDurSen Technologies",
+              "url": "https://veldursen.com"
+            },
+            "areaServed": "Global",
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": service.tagline,
+              "itemListElement": service.features.map(f => ({
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": f.title,
+                  "description": f.description
+                }
+              }))
+            }
+          }))
+        }]}
+      />
       {/* 1. HERO SECTION - Keeping Original Video Style as requested */}
+
       <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
         <video
           autoPlay

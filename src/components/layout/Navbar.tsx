@@ -29,14 +29,7 @@ const navLinks: NavLinkItem[] = [
       { label: "Technologies", path: "/technologies" },
     ],
   },
-  {
-    label: "Insights",
-    children: [
-      { label: "Blog", path: "/blog" },
-      { label: "Achievements", path: "/achievements" },
-      { label: "History", path: "/history" },
-    ],
-  },
+  { label: "Blog", path: "/blog" },
   { label: "Careers", path: "/careers" },
   { label: "Internships", path: "/internships" },
   { label: "Contact", path: "/contact" },

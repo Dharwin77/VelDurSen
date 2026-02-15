@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main Pages -->
+  <url><loc>https://veldursen.com/</loc><lastmod>2026-02-14</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://veldursen.com/about</loc><lastmod>2026-02-14</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://veldursen.com/services</loc><lastmod>2026-02-14</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://veldursen.com/industries</loc><lastmod>2026-02-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://veldursen.com/technologies</loc><lastmod>2026-02-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://veldursen.com/blog</loc><lastmod>2026-02-14</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://veldursen.com/achievements</loc><lastmod>2026-02-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/history</loc><lastmod>2026-02-14</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://veldursen.com/careers</loc><lastmod>2026-02-14</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/internships</loc><lastmod>2026-02-14</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/contact</loc><lastmod>2026-02-14</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://veldursen.com/security</loc><lastmod>2026-02-14</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+
+  <!-- Legal Pages -->
+  <url><loc>https://veldursen.com/privacy-policy</loc><lastmod>2026-02-14</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://veldursen.com/terms-of-service</loc><lastmod>2026-02-14</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+
+  <!-- Service Details -->
+  <url><loc>https://veldursen.com/services/ai</loc><lastmod>2026-02-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://veldursen.com/services/web-mobile</loc><lastmod>2026-02-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://veldursen.com/services/data-engineering</loc><lastmod>2026-02-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://veldursen.com/services/cloud-devops</loc><lastmod>2026-02-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://veldursen.com/services/cyber-security</loc><lastmod>2026-02-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://veldursen.com/services/automation</loc><lastmod>2026-02-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- Achievement Details -->
+  <url><loc>https://veldursen.com/achievements/global-enterprise-ai-excellence</loc><lastmod>2026-02-14</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://veldursen.com/achievements/cloud-transformation-leadership</loc><lastmod>2026-02-14</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://veldursen.com/achievements/cybersecurity-innovation-recognition</loc><lastmod>2026-02-14</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://veldursen.com/achievements/sustainable-technology-impact</loc><lastmod>2026-02-14</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://veldursen.com/achievements/industry-4-0-digital-turnaround</loc><lastmod>2026-02-14</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://veldursen.com/achievements/global-agritech-innovation</loc><lastmod>2026-02-14</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+
+  <!-- Blog Posts (Select Samples) -->
+  <url><loc>https://veldursen.com/blog/ai-agents-automotive-revolution</loc><lastmod>2026-02-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/generative-ai-beyond</loc><lastmod>2026-02-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/responsible-ai-regulated</loc><lastmod>2026-02-05</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/ai-predictive-intelligence</loc><lastmod>2026-02-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/ai-governance-ethics</loc><lastmod>2026-01-31</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/multi-cloud-management</loc><lastmod>2026-02-07</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/resilient-cloud-architecture</loc><lastmod>2026-02-05</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/cloud-cost-optimization</loc><lastmod>2026-02-03</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/hybrid-cloud-enterprises</loc><lastmod>2026-01-30</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/cloud-native-transformation</loc><lastmod>2026-01-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/zero-trust-security-models</loc><lastmod>2026-02-06</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/cloud-native-application-security</loc><lastmod>2026-02-02</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/enterprise-iam-best-practices</loc><lastmod>2026-01-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/cybersecurity-distributed-teams</loc><lastmod>2026-01-26</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/compliance-driven-security-architecture</loc><lastmod>2026-01-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/real-time-data-pipelines</loc><lastmod>2026-02-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/data-lakes-vs-warehouses</loc><lastmod>2026-01-31</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/enterprise-analytics-at-scale</loc><lastmod>2026-01-27</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/data-governance-compliance</loc><lastmod>2026-01-24</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/big-data-business-value</loc><lastmod>2026-01-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/manufacturing-industry-4.0</loc><lastmod>2026-01-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/retail-analytics-demand-forecasting</loc><lastmod>2026-01-20</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/smart-cities-powered-by-ai</loc><lastmod>2026-01-17</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/designing-scalable-enterprise-systems</loc><lastmod>2026-01-29</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/microservices-vs-monoliths</loc><lastmod>2026-01-25</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/event-driven-architecture-explained</loc><lastmod>2026-01-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/api-first-enterprise-design</loc><lastmod>2026-01-19</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/system-reliability-engineering</loc><lastmod>2026-01-16</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/future-of-enterprise-ai</loc><lastmod>2026-01-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/edge-computing-global-systems</loc><lastmod>2026-01-24</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/ai-iot-integration</loc><lastmod>2026-01-21</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/autonomous-systems-enterprises</loc><lastmod>2026-01-18</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://veldursen.com/blog/next-decade-digital-transformation</loc><lastmod>2026-01-15</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+</urlset>

@@ -1,8 +1,10 @@
+
 import { useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, MapPin, Calendar, Award, CheckCircle2, Trophy, TrendingUp, Shield } from "lucide-react";
 import PageLayout from "@/components/layout/PageLayout";
+import { SEO } from "@/components/shared/SEO";
 import { achievementsData } from "@/data/achievements";
 
 const AchievementDetail = () => {
@@ -12,7 +14,7 @@ const AchievementDetail = () => {
 
     useEffect(() => {
         if (!achievement) {
-            navigate("/achievements");
+            navigate("/");
         }
         window.scrollTo(0, 0);
     }, [achievement, navigate]);
@@ -21,6 +23,11 @@ const AchievementDetail = () => {
 
     return (
         <PageLayout>
+            <SEO
+                title={`${achievement.title} | VelDurSen Achievements`}
+                description={achievement.description}
+                ogImage={achievement.image}
+            />
             {/* 1. HERO IMAGE BANNER */}
             <section className="relative h-[50vh] min-h-[400px]">
                 <img
@@ -31,12 +38,12 @@ const AchievementDetail = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
 
                 <div className="enterprise-container absolute bottom-0 left-0 right-0 pb-12 z-20">
-                    <Link
-                        to="/achievements"
-                        className="inline-flex items-center text-white/80 hover:text-white mb-6 uppercase tracking-widest text-xs font-bold transition-colors"
+                    <button
+                        onClick={() => navigate(-1)}
+                        className="inline-flex items-center text-white/80 hover:text-white mb-6 uppercase tracking-widest text-xs font-bold transition-colors bg-transparent border-none cursor-pointer p-0"
                     >
-                        <ArrowLeft size={16} className="mr-2" /> Back to Achievements
-                    </Link>
+                        <ArrowLeft size={16} className="mr-2" /> Back to Home
+                    </button>
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}

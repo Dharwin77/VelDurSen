@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { SEO } from "@/components/shared/SEO";
 import {
   Heart, GraduationCap, Factory, Landmark, ShoppingCart,
   Building2, Sprout, ArrowRight, CheckCircle2, ShieldCheck,
@@ -9,9 +10,9 @@ import React from "react";
 import { useInView } from "framer-motion";
 import PageLayout from "@/components/layout/PageLayout";
 import industryVideo from "@/assets/industry.mp4";
-import aboutTeam from "@/assets/about-team.jpg";
-import industryImg1 from "@/assets/Gemini_Generated_Image_ello0sello0sello.png";
-import industryImg2 from "@/assets/Gemini_Generated_Image_zh56h0zh56h0zh56.png";
+import aboutTeam from "@/assets/coptercode3.png.jpeg";
+import industryImg1 from "@/assets/coptercode1.png.jpeg";
+import industryImg2 from "@/assets/coptercode2.jpeg";
 import manufacturingImg from "@/assets/industries/manufacturing.jpg";
 import retailMainImg from "@/assets/industries/retail-main.jpg";
 import retailDetailImg from "@/assets/industries/retail-detail.jpg";
@@ -49,9 +50,27 @@ const CountUp = ({ end, duration = 2 }: { end: number; duration?: number }) => {
   return <span ref={nodeRef}>{count}</span>;
 };
 
+
 const Industries = () => {
   return (
     <PageLayout>
+      <SEO
+        title="Industry-Specific AI Solutions | VelDurSen Technologies"
+        description="VelDurSen architects domain-specific digital ecosystems for Healthcare, Finance, Manufacturing, Retail, and more. Global AI & Cloud expertise."
+        keywords={["Industry-specific AI solutions", "Finance AI", "Healthcare digital transformation", "Automotive software", "Retail analytics", "Smart Cities"]}
+        schemas={[{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": [
+            "Healthcare", "Education", "Manufacturing", "Retail",
+            "Agriculture", "Smart Cities", "FinTech", "Global Digital Infrastructure"
+          ].map((item, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "name": item
+          }))
+        }]}
+      />
       {/* 1. HERO SECTION */}
       <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
         <video

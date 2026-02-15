@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { SEO } from "@/components/shared/SEO";
 import {
   Brain, Cloud, Shield, Database, Leaf, CheckCircle2,
   ArrowRight, Globe2, Cpu, Zap, Activity, Layers,
@@ -14,9 +15,9 @@ import aiBg from "@/assets/blog-10.png";
 import cloudBg from "@/assets/blog-2.png";
 import securityBg from "@/assets/blog-9.png";
 import dataBg from "@/assets/blog-8.png";
-import sustainBg from "@/assets/Gemini_Generated_Image_uugaqruugaqruuga.png";
-import ecosystemBg from "@/assets/Gemini_Generated_Image_zh56h0zh56h0zh56.png";
-import ctaBg from "@/assets/Gemini_Generated_Image_ello0sello0sello.png";
+import sustainBg from "@/assets/coptercode3.png.jpeg";
+import ecosystemBg from "@/assets/coptercode2.jpeg";
+import ctaBg from "@/assets/coptercode1.png.jpeg";
 
 const Technologies = () => {
   const [activePillar, setActivePillar] = useState<number | null>(null);
@@ -121,8 +122,24 @@ const Technologies = () => {
     { icon: RefreshCcw, title: "Optimization & Innovation" }
   ];
 
+
   return (
     <PageLayout>
+      <SEO
+        title="Cloud Engineering Services & AI Technologies | VelDurSen"
+        description="Explore VelDurSen's enterprise technology stack: Generative AI, Cloud-Native Architectures, Zero-Trust Security, and Data Engineering platforms."
+        keywords={["Cloud engineering services", "DevOps", "Data Engineering", "Cybersecurity", "Generative AI"]}
+        schemas={[{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": pillars.map((pillar, index) => ({
+            "@type": "Service",
+            "position": index + 1,
+            "name": pillar.title,
+            "description": pillar.desc
+          }))
+        }]}
+      />
       {/* 1. HERO SECTION - Industries Page Style */}
       <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
         <video

@@ -4,9 +4,11 @@ import { Mail, Phone, MapPin, Globe, Shield, Send, CheckCircle, ArrowRight, Buil
 import PageLayout from "@/components/layout/PageLayout";
 import SectionHeader from "@/components/shared/SectionHeader";
 import globalMap from "@/assets/global-map.jpg";
+import { SEO } from "@/components/shared/SEO";
 import contactVideo from "@/assets/contact.mp4";
 
 const Contact = () => {
+
   const [formState, setFormState] = useState({
     firstName: "",
     lastName: "",
@@ -64,6 +66,31 @@ const Contact = () => {
 
   return (
     <PageLayout>
+      <SEO
+        title="Contact VelDurSen | Global Enterprise Support & Sales"
+        description="Get in touch with VelDurSen Technologies for enterprise AI solutions, cloud engineering, and digital transformation consulting. 24/7 global support."
+        keywords={["Contact VelDurSen", "Enterprise support", "IT consulting contact", "Global IT sales", "VelDurSen headquarters"]}
+        schemas={[{
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          "name": "Contact VelDurSen Technologies",
+          "description": "Contact page for VelDurSen Technologies enterprise services",
+          "mainEntity": {
+            "@type": "Organization",
+            "name": "VelDurSen Technologies",
+            "telephone": "+1-800-555-8324",
+            "email": "enterprise@veldursen.com",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "350 Fifth Avenue",
+              "addressLocality": "New York",
+              "addressRegion": "NY",
+              "postalCode": "10118",
+              "addressCountry": "US"
+            }
+          }
+        }]}
+      />
       {/* 1. HERO SECTION WITH VIDEO BACKGROUND */}
       <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden bg-slate-900">
         <video

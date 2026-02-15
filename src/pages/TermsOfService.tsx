@@ -1,10 +1,15 @@
 
 import React from 'react';
 import PageLayout from '@/components/layout/PageLayout';
+import { SEO } from '@/components/shared/SEO';
 
 const TermsOfService = () => {
     return (
         <PageLayout>
+            <SEO
+                title="Terms of Service | VelDurSen Technologies"
+                description="Review the terms and conditions for using VelDurSen Technologies services and platforms."
+            />
             <div className="bg-white min-h-screen">
                 {/* Hero Section */}
                 <section className="bg-slate-50 py-24 border-b border-slate-200">

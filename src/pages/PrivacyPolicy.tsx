@@ -1,10 +1,15 @@
 
 import React from 'react';
 import PageLayout from '@/components/layout/PageLayout';
+import { SEO } from '@/components/shared/SEO';
 
 const PrivacyPolicy = () => {
     return (
         <PageLayout>
+            <SEO
+                title="Privacy Policy | VelDurSen Technologies"
+                description="Our commitment to protecting your privacy. Read the VelDurSen Technologies Privacy Policy."
+            />
             <div className="bg-white min-h-screen">
                 {/* Hero Section */}
                 <section className="bg-slate-50 py-24 border-b border-slate-200">

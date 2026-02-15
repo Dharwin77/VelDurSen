@@ -846,8 +846,15 @@ const FoundersSection = () => {
 
 const RapidSupportSection = () => {
   return (
-    <section className="section-padding bg-amber-50/30 overflow-hidden">
-      <div className="enterprise-container">
+    <section
+      className="section-padding bg-amber-50/30 overflow-hidden"
+    >
+      <motion.div
+        onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#ea580c' } }))}
+        onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+        viewport={{ margin: "-100px 0px -80% 0px" }}
+        className="enterprise-container"
+      >
         <div className="text-center max-w-4xl mx-auto mb-16">
           <motion.h2
             variants={fadeInUp}
@@ -904,7 +911,7 @@ const RapidSupportSection = () => {
             </GlareHover>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -1075,7 +1082,8 @@ const Index = () => {
       />
       {/* 1. HERO SECTION - Redesigned to match Premium Industry Style */}
       <section className="relative h-[90vh] min-h-[600px] flex items-center overflow-hidden bg-white">
-        <div
+        <motion.div
+          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
           className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[10s] brightness-110 hover:scale-105"
           style={{ backgroundImage: `url(${heroBg})` }}
         />
@@ -1202,7 +1210,12 @@ const Index = () => {
 
         {/* About Brief */}
         <section className="section-padding bg-emerald-50/50">
-          <div className="enterprise-container">
+          <motion.div
+            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#10b981' } }))}
+            onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+            viewport={{ margin: "-10% 0px -70% 0px" }}
+            className="enterprise-container"
+          >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <motion.div
                 variants={fadeInLeft}
@@ -1238,7 +1251,7 @@ const Index = () => {
                 <ImageCarousel images={[aboutTeam, aboutImage1, aboutImage2]} interval={4000} />
               </motion.div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
 
@@ -1257,7 +1270,12 @@ const Index = () => {
 
         {/* What We Provide Section */}
         <section className="section-padding bg-slate-50">
-          <div className="enterprise-container">
+          <motion.div
+            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#7c3aed' } }))}
+            onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+            viewport={{ margin: "-10% 0px -70% 0px" }}
+            className="enterprise-container"
+          >
             <div className="text-center max-w-3xl mx-auto mb-12">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
@@ -1271,12 +1289,17 @@ const Index = () => {
 
             {/* Tab Navigation */}
             <WhatWeProvideSection />
-          </div>
+          </motion.div>
         </section>
 
         {/* 1.5 CRISPY ACHIEVEMENTS HIGHLIGHTS - REFINED TEXT VERSION */}
         <section className="py-16 bg-white border-b border-slate-100">
-          <div className="enterprise-container">
+          <motion.div
+            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
+            onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+            viewport={{ margin: "-10% 0px -70% 0px" }}
+            className="enterprise-container"
+          >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1295,7 +1318,7 @@ const Index = () => {
                 </p>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         </section>
 
         {/* 2. DYNAMIC ACHIEVEMENT GRID - WITH STACKED-TO-SPLIT ANIMATION */}
@@ -1408,7 +1431,11 @@ const Index = () => {
 
         {/* 3. SUCCESS TRAJECTORY SECTION (TROPHY GRAPHIC) */}
         <section className="py-24 bg-white overflow-hidden">
-          <div className="enterprise-container">
+          <motion.div
+            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#f59e0b' } }))}
+            viewport={{ amount: 0.1 }}
+            className="enterprise-container"
+          >
             <div className="flex flex-col lg:flex-row items-center gap-16">
 
               {/* Left Column: Trophy Graphic */}
@@ -1466,12 +1493,16 @@ const Index = () => {
               </div>
 
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* Global Deployment Milestones - 6 Achievement Cards Section */}
         <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-slate-50">
-          <div className="enterprise-container">
+          <motion.div
+            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
+            viewport={{ amount: 0.1 }}
+            className="enterprise-container"
+          >
             {/* Header */}
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-6">Global Deployment <span className="text-red-600">Milestones.</span></h2>
@@ -1704,7 +1735,7 @@ const Index = () => {
                 </div>
               </motion.div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
 
@@ -1954,9 +1985,10 @@ const Index = () => {
         <section className="section-padding bg-white overflow-hidden">
           <div className="enterprise-container flex flex-col items-center">
             <motion.div
+              onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false }}
+              viewport={{ amount: 0.1 }}
               variants={fadeInUp}
               className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16"
             >

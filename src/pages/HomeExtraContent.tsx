@@ -57,7 +57,7 @@ const staggerContainer: Variants = {
     }
 };
 
-const AcceleratorSection = () => {
+const AcceleratorSection: React.FC = () => {
     const [progress, setProgress] = useState(0);
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -87,8 +87,13 @@ const AcceleratorSection = () => {
     ];
 
     return (
-        <section className="section-padding bg-slate-900 text-white clip-path-slant-reverse overflow-hidden">
-            <div className="enterprise-container">
+        <section className="section-padding bg-slate-900 text-white clip-path-slant-reverse overflow-hidden font-heading">
+            <motion.div
+                onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#10b981' } }))}
+                onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+                viewport={{ margin: "-10% 0px -70% 0px" }}
+                className="enterprise-container"
+            >
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <motion.div
                         initial="hidden"
@@ -96,7 +101,7 @@ const AcceleratorSection = () => {
                         viewport={{ once: false }}
                         variants={fadeInLeft}
                     >
-                        <span className="text-emerald-400 font-bold uppercase tracking-[0.2em] text-xs mb-4 block">Sector Expertise</span>
+                        <span className="text-emerald-400 font-bold uppercase tracking-[0.2em] text-xs mb-4 block" style={{ fontFamily: "'Inter', sans-serif" }}>Sector Expertise</span>
                         <h2 className="text-4xl font-black text-white mb-6 tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>
                             Industry-Specific <br /> CRM Accelerators
                         </h2>
@@ -138,13 +143,11 @@ const AcceleratorSection = () => {
                                 className="absolute inset-0 w-full h-full rounded-full"
                                 style={{ transform: `rotate(${progress * 3.6}deg)` }} // 0-100% -> 0-360deg
                             >
-                                {/* The Dot (Top Center at 0deg) */}
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-[0_0_30px_rgba(255,255,255,0.8)] flex items-center justify-center">
                                     <div className="w-2 h-2 bg-slate-900 rounded-full" />
                                 </div>
                             </div>
 
-                            {/* Active Quadrant Highlight (Optional - subtle arc?) */}
                             {/* Center Content - Changing Images */}
                             <div className="absolute inset-8 rounded-full bg-slate-800/50 backdrop-blur-sm flex items-center justify-center overflow-hidden border border-white/10">
                                 <AnimatePresence mode="wait">
@@ -165,7 +168,7 @@ const AcceleratorSection = () => {
                         </div>
                     </motion.div>
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };
@@ -266,11 +269,15 @@ export const EnterpriseCRMContent = () => {
         <div className="font-heading">
             {/* 1. Intro Section: Enterprise CRM & Product Engineering Excellence */}
             <section className="relative overflow-hidden py-16 lg:py-20 bg-gradient-to-br from-[#F8FAFC] to-[#EEF4FF]">
-                {/* Background Decor */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#4f46e5 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
+                <motion.div
+                    onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#2563eb' } }))}
+                    viewport={{ amount: 0.1 }}
+                    className="enterprise-container relative z-10"
+                >
+                    {/* Background Decor */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
+                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#4f46e5 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
 
-                <div className="enterprise-container relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start lg:items-center">
 
                         {/* Left Content */}
@@ -371,7 +378,7 @@ export const EnterpriseCRMContent = () => {
                         </motion.div>
 
                     </div>
-                </div>
+                </motion.div>
             </section>
 
             {/* 2. Product Engineering & SaaS Development */}
@@ -559,7 +566,11 @@ export const EnterpriseCRMContent = () => {
 
             {/* 5. Intelligent Automation & Transformation */}
             <section className="section-padding bg-rose-50/30 border-y border-slate-200">
-                <div className="enterprise-container">
+                <motion.div
+                    onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#e11d48' } }))}
+                    viewport={{ amount: 0.1 }}
+                    className="enterprise-container"
+                >
                     <motion.div
                         initial="hidden"
                         whileInView="visible"
@@ -612,7 +623,7 @@ export const EnterpriseCRMContent = () => {
                             </ul>
                         </motion.div>
                     </motion.div>
-                </div>
+                </motion.div>
             </section>
 
             {/* 6. Why Choose & Case Studies Snapshots */}
@@ -899,20 +910,24 @@ export const EnterpriseCRMContent = () => {
 
             {/* 14. CRM Migration & Modernization - Technical Transformation */}
             <section className="section-padding bg-white relative overflow-hidden">
-                {/* Blueprint Background */}
-                <svg className="absolute top-0 right-0 w-[800px] h-[800px] text-slate-50 opacity-[0.4] pointer-events-none" viewBox="0 0 100 100">
-                    <defs>
-                        <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5" />
-                        </pattern>
-                    </defs>
-                    <rect width="100" height="100" fill="url(#grid)" />
-                    <circle cx="80" cy="20" r="15" fill="none" stroke="currentColor" strokeWidth="0.2" />
-                    <line x1="80" y1="5" x2="80" y2="35" stroke="currentColor" strokeWidth="0.1" />
-                    <line x1="65" y1="20" x2="95" y2="20" stroke="currentColor" strokeWidth="0.1" />
-                </svg>
+                <motion.div
+                    onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#65a30d' } }))}
+                    viewport={{ amount: 0.1 }}
+                    className="enterprise-container relative z-10"
+                >
+                    {/* Blueprint Background */}
+                    <svg className="absolute top-0 right-0 w-[800px] h-[800px] text-slate-50 opacity-[0.4] pointer-events-none" viewBox="0 0 100 100">
+                        <defs>
+                            <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5" />
+                            </pattern>
+                        </defs>
+                        <rect width="100" height="100" fill="url(#grid)" />
+                        <circle cx="80" cy="20" r="15" fill="none" stroke="currentColor" strokeWidth="0.2" />
+                        <line x1="80" y1="5" x2="80" y2="35" stroke="currentColor" strokeWidth="0.1" />
+                        <line x1="65" y1="20" x2="95" y2="20" stroke="currentColor" strokeWidth="0.1" />
+                    </svg>
 
-                <div className="enterprise-container relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <motion.div
                             initial="hidden"
@@ -1007,7 +1022,7 @@ export const EnterpriseCRMContent = () => {
                             >
                                 <div className="flex items-center gap-4">
                                     <div className="w-12 h-12 rounded-xl bg-lime-50 flex items-center justify-center">
-                                        <RefreshCcw className="text-lime-600 w-6 h-6 animate-spin-slow" />
+                                        <RefreshCcw className="w-6 h-6 text-lime-600 animate-spin-slow" />
                                     </div>
                                     <div>
                                         <div className="text-slate-900 font-black text-lg leading-none">Automated</div>
@@ -1017,7 +1032,7 @@ export const EnterpriseCRMContent = () => {
                             </motion.div>
                         </motion.div>
                     </div>
-                </div>
+                </motion.div>
             </section>
 
             {/* 15 & 16. Customer Success & Enterprise Compliance - Bento Grid Resilience */}
@@ -1397,7 +1412,11 @@ export const EnterpriseCRMContent = () => {
 
             {/* 22. Enterprise Data Command Center - Global Intelligence HUD */}
             <section className="section-padding bg-slate-950 relative">
-                <div className="enterprise-container">
+                <motion.div
+                    onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#059669' } }))}
+                    viewport={{ amount: 0.1 }}
+                    className="enterprise-container"
+                >
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-4">
                             <motion.div
@@ -1462,7 +1481,7 @@ export const EnterpriseCRMContent = () => {
                             </motion.div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </section>
 
             {/* 23. Scalable SaaS Infrastructure - Sovereign Cloud */}
@@ -1528,7 +1547,11 @@ export const EnterpriseCRMContent = () => {
             <section className="section-padding bg-blue-50 text-slate-900 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #3b82f6 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
 
-                <div className="enterprise-container relative z-10">
+                <motion.div
+                    onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#2563eb' } }))}
+                    viewport={{ amount: 0.1 }}
+                    className="enterprise-container relative z-10"
+                >
                     <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-12">
                         <motion.div
                             initial="hidden"
@@ -1572,58 +1595,64 @@ export const EnterpriseCRMContent = () => {
                             </motion.div>
                         ))}
                     </div>
-                </div>
+                </motion.div>
             </section>
 
 
 
             {/* 26. Sustainable Digital Infrastructure - Green Resilience */}
             <section className="section-padding bg-white relative overflow-hidden">
-                <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-emerald-50/50 rounded-full blur-[120px]"></div>
+                <motion.div
+                    onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#10b981' } }))}
+                    viewport={{ amount: 0.1 }}
+                    className="enterprise-container"
+                >
+                    <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-emerald-50/50 rounded-full blur-[120px]"></div>
 
-                <div className="enterprise-container relative z-10">
-                    <div className="max-w-4xl">
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: false }}
-                            variants={fadeInUp}
-                        >
-                            <div className="inline-block px-4 py-1.5 bg-emerald-100/50 border border-emerald-200 rounded-full text-emerald-600 font-bold uppercase tracking-widest text-xs mb-8">Green Computing</div>
-                            <h2 className="text-4xl lg:text-6xl font-black mb-8 leading-none tracking-tighter text-slate-900" style={{ fontFamily: "'Inter', sans-serif" }}>
-                                Sustainable <br />
-                                <span className="text-emerald-600">Resilience.</span>
-                            </h2>
-                            <p className="text-xl text-slate-600 leading-relaxed mb-16 font-medium max-w-2xl">
-                                We optimize infrastructure not just for speed, but for efficiency. Reducing the carbon footprint of global CRM operations through intelligent orchestration.
-                            </p>
-                        </motion.div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {[
-                            { label: "Energy Optimization", v: "-32%", d: "Carbon footprint reduction." },
-                            { label: "Hardware Life", v: "+48%", d: "Extended server utility." },
-                            { label: "Green Orchestration", v: "Active", d: "Intelligent resource allocation." }
-                        ].map((item, i) => (
+                    <div className="relative z-10">
+                        <div className="max-w-4xl">
                             <motion.div
-                                key={i}
                                 initial="hidden"
                                 whileInView="visible"
-                                variants={scaleUp}
-                                transition={{ delay: i * 0.1 }}
-                                className="p-10 bg-emerald-50/50 border border-emerald-100/50 rounded-[3rem] hover:bg-emerald-100/50 transition-all duration-500 overflow-hidden relative group"
+                                viewport={{ once: false }}
+                                variants={fadeInUp}
                             >
-                                <div className="absolute -right-8 -bottom-8 opacity-10 group-hover:opacity-20 transition-opacity">
-                                    <Leaf className="w-32 h-32 text-emerald-600" />
-                                </div>
-                                <div className="text-[10px] text-slate-500 uppercase tracking-[0.4em] font-black mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>{item.label}</div>
-                                <div className="text-5xl font-black text-emerald-600 mb-2 tracking-tighter" style={{ fontFamily: "'Inter', sans-serif" }}>{item.v}</div>
-                                <div className="text-sm text-slate-600 font-medium">{item.d}</div>
+                                <div className="inline-block px-4 py-1.5 bg-emerald-100/50 border border-emerald-200 rounded-full text-emerald-600 font-bold uppercase tracking-widest text-xs mb-8">Green Computing</div>
+                                <h2 className="text-4xl lg:text-6xl font-black mb-8 leading-none tracking-tighter text-slate-900" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                    Sustainable <br />
+                                    <span className="text-emerald-600">Resilience.</span>
+                                </h2>
+                                <p className="text-xl text-slate-600 leading-relaxed mb-16 font-medium max-w-2xl">
+                                    We optimize infrastructure not just for speed, but for efficiency. Reducing the carbon footprint of global CRM operations through intelligent orchestration.
+                                </p>
                             </motion.div>
-                        ))}
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {[
+                                { label: "Energy Optimization", v: "-32%", d: "Carbon footprint reduction." },
+                                { label: "Hardware Life", v: "+48%", d: "Extended server utility." },
+                                { label: "Green Orchestration", v: "Active", d: "Intelligent resource allocation." }
+                            ].map((item, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    variants={scaleUp}
+                                    transition={{ delay: i * 0.1 }}
+                                    className="p-10 bg-emerald-50/50 border border-emerald-100/50 rounded-[3rem] hover:bg-emerald-100/50 transition-all duration-500 overflow-hidden relative group"
+                                >
+                                    <div className="absolute -right-8 -bottom-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                                        <Leaf className="w-32 h-32 text-emerald-600" />
+                                    </div>
+                                    <div className="text-[10px] text-slate-500 uppercase tracking-[0.4em] font-black mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>{item.label}</div>
+                                    <div className="text-5xl font-black text-emerald-600 mb-2 tracking-tighter" style={{ fontFamily: "'Inter', sans-serif" }}>{item.v}</div>
+                                    <div className="text-sm text-slate-600 font-medium">{item.d}</div>
+                                </motion.div>
+                            ))}
+                        </div>
                     </div>
-                </div>
+                </motion.div>
             </section>
 
 

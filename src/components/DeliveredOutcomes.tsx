@@ -76,7 +76,11 @@ const projects = [
 const DeliveredOutcomes = () => {
     return (
         <section className="section-padding bg-slate-50 overflow-hidden min-h-screen">
-            <div className="enterprise-container">
+            <motion.div
+                onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#2563eb' } }))}
+                viewport={{ amount: 0.1 }}
+                className="enterprise-container"
+            >
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                     <motion.div
@@ -168,7 +172,7 @@ const DeliveredOutcomes = () => {
                         ))}
                     </CardSwap>
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 };

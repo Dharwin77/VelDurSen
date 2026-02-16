@@ -1,5 +1,5 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import {
   Users, Lightbulb, GraduationCap, Leaf, Heart, Code, Globe, TrendingUp,
@@ -8,9 +8,10 @@ import {
   Clock, FileText, Video, Handshake, Gift, Plus, Minus, Upload, X,
   Calendar, Building, Rocket
 } from "lucide-react";
+import Navbar from "@/components/layout/Navbar";
 import PageLayout from "@/components/layout/PageLayout";
 import WhyChooseUsCards from "@/components/WhyChooseUsCards";
-import { SpotlightCard, NeonGradientCard, HoverBorderGradientCard } from "@/components/ui/AceternityCards";
+import { SpotlightCard, NeonGradientCard, HoverBorderGradientCard, ImageRevealCard, ExpandingCard, CircularGallery, GlowingCard, SwipeCards, ScrollStaggerGallery, ExpandableTechGallery } from "@/components/ui/AceternityCards";
 
 // --- Data Constants ---
 
@@ -67,8 +68,13 @@ const employeeProfiles = [
 // --- Helper Components ---
 
 const AnimatedCounter = ({ end, duration = 2000, suffix = "" }: { end: number; duration?: number; suffix?: string }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [count, setCount] = useState(0);
+
   useEffect(() => {
+    if (!isInView) return;
+
     let startTime: number, animationFrame: number;
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime;
@@ -78,8 +84,9 @@ const AnimatedCounter = ({ end, duration = 2000, suffix = "" }: { end: number; d
     };
     animationFrame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrame);
-  }, [end, duration]);
-  return <span>{count}{suffix}</span>;
+  }, [end, duration, isInView]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
 };
 
 // --- Main Component ---
@@ -100,6 +107,7 @@ const Careers = () => {
   const [profileStrength, setProfileStrength] = useState(0);
   const [experienceLevel, setExperienceLevel] = useState(3);
   const [selectedEmployee, setSelectedEmployee] = useState<number | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   const filteredJobs = allJobs.filter((job) => {
     const matchesSearch = job.role.toLowerCase().includes(searchTerm.toLowerCase()) || job.description.toLowerCase().includes(searchTerm.toLowerCase());
@@ -114,9 +122,11 @@ const Careers = () => {
   const types = ["All", "Full-time", "Internship"];
 
   useEffect(() => {
-    const interval = setInterval(() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length), 5000);
-    return () => clearInterval(interval);
-  }, []);
+    if (!isHovered) {
+      const interval = setInterval(() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length), 5000);
+      return () => clearInterval(interval);
+    }
+  }, [isHovered]);
 
   const handleQuizAnswer = (value: string) => {
     const newAnswers = [...quizAnswers, value];
@@ -174,7 +184,7 @@ const Careers = () => {
               animate={{ scale: 1 }}
               exit={{ scale: 0 }}
               onClick={() => setShowQuickApply(true)}
-              className="group fixed bottom-8 right-8 z-50 bg-white hover:bg-gray-50 text-[#C0392B] border-2 border-red-300 hover:border-[#C0392B] rounded-full shadow-2xl flex items-center gap-2 font-semibold transition-all duration-300 overflow-hidden"
+              className="group fixed bottom-8 right-8 z-50 bg-white hover:bg-[#C0392B] text-[#C0392B] hover:text-white border-2 border-[#C0392B] rounded-full shadow-2xl flex items-center gap-2 font-semibold transition-all duration-300 overflow-hidden"
               style={{ width: '64px', height: '64px' }}
               whileHover={{ width: '180px' }}
             >
@@ -254,7 +264,7 @@ const Careers = () => {
           <div className="relative h-full flex items-center justify-center">
             <div className="max-w-5xl mx-auto px-6 text-center">
               <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
-                <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-8 leading-tight">Build the Future<br />With Us</h1>
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 md:mb-8 leading-tight">Build the Future<br />With Us</h1>
                 <p className="text-2xl md:text-3xl text-white/90 mb-12 max-w-3xl mx-auto">Join a team that values innovation, collaboration, and real impact.</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <a href="#openings" className="bg-white text-[#C0392B] hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg inline-flex items-center justify-center gap-2 transition-all transform hover:scale-105">View Open Roles <ArrowRight size={20} /></a>
@@ -269,7 +279,7 @@ const Careers = () => {
         </section>
 
         {/* SECTION 1: WHY WORK AT VELDURSEN */}
-        <section className="py-24 bg-white relative">
+        <section className="py-12 md:py-24 bg-white relative">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -277,7 +287,7 @@ const Careers = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-8">Why Work at Veldursen</h2>
+              <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-8">Why Work at Veldursen</h2>
               <div className="text-xl text-slate-700 space-y-8 leading-relaxed">
                 <p>
                   At Veldursen, we build digital products that solve practical business challenges. Our work spans modern web applications, scalable backend systems, and thoughtful user experiences.
@@ -296,7 +306,7 @@ const Careers = () => {
 
 
         {/* SECTION 5: COMPANY MILESTONES */}
-        <section className="py-24 bg-slate-50 overflow-hidden">
+        <section className="py-12 md:py-24 bg-slate-50 overflow-hidden">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -352,10 +362,10 @@ const Careers = () => {
         </section>
 
         {/* SECTION 2: CAREERS IN SOFTWARE DEVELOPMENT */}
-        <section className="py-24 bg-white">
+        <section className="py-12 md:py-24 bg-white">
           <div className="max-w-4xl mx-auto px-6">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-6">Careers in Software Development</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Careers in Software Development</h2>
               <p className="text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
                 We regularly hire frontend developers, backend engineers, UI/UX designers, and QA professionals. Our teams work with technologies such as React, Node.js, Tailwind CSS, cloud infrastructure, and modern development workflows.
               </p>
@@ -386,8 +396,38 @@ const Careers = () => {
           </div>
         </section>
 
+        {/* NEW SECTION: TECH STACK */}
+        <section className="py-12 md:py-24 bg-slate-900 text-white overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-orange-500">Our Technology Stack</h2>
+              <p className="text-slate-400 text-lg">We use the best tools to build world-class software.</p>
+            </motion.div>
+          </div>
+          <div className="flex gap-8 whitespace-nowrap overflow-hidden py-8 relative">
+            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-slate-900 to-transparent z-10" />
+            <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-slate-900 to-transparent z-10" />
+            <motion.div
+              className="flex gap-12"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            >
+              {[
+                "React", "TypeScript", "Node.js", "Python", "Go", "Rust",
+                "AWS", "Docker", "Kubernetes", "GraphQL", "PostgreSQL",
+                "Redis", "Terraform", "Figma", "Next.js", "Tailwind CSS",
+                "React", "TypeScript", "Node.js", "Python", "Go", "Rust",
+                "AWS", "Docker", "Kubernetes", "GraphQL", "PostgreSQL",
+                "Redis", "Terraform", "Figma", "Next.js", "Tailwind CSS"
+              ].map((tech, i) => (
+                <span key={i} className="text-3xl font-bold text-slate-700 hover:text-[#C0392B] transition-colors cursor-default">{tech}</span>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
         {/* SECTION 4: GROWTH & LEARNING */}
-        <section className="py-24 bg-slate-50">
+        <section className="py-12 md:py-24 bg-slate-50">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -424,7 +464,7 @@ const Careers = () => {
         </section>
 
         {/* SECTION 6: IMPACT METRICS (Moved & Enhanced) */}
-        <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <section className="py-12 md:py-24 bg-slate-900 text-white relative overflow-hidden">
           {/* Subtle background pattern/gradient */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-slate-900 to-black opacity-40"></div>
           <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -485,18 +525,18 @@ const Careers = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Built by People, for People</h2>
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Built by People, for People</h2>
               <p className="text-xl text-slate-200 max-w-2xl mx-auto">See how we collaborate to bring ideas to life.</p>
             </motion.div>
           </div>
         </section>
 
         {/* Existing Culture Section (Shortened/Modified if needed, preserving existing components) */}
-        <section id="culture" className="py-24 bg-white">
+        <section id="culture" className="py-12 md:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
               <span className="text-[#C0392B] font-semibold text-sm uppercase tracking-wider">Culture</span>
-              <h2 className="text-5xl font-bold text-slate-900 mt-4 mb-6">Our Values</h2>
+              <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mt-4 mb-6">Our Values</h2>
               <p className="text-xl text-slate-600 max-w-3xl mx-auto">We're built on trust, creativity, and a passion for solving complex problems.</p>
             </motion.div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -517,6 +557,71 @@ const Careers = () => {
                 ))}
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* NEW SECTION: PERKS & BENEFITS */}
+        <section className="py-12 md:py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+              <span className="text-[#C0392B] font-semibold text-sm uppercase tracking-wider">Perks</span>
+              <h2 className="text-3xl md:text-5xl font-bold mt-4 mb-6">Beyond the Salary</h2>
+              <p className="text-xl text-slate-600 max-w-3xl mx-auto">We take care of you so you can do your best work.</p>
+            </motion.div>
+
+            {/* Expandable Technical Cards */}
+            <ExpandableTechGallery
+              items={[
+                {
+                  icon: Globe,
+                  title: "Remote-First",
+                  desc: "Work from anywhere in the world. We focus on output, not hours.",
+                  image: "https://peoplebox.ai/wp-content/uploads/2020/06/remote-friendly-benefits-1024x683-1.jpg"
+                },
+                {
+                  icon: Heart,
+                  title: "Health & Wellness",
+                  desc: "Comprehensive health insurance and monthly wellness stipend to keep you fit.",
+                  image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=800"
+                },
+                {
+                  icon: TrendingUp,
+                  title: "Equity & Stock",
+                  desc: "Every employee receives stock options. Own a piece of what you build.",
+                  image: "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?auto=format&fit=crop&q=80&w=800"
+                },
+                {
+                  icon: GraduationCap,
+                  title: "Learning Budget",
+                  desc: "$2,000 annual budget for courses, conferences, and books to level up.",
+                  image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=800"
+                },
+                {
+                  icon: Coffee,
+                  title: "Home Office Setup",
+                  desc: "Generous stipend to upgrade your home workspace with the best gear.",
+                  image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=800"
+                },
+                {
+                  icon: Gift,
+                  title: "Annual Retreats",
+                  desc: "All-expenses-paid team gatherings in exotic locations twice a year.",
+                  image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=800"
+                },
+                {
+                  icon: Clock,
+                  title: "Flexible Hours",
+                  desc: "Manage your own schedule. We care about what you do, not when you do it.",
+                  image: "https://images.unsplash.com/photo-1508962914676-134849a727f0?auto=format&fit=crop&q=80&w=800"
+                },
+                {
+                  icon: Users,
+                  title: "Parental Leave",
+                  desc: "Extended paid leave for all new parents to spend time with family.",
+                  image: "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=800"
+                }
+              ]}
+            />
           </div>
         </section>
 
@@ -620,14 +725,51 @@ const Careers = () => {
           </div>
         </section>
 
-        {/* Existing: Why Choose Us - Polaroid Cards */}
+
+
+        {/* Why Choose Us - Polaroid Cards */}
         <WhyChooseUsCards />
 
+        {/* NEW SECTION: INTERNSHIP PROGRAM */}
+        <section className="py-12 md:py-24 bg-gradient-to-br from-slate-900 to-slate-800 text-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#C0392B] rounded-full filter blur-[128px] opacity-20" />
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+                <h2 className="text-3xl md:text-5xl font-bold mb-6 text-orange-500">Launchpad Internship Program</h2>
+                <p className="text-xl text-slate-300 mb-8 leading-relaxed">
+                  Kickstart your career with our 12-week intensive internship. You won't be fetching coffee—you'll be shipping code to production, working alongside senior engineers, and solving real-world problems.
+                </p>
+                <ul className="space-y-4 mb-8">
+                  {[
+                    "Direct mentorship from Tech Leads",
+                    "Weekly technical workshops and AMAs",
+                    "Potential for full-time return offer",
+                    "Competitive monthly stipend"
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center gap-3 text-lg">
+                      <CheckCircle className="text-[#C0392B]" size={24} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <a href="#openings" className="bg-[#C0392B] hover:bg-[#a02f24] text-white px-8 py-4 rounded-lg font-bold inline-flex items-center gap-2 transition-all">
+                  View Internship Roles <ArrowRight size={20} />
+                </a>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative">
+                <div className="absolute inset-0 bg-[#C0392B] rounded-2xl transform rotate-3 scale-95 opacity-50" />
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=800&fit=crop" alt="Internship Program" className="relative w-full rounded-2xl shadow-2xl transform border-4 border-slate-700" />
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* Job Search Section */}
-        <section id="openings" className="py-24 bg-white">
+        <section id="openings" className="py-12 md:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-              <h2 className="text-5xl font-bold mb-6">Find Your Perfect Role</h2>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">Find Your Perfect Role</h2>
             </motion.div>
             <div className="mb-12 space-y-4">
               <div className="relative max-w-2xl mx-auto">
@@ -676,10 +818,10 @@ const Careers = () => {
         </section>
 
         {/* Hiring Process */}
-        <section className="py-24 bg-gradient-to-br from-slate-50 to-orange-50">
+        <section className="py-12 md:py-24 bg-gradient-to-br from-slate-50 to-orange-50">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-              <h2 className="text-5xl font-bold mb-6">Our Hiring Journey</h2>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">Our Hiring Journey</h2>
             </motion.div>
             <div className="max-w-5xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
@@ -707,22 +849,76 @@ const Careers = () => {
             </motion.div>
             <div className="max-w-4xl mx-auto relative">
               <AnimatePresence mode="wait">
-                <motion.div key={currentTestimonial} initial={{ opacity: 0, x: 100 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -100 }} transition={{ duration: 0.5 }} className="bg-slate-50 rounded-2xl p-12 shadow-2xl">
-                  <div className="flex gap-2 mb-6">{[...Array(5)].map((_, i) => <span key={i} className="text-yellow-400 text-2xl">★</span>)}</div>
-                  <blockquote className="text-2xl text-slate-700 mb-8 italic">"{testimonials[currentTestimonial].quote}"</blockquote>
-                  <div className="flex items-center gap-4 border-t pt-6">
-                    <img src={testimonials[currentTestimonial].image} alt={testimonials[currentTestimonial].name} className="w-16 h-16 rounded-full" loading="lazy" />
+                <motion.div
+                  key={currentTestimonial}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.4 }}
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                  className="bg-slate-50 rounded-2xl p-12 shadow-xl border border-slate-100"
+                >
+                  <div className="flex gap-2 mb-6">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="text-yellow-400 text-2xl">★</span>
+                    ))}
+                  </div>
+                  <blockquote className="text-2xl text-slate-800 mb-8 italic leading-relaxed">
+                    "{testimonials[currentTestimonial].quote}"
+                  </blockquote>
+                  <div className="flex items-center gap-4 border-t border-slate-200 pt-6">
+                    <img
+                      src={testimonials[currentTestimonial].image}
+                      alt={testimonials[currentTestimonial].name}
+                      className="w-16 h-16 rounded-full object-cover ring-2 ring-white ring-offset-2 ring-offset-slate-50"
+                      loading="lazy"
+                    />
                     <div>
-                      <p className="font-bold text-xl">{testimonials[currentTestimonial].name}</p>
-                      <p className="text-slate-600">{testimonials[currentTestimonial].role}</p>
+                      <p className="font-bold text-xl text-slate-900">{testimonials[currentTestimonial].name}</p>
+                      <p className="text-slate-600 font-medium">{testimonials[currentTestimonial].role}</p>
                     </div>
                   </div>
                 </motion.div>
               </AnimatePresence>
-              <div className="flex items-center justify-center gap-4 mt-8">
-                <button onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)} className="w-12 h-12 rounded-full bg-[#C0392B] hover:bg-[#a02f24] text-white flex items-center justify-center" aria-label="Previous Testimonial"><ChevronLeft size={24} /></button>
-                <div className="flex gap-2">{testimonials.map((_, i) => <button key={i} onClick={() => setCurrentTestimonial(i)} className={`w-3 h-3 rounded-full transition-all ${i === currentTestimonial ? "bg-[#C0392B] w-8" : "bg-slate-300"}`} aria-label={`View testimonial ${i + 1}`} />)}</div>
-                <button onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)} className="w-12 h-12 rounded-full bg-[#C0392B] hover:bg-[#a02f24] text-white flex items-center justify-center" aria-label="Next Testimonial"><ChevronRight size={24} /></button>
+
+              {/* Navigation Controls */}
+              <div className="flex items-center justify-center gap-6 mt-10">
+                <button
+                  onClick={() => {
+                    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+                    setIsHovered(true); // Pause auto-play briefly on interaction
+                  }}
+                  className="w-12 h-12 rounded-full bg-white border border-slate-200 hover:border-[#C0392B] hover:text-[#C0392B] text-slate-600 flex items-center justify-center shadow-sm transition-all"
+                  aria-label="Previous Testimonial"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+
+                <div className="flex gap-3">
+                  {testimonials.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => {
+                        setCurrentTestimonial(i);
+                        setIsHovered(true);
+                      }}
+                      className={`h-3 rounded-full transition-all duration-300 ${i === currentTestimonial ? "bg-[#C0392B] w-8 shadow-sm" : "bg-slate-300 w-3 hover:bg-slate-400"}`}
+                      aria-label={`View testimonial ${i + 1}`}
+                    />
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => {
+                    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+                    setIsHovered(true);
+                  }}
+                  className="w-12 h-12 rounded-full bg-white border border-slate-200 hover:border-[#C0392B] hover:text-[#C0392B] text-slate-600 flex items-center justify-center shadow-sm transition-all"
+                  aria-label="Next Testimonial"
+                >
+                  <ChevronRight size={24} />
+                </button>
               </div>
             </div>
           </div>
@@ -838,7 +1034,7 @@ const Careers = () => {
               <p className="text-2xl text-[#5D4037] mb-10">Send us your resume and tell us what you're working on.</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <a href="#openings" className="bg-[#C0392B] hover:bg-[#a02f24] text-white rounded-lg px-10 py-4 text-lg font-semibold inline-flex items-center justify-center gap-2 transition-all transform hover:scale-105">Apply Today <ArrowRight size={20} /></a>
-                <a href="mailto:careers@veldursen.com" className="btn-outline-enterprise flex items-center gap-2 border-2 border-[#5D4037] px-8 py-4 rounded-lg text-[#5D4037] font-semibold hover:bg-[#5D4037] hover:text-white transition-all"><MessageSquare size={20} />Contact HR</a>
+                <a href="mailto:careers@veldursen.com" className="btn-outline-enterprise flex items-center gap-2 border-2 border-[#C0392B] px-8 py-4 rounded-lg text-[#C0392B] font-semibold hover:bg-[#C0392B] hover:text-white transition-all"><MessageSquare size={20} />Contact HR</a>
               </div>
               <p className="text-[#5D4037] text-lg"><a href="mailto:careers@veldursen.com" className="hover:text-[#C0392B]">careers@veldursen.com</a></p>
             </motion.div>

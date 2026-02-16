@@ -37,7 +37,7 @@ import copter12 from "@/assets/coptercode12.png.jpeg";
 import copter13 from "@/assets/coptercode13.png.jpeg";
 import copter14 from "@/assets/coptercode14.png.jpeg";
 import globalMap from "@/assets/global-map.jpg";
-import backgroundVideo from "@/assets/home.mp4";
+import backgroundImage from "@/assets/home.jpeg";
 import img1 from "@/assets/coptercode11.png.jpeg";
 import img2 from "@/assets/coptercode12.png.jpeg";
 import profile1 from "@/assets/profile1.png";
@@ -1175,36 +1175,29 @@ const Index = () => {
 
 
         {/* World Map Visualization - Full Screen */}
-        <section className="relative w-full min-h-[600px] lg:h-screen overflow-hidden bg-gradient-to-br from-indigo-900 via-slate-900 to-black flex items-center justify-center">
+        <section className="relative w-full min-h-[600px] lg:h-screen overflow-hidden bg-gradient-to-br from-indigo-900 via-slate-900 to-black flex items-start justify-center pt-20">
           {/* Background Video */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
+          <img
+            src={backgroundImage}
+            alt="World Map Background"
             className="absolute inset-0 w-full h-full object-cover opacity-70"
-          >
-            <source src={backgroundVideo} type="video/mp4" />
-          </video>
+          />
           <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/50 z-10"></div>
           <div className="absolute inset-0 opacity-20 z-10" style={{
             backgroundImage: `radial-gradient(circle at 20% 50%, rgba(24, 119, 242, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(24, 119, 242, 0.3) 0%, transparent 50%)`
           }}></div>
           <motion.div
+            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#facc15' } }))}
+            onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
             className="relative z-20 text-center px-6"
             variants={scaleUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false }}
+            viewport={{ margin: "-10% 0px -70% 0px" }}
           >
-            <Globe2 className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 text-white mx-auto mb-8 drop-shadow-lg" />
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-cyan-400 mb-6 drop-shadow-lg">Global Delivery Network</h3>
-            <p className="text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto drop-shadow-sm mb-6">
-              <span className="font-semibold text-white">North America</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Europe</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Asia-Pacific</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Middle East</span> <span className="text-white/60 mx-2">•</span> <span className="font-semibold text-white">Latin America</span>
-            </p>
-            <p className="text-base md:text-lg lg:text-xl text-white/80 mt-6 max-w-3xl mx-auto drop-shadow-sm">
-              Our distributed teams enable continuous deployment, faster response times, and seamless collaboration across time zones.
-            </p>
+
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-400 mb-6 drop-shadow-lg">Global Delivery Network</h3>
+
           </motion.div>
         </section>
 

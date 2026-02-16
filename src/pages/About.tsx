@@ -313,8 +313,8 @@ const MilestonesInteractive = () => {
             key={m.year}
             onClick={() => setActiveYear(m.year)}
             className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold uppercase tracking-[0.16em] transition-all ${m.year === activeYear
-                ? "border-amber-500 bg-amber-100 text-amber-900 shadow-sm"
-                : "border-slate-200 bg-white text-slate-700 hover:border-amber-300 hover:text-amber-900"
+              ? "border-amber-500 bg-amber-100 text-amber-900 shadow-sm"
+              : "border-slate-200 bg-white text-slate-700 hover:border-amber-300 hover:text-amber-900"
               }`}
           >
             <span className="h-2 w-2 rounded-full bg-amber-500" />

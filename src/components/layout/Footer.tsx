@@ -18,25 +18,24 @@ const footerSections = [
   {
     title: "Services",
     links: [
-      { label: "All Services", path: "/services" },
-      { label: "Artificial Intelligence", path: "/services" },
-      { label: "Web & Mobile Dev", path: "/services" },
-      { label: "Data Engineering", path: "/services" },
-      { label: "Technologies", path: "/technologies" },
-      { label: "Cloud Infrastructure", path: "/technologies" },
-      { label: "Cybersecurity", path: "/technologies" },
+      { label: "All Services", path: "/services#our-services" },
+      { label: "Artificial Intelligence", path: "/services#technology-pillars" },
+      { label: "Web & Mobile Dev", path: "/services#our-solutions-architecture" },
+      { label: "Data Engineering", path: "/services#technology-pillars" },
+      { label: "Technologies", path: "/services#technology-pillars" },
+      { label: "Cloud Infrastructure", path: "/services#technology-pillars" },
+      { label: "Cybersecurity", path: "/services#technology-pillars" },
     ]
   },
   {
     title: "Industries",
     links: [
-      { label: "Healthcare", path: "/industries" },
-      { label: "FinTech", path: "/industries" },
-      { label: "Manufacturing", path: "/industries" },
-      { label: "Retail", path: "/industries" },
-      { label: "Education", path: "/industries" },
-      { label: "Agriculture", path: "/industries" },
-      { label: "Smart Cities", path: "/industries" },
+      { label: "Healthcare", path: "/services#industries-full-content" },
+      { label: "FinTech", path: "/services#industries-full-content" },
+      { label: "Manufacturing", path: "/services#industries-full-content" },
+      { label: "Retail", path: "/services#industries-full-content" },
+      { label: "Education", path: "/services#industries-full-content" },
+
     ]
   },
   {

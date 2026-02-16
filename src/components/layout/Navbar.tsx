@@ -24,14 +24,14 @@ const navLinks: NavLinkItem[] = [
   {
     label: "What We Do",
     children: [
-      { label: "Services", path: "/services" },
-      { label: "Industries", path: "/industries" },
-      { label: "Technologies", path: "/technologies" },
+      { label: "Services", path: "/services#our-services" },
+      { label: "Industries", path: "/services#industries-full-content" },
+      { label: "Technologies", path: "/services#technology-pillars" },
     ],
   },
   { label: "Blog", path: "/blog" },
   { label: "Careers", path: "/careers" },
-  { label: "Internships", path: "/internships" },
+
   { label: "Contact", path: "/contact" },
 ];
 
@@ -144,9 +144,9 @@ const Navbar = () => {
                       <>
                         <button
                           className={cn(
-                            "flex items-center gap-1.5 px-1 py-2 text-[13px] font-medium transition-colors focus:outline-none",
+                            "flex items-center gap-1.5 px-1 py-2 text-base font-bold transition-colors focus:outline-none",
                             isActive
-                              ? (navColor ? "opacity-100" : "text-slate-900 font-bold")
+                              ? (navColor ? "opacity-100" : "text-slate-900 font-extrabold")
                               : "text-muted-foreground",
                             !navColor && !isActive && "group-hover:text-red-600"
                           )}
@@ -165,7 +165,7 @@ const Navbar = () => {
                                   key={child.path}
                                   to={child.path}
                                   className={cn(
-                                    "block px-4 py-2 text-sm text-slate-600 rounded-sm transition-colors",
+                                    "block px-4 py-2.5 text-base font-bold text-slate-600 rounded-md transition-colors",
                                     !navColor ? "hover:bg-slate-50 hover:text-red-600" : ""
                                   )}
                                   style={
@@ -187,9 +187,9 @@ const Navbar = () => {
                       <Link
                         to={link.path!}
                         className={cn(
-                          "px-1 py-2 text-[13px] font-medium transition-colors h-full flex items-center",
+                          "px-1 py-2 text-base font-bold transition-colors h-full flex items-center",
                           isActive
-                            ? (navColor ? "" : "text-slate-900 font-bold")
+                            ? (navColor ? "" : "text-slate-900 font-extrabold")
                             : "text-muted-foreground",
                           !navColor && !isActive && "hover:text-red-600"
                         )}
@@ -221,11 +221,11 @@ const Navbar = () => {
             {/* CTA + Mobile Toggle */}
             <div className="flex items-center gap-3">
               <Link
-                to="/contact"
-                className="hidden xl:inline-flex btn-enterprise text-xs py-2 px-5"
+                to="/internships"
+                className="hidden xl:inline-flex btn-enterprise text-sm font-bold py-2.5 px-6"
                 style={navColor ? { backgroundColor: navColor, borderColor: navColor } : {}}
               >
-                Talk to Experts
+                Internships
               </Link>
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
@@ -325,12 +325,12 @@ const Navbar = () => {
               {/* Mobile CTA */}
               <div className="pt-4 mt-2 px-4 xl:hidden">
                 <Link
-                  to="/contact"
+                  to="/internships"
                   onClick={() => setMobileOpen(false)}
                   className="block w-full py-3 bg-red-600 text-white text-center rounded-xl font-bold transition-all active:scale-95"
                   style={navColor ? { backgroundColor: navColor } : {}}
                 >
-                  Talk to Experts
+                  Internships
                 </Link>
               </div>
             </div>

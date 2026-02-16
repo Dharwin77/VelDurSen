@@ -12,8 +12,7 @@ const Sitemap = () => {
                 { label: 'Home', path: '/' },
                 { label: 'About Us', path: '/about' },
                 { label: 'Services', path: '/services' },
-                { label: 'Technologies', path: '/technologies' },
-                { label: 'Industries', path: '/industries' },
+
                 { label: 'Achievements', path: '/achievements' },
                 { label: 'History', path: '/history' },
                 { label: 'Blog', path: '/blog' },
@@ -25,23 +24,21 @@ const Sitemap = () => {
         {
             title: 'Services',
             links: [
-                { label: 'Enterprise AI Solutions', path: '/services' },
-                { label: 'Cloud & DevOps Engineering', path: '/services' },
-                { label: 'Cybersecurity & Compliance', path: '/services' },
-                { label: 'Data Engineering & Analytics', path: '/services' },
-                { label: 'Enterprise Software Development', path: '/services' },
+                { label: 'Enterprise AI Solutions', path: '/services#technology-pillars' },
+                { label: 'Cloud & DevOps Engineering', path: '/services#technology-pillars' },
+                { label: 'Cybersecurity & Compliance', path: '/services#technology-pillars' },
+                { label: 'Data Engineering & Analytics', path: '/services#technology-pillars' },
+                { label: 'Enterprise Software Development', path: '/services#our-solutions-architecture' },
             ],
         },
         {
             title: 'Industries',
             links: [
-                { label: 'Healthcare', path: '/industries' },
-                { label: 'Education', path: '/industries' },
-                { label: 'Manufacturing', path: '/industries' },
-                { label: 'FinTech', path: '/industries' },
-                { label: 'Retail', path: '/industries' },
-                { label: 'Smart Cities', path: '/industries' },
-                { label: 'Agriculture & AgriTech', path: '/industries' },
+                { label: 'Healthcare', path: '/services#industries-full-content' },
+                { label: 'Education', path: '/services#industries-full-content' },
+                { label: 'Manufacturing', path: '/services#industries-full-content' },
+                { label: 'FinTech', path: '/services#industries-full-content' },
+                { label: 'Retail', path: '/services#industries-full-content' },
             ],
         },
         {

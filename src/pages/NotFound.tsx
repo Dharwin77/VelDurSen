@@ -50,7 +50,7 @@ const NotFound = () => {
                 Lost in <span className="text-red-600">Transit.</span>
               </h1>
 
-              <p className="text-xl md:text-2xl text-slate-500 font-medium mb-12 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-slate-500 font-medium mb-12 max-w-2xl mx-auto leading-relaxed">
                 The architectural path you're looking for doesn't exist or has been relocated to a different layer of our infrastructure.
               </p>
 

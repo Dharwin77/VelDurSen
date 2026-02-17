@@ -127,14 +127,14 @@ const Internships = () => {
               viewport={{ once: true }}
               className="inline-flex items-center gap-3 px-4 py-1 rounded-full border border-red-200 bg-red-50/50 backdrop-blur-sm text-red-600 mb-6"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em]">CSR Mission Architecture</span>
+              <div className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600">CSR Mission Architecture</span>
             </motion.div>
 
             <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-8 tracking-tighter">
-              Growing <span className="text-red-600 italic">Future</span> Tech Leaders
+              Growing <span className="text-blue-600 italic">Future</span> Tech Leaders
             </h2>
-            <p className="text-xl text-slate-500 leading-relaxed font-medium">
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
               This is <span className="text-slate-900 font-bold border-b-2 border-red-200">not a coaching institute</span>. VelDurSen's Internship Program is a <br className="hidden md:block" />
               <span className="text-red-600 font-bold">CSR-driven early talent engine</span> designed to architect real-world engineering excellence.
             </p>
@@ -268,12 +268,12 @@ const Internships = () => {
           <header className="mb-12">
             <div className="flex items-center gap-4 mb-6">
               <div className="h-0.5 w-12 bg-red-600" />
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-red-600">Architectural Core</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-600">Architectural Core</span>
             </div>
             <h2 className="text-4xl md:text-7xl font-black text-slate-950 tracking-tighter mb-8 italic">
               Technology <span className="text-slate-300">Focus Areas</span>
             </h2>
-            <p className="text-xl text-slate-500 font-medium max-w-2xl leading-tight">
+            <p className="text-lg md:text-xl text-slate-600 font-medium max-w-2xl leading-tight">
               Interns engage with <span className="text-slate-950 underline decoration-red-600/20 underline-offset-8">mission-critical tech stacks</span>. Guidance is provided by senior architects through a deep-dive engineering immersion.
             </p>
           </header>
@@ -411,12 +411,12 @@ const Internships = () => {
               initial={{ opacity: 0, letterSpacing: '0.2em' }}
               whileInView={{ opacity: 1, letterSpacing: '0.6em' }}
               viewport={{ once: true }}
-              className="text-[10px] font-black uppercase text-red-600 mb-6"
+              className="text-[10px] font-black uppercase text-green-600 mb-6"
             >
               System Execution Roadmap
             </motion.div>
             <h2 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter mb-8 leading-[0.8]">
-              Operational <span className="text-red-600">Pipeline.</span>
+              Operational <span className="text-green-600">Pipeline.</span>
             </h2>
           </header>
 

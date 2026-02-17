@@ -80,16 +80,16 @@ const AcceleratorSection: React.FC = () => {
     }, [progress]);
 
     const accelerators = [
-        { title: "Healthcare Accelerator", sub: "Patient engagement & compliance tracking.", color: "text-cyan-400", bg: "bg-cyan-400", img: crmHealthcare },
-        { title: "FinTech Accelerator", sub: "KYC, fraud detection & onboarding.", color: "text-indigo-400", bg: "bg-indigo-400", img: crmFinance },
-        { title: "Retail Accelerator", sub: "Loyalty engines & omnichannel data.", color: "text-emerald-400", bg: "bg-emerald-400", img: crmRetail },
-        { title: "Manufacturing Accelerator", sub: "Dealer networks & production analytics.", color: "text-lime-400", bg: "bg-lime-400", img: crmManufacturing }
+        { title: "Healthcare Accelerator", sub: "Patient engagement & compliance tracking.", color: "text-blue-400", bg: "bg-blue-400", img: crmHealthcare },
+        { title: "FinTech Accelerator", sub: "KYC, fraud detection & onboarding.", color: "text-blue-600", bg: "bg-blue-600", img: crmFinance },
+        { title: "Retail Accelerator", sub: "Loyalty engines & omnichannel data.", color: "text-green-500", bg: "bg-green-500", img: crmRetail },
+        { title: "Manufacturing Accelerator", sub: "Dealer networks & production analytics.", color: "text-green-600", bg: "bg-green-600", img: crmManufacturing }
     ];
 
     return (
         <section className="section-padding bg-slate-900 text-white clip-path-slant-reverse overflow-hidden font-heading">
             <motion.div
-                onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#10b981' } }))}
+                onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#16a34a' } }))}
                 onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
                 viewport={{ margin: "-10% 0px -70% 0px" }}
                 className="enterprise-container"
@@ -101,11 +101,11 @@ const AcceleratorSection: React.FC = () => {
                         viewport={{ once: false }}
                         variants={fadeInLeft}
                     >
-                        <span className="text-emerald-400 font-bold uppercase tracking-[0.2em] text-xs mb-4 block" style={{ fontFamily: "'Inter', sans-serif" }}>Sector Expertise</span>
+                        <span className="text-green-500 font-bold uppercase tracking-[0.2em] text-xs mb-4 block" style={{ fontFamily: "'Inter', sans-serif" }}>Sector Expertise</span>
                         <h2 className="text-4xl font-black text-white mb-6 tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>
                             Industry-Specific <br /> CRM Accelerators
                         </h2>
-                        <p className="text-lg text-slate-400 mb-8 leading-relaxed">
+                        <p className="text-lg md:text-xl text-slate-400 mb-8 leading-relaxed font-medium">
                             We provide industry-optimized CRM frameworks tailored to operational realities, ensuring faster time-to-value and deeper vertical alignment.
                         </p>
 
@@ -191,7 +191,7 @@ const CRMUseCaseCard = ({ useCase, index }: { useCase: any, index: number }) => 
             {/* Slanted Background Container */}
             <div className={`absolute inset-x-0 bottom-0 top-32 transition-all duration-700 rounded-[4rem] shadow-[0_25px_70px_-15px_rgba(0,0,0,0.06)] border border-slate-50 transform 
                 ${isHovered
-                    ? 'bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600 shadow-emerald-500/30 border-transparent -skew-y-6 scale-105'
+                    ? 'bg-gradient-to-br from-green-400 via-green-500 to-green-600 shadow-green-500/30 border-transparent -skew-y-6 scale-105'
                     : 'bg-white skew-y-6'}`}
             >
                 <div className={`absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none transition-opacity duration-700 ${isHovered ? 'opacity-20' : 'opacity-0'}`} />
@@ -200,7 +200,7 @@ const CRMUseCaseCard = ({ useCase, index }: { useCase: any, index: number }) => 
             {/* Content Container */}
             <div className="relative h-full pt-10 pb-16 flex flex-col items-center text-center z-10">
                 <div className="relative w-full h-56 mb-16 flex items-center justify-center">
-                    <div className={`absolute inset-0 rounded-full blur-3xl transition-all duration-700 ${isHovered ? 'bg-white/40 scale-150' : 'bg-indigo-100 opacity-40'}`} />
+                    <div className={`absolute inset-0 rounded-full blur-3xl transition-all duration-700 ${isHovered ? 'bg-white/40 scale-150' : 'bg-blue-100 opacity-40'}`} />
 
                     <div className={`relative z-10 transform transition-all duration-700 ${isHovered ? '-translate-y-8 rotate-3' : ''}`}>
                         <div className="relative">
@@ -218,7 +218,7 @@ const CRMUseCaseCard = ({ useCase, index }: { useCase: any, index: number }) => 
                             </motion.div>
 
                             <div className={`absolute -bottom-4 -left-6 w-12 h-12 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white flex items-center justify-center transition-all duration-700 ${isHovered ? 'scale-110 -translate-x-3' : ''}`}>
-                                <Zap className={`w-6 h-6 ${isHovered ? 'text-purple-600 animate-pulse' : 'text-amber-500'}`} />
+                                <Zap className={`w-6 h-6 ${isHovered ? 'text-blue-600 animate-pulse' : 'text-orange-500'}`} />
                             </div>
                         </div>
                     </div>
@@ -227,17 +227,17 @@ const CRMUseCaseCard = ({ useCase, index }: { useCase: any, index: number }) => 
                         <motion.div
                             animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
                             transition={{ duration: 4, repeat: Infinity }}
-                            className="absolute top-0 right-10 w-6 h-6 bg-emerald-400 rounded-full blur-[2px] opacity-50"
+                            className="absolute top-0 right-10 w-6 h-6 bg-green-400 rounded-full blur-[2px] opacity-50"
                         />
                         <motion.div
                             animate={{ y: [0, 20, 0], x: [0, -15, 0] }}
                             transition={{ duration: 5, repeat: Infinity }}
-                            className="absolute bottom-0 left-10 w-4 h-4 bg-cyan-400 rounded-full blur-[2px] opacity-50"
+                            className="absolute bottom-0 left-10 w-4 h-4 bg-blue-400 rounded-full blur-[2px] opacity-50"
                         />
                     </div>
                 </div>
 
-                <h3 className={`text-2xl font-black mb-5 tracking-tight leading-tight transition-colors duration-700 ${isHovered ? 'text-white' : 'text-slate-950 group-hover:text-indigo-600'}`}>
+                <h3 className={`text-2xl font-black mb-5 tracking-tight leading-tight transition-colors duration-700 ${isHovered ? 'text-white' : 'text-slate-950 group-hover:text-blue-600'}`}>
                     {useCase.title}
                 </h3>
                 <p className={`text-base leading-relaxed mb-16 font-medium px-8 transition-colors duration-700 ${isHovered ? 'text-white/95' : 'text-slate-500'}`}>
@@ -250,8 +250,8 @@ const CRMUseCaseCard = ({ useCase, index }: { useCase: any, index: number }) => 
                             whileHover={{ scale: 1.1, rotate: 90 }}
                             className={`w-16 h-16 rounded-full flex items-center justify-center shadow-lg cursor-pointer transition-all duration-700
                                 ${isHovered
-                                    ? 'bg-gradient-to-br from-emerald-500 to-teal-600 text-white'
-                                    : 'bg-gradient-to-br from-emerald-500 to-teal-600 text-white'}`}
+                                    ? 'bg-gradient-to-br from-green-500 to-green-600 text-white'
+                                    : 'bg-gradient-to-br from-green-500 to-green-600 text-white'}`}
                         >
                             <ArrowRight size={28} strokeWidth={3} />
                         </motion.div>
@@ -291,12 +291,12 @@ export const EnterpriseCRMContent = () => {
                             <motion.div variants={fadeInUp}>
                                 <h1 className="text-5xl lg:text-7xl font-black tracking-tighter text-slate-900 leading-[1.1]" style={{ fontFamily: "'Inter', sans-serif" }}>
                                     Enterprise CRM & <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Product Engineering</span>
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-700">Product Engineering</span>
                                 </h1>
                             </motion.div>
 
                             <motion.div variants={fadeInUp}>
-                                <h2 className="text-xl md:text-2xl font-bold text-slate-600 leading-relaxed tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                <h2 className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>
                                     Purpose-built CRM platforms engineered for scale, intelligence, and measurable growth.
                                 </h2>
                             </motion.div>
@@ -343,7 +343,7 @@ export const EnterpriseCRMContent = () => {
                             className="relative"
                         >
                             {/* Optional Holographic Accent */}
-                            <div className="absolute -top-20 -right-20 w-80 h-80 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full blur-[100px] opacity-20 animate-pulse pointer-events-none" />
+                            <div className="absolute -top-20 -right-20 w-80 h-80 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full blur-[100px] opacity-20 animate-pulse pointer-events-none" />
 
                             <motion.div
                                 whileHover={{ y: -6, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" }}
@@ -399,13 +399,13 @@ export const EnterpriseCRMContent = () => {
                         <motion.div variants={fadeInLeft} className="relative z-10 order-last lg:order-first">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
                                 {/* Decorative Blur Behind Tiles */}
-                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-indigo-500/10 blur-[80px] rounded-full -z-10" />
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/10 blur-[80px] rounded-full -z-10" />
 
                                 {[
                                     { label: "CRM Platforms", desc: "Enterprise-ready customer intelligence systems.", icon: Users, color: "text-blue-600", delay: 0 },
-                                    { label: "Workflow Automation", desc: "Streamlined cross-department orchestration.", icon: Workflow, color: "text-indigo-600", delay: 0.2, className: "lg:translate-y-12" },
-                                    { label: "Enterprise Dashboards", desc: "Executive-level visibility & real-time monitoring.", icon: BarChart, color: "text-violet-600", delay: 0.1 },
-                                    { label: "BI Systems", desc: "Data modeling and predictive analytics built for decisions.", icon: Activity, color: "text-fuchsia-600", delay: 0.3, className: "lg:translate-y-12" },
+                                    { label: "Workflow Automation", desc: "Streamlined cross-department orchestration.", icon: Workflow, color: "text-blue-700", delay: 0.2, className: "lg:translate-y-12" },
+                                    { label: "Enterprise Dashboards", desc: "Executive-level visibility & real-time monitoring.", icon: BarChart, color: "text-blue-800", delay: 0.1 },
+                                    { label: "BI Systems", desc: "Data modeling and predictive analytics built for decisions.", icon: Activity, color: "text-red-600", delay: 0.3, className: "lg:translate-y-12" },
                                 ].map((item, i) => (
                                     <motion.div
                                         key={i}
@@ -432,7 +432,7 @@ export const EnterpriseCRMContent = () => {
                                 initial={{ opacity: 0, x: 20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.2 }}
-                                className="text-indigo-600 font-bold uppercase tracking-[0.2em] text-xs mb-4 block pl-1"
+                                className="text-blue-600 font-bold uppercase tracking-[0.2em] text-xs mb-4 block pl-1"
                             >
                                 Product Focus
                             </motion.span>
@@ -441,7 +441,7 @@ export const EnterpriseCRMContent = () => {
                                 Product Engineering & <br /> SaaS Development
                             </h2>
 
-                            <p className="text-xl text-slate-500 font-bold tracking-tight mb-8" style={{ fontFamily: "'Inter', sans-serif" }}>
+                            <p className="text-lg md:text-xl text-slate-600 font-medium leading-relaxed mb-8" style={{ fontFamily: "'Inter', sans-serif" }}>
                                 From concept validation to enterprise-grade scale.
                             </p>
 
@@ -449,7 +449,7 @@ export const EnterpriseCRMContent = () => {
                                 VelDurSen builds digital products with long-term architecture in mind. We don’t just ship features — we design <strong className="text-slate-900">scalable SaaS ecosystems</strong> that evolve with your business. Every release is structured for reliability, security, and performance under real-world enterprise load.
                             </p>
 
-                            <div className="bg-white/60 backdrop-blur-sm border border-indigo-100 rounded-3xl p-8 shadow-sm group hover:border-indigo-200 transition-colors duration-300">
+                            <div className="bg-white/60 backdrop-blur-sm border border-blue-100 rounded-3xl p-8 shadow-sm group hover:border-blue-200 transition-colors duration-300">
                                 <div className="mb-6">
                                     <h3 className="text-xl font-bold tracking-tight text-slate-900 mb-1" style={{ fontFamily: "'Inter', sans-serif" }}>
                                         End-to-End Product Lifecycle Management
@@ -459,7 +459,7 @@ export const EnterpriseCRMContent = () => {
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 relative">
                                     {/* Vertical Divider */}
-                                    <div className="hidden sm:block absolute left-1/2 top-0 bottom-0 w-px bg-indigo-100 -translate-x-1/2" />
+                                    <div className="hidden sm:block absolute left-1/2 top-0 bottom-0 w-px bg-blue-100 -translate-x-1/2" />
 
                                     <div className="space-y-3">
                                         {["Product Discovery", "Scalable Development", "Performance Optimization"].map((item, i) => (
@@ -470,8 +470,8 @@ export const EnterpriseCRMContent = () => {
                                                 transition={{ delay: 0.3 + (i * 0.1) }}
                                                 className="flex items-center gap-3"
                                             >
-                                                <div className="w-5 h-5 rounded-full bg-indigo-50 flex items-center justify-center shrink-0 border border-indigo-100 group-hover:bg-indigo-600 group-hover:border-indigo-600 transition-colors duration-300">
-                                                    <div className="w-2 h-2 rounded-full bg-indigo-600 group-hover:bg-white transition-colors duration-300" />
+                                                <div className="w-5 h-5 rounded-full bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100 group-hover:bg-blue-600 group-hover:border-blue-600 transition-colors duration-300">
+                                                    <div className="w-2 h-2 rounded-full bg-blue-600 group-hover:bg-white transition-colors duration-300" />
                                                 </div>
                                                 <span className="text-slate-700 font-medium text-sm">{item}</span>
                                             </motion.div>
@@ -487,8 +487,8 @@ export const EnterpriseCRMContent = () => {
                                                 transition={{ delay: 0.4 + (i * 0.1) }}
                                                 className="flex items-center gap-3"
                                             >
-                                                <div className="w-5 h-5 rounded-full bg-indigo-50 flex items-center justify-center shrink-0 border border-indigo-100 group-hover:bg-indigo-600 group-hover:border-indigo-600 transition-colors duration-300">
-                                                    <div className="w-2 h-2 rounded-full bg-indigo-600 group-hover:bg-white transition-colors duration-300" />
+                                                <div className="w-5 h-5 rounded-full bg-blue-50 flex items-center justify-center shrink-0 border border-blue-100 group-hover:bg-blue-600 group-hover:border-blue-600 transition-colors duration-300">
+                                                    <div className="w-2 h-2 rounded-full bg-blue-600 group-hover:bg-white transition-colors duration-300" />
                                                 </div>
                                                 <span className="text-slate-700 font-medium text-sm">{item}</span>
                                             </motion.div>
@@ -505,9 +505,9 @@ export const EnterpriseCRMContent = () => {
             <section className="section-padding bg-[#fdfdff] relative overflow-hidden">
                 {/* Decorative background blobs */}
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                    <div className="absolute top-[-5%] left-[-5%] w-[30%] h-[30%] bg-purple-100/30 rounded-full blur-[100px]" />
+                    <div className="absolute top-[-5%] left-[-5%] w-[30%] h-[30%] bg-blue-100/30 rounded-full blur-[100px]" />
                     <div className="absolute bottom-[-5%] right-[-5%] w-[30%] h-[30%] bg-blue-100/30 rounded-full blur-[100px]" />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[40%] bg-emerald-50/20 rounded-full blur-[150px]" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[40%] bg-green-50/20 rounded-full blur-[150px]" />
                 </div>
 
                 <div className="enterprise-container relative z-10">
@@ -518,7 +518,7 @@ export const EnterpriseCRMContent = () => {
                         variants={fadeInUp}
                         className="text-center max-w-5xl mx-auto mb-16"
                     >
-                        <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-green-600 to-teal-600 font-extrabold text-xl md:text-2xl mb-4 tracking-tight drop-shadow-sm">
+                        <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-green-600 to-green-700 font-extrabold text-xl md:text-2xl mb-4 tracking-tight drop-shadow-sm">
                             Our Expertise. Your Advantage.
                         </span>
                         <h2 className="text-4xl md:text-6xl font-black text-slate-950 mb-8 tracking-tight leading-[1.1]">
@@ -565,9 +565,9 @@ export const EnterpriseCRMContent = () => {
 
 
             {/* 5. Intelligent Automation & Transformation */}
-            <section className="section-padding bg-rose-50/30 border-y border-slate-200">
+            <section className="section-padding bg-red-50/30 border-y border-slate-200">
                 <motion.div
-                    onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#e11d48' } }))}
+                    onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
                     viewport={{ amount: 0.1 }}
                     className="enterprise-container"
                 >
@@ -579,7 +579,7 @@ export const EnterpriseCRMContent = () => {
                         className="text-center mb-16"
                     >
                         <h2 className="text-4xl font-black text-slate-900 mb-6 tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>
-                            Intelligent Automation & <span className="text-rose-600">Digital Transformation</span>
+                            Intelligent Automation & <span className="text-red-600">Digital Transformation</span>
                         </h2>
                     </motion.div>
 
@@ -591,7 +591,7 @@ export const EnterpriseCRMContent = () => {
                         className="grid grid-cols-1 md:grid-cols-3 gap-8"
                     >
                         <motion.div variants={fadeInUp} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                            <Brain className="w-12 h-12 text-rose-600 mb-6" />
+                            <Brain className="w-12 h-12 text-red-600 mb-6" />
                             <h3 className="text-xl font-bold text-slate-900 mb-4">AI-Driven CRM</h3>
                             <p className="text-slate-600 text-sm mb-4">Transforming CRM from data storage into a revenue engine.</p>
                             <ul className="space-y-2 text-sm text-slate-600 font-medium">
@@ -602,7 +602,7 @@ export const EnterpriseCRMContent = () => {
                         </motion.div>
 
                         <motion.div variants={fadeInUp} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                            <RefreshCcw className="w-12 h-12 text-rose-600 mb-6" />
+                            <RefreshCcw className="w-12 h-12 text-red-600 mb-6" />
                             <h3 className="text-xl font-bold text-slate-900 mb-4">Digital Transformation</h3>
                             <p className="text-slate-600 text-sm mb-4">Modernizing legacy systems with strategic rebuilding.</p>
                             <ul className="space-y-2 text-sm text-slate-600 font-medium">
@@ -613,7 +613,7 @@ export const EnterpriseCRMContent = () => {
                         </motion.div>
 
                         <motion.div variants={fadeInUp} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                            <Globe className="w-12 h-12 text-rose-600 mb-6" />
+                            <Globe className="w-12 h-12 text-red-600 mb-6" />
                             <h3 className="text-xl font-bold text-slate-900 mb-4">Global Deployment</h3>
                             <p className="text-slate-600 text-sm mb-4">Supporting enterprise ecosystems without disruption.</p>
                             <ul className="space-y-2 text-sm text-slate-600 font-medium">
@@ -627,7 +627,7 @@ export const EnterpriseCRMContent = () => {
             </section>
 
             {/* 6. Why Choose & Case Studies Snapshots */}
-            <section className="section-padding bg-emerald-50/20">
+            <section className="section-padding bg-green-50/20">
                 <div className="enterprise-container">
                     <motion.div
                         initial="hidden"
@@ -657,7 +657,7 @@ export const EnterpriseCRMContent = () => {
                                     ))}
                                 </div>
                                 {/* Decor */}
-                                <div className="absolute right-0 bottom-0 w-32 h-32 bg-emerald-600 rounded-tl-full opacity-20" />
+                                <div className="absolute right-0 bottom-0 w-32 h-32 bg-green-600 rounded-tl-full opacity-20" />
                             </div>
                         </motion.div>
 
@@ -667,7 +667,7 @@ export const EnterpriseCRMContent = () => {
                                 <motion.div whileHover={{ x: 5 }} className="border border-slate-200 p-6 rounded-2xl bg-slate-50 hover:border-red-200 transition-colors">
                                     <div className="flex justify-between items-start mb-2">
                                         <h4 className="font-black text-lg text-slate-900 tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>Global FinTech CRM Transformation</h4>
-                                        <TrendingUp className="text-emerald-600 w-5 h-5" />
+                                        <TrendingUp className="text-green-600 w-5 h-5" />
                                     </div>
                                     <div className="grid grid-cols-3 gap-4 mt-4 text-center">
                                         <div>
@@ -688,7 +688,7 @@ export const EnterpriseCRMContent = () => {
                                 <motion.div whileHover={{ x: 5 }} className="border border-slate-200 p-6 rounded-2xl bg-slate-50 hover:border-red-200 transition-colors">
                                     <div className="flex justify-between items-start mb-2">
                                         <h4 className="font-bold text-lg text-slate-900">Manufacturing Process Automation</h4>
-                                        <Factory className="text-emerald-600 w-5 h-5" />
+                                        <Factory className="text-green-600 w-5 h-5" />
                                     </div>
                                     <div className="grid grid-cols-3 gap-4 mt-4 text-center">
                                         <div>
@@ -719,7 +719,7 @@ export const EnterpriseCRMContent = () => {
             {/* 10. Industry-Specific CRM Accelerators - Circular Interactive Carousel */}
             <AcceleratorSection />
             {/* 11. Enterprise Product Innovation Framework - 3D Car Animation */}
-            <section className="section-padding bg-fuchsia-50/20 overflow-hidden">
+            <section className="section-padding bg-orange-50/20 overflow-hidden">
                 <div className="enterprise-container">
                     <motion.div
                         initial="hidden"
@@ -729,9 +729,9 @@ export const EnterpriseCRMContent = () => {
                         className="text-center max-w-4xl mx-auto mb-8"
                     >
                         <h2 className="text-4xl font-black text-slate-900 mb-6">
-                            Enterprise Product Innovation <span className="text-fuchsia-600">Framework</span>
+                            Enterprise Product Innovation <span className="text-orange-600">Framework</span>
                         </h2>
-                        <p className="text-xl text-slate-600">Structured Software Engineering for Long-Term Scalability.</p>
+                        <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">Structured Software Engineering for Long-Term Scalability.</p>
                     </motion.div>
 
                     <div className="relative overflow-visible -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-12 xl:-mx-16 flex flex-col gap-8 pt-8 pb-8">
@@ -757,7 +757,7 @@ export const EnterpriseCRMContent = () => {
                                     repeat: Infinity,
                                     times: [0, 0.5, 1]
                                 }}
-                                className="absolute top-0 h-full bg-gradient-to-r from-fuchsia-500 via-pink-500 to-indigo-500 shadow-[0_0_20px_rgba(236,72,153,0.5)]"
+                                className="absolute top-0 h-full bg-gradient-to-r from-orange-500 via-red-500 to-blue-500 shadow-[0_0_20px_rgba(239,68,68,0.5)]"
                             />
 
                             {/* Moving Glow Particle */}
@@ -792,7 +792,7 @@ export const EnterpriseCRMContent = () => {
                                     <div className="w-8 h-8 bg-slate-900 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-xs">
                                         {phase.step}
                                     </div>
-                                    <phase.icon className="w-6 h-6 text-fuchsia-600 mx-auto mb-2" />
+                                    <phase.icon className="w-6 h-6 text-red-600 mx-auto mb-2" />
                                     <h3 className="font-bold text-slate-900 text-xs md:text-sm">{phase.title}</h3>
                                 </motion.div>
                             ))}
@@ -880,7 +880,7 @@ export const EnterpriseCRMContent = () => {
                                     Global Delivery Ecosystem <br />
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">24/7 Connectivity</span>
                                 </h2>
-                                <p className="text-xl text-slate-400 leading-relaxed mb-10 font-bold tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                <p className="text-lg md:text-xl text-slate-400 leading-relaxed mb-10 font-medium">
                                     Our distributed technology centers enable <span className="text-white italic">"Follow-the-Sun"</span> engineering cycles, ensuring uninterrupted innovation benchmarks and rapid response scalability across every timezone.
                                 </p>
 
@@ -943,7 +943,7 @@ export const EnterpriseCRMContent = () => {
                                 Modernize. <br />
                                 <span className="text-lime-600">Don't Just Migrate.</span>
                             </h2>
-                            <p className="text-xl text-slate-600 font-medium mb-12 leading-relaxed">
+                            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium mb-12">
                                 We re-engineer monolithic structures into high-velocity microservices. Our focus is structural resilience, not just digital lift-and-shift.
                             </p>
 
@@ -1052,7 +1052,7 @@ export const EnterpriseCRMContent = () => {
                                 Beyond Deployment. <br />
                                 <span className="text-blue-600">Continuous Evolution.</span>
                             </h2>
-                            <p className="text-xl text-slate-500 font-medium leading-relaxed max-w-2xl">
+                            <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl font-medium">
                                 We don’t just launch platforms; we nurture ecosystems. Our success engineering model ensures your CRM assets appreciate in value over time.
                             </p>
                         </motion.div>
@@ -1131,7 +1131,7 @@ export const EnterpriseCRMContent = () => {
                                     Strategic <br />
                                     <span className="text-indigo-600">Consulting.</span>
                                 </h2>
-                                <p className="text-xl text-slate-600 leading-relaxed mb-10 font-medium">
+                                <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-10 font-medium">
                                     We align multi-decade technology roadmaps with immediate business performance, navigating the complexity of global digital transformation.
                                 </p>
 
@@ -1197,11 +1197,11 @@ export const EnterpriseCRMContent = () => {
                             variants={fadeInLeft}
                         >
                             <span className="text-blue-400 font-black uppercase tracking-[0.3em] text-[10px] mb-6 block" style={{ fontFamily: "'Inter', sans-serif" }}>Core Blueprint v2.0</span>
-                            <h2 className="text-4xl lg:text-5xl font-black text-white mb-8 tracking-tighter leading-tight" style={{ fontFamily: "'Inter', sans-serif" }}>
+                            <h2 className="text-4xl lg:text-5xl font-black text-white mb-8 tracking-tighter leading-tight">
                                 Engineered for <br />
-                                <span className="text-blue-500 italic">High Performance.</span>
+                                <span className="text-blue-500">High Performance.</span>
                             </h2>
-                            <p className="text-xl text-slate-400 leading-relaxed mb-12 font-medium">
+                            <p className="text-lg md:text-xl text-slate-400 leading-relaxed mb-12 font-medium">
                                 Before code, we architect. Our systems are mapped to navigate global regulatory complexity and extreme operational load.
                             </p>
 
@@ -1287,7 +1287,7 @@ export const EnterpriseCRMContent = () => {
                                     Revenue <br />
                                     <span className="text-indigo-600">Acceleration.</span>
                                 </h2>
-                                <p className="text-xl text-slate-500 font-medium leading-relaxed">
+                                <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
                                     We transform CRMs from passive databases into active revenue engines, using intelligence to compress sales cycles and expand lifetime value.
                                 </p>
                             </motion.div>
@@ -1352,7 +1352,7 @@ export const EnterpriseCRMContent = () => {
                                 <span className="text-slate-200/40 block text-lg mb-1 font-black">Product</span>
                                 <span className="text-red-500">Engineering Labs.</span>
                             </h2>
-                            <p className="text-xl text-slate-400 leading-relaxed mb-12 max-w-2xl font-medium">
+                            <p className="text-lg md:text-xl text-slate-400 leading-relaxed mb-12 max-w-2xl font-medium">
                                 Where enterprise software is forged. We treat product development as a high-precision engineering discipline — evolving through constant experimentation.
                             </p>
 
@@ -1429,7 +1429,7 @@ export const EnterpriseCRMContent = () => {
                                     Enterprise <br />
                                     <span className="text-emerald-500">Data Command.</span>
                                 </h2>
-                                <p className="text-slate-400 font-medium leading-relaxed mb-10">
+                                <p className="text-lg md:text-xl text-slate-400 leading-relaxed mb-10 font-medium">
                                     Real-time observability into the core of your commercial operations. We build the interfaces that power executive decisions.
                                 </p>
                                 <div className="flex items-center gap-4">
@@ -1496,11 +1496,11 @@ export const EnterpriseCRMContent = () => {
                             className="flex-1"
                         >
                             <span className="text-blue-600 font-black uppercase tracking-[0.3em] text-[10px] mb-6 block" style={{ fontFamily: "'Inter', sans-serif" }}>Elastic Architecture</span>
-                            <h2 className="text-4xl lg:text-6xl font-black text-slate-950 mb-8 leading-tight tracking-tighter" style={{ fontFamily: "'Inter', sans-serif" }}>
+                            <h2 className="text-4xl lg:text-6xl font-black text-slate-950 mb-8 leading-tight tracking-tighter">
                                 Scalable <br />
-                                <span className="text-blue-600 italic">Sovereign Cloud.</span>
+                                <span className="text-blue-600">Sovereign Cloud.</span>
                             </h2>
-                            <p className="text-xl text-slate-600 leading-relaxed mb-12 font-medium">
+                            <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-12 font-medium">
                                 Engineered for millions. Our infrastructure adapts in real-time to operational volatility, ensuring peak performance during hyper-growth phases.
                             </p>
 
@@ -1566,7 +1566,7 @@ export const EnterpriseCRMContent = () => {
                                 Banking-Grade <br />
                                 <span className="text-blue-600">Obsidian Guard.</span>
                             </h2>
-                            <p className="text-xl text-slate-600 leading-relaxed font-medium">
+                            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
                                 Security isn’t a feature; it’s the bedrock. We align your CRM operations with global identity governance and AI-driven anomaly detection.
                             </p>
                         </motion.div>
@@ -1622,7 +1622,7 @@ export const EnterpriseCRMContent = () => {
                                     Sustainable <br />
                                     <span className="text-emerald-600">Resilience.</span>
                                 </h2>
-                                <p className="text-xl text-slate-600 leading-relaxed mb-16 font-medium max-w-2xl">
+                                <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-16 font-medium max-w-2xl">
                                     We optimize infrastructure not just for speed, but for efficiency. Reducing the carbon footprint of global CRM operations through intelligent orchestration.
                                 </p>
                             </motion.div>

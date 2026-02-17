@@ -2,13 +2,25 @@ import { Link, useLocation } from "react-router-dom";
 import { Linkedin, Twitter, Youtube, Facebook, Instagram, Github } from "lucide-react";
 import footerBg from "../../assets/footer_new_bg.png";
 import logo from "../../assets/logo.png";
+
+// TypeScript interface for footer links
+interface FooterLink {
+  label: string;
+  path: string;
+  scrollTo?: string | null;
+}
+
+interface FooterSection {
+  title: string;
+  links: FooterLink[];
+}
+
 // Content Structure based on all actual pages and detailed site map
-const footerSections = [
+const footerSections: FooterSection[] = [
   {
     title: "Company",
     links: [
       { label: "About Us", path: "/about" },
-      { label: "Our History", path: "/history" },
       { label: "Careers", path: "/careers" },
       { label: "Internships", path: "/internships" },
       { label: "Achievements", path: "/achievements" },
@@ -18,24 +30,22 @@ const footerSections = [
   {
     title: "Services",
     links: [
-      { label: "All Services", path: "/services#our-services" },
-      { label: "Artificial Intelligence", path: "/services#technology-pillars" },
-      { label: "Web & Mobile Dev", path: "/services#our-solutions-architecture" },
-      { label: "Data Engineering", path: "/services#technology-pillars" },
-      { label: "Technologies", path: "/services#technology-pillars" },
-      { label: "Cloud Infrastructure", path: "/services#technology-pillars" },
-      { label: "Cybersecurity", path: "/services#technology-pillars" },
+      { label: "All Services", path: "/services", scrollTo: "our-services" },
+      { label: "Solutions Architecture", path: "/services", scrollTo: "our-solutions-architecture" },
+      { label: "Technology Pillars", path: "/services", scrollTo: "technology-pillars" },
+      { label: "Engineering Excellence", path: "/services", scrollTo: null },
+      { label: "Performance & Scalability", path: "/services", scrollTo: null },
     ]
   },
   {
     title: "Industries",
     links: [
-      { label: "Healthcare", path: "/services#industries-full-content" },
-      { label: "FinTech", path: "/services#industries-full-content" },
-      { label: "Manufacturing", path: "/services#industries-full-content" },
-      { label: "Retail", path: "/services#industries-full-content" },
-      { label: "Education", path: "/services#industries-full-content" },
-
+      { label: "Our Industries", path: "/services", scrollTo: "industries-full-content" },
+      { label: "Healthcare", path: "/services", scrollTo: "industries" },
+      { label: "Education", path: "/services", scrollTo: "industries" },
+      { label: "Manufacturing", path: "/services", scrollTo: "industries" },
+      { label: "Retail", path: "/services", scrollTo: "industries" },
+      { label: "FinTech", path: "/services", scrollTo: "industries" },
     ]
   },
   {
@@ -114,7 +124,10 @@ const Footer = () => {
                     <li key={lIdx}>
                       <Link
                         to={link.path}
-                        state={{ fromButton: true }}
+                        state={{
+                          fromButton: true,
+                          ...(link.scrollTo && { scrollTo: link.scrollTo })
+                        }}
                         className={`hover:text-white transition-colors text-[13px] leading-snug block ${currentPath === link.path ? "text-white font-semibold" : ""
                           }`}
                       >

@@ -120,13 +120,13 @@ const Navbar = () => {
         <div className="enterprise-container">
           <div className="flex items-center justify-between h-16 md:h-[72px]">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-4">
               <img src={logo} alt="VelDurSen Logo" className="h-10 md:h-12 w-auto" />
               <div className="flex flex-col">
-                <span className="text-lg md:text-xl font-black text-slate-950 tracking-tighter uppercase leading-none shrink-0">
+                <span className="text-base xs:text-lg md:text-2xl font-black text-slate-950 tracking-tighter uppercase leading-none shrink-0">
                   VelDur<span className="text-red-600">Sen</span>
                 </span>
-                <span className="block text-[7px] md:text-[8px] font-bold text-slate-500 uppercase tracking-[0.4em] mt-0.5 leading-none">
+                <span className="block text-[7px] md:text-[8px] font-bold text-slate-500 uppercase tracking-[0.4em] mt-1 leading-none">
                   Enterprise Technology Partner
                 </span>
               </div>
@@ -150,7 +150,7 @@ const Navbar = () => {
                               : "text-muted-foreground",
                             !navColor && !isActive && "group-hover:text-red-600"
                           )}
-                          style={navColor ? { color: navColor, opacity: isActive ? 1 : 0.6, fontWeight: isActive ? 700 : 500 } : {}}
+                          style={navColor ? { color: navColor, opacity: isActive ? 1 : 0.6, fontWeight: isActive ? 800 : 700 } : {}}
                         >
                           {link.label}
                           <ChevronDown size={14} className="transition-transform duration-200 group-hover:rotate-180" />
@@ -195,7 +195,7 @@ const Navbar = () => {
                         )}
                         style={
                           navColor
-                            ? { color: navColor, opacity: isActive ? 1 : 0.6, fontWeight: isActive ? 700 : 500 }
+                            ? { color: navColor, opacity: isActive ? 1 : 0.6, fontWeight: isActive ? 800 : 700 }
                             : {}
                         }
                       >

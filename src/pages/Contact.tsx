@@ -118,7 +118,7 @@ const Contact = () => {
               Let's Build the <br />
               <span className="text-red-600">Extraordinary.</span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-300 font-medium mb-12 max-w-2xl leading-relaxed drop-shadow-md">
+            <p className="text-lg md:text-xl text-slate-300 font-medium mb-12 max-w-2xl leading-relaxed drop-shadow-md">
               Connect with our enterprise architects and digital transformation experts. We are ready to scale your vision globally.
             </p>
           </motion.div>
@@ -145,7 +145,8 @@ const Contact = () => {
                 <div className="relative z-10">
                   <div className="flex justify-between items-start mb-8">
                     <div>
-                      <h3 className="text-2xl font-bold mb-1">Live Operations</h3>
+                      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500 mb-2 block">Connectivity Status</span>
+                      <h3 className="text-2xl font-bold mb-1 tracking-tight">Live Operations</h3>
                       <p className="text-slate-400 text-sm">System Status: <span className="text-emerald-400 font-bold">OPTIMAL</span></p>
                     </div>
                     <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center animate-pulse">
@@ -360,13 +361,13 @@ const Contact = () => {
       <section className="py-24 bg-white overflow-hidden">
         <div className="enterprise-container">
           <div className="mb-16 text-center">
-            <span className="inline-block text-xs font-black uppercase tracking-[0.2em] mb-4 text-red-600">
-              Global Reach
+            <span className="inline-block text-xs font-black uppercase tracking-[0.4em] mb-6 text-orange-600">
+              Global Persistence
             </span>
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-6">
-              Operational Across 4 <span className="text-red-600">Continents.</span>
+              Empowering <span className="text-orange-600">4 Continents.</span>
             </h2>
-            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto font-medium leading-relaxed">
               Strategically located delivery centers ensuring seamless 24/7 operations.
             </p>
           </div>

@@ -69,7 +69,7 @@ const Solutions = () => (
                 <sol.icon className="text-accent" size={28} />
               </div>
               <h2 className="text-2xl md:text-3xl font-bold mb-4">{sol.title}</h2>
-              <p className="text-muted-foreground leading-relaxed mb-6">{sol.desc}</p>
+              <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-6">{sol.desc}</p>
               <ul className="space-y-3">
                 {sol.points.map((point) => (
                   <li key={point} className="flex items-start gap-3">
@@ -96,7 +96,7 @@ const Solutions = () => (
     {/* Success Metrics */}
     <section className="section-padding bg-primary">
       <div className="enterprise-container">
-        <SectionHeader tag="Results" title="Enterprise Success Metrics" subtitle="Measurable outcomes delivered across our enterprise engagements." light />
+        <SectionHeader tag="Results" title="Enterprise Success Metrics" subtitle="Measurable outcomes delivered across our enterprise engagements." color="green" light />
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {metrics.map((m, i) => (
             <motion.div key={m.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center">

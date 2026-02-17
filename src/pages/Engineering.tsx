@@ -59,12 +59,13 @@ const Engineering = () => (
           tag="Our Philosophy"
           title="Engineering That Stands the Test of Scale"
           subtitle="We don't just write code—we architect systems. Every solution is designed to be scalable, secure, and sustainable from day one."
+          color="blue"
         />
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-muted-foreground leading-relaxed mb-5">
+          <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-5">
             At VelDurSen, engineering excellence isn't a department—it's a culture. Our engineers are trained in architecture-first thinking, where every system is designed with scalability, security, and performance as foundational requirements, not afterthoughts.
           </p>
-          <p className="text-muted-foreground leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
             We combine deep technical expertise with proven engineering methodologies to deliver systems that enterprises can trust with their most critical operations.
           </p>
         </div>
@@ -81,7 +82,7 @@ const Engineering = () => (
                 <p.icon className="text-accent" size={28} />
               </div>
               <h2 className="text-2xl md:text-3xl font-bold mb-4">{p.title}</h2>
-              <p className="text-muted-foreground leading-relaxed mb-6">{p.desc}</p>
+              <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-6">{p.desc}</p>
               <ul className="space-y-3">
                 {p.points.map((point) => (
                   <li key={point} className="flex items-start gap-3">

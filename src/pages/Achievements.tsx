@@ -55,10 +55,10 @@ const Achievements = () => {
             viewport={{ once: true }}
             className="max-w-4xl"
           >
-            <span className="text-red-600 font-bold uppercase tracking-widest text-xs mb-4 block">
+            <span className="text-blue-600 font-bold uppercase tracking-widest text-xs mb-4 block">
               Global Excellence & Recognition
             </span>
-            <div className="space-y-6 text-slate-500 leading-relaxed text-lg font-medium">
+            <div className="space-y-6 text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
               <p>
                 VelDurSen’s achievements represent a decade of relentless engineering innovation and architectural integrity. We have successfully deployed mission-critical systems across 150+ countries, earning over 50 global awards for our pioneering work in AI safety and cloud resilience.
               </p>
@@ -204,8 +204,8 @@ const Achievements = () => {
             {/* Right Column: Progress Bars */}
             <div className="w-full lg:w-2/3 space-y-5">
               <div className="mb-8">
-                <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-4">Our Growth <span className="text-red-600">Trajectory.</span></h2>
-                <p className="text-lg text-slate-500 font-medium">Consistent performance and measurable impact year over year.</p>
+                <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-4">Our Growth <span className="text-orange-600">Trajectory.</span></h2>
+                <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">Consistent performance and measurable impact year over year.</p>
               </div>
 
               {[
@@ -248,8 +248,8 @@ const Achievements = () => {
         <div className="enterprise-container">
           {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-6">Global Deployment <span className="text-red-600">Milestones.</span></h2>
-            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-6">Global Deployment <span className="text-green-600">Milestones.</span></h2>
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium">
               Enterprise achievements in scale, reliability, and transformation. We deliver large-scale platforms that power mission-critical operations globally.
             </p>
           </div>

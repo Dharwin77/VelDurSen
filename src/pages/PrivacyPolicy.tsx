@@ -18,7 +18,7 @@ const PrivacyPolicy = () => {
                         <h1 className="text-5xl md:text-6xl font-black text-slate-900 mb-6 tracking-tighter">
                             Privacy Policy
                         </h1>
-                        <p className="text-xl md:text-2xl text-slate-600 font-medium max-w-3xl leading-relaxed">
+                        <p className="text-lg md:text-xl text-slate-600 font-medium max-w-3xl leading-relaxed">
                             Your data privacy and trust are fundamental to VelDurSen’s operations.
                         </p>
                     </div>

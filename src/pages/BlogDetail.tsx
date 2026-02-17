@@ -131,7 +131,7 @@ const BlogDetail = () => {
                     {/* Introduction */}
                     <div className="mb-16">
                         <div className="border-l-4 border-primary bg-primary/5 p-6 rounded-r-lg">
-                            <p className="text-lg leading-relaxed text-foreground/90">
+                            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
                                 {blog.content.introduction}
                             </p>
                         </div>

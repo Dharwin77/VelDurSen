@@ -97,7 +97,7 @@
   }
 
   .section-subtitle {
-    @apply text-lg md:text-xl text-muted-foreground max-w-3xl leading-relaxed;
+    @apply text-lg md:text-xl text-slate-600 max-w-3xl leading-relaxed;
   }
 
   .card-enterprise {

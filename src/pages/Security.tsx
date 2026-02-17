@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PageLayout from '@/components/layout/PageLayout';
 import { SEO } from '@/components/shared/SEO';
@@ -14,11 +13,11 @@ const Security = () => {
                 {/* Hero Section */}
                 <section className="bg-slate-50 py-24 border-b border-slate-200">
                     <div className="enterprise-container">
-                        <span className="text-red-600 font-bold text-sm uppercase tracking-[0.2em] mb-4 block">Trust & Compliance</span>
+                        <span className="text-red-500 font-bold text-sm uppercase tracking-[0.2em] mb-4 block">Trust & Compliance</span>
                         <h1 className="text-5xl md:text-6xl font-black text-slate-900 mb-6 tracking-tighter">
                             Security & Compliance
                         </h1>
-                        <p className="text-xl md:text-2xl text-slate-600 font-medium max-w-3xl leading-relaxed">
+                        <p className="text-lg md:text-xl text-slate-600 font-medium max-w-3xl leading-relaxed">
                             Enterprise-grade security embedded at every layer.
                         </p>
                     </div>
@@ -30,6 +29,7 @@ const Security = () => {
 
                         {/* 1. Security Philosophy */}
                         <div className="space-y-6">
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-2 block">Foundational Integrity</span>
                             <h2 className="text-3xl font-bold text-slate-900 tracking-tight">1. Security Philosophy</h2>
                             <p className="text-slate-600 leading-relaxed text-lg font-medium">
                                 VelDurSen integrates security from architecture to deployment. Security is not an add-on — it is foundational.
@@ -38,6 +38,7 @@ const Security = () => {
 
                         {/* 2. Security Frameworks */}
                         <div className="space-y-6">
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-600 mb-2 block">Architectural Defense</span>
                             <h2 className="text-3xl font-bold text-slate-900 tracking-tight">2. Security Frameworks</h2>
                             <p className="text-slate-600 leading-relaxed text-lg font-medium">We implement:</p>
                             <ul className="list-disc list-outside pl-6 space-y-3 text-slate-600 text-lg marker:text-red-600 font-medium">
@@ -51,6 +52,7 @@ const Security = () => {
 
                         {/* 3. Infrastructure Protection */}
                         <div className="space-y-6">
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-green-600 mb-2 block">System Resilience</span>
                             <h2 className="text-3xl font-bold text-slate-900 tracking-tight">3. Infrastructure Protection</h2>
                             <p className="text-slate-600 leading-relaxed text-lg font-medium">Our infrastructure includes:</p>
                             <ul className="list-disc list-outside pl-6 space-y-3 text-slate-600 text-lg marker:text-red-600 font-medium">
@@ -63,6 +65,7 @@ const Security = () => {
 
                         {/* 4. Compliance Standards */}
                         <div className="space-y-6">
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-red-600 mb-2 block">Regulatory Alignment</span>
                             <h2 className="text-3xl font-bold text-slate-900 tracking-tight">4. Compliance Standards</h2>
                             <p className="text-slate-600 leading-relaxed text-lg font-medium">We design systems aligned with:</p>
                             <ul className="list-disc list-outside pl-6 space-y-3 text-slate-600 text-lg marker:text-red-600 font-medium">
@@ -74,6 +77,7 @@ const Security = () => {
 
                         {/* 5. Continuous Monitoring */}
                         <div className="space-y-6">
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 mb-2 block">Continuous Vigilance</span>
                             <h2 className="text-3xl font-bold text-slate-900 tracking-tight">5. Continuous Monitoring</h2>
                             <p className="text-slate-600 leading-relaxed text-lg font-medium">Security operations include:</p>
                             <ul className="list-disc list-outside pl-6 space-y-3 text-slate-600 text-lg marker:text-red-600 font-medium">

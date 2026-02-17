@@ -65,7 +65,7 @@ const AchievementDetail = () => {
                             {/* Project Overview */}
                             <div>
                                 <h3 className="text-sm font-black uppercase tracking-widest text-red-600 mb-4">Project Overview</h3>
-                                <p className="text-xl md:text-2xl text-slate-700 leading-relaxed font-serif">
+                                <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
                                     {achievement.fullDescription}
                                 </p>
                             </div>

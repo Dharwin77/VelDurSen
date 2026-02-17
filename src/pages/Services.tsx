@@ -727,6 +727,105 @@ const WhatsIncludedCard = ({ item, index }: { item: any; index: number }) => {
   );
 };
 
+const pillars = [
+  {
+    id: 1,
+    icon: Brain,
+    title: "Artificial Intelligence & Machine Learning",
+    desc: "VelDurSen integrates AI into enterprise systems from the ground up.",
+    capabilities: ["Generative AI models", "NLP-driven automation", "Computer vision systems", "Predictive analytics engines", "Intelligent decision systems"],
+    examples: ["Fraud detection", "Customer support automation", "Forecasting systems"],
+    color: "bg-red-50",
+    accent: "text-red-600",
+    bg: aiBg
+  },
+  {
+    id: 2,
+    icon: Cloud,
+    title: "Cloud & Infrastructure Engineering",
+    desc: "Modern enterprises require resilient cloud ecosystems.",
+    capabilities: ["Multi-cloud deployment models", "Kubernetes orchestration", "Auto-scaling systems", "High-availability architecture", "Disaster recovery design"],
+    examples: ["Global region deployment", "Resource optimization", "Hybrid-cloud strategy"],
+    color: "bg-slate-50",
+    accent: "text-slate-900",
+    bg: cloudBg
+  },
+  {
+    id: 3,
+    icon: Shield,
+    title: "Cybersecurity & Compliance Technologies",
+    desc: "Security is embedded in every layer of our technology stack.",
+    capabilities: ["Zero-trust frameworks", "Identity & access management", "SOC monitoring systems", "Compliance automation", "Secure API gateways"],
+    examples: ["Regulatory compliance", "Risk mitigation", "Thread detection"],
+    color: "bg-red-50",
+    accent: "text-red-600",
+    bg: securityBg
+  },
+  {
+    id: 4,
+    icon: Database,
+    title: "Data Engineering & Analytics Platforms",
+    desc: "Transforming raw data into actionable intelligence at enterprise scale.",
+    capabilities: ["ETL & ELT pipelines", "Real-time streaming architecture", "Data lakes & warehouses", "Business intelligence dashboards", "Predictive modeling"],
+    examples: ["Real-time reporting", "Scalable data ingestion", "Big data processing"],
+    color: "bg-slate-50",
+    accent: "text-slate-900",
+    bg: dataBg
+  },
+  {
+    id: 5,
+    icon: Leaf,
+    title: "Sustainable & Ethical Technology",
+    desc: "Technology must serve both business performance and the planet.",
+    capabilities: ["Carbon-aware cloud optimization", "Green DevOps pipelines", "Energy-efficient system design", "Ethical AI governance", "Sustainable infrastructure"],
+    examples: ["Carbon footprint tracking", "Ethical AI audits", "Energy efficiency"],
+    color: "bg-red-50",
+    accent: "text-red-600",
+    bg: sustainBg
+  }
+];
+
+const roadmapSteps = [
+  { icon: Search, title: "Discovery & Architecture" },
+  { icon: Code, title: "Scalable Development" },
+  { icon: Play, title: "Secure Deployment" },
+  { icon: Activity, title: "Continuous Monitoring" },
+  { icon: RefreshCcw, title: "Optimization & Innovation" }
+];
+
+const labProjects = [
+  {
+    id: 0,
+    title: "Quantum-Resilient Encryption",
+    tag: "Security",
+    progress: 75,
+    image: securityBg,
+    fullTitle: "Post-Quantum Cryptographic Frameworks",
+    fullDesc: "Our research focuses on lattice-based cryptography and multivariate equations that are theoretically secure against Shor's algorithm and other quantum-specific attacks. We are currently implementing zero-knowledge proof protocols for decentralized identity management.",
+    milestones: ["Lattice Integration", "Key Distribution", "Speed Benchmarking"]
+  },
+  {
+    id: 1,
+    title: "Self-Healing Architectures",
+    tag: "Reliability",
+    progress: 90,
+    image: aiBg,
+    fullTitle: "Autonomous Infrastructure Orchestration",
+    fullDesc: "Combining AI-driven monitoring with Kubernetes operators to create clusters that don't just alert on failure, but preemptively reroute traffic and scale compute before the failure cascade begins.",
+    milestones: ["Predictive Scaling", "Auto-Remediation", "Failure Injection"]
+  },
+  {
+    id: 2,
+    title: "High-Density Compute",
+    tag: "Hardware",
+    progress: 60,
+    image: dataBg,
+    fullTitle: "Liquid-Cooled Distributed Logic",
+    fullDesc: "Optimizing the physical layer of data centers for high-frequency trading and large-scale AI training. This project uses custom liquid cooling logic to maintain sub-0.1ms consistency across a 10,000 node mesh.",
+    milestones: ["Thermal Balancing", "Bus Speed Optimization", "Fiber Logic"]
+  }
+];
+
 // --- Main Page Component ---
 
 const Services = () => {
@@ -735,13 +834,19 @@ const Services = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.hash) {
+    const scrollToElement = (id: string) => {
       setTimeout(() => {
-        const element = document.getElementById(location.hash.slice(1));
+        const element = document.getElementById(id);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
+    };
+
+    if (location.hash) {
+      scrollToElement(location.hash.slice(1));
+    } else if (location.state?.scrollTo) {
+      scrollToElement(location.state.scrollTo);
     }
   }, [location]);
 
@@ -765,107 +870,6 @@ const Services = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const labProjects = [
-    {
-      id: 0,
-      title: "Quantum-Resilient Encryption",
-      tag: "Security",
-      progress: 75,
-      image: securityBg,
-      fullTitle: "Post-Quantum Cryptographic Frameworks",
-      fullDesc: "Our research focuses on lattice-based cryptography and multivariate equations that are theoretically secure against Shor's algorithm and other quantum-specific attacks. We are currently implementing zero-knowledge proof protocols for decentralized identity management.",
-      milestones: ["Lattice Integration", "Key Distribution", "Speed Benchmarking"]
-    },
-    {
-      id: 1,
-      title: "Self-Healing Architectures",
-      tag: "Reliability",
-      progress: 90,
-      image: aiBg,
-      fullTitle: "Autonomous Infrastructure Orchestration",
-      fullDesc: "Combining AI-driven monitoring with Kubernetes operators to create clusters that don't just alert on failure, but preemptively reroute traffic and scale compute before the failure cascade begins.",
-      milestones: ["Predictive Scaling", "Auto-Remediation", "Failure Injection"]
-    },
-    {
-      id: 2,
-      title: "High-Density Compute",
-      tag: "Hardware",
-      progress: 60,
-      image: dataBg,
-      fullTitle: "Liquid-Cooled Distributed Logic",
-      fullDesc: "Optimizing the physical layer of data centers for high-frequency trading and large-scale AI training. This project uses custom liquid cooling logic to maintain sub-0.1ms consistency across a 10,000 node mesh.",
-      milestones: ["Thermal Balancing", "Bus Speed Optimization", "Fiber Logic"]
-    }
-  ];
-
-  const pillars = [
-    {
-      id: 1,
-      icon: Brain,
-      title: "Artificial Intelligence & Machine Learning",
-      desc: "VelDurSen integrates AI into enterprise systems from the ground up.",
-      capabilities: ["Generative AI models", "NLP-driven automation", "Computer vision systems", "Predictive analytics engines", "Intelligent decision systems"],
-      examples: ["Fraud detection", "Customer support automation", "Forecasting systems"],
-      color: "bg-red-50",
-      accent: "text-red-600",
-      bg: aiBg
-    },
-    {
-      id: 2,
-      icon: Cloud,
-      title: "Cloud & Infrastructure Engineering",
-      desc: "Modern enterprises require resilient cloud ecosystems.",
-      capabilities: ["Multi-cloud deployment models", "Kubernetes orchestration", "Auto-scaling systems", "High-availability architecture", "Disaster recovery design"],
-      examples: ["Global region deployment", "Resource optimization", "Hybrid-cloud strategy"],
-      color: "bg-slate-50",
-      accent: "text-slate-900",
-      bg: cloudBg
-    },
-    {
-      id: 3,
-      icon: Shield,
-      title: "Cybersecurity & Compliance Technologies",
-      desc: "Security is embedded in every layer of our technology stack.",
-      capabilities: ["Zero-trust frameworks", "Identity & access management", "SOC monitoring systems", "Compliance automation", "Secure API gateways"],
-      examples: ["Regulatory compliance", "Risk mitigation", "Thread detection"],
-      color: "bg-red-50",
-      accent: "text-red-600",
-      bg: securityBg
-    },
-    {
-      id: 4,
-      icon: Database,
-      title: "Data Engineering & Analytics Platforms",
-      desc: "Transforming raw data into actionable intelligence at enterprise scale.",
-      capabilities: ["ETL & ELT pipelines", "Real-time streaming architecture", "Data lakes & warehouses", "Business intelligence dashboards", "Predictive modeling"],
-      examples: ["Real-time reporting", "Scalable data ingestion", "Big data processing"],
-      color: "bg-slate-50",
-      accent: "text-slate-900",
-      bg: dataBg
-    },
-    {
-      id: 5,
-      icon: Leaf,
-      title: "Sustainable & Ethical Technology",
-      desc: "Technology must serve both business performance and the planet.",
-      capabilities: ["Carbon-aware cloud optimization", "Green DevOps pipelines", "Energy-efficient system design", "Ethical AI governance", "Sustainable infrastructure"],
-      examples: ["Carbon footprint tracking", "Ethical AI audits", "Energy efficiency"],
-      color: "bg-red-50",
-      accent: "text-red-600",
-      bg: sustainBg
-    }
-  ];
-
-  const roadmapSteps = [
-    { icon: Search, title: "Discovery & Architecture" },
-    { icon: Code, title: "Scalable Development" },
-    { icon: Play, title: "Secure Deployment" },
-    { icon: Activity, title: "Continuous Monitoring" },
-    { icon: RefreshCcw, title: "Optimization & Innovation" }
-  ];
-
-
-
   const nextReview = () => {
     setCurrentReview((prev) => (prev + 1) % reviews.length);
   };
@@ -885,196 +889,208 @@ const Services = () => {
 
         {/* 1. HERO SECTION - Keeping Original Video Style as requested */}
         <section id="our-services" className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]"
+          <motion.div
+            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+            className="contents"
           >
-            <source src={serviceVideo} type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent z-10" />
-
-          <div className="enterprise-container relative z-20">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-4xl"
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]"
             >
-              <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-white mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-                Our Services
-              </span>
-              <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
-                Enterprise <br />
-                <span className="text-slate-200">Performance.</span>
-              </h1>
-              <p className="text-xl md:text-2xl text-slate-300 font-medium mb-12 max-w-3xl leading-relaxed drop-shadow-md">
-                Comprehensive technology services designed for global enterprises. From AI and cloud to security and data engineering, we deliver end-to-end solutions that power mission-critical operations worldwide.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <button onClick={() => document.getElementById('our-solutions-architecture')?.scrollIntoView({ behavior: 'smooth' })} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20">
-                  Explore Our Services
-                </button>
-                <div className="flex items-center gap-4 px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">
-                  <Globe2 size={16} className="text-red-600 shadow-sm" /> Global Delivery Network
-                </div>
-              </div>
-            </motion.div>
-          </div>
+              <source src={serviceVideo} type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent z-10" />
 
-          {/* Floating Abstract Element */}
-          <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[120px] -z-0" />
+            <div className="enterprise-container relative z-20">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="max-w-4xl"
+              >
+                <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-white mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+                  Our Services
+                </span>
+                <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+                  Enterprise <br />
+                  <span className="text-slate-200">Performance.</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-slate-300 font-medium mb-12 max-w-3xl leading-relaxed drop-shadow-md">
+                  Comprehensive technology services designed for global enterprises. From AI and cloud to security and data engineering, we deliver end-to-end solutions that power mission-critical operations worldwide.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <button onClick={() => document.getElementById('our-solutions-architecture')?.scrollIntoView({ behavior: 'smooth' })} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20">
+                    Explore Our Services
+                  </button>
+                  <div className="flex items-center gap-4 px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">
+                    <Globe2 size={16} className="text-red-600 shadow-sm" /> Global Delivery Network
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Floating Abstract Element */}
+            <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[120px] -z-0" />
+          </motion.div>
         </section>
 
         {/* Services Breakdown - What's Included */}
         <section className="pt-12 pb-8 bg-white relative overflow-hidden">
-          {/* Architectural Background Pattern */}
-          <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
-            style={{ backgroundImage: 'radial-gradient(#0f172a 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+          <motion.div
+            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#2563eb' } }))}
+            onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+            viewport={{ margin: "-10% 0px -70% 0px" }}
+          >
+            {/* Architectural Background Pattern */}
+            <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
+              style={{ backgroundImage: 'radial-gradient(#0f172a 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
 
-          <div className="enterprise-container relative z-10">
-            <div className="max-w-full mb-20 group">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-4xl md:text-6xl font-[900] text-[#0f172a] group-hover:text-[#dc2626] transition-colors duration-300 mb-8 tracking-tighter"
-              >
-                What's Included.
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="text-lg md:text-xl text-slate-500 leading-relaxed font-medium"
-              >
-                Technology is never a "set it and forget it" endeavor. True digital transformation requires a partner who is willing to stay in the trenches long after the initial excitement of a launch has faded. We provide a comprehensive lifecycle model that shifts the technical burden off your shoulders and onto ours, ensuring that your infrastructure remains an asset rather than a liability.
-              </motion.p>
-            </div>
+            <div className="enterprise-container relative z-10">
+              <div className="max-w-full mb-20 group">
+                <span className="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-6 block">Lifecycle Model</span>
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-4xl md:text-6xl font-[900] text-[#0f172a] group-hover:text-blue-600 transition-colors duration-300 mb-8 tracking-tighter"
+                >
+                  What's Included.
+                </motion.h2>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium"
+                >
+                  Technology is never a "set it and forget it" endeavor. True digital transformation requires a partner who is willing to stay in the trenches long after the initial excitement of a launch has faded. We provide a comprehensive lifecycle model that shifts the technical burden off your shoulders and onto ours, ensuring that your infrastructure remains an asset rather than a liability.
+                </motion.p>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-              {[
-                {
-                  title: "Consultation",
-                  icon: CheckCircle2,
-                  desc: "Strategic discovery & roadmap planning",
-                  color: "group-hover:text-blue-600"
-                },
-                {
-                  title: "Development",
-                  icon: Cpu,
-                  desc: "High-performance engineering & build",
-                  color: "group-hover:text-purple-600"
-                },
-                {
-                  title: "Maintenance",
-                  icon: Layers,
-                  desc: "Continuous optimization & updates",
-                  color: "group-hover:text-emerald-600"
-                },
-                {
-                  title: "Security",
-                  icon: ShieldCheck,
-                  desc: "Zero-trust protocols & compliance",
-                  color: "group-hover:text-indigo-600"
-                },
-                {
-                  title: "Support",
-                  icon: ArrowRight,
-                  desc: "24/7 global expert assistance",
-                  color: "group-hover:text-[#dc2626]"
-                }
-              ].map((item, i) => (
-                <WhatsIncludedCard key={item.title} item={item} index={i} />
-              ))}
-            </div>
-
-            <div className="mt-24 max-w-full mx-auto">
-              <div className="space-y-16">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
                 {[
                   {
-                    title: "1. Consultation: Strategic Discovery & Roadmap Planning",
-                    desc: "We believe the most expensive mistake a company can make is building the \"wrong\" solution perfectly. Our process begins with a deep dive into your operational reality. We don't just ask what you want to build; we ask what business problem you are trying to solve.",
-                    outcome: "You receive a pragmatic, battle-tested roadmap that balances immediate technical needs with your three-to-five-year fiscal goals. We identify the \"unseen\" risks early—regulatory hurdles, integration bottlenecks, and scalability ceilings—so they never become surprises later.",
-                    image: consultationImg
+                    title: "Consultation",
+                    icon: CheckCircle2,
+                    desc: "Strategic discovery & roadmap planning",
+                    color: "group-hover:text-blue-600"
                   },
                   {
-                    title: "2. Development: High-Performance Engineering & Build",
-                    desc: "Engineering excellence is our baseline, but our real focus is on maintainable innovation. We build systems that your organization can actually live with. We avoid \"black-box\" code that creates vendor lock-in, prioritizing transparent, modular architectures instead.",
-                    outcome: "A high-velocity build process that emphasizes \"clean\" code and rigorous documentation. By utilizing modern CI/CD pipelines and agile methodologies, we deliver functional, high-performance software that is ready to scale the moment it hits production.",
-                    image: developmentImg
+                    title: "Development",
+                    icon: Cpu,
+                    desc: "High-performance engineering & build",
+                    color: "group-hover:text-purple-600"
                   },
                   {
-                    title: "3. Maintenance: Continuous Optimization & Updates",
-                    desc: "Software begins to age the moment it is deployed. Our maintenance philosophy is proactive, not reactive. We don’t wait for a system crash to look at your servers; we are constantly \"under the hood\" ensuring the engine is running at peak efficiency.",
-                    outcome: "We handle the delicate work of dependency updates, framework migrations, and performance tuning. Our goal is to ensure your platform performs better on day 500 than it did on day one, reducing technical debt and extending the lifespan of your investment.",
-                    image: maintenanceImg
+                    title: "Maintenance",
+                    icon: Layers,
+                    desc: "Continuous optimization & updates",
+                    color: "group-hover:text-emerald-600"
                   },
                   {
-                    title: "4. Security: Zero-Trust Protocols & Compliance",
-                    desc: "In today’s landscape, security is a board-level risk that can’t be solved with a simple firewall. We bake security into the very first line of code using a Zero-Trust framework—verifying every request, every time, without exception.",
-                    outcome: "We build \"hardened\" environments that protect your proprietary data and customer trust. From navigating the complexities of GDPR and HIPAA to implementing advanced encryption and threat-hunting, we ensure your brand stays out of the headlines for the wrong reasons.",
-                    image: securityImg
+                    title: "Security",
+                    icon: ShieldCheck,
+                    desc: "Zero-trust protocols & compliance",
+                    color: "group-hover:text-indigo-600"
                   },
                   {
-                    title: "5. Support: 24/7 Global Expert Assistance",
-                    desc: "When a critical system goes down, you don’t need a generic ticketing system; you need a senior engineer who knows your architecture. Our support is handled by experts, not scripted call centers.",
-                    outcome: "We provide true \"follow-the-sun\" coverage. Whether it’s a minor configuration tweak or a midnight emergency, you have direct access to specialists who understand the stakes. We don't just patch problems; we identify the root cause to ensure they never happen again.",
-                    image: supportImg
+                    title: "Support",
+                    icon: ArrowRight,
+                    desc: "24/7 global expert assistance",
+                    color: "group-hover:text-[#dc2626]"
                   }
-                ].map((item, idx) => (
-                  <div id={`service-detail-${idx}`} key={idx} className={`flex flex-col ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 md:gap-16 items-center group`}>
-
-                    {/* Text Side */}
-                    <div className="flex-1 space-y-6">
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 font-black text-lg group-hover:bg-[#dc2626] group-hover:text-white transition-colors duration-300 shrink-0">
-                          0{idx + 1}
-                        </div>
-                        <h3 className="text-2xl md:text-3xl font-black text-[#0f172a] group-hover:text-[#dc2626] transition-colors duration-300">
-                          {item.title.split(":")[0]}
-                        </h3>
-                      </div>
-
-                      <h4 className="text-xl font-bold text-slate-800">{item.title.split(":")[1]}</h4>
-
-                      <p className="text-slate-600 leading-relaxed text-lg">
-                        {item.desc}
-                      </p>
-
-                      <div className="bg-slate-50 p-6 md:p-8 rounded-2xl border border-slate-100 border-l-4 border-l-[#dc2626] shadow-sm">
-                        <h4 className="text-xs font-black text-[#dc2626] uppercase tracking-widest mb-3 flex items-center gap-2">
-                          <CheckCircle2 size={14} /> The Outcome
-                        </h4>
-                        <p className="text-slate-700 font-medium leading-relaxed italic">
-                          "{item.outcome}"
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Image Side */}
-                    <div className="flex-1 w-full">
-                      <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-slate-200 group-hover:shadow-[0_20px_40px_-15px_rgba(220,38,38,0.2)] transition-all duration-500 border border-slate-100 aspect-[4/3]">
-                        <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                        <motion.img
-                          initial={{ scale: 1.1 }}
-                          whileInView={{ scale: 1 }}
-                          transition={{ duration: 1.5 }}
-                          src={item.image}
-                          alt={item.title}
-                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                        />
-                      </div>
-                    </div>
-
-                  </div>
+                ].map((item, i) => (
+                  <WhatsIncludedCard key={item.title} item={item} index={i} />
                 ))}
               </div>
+
+              <div className="mt-24 max-w-full mx-auto">
+                <div className="space-y-16">
+                  {[
+                    {
+                      title: "1. Consultation: Strategic Discovery & Roadmap Planning",
+                      desc: "We believe the most expensive mistake a company can make is building the \"wrong\" solution perfectly. Our process begins with a deep dive into your operational reality. We don't just ask what you want to build; we ask what business problem you are trying to solve.",
+                      outcome: "You receive a pragmatic, battle-tested roadmap that balances immediate technical needs with your three-to-five-year fiscal goals. We identify the \"unseen\" risks early—regulatory hurdles, integration bottlenecks, and scalability ceilings—so they never become surprises later.",
+                      image: consultationImg
+                    },
+                    {
+                      title: "2. Development: High-Performance Engineering & Build",
+                      desc: "Engineering excellence is our baseline, but our real focus is on maintainable innovation. We build systems that your organization can actually live with. We avoid \"black-box\" code that creates vendor lock-in, prioritizing transparent, modular architectures instead.",
+                      outcome: "A high-velocity build process that emphasizes \"clean\" code and rigorous documentation. By utilizing modern CI/CD pipelines and agile methodologies, we deliver functional, high-performance software that is ready to scale the moment it hits production.",
+                      image: developmentImg
+                    },
+                    {
+                      title: "3. Maintenance: Continuous Optimization & Updates",
+                      desc: "Software begins to age the moment it is deployed. Our maintenance philosophy is proactive, not reactive. We don’t wait for a system crash to look at your servers; we are constantly \"under the hood\" ensuring the engine is running at peak efficiency.",
+                      outcome: "We handle the delicate work of dependency updates, framework migrations, and performance tuning. Our goal is to ensure your platform performs better on day 500 than it did on day one, reducing technical debt and extending the lifespan of your investment.",
+                      image: maintenanceImg
+                    },
+                    {
+                      title: "4. Security: Zero-Trust Protocols & Compliance",
+                      desc: "In today’s landscape, security is a board-level risk that can’t be solved with a simple firewall. We bake security into the very first line of code using a Zero-Trust framework—verifying every request, every time, without exception.",
+                      outcome: "We build \"hardened\" environments that protect your proprietary data and customer trust. From navigating the complexities of GDPR and HIPAA to implementing advanced encryption and threat-hunting, we ensure your brand stays out of the headlines for the wrong reasons.",
+                      image: securityImg
+                    },
+                    {
+                      title: "5. Support: 24/7 Global Expert Assistance",
+                      desc: "When a critical system goes down, you don’t need a generic ticketing system; you need a senior engineer who knows your architecture. Our support is handled by experts, not scripted call centers.",
+                      outcome: "We provide true \"follow-the-sun\" coverage. Whether it’s a minor configuration tweak or a midnight emergency, you have direct access to specialists who understand the stakes. We don't just patch problems; we identify the root cause to ensure they never happen again.",
+                      image: supportImg
+                    }
+                  ].map((item, idx) => (
+                    <div id={`service-detail-${idx}`} key={idx} className={`flex flex-col ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 md:gap-16 items-center group`}>
+
+                      {/* Text Side */}
+                      <div className="flex-1 space-y-6">
+                        <div className="flex items-center gap-4 mb-4">
+                          <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 font-black text-lg group-hover:bg-[#dc2626] group-hover:text-white transition-colors duration-300 shrink-0">
+                            0{idx + 1}
+                          </div>
+                          <h3 className="text-2xl md:text-3xl font-black text-[#0f172a] group-hover:text-[#dc2626] transition-colors duration-300">
+                            {item.title.split(":")[0]}
+                          </h3>
+                        </div>
+
+                        <h4 className="text-xl font-bold text-slate-800">{item.title.split(":")[1]}</h4>
+
+                        <p className="text-slate-600 leading-relaxed text-lg">
+                          {item.desc}
+                        </p>
+
+                        <div className="bg-slate-50 p-6 md:p-8 rounded-2xl border border-slate-100 border-l-4 border-l-[#dc2626] shadow-sm">
+                          <h4 className="text-xs font-black text-[#dc2626] uppercase tracking-widest mb-3 flex items-center gap-2">
+                            <CheckCircle2 size={14} /> The Outcome
+                          </h4>
+                          <p className="text-slate-700 font-medium leading-relaxed italic">
+                            "{item.outcome}"
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Image Side */}
+                      <div className="flex-1 w-full">
+                        <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-slate-200 group-hover:shadow-[0_20px_40px_-15px_rgba(220,38,38,0.2)] transition-all duration-500 border border-slate-100 aspect-[4/3]">
+                          <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                          <motion.img
+                            initial={{ scale: 1.1 }}
+                            whileInView={{ scale: 1 }}
+                            transition={{ duration: 1.5 }}
+                            src={item.image}
+                            alt={item.title}
+                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                          />
+                        </div>
+                      </div>
+
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* Our Services Section - Interactive Service Wheel */}
@@ -1084,13 +1100,18 @@ const Services = () => {
         </div>
 
         <section id="our-solutions-architecture" className="py-12 bg-gray-50/50 overflow-hidden relative">
-          <div className="enterprise-container relative z-10">
+          <motion.div
+            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#f97316' } }))}
+            onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+            viewport={{ margin: "-10% 0px -70% 0px" }}
+            className="enterprise-container relative z-10"
+          >
             <div className="text-center mb-16 mt-10">
               <motion.span
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="inline-block text-[10px] font-black uppercase tracking-[0.5em] text-[#dc2626] mb-3"
+                className="inline-block text-[10px] font-black uppercase tracking-[0.5em] text-orange-600 mb-3"
               >
                 SOLUTIONS ARCHITECTURE
               </motion.span>
@@ -1100,7 +1121,7 @@ const Services = () => {
                 viewport={{ once: true }}
                 className="text-3xl md:text-5xl font-[900] text-[#0f172a]"
               >
-                Our <span className="text-[#dc2626]">Services.</span>
+                Our <span className="text-orange-600">Services.</span>
               </motion.h2>
             </div>
 
@@ -1111,12 +1132,12 @@ const Services = () => {
                     key={service.id}
                     service={service}
                     index={index}
-                    onSelect={(s) => navigate(`/services/${s.id}`)}
+                    onSelect={(s) => navigate(`/services/${s.id}`, { state: { fromButton: true } })}
                   />
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
 
@@ -1126,8 +1147,8 @@ const Services = () => {
         <section id="technology-pillars" className="section-padding bg-white overflow-hidden">
           <div className="enterprise-container">
             <div className="mb-12">
-              <span className="text-red-600 font-black uppercase tracking-widest text-xs mb-4 block">Core Competencies</span>
-              <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Technology <span className="text-red-600">Pillars.</span></h2>
+              <span className="text-green-600 font-black uppercase tracking-widest text-xs mb-4 block">Core Competencies</span>
+              <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Technology <span className="text-green-600">Pillars.</span></h2>
             </div>
 
             <div className="flex flex-col lg:flex-row gap-6 h-auto lg:h-[550px]">
@@ -1206,7 +1227,7 @@ const Services = () => {
                   Bridging the Gap Between <br />
                   <span className="text-red-600">Core & Cloud.</span>
                 </h2>
-                <p className="text-lg text-slate-500 font-medium leading-relaxed mb-10">
+                <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-10 font-medium">
                   VelDurSen specializes in building high-performance bridges that enable bi-directional data flow and gradual modernization without disrupting mission-critical operations.
                 </p>
 
@@ -1305,8 +1326,8 @@ const Services = () => {
         <section className="py-32 bg-slate-50 relative overflow-hidden">
           <div className="enterprise-container">
             <div className="mb-24 text-center relative z-10">
-              <span className="text-red-600 font-black uppercase tracking-widest text-[10px] bg-white px-4 py-2 rounded-full border border-slate-100 shadow-sm inline-block mb-6">Execution Lifecycle</span>
-              <h2 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter leading-none">The Path to <span className="text-red-600">Innovation.</span></h2>
+              <span className="text-blue-600 font-black uppercase tracking-widest text-[10px] bg-white px-4 py-2 rounded-full border border-blue-100 shadow-sm inline-block mb-6">Execution Lifecycle</span>
+              <h2 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter leading-none">The Path to <span className="text-blue-600">Innovation.</span></h2>
             </div>
 
             <div className="relative px-12 lg:px-0">
@@ -1391,92 +1412,98 @@ const Services = () => {
 
         {/* 7. PERFORMANCE & SCALABILITY BLOCK - TECHNICAL SCHEMATIC STYLE */}
         <section className="py-20 bg-white relative overflow-hidden">
-          {/* Precision Grid Background */}
-          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+          <motion.div
+            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#f59e0b' } }))}
+            onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+            viewport={{ margin: "-10% 0px -70% 0px" }}
+          >
+            {/* Precision Grid Background */}
+            <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
 
-          <div className="enterprise-container relative z-10">
-            <div className="flex flex-col lg:flex-row items-end justify-between mb-12 gap-8">
-              <div className="max-w-2xl">
-                <span className="text-red-600 font-black uppercase tracking-[0.4em] text-[10px] mb-4 block">Precision Telemetry</span>
-                <h2 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter leading-[0.9] mb-2">
-                  Reliability <br />
-                  <span className="text-red-600">Calculated.</span>
-                </h2>
+            <div className="enterprise-container relative z-10">
+              <div className="flex flex-col lg:flex-row items-end justify-between mb-12 gap-8">
+                <div className="max-w-2xl">
+                  <span className="text-orange-600 font-black uppercase tracking-[0.4em] text-[10px] mb-4 block">Precision Telemetry</span>
+                  <h2 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter leading-[0.9] mb-2">
+                    Reliability <br />
+                    <span className="text-orange-600">Calculated.</span>
+                  </h2>
+                </div>
+                <div className="max-w-md pb-2">
+                  <p className="text-slate-500 text-sm font-medium leading-relaxed lg:text-right border-r-4 border-red-600 pr-8">
+                    Our infrastructure is stress-tested against extreme concurrent loads, ensuring mission-critical stability for global deployments.
+                  </p>
+                </div>
               </div>
-              <div className="max-w-md pb-2">
-                <p className="text-slate-500 text-sm font-medium leading-relaxed lg:text-right border-r-4 border-red-600 pr-8">
-                  Our infrastructure is stress-tested against extreme concurrent loads, ensuring mission-critical stability for global deployments.
-                </p>
-              </div>
-            </div>
 
-            <div className="relative py-8">
-              {/* Horizontal Axis */}
-              <div className="absolute top-1/2 left-0 w-full h-[1px] bg-slate-100 -translate-y-1/2" />
+              <div className="relative py-8">
+                {/* Horizontal Axis */}
+                <div className="absolute top-1/2 left-0 w-full h-[1px] bg-slate-100 -translate-y-1/2" />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
-                {[
-                  { id: "SYS-X1", label: "Runtime Stability", value: "99.99%", unit: "UPTIME", desc: "Redundant node clusters with sub-second failover protocols." },
-                  { id: "OPS-T4", label: "Network Latency", value: "Multi-Region", unit: "FABRIC", desc: "Proprietary backbone connectivity across six continents." },
-                  { id: "CAP-B10", label: "Daily Throughput", value: "10B+", unit: "TXNS", desc: "Architected for massive concurrent transaction volumes." },
-                  { id: "SEC-S2", label: "Security Standard", value: "SOC 2", unit: "TYPE II", desc: "Continuous monitoring and high-fidelity audit trails." },
-                ].map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1, duration: 0.5 }}
-                    className="relative group cursor-default"
-                  >
-                    {/* Technical ID */}
-                    <div className="font-mono text-[9px] font-black text-slate-300 mb-4 tracking-[0.3em] group-hover:text-red-600 transition-colors">
-                      REF_ID: // {item.id}
-                    </div>
-
-                    {/* Lead bar */}
-                    <div className="w-full h-[3px] bg-slate-50 mb-6 overflow-hidden rounded-full">
-                      <motion.div
-                        className="h-full bg-red-600"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: "100%" }}
-                        transition={{ duration: 1, delay: i * 0.2 }}
-                      />
-                    </div>
-
-                    <div className="flex items-end gap-2 mb-2">
-                      <div className="text-3xl md:text-4xl font-black text-slate-900 tracking-tighter leading-none">
-                        {item.value}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
+                  {[
+                    { id: "SYS-X1", label: "Runtime Stability", value: "99.99%", unit: "UPTIME", desc: "Redundant node clusters with sub-second failover protocols." },
+                    { id: "OPS-T4", label: "Network Latency", value: "Multi-Region", unit: "FABRIC", desc: "Proprietary backbone connectivity across six continents." },
+                    { id: "CAP-B10", label: "Daily Throughput", value: "10B+", unit: "TXNS", desc: "Architected for massive concurrent transaction volumes." },
+                    { id: "SEC-S2", label: "Security Standard", value: "SOC 2", unit: "TYPE II", desc: "Continuous monitoring and high-fidelity audit trails." },
+                  ].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1, duration: 0.5 }}
+                      className="relative group cursor-default"
+                    >
+                      {/* Technical ID */}
+                      <div className="font-mono text-[9px] font-black text-slate-300 mb-4 tracking-[0.3em] group-hover:text-red-600 transition-colors">
+                        REF_ID: // {item.id}
                       </div>
-                      <div className="text-[9px] font-black text-red-600 uppercase tracking-widest pb-1 border-b-2 border-red-100">
-                        {item.unit}
+
+                      {/* Lead bar */}
+                      <div className="w-full h-[3px] bg-slate-50 mb-6 overflow-hidden rounded-full">
+                        <motion.div
+                          className="h-full bg-red-600"
+                          initial={{ width: 0 }}
+                          whileInView={{ width: "100%" }}
+                          transition={{ duration: 1, delay: i * 0.2 }}
+                        />
                       </div>
-                    </div>
 
-                    <h3 className="text-[10px] font-black text-slate-900 uppercase tracking-[0.2em] mb-2">
-                      {item.label}
-                    </h3>
+                      <div className="flex items-end gap-2 mb-2">
+                        <div className="text-3xl md:text-4xl font-black text-slate-900 tracking-tighter leading-none">
+                          {item.value}
+                        </div>
+                        <div className="text-[9px] font-black text-red-600 uppercase tracking-widest pb-1 border-b-2 border-red-100">
+                          {item.unit}
+                        </div>
+                      </div>
 
-                    <p className="text-[11px] text-slate-400 font-medium leading-snug max-w-[180px]">
-                      {item.desc}
-                    </p>
+                      <h3 className="text-[10px] font-black text-slate-900 uppercase tracking-[0.2em] mb-2">
+                        {item.label}
+                      </h3>
 
-                    {/* Aesthetic Coordinate Point */}
-                    <div className="absolute -top-6 -left-4 w-1.5 h-1.5 rounded-full border border-slate-200 bg-white" />
-                  </motion.div>
-                ))}
+                      <p className="text-[11px] text-slate-400 font-medium leading-snug max-w-[180px]">
+                        {item.desc}
+                      </p>
+
+                      {/* Aesthetic Coordinate Point */}
+                      <div className="absolute -top-6 -left-4 w-1.5 h-1.5 rounded-full border border-slate-200 bg-white" />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom Data Legend */}
+              <div className="mt-12 pt-6 border-t border-slate-100 flex justify-between items-center text-[9px] font-black text-slate-300 uppercase tracking-[0.5em]">
+                <span>Telemetry Stream Active</span>
+                <div className="flex gap-4">
+                  <span>Vector-22</span>
+                  <span className="text-red-600">Verified Stability</span>
+                </div>
               </div>
             </div>
-
-            {/* Bottom Data Legend */}
-            <div className="mt-12 pt-6 border-t border-slate-100 flex justify-between items-center text-[9px] font-black text-slate-300 uppercase tracking-[0.5em]">
-              <span>Telemetry Stream Active</span>
-              <div className="flex gap-4">
-                <span>Vector-22</span>
-                <span className="text-red-600">Verified Stability</span>
-              </div>
-            </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* 8.5 INNOVATION LAB SECTION - DASHBOARD STYLE */}
@@ -1485,12 +1512,12 @@ const Services = () => {
           <div className="enterprise-container relative z-10">
             <div className="flex flex-col lg:flex-row gap-16 items-center">
               <div className="w-full lg:w-1/2">
-                <span className="text-red-600 font-black uppercase tracking-[0.3em] text-[10px] mb-6 block">Internal R&D Lab</span>
+                <span className="text-green-600 font-black uppercase tracking-[0.3em] text-[10px] mb-6 block">Internal R&D Lab</span>
                 <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter leading-tight mb-8">
                   The VelDurSen <br />
-                  <span className="text-red-600">Innovation Engine.</span>
+                  <span className="text-green-600">Innovation Engine.</span>
                 </h2>
-                <p className="text-lg text-slate-500 font-medium leading-relaxed mb-12 max-w-xl">
+                <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-12 max-w-xl font-medium">
                   Our labs are where we stress-test the future. We don't just follow trends; we architect the patent-pending IP that powers next-decade infrastructure.
                 </p>
 
@@ -1597,12 +1624,11 @@ const Services = () => {
                             </span>
                           </div>
                           <div className="mt-4 flex gap-1">
-                            {[1, 2, 3, 4, 5, 6].map((i) => (
-                              <motion.div
+                            {[0, 1, 2, 3, 4, 5].map((i) => (
+                              <div
                                 key={i}
-                                animate={{ height: [10, 20, 15, 25, 10] }}
-                                transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1, delay: i * 0.1 }}
                                 className="flex-1 bg-red-600/20 rounded-full"
+                                style={{ height: [15, 12, 22, 18, 25, 14][i] }}
                               />
                             ))}
                           </div>
@@ -1623,148 +1649,154 @@ const Services = () => {
         </div>
 
         <section className="py-20 bg-white text-[#0f172a] overflow-hidden relative">
-          {/* Subtle Architectural Background */}
-          <div className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none"
-            style={{ backgroundImage: 'radial-gradient(#0f172a 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+          <motion.div
+            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
+            onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+            viewport={{ margin: "-10% 0px -70% 0px" }}
+          >
+            {/* Subtle Architectural Background */}
+            <div className="absolute inset-0 z-0 opacity-[0.02] pointer-events-none"
+              style={{ backgroundImage: 'radial-gradient(#0f172a 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
-          <div className="container px-4 md:px-6 mx-auto relative z-10 box-border">
-            {/* Section Heading - Navy & Red Split */}
-            <div className="max-w-7xl mx-auto text-center mb-16">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-2xl md:text-3xl lg:text-4xl font-[900] leading-tight tracking-tight text-[#0f172a]"
-              >
-                Why Global Leaders <br />
-                <span className="text-[#dc2626]">Choose Us.</span>
-              </motion.h2>
-            </div>
+            <div className="container px-4 md:px-6 mx-auto relative z-10 box-border">
+              {/* Section Heading - Navy & Red Split */}
+              <div className="max-w-7xl mx-auto text-center mb-16">
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-2xl md:text-3xl lg:text-4xl font-[900] leading-tight tracking-tight text-[#0f172a]"
+                >
+                  Why Global Leaders <br />
+                  <span className="text-[#dc2626]">Choose Us.</span>
+                </motion.h2>
+              </div>
 
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 gap-6 mb-24">
-                {whyChooseUsData.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.05 }}
-                    className="p-8 md:p-10 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1 relative overflow-hidden flex flex-col md:flex-row gap-8 items-start"
-                  >
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-slate-50 to-transparent rounded-bl-full -mr-8 -mt-8 opacity-50 group-hover:opacity-100 transition-opacity" />
+              <div className="max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 gap-6 mb-24">
+                  {whyChooseUsData.map((item, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 }}
+                      className="p-8 md:p-10 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1 relative overflow-hidden flex flex-col md:flex-row gap-8 items-start"
+                    >
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-slate-50 to-transparent rounded-bl-full -mr-8 -mt-8 opacity-50 group-hover:opacity-100 transition-opacity" />
 
-                    <div className="w-16 h-16 bg-red-50 text-[#dc2626] rounded-xl flex items-center justify-center shrink-0 group-hover:bg-[#dc2626] group-hover:text-white transition-colors duration-300">
-                      <item.icon size={32} strokeWidth={1.5} />
-                    </div>
-
-                    <div className="flex-1 relative z-10">
-                      <h3 className="text-2xl font-bold text-[#0f172a] mb-4 group-hover:text-[#dc2626] transition-colors duration-300">
-                        {item.title}
-                      </h3>
-
-                      <div className="text-slate-600 text-base leading-relaxed space-y-4 flex-1">
-                        <p>{item.description}</p>
-
-                        {item.note && (
-                          <p className="text-sm font-semibold text-slate-500 italic mt-6 border-l-4 border-[#dc2626]/20 pl-4 py-1">
-                            {item.note}
-                          </p>
-                        )}
+                      <div className="w-16 h-16 bg-red-50 text-[#dc2626] rounded-xl flex items-center justify-center shrink-0 group-hover:bg-[#dc2626] group-hover:text-white transition-colors duration-300">
+                        <item.icon size={32} strokeWidth={1.5} />
                       </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
 
-              {/* Testimonials Section - Full Width Below */}
-              <div className="w-full max-w-5xl mx-auto py-12">
-                <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-400 to-transparent" />
-              </div>
+                      <div className="flex-1 relative z-10">
+                        <h3 className="text-2xl font-bold text-[#0f172a] mb-4 group-hover:text-[#dc2626] transition-colors duration-300">
+                          {item.title}
+                        </h3>
 
-              <div className="relative max-w-5xl mx-auto">
-                <div className="text-center mb-12">
-                  <span className="text-[#dc2626] font-bold tracking-widest uppercase text-xs mb-2 block">Client Stories</span>
-                  <h3 className="text-3xl font-black text-[#0f172a]">Trusted by Industry Visionaries</h3>
+                        <div className="text-slate-600 text-base leading-relaxed space-y-4 flex-1">
+                          <p>{item.description}</p>
+
+                          {item.note && (
+                            <p className="text-sm font-semibold text-slate-500 italic mt-6 border-l-4 border-[#dc2626]/20 pl-4 py-1">
+                              {item.note}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
 
-                <div className="relative bg-[#0f172a] border border-slate-800 rounded-[2.5rem] p-8 md:p-14 shadow-[0_20px_60px_-15px_rgba(15,23,42,0.3)] overflow-hidden">
-                  {/* Background Accent */}
-                  <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                {/* Testimonials Section - Full Width Below */}
+                <div className="w-full max-w-5xl mx-auto py-12">
+                  <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-400 to-transparent" />
+                </div>
 
-                  <div className="absolute top-10 right-10 opacity-10">
-                    <Quote className="w-24 h-24 text-white" />
+                <div className="relative max-w-5xl mx-auto">
+                  <div className="text-center mb-12">
+                    <span className="text-[#dc2626] font-bold tracking-widest uppercase text-xs mb-2 block">Client Stories</span>
+                    <h3 className="text-3xl font-black text-[#0f172a]">Trusted by Industry Visionaries</h3>
                   </div>
 
-                  <div className="relative z-10">
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={currentReview}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.3 }}
-                        className="flex flex-col items-center text-center"
-                      >
-                        <blockquote className="text-2xl md:text-3xl font-medium leading-relaxed mb-10 text-white max-w-4xl tracking-tight">
-                          "{reviews[currentReview].quote}"
-                        </blockquote>
+                  <div className="relative bg-[#0f172a] border border-slate-800 rounded-[2.5rem] p-8 md:p-14 shadow-[0_20px_60px_-15px_rgba(15,23,42,0.3)] overflow-hidden">
+                    {/* Background Accent */}
+                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
-                        <div className="flex flex-col items-center gap-4">
-                          <div className={`w-16 h-16 bg-gradient-to-br ${reviews[currentReview].color} rounded-full flex items-center justify-center text-white font-black text-xl shadow-lg ring-4 ring-white/10`}>
-                            {reviews[currentReview].author}
-                          </div>
-                          <div>
-                            <div className="font-black text-lg text-white">{reviews[currentReview].role}</div>
-                            <div className="text-xs font-bold text-red-500 uppercase tracking-widest mt-1">
-                              {reviews[currentReview].company}
+                    <div className="absolute top-10 right-10 opacity-10">
+                      <Quote className="w-24 h-24 text-white" />
+                    </div>
+
+                    <div className="relative z-10">
+                      <AnimatePresence mode="wait">
+                        <motion.div
+                          key={currentReview}
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -20 }}
+                          transition={{ duration: 0.3 }}
+                          className="flex flex-col items-center text-center"
+                        >
+                          <blockquote className="text-2xl md:text-3xl font-medium leading-relaxed mb-10 text-white max-w-4xl tracking-tight">
+                            "{reviews[currentReview].quote}"
+                          </blockquote>
+
+                          <div className="flex flex-col items-center gap-4">
+                            <div className={`w-16 h-16 bg-gradient-to-br ${reviews[currentReview].color} rounded-full flex items-center justify-center text-white font-black text-xl shadow-lg ring-4 ring-white/10`}>
+                              {reviews[currentReview].author}
+                            </div>
+                            <div>
+                              <div className="font-black text-lg text-white">{reviews[currentReview].role}</div>
+                              <div className="text-xs font-bold text-red-500 uppercase tracking-widest mt-1">
+                                {reviews[currentReview].company}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </motion.div>
-                    </AnimatePresence>
+                        </motion.div>
+                      </AnimatePresence>
 
-                    {/* Controls */}
-                    <div className="flex items-center justify-between mt-12 px-4 md:px-12 border-t border-white/10 pt-8">
-                      <button
-                        onClick={prevReview}
-                        className="group flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-white transition-colors"
-                      >
-                        <div className="w-10 h-10 rounded-full border border-slate-700 flex items-center justify-center group-hover:border-white group-hover:bg-white group-hover:text-[#0f172a] transition-all">
-                          <ChevronLeft size={18} />
-                        </div>
-                        <span className="hidden md:inline">Previous</span>
-                      </button>
+                      {/* Controls */}
+                      <div className="flex items-center justify-between mt-12 px-4 md:px-12 border-t border-white/10 pt-8">
+                        <button
+                          onClick={prevReview}
+                          className="group flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-white transition-colors"
+                        >
+                          <div className="w-10 h-10 rounded-full border border-slate-700 flex items-center justify-center group-hover:border-white group-hover:bg-white group-hover:text-[#0f172a] transition-all">
+                            <ChevronLeft size={18} />
+                          </div>
+                          <span className="hidden md:inline">Previous</span>
+                        </button>
 
-                      <div className="flex gap-2">
-                        {reviews.map((_, i) => (
-                          <button
-                            key={i}
-                            onClick={() => setCurrentReview(i)}
-                            className={`h-1.5 rounded-full transition-all duration-300 ${i === currentReview
-                              ? "bg-red-600 w-8"
-                              : "bg-slate-700 w-1.5 hover:bg-slate-500"
-                              }`}
-                            aria-label={`Review ${i + 1}`}
-                          />
-                        ))}
+                        <div className="flex gap-2">
+                          {reviews.map((_, i) => (
+                            <button
+                              key={i}
+                              onClick={() => setCurrentReview(i)}
+                              className={`h-1.5 rounded-full transition-all duration-300 ${i === currentReview
+                                ? "bg-red-600 w-8"
+                                : "bg-slate-700 w-1.5 hover:bg-slate-500"
+                                }`}
+                              aria-label={`Review ${i + 1}`}
+                            />
+                          ))}
+                        </div>
+
+                        <button
+                          onClick={nextReview}
+                          className="group flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-white transition-colors"
+                        >
+                          <span className="hidden md:inline">Next</span>
+                          <div className="w-10 h-10 rounded-full border border-slate-700 flex items-center justify-center group-hover:border-white group-hover:bg-white group-hover:text-[#0f172a] transition-all">
+                            <ChevronRight size={18} />
+                          </div>
+                        </button>
                       </div>
-
-                      <button
-                        onClick={nextReview}
-                        className="group flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-white transition-colors"
-                      >
-                        <span className="hidden md:inline">Next</span>
-                        <div className="w-10 h-10 rounded-full border border-slate-700 flex items-center justify-center group-hover:border-white group-hover:bg-white group-hover:text-[#0f172a] transition-all">
-                          <ChevronRight size={18} />
-                        </div>
-                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         {/* --- APPENDED INDUSTRIES PAGE CONTENT --- */}
@@ -1773,11 +1805,16 @@ const Services = () => {
 
           {/* 2. PHILOSOPHY — ASYMMETRICAL SPLIT */}
           <section className="py-12 bg-white relative overflow-hidden">
-            <div className="enterprise-container">
+            <motion.div
+              onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
+              onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+              viewport={{ margin: "-10% 0px -70% 0px" }}
+              className="enterprise-container"
+            >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div className="lg:col-span-12 mb-6">
                   <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight mb-6">Our <span className="text-red-600">Industries.</span></h2>
-                  <p className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight max-w-4xl italic serif">
+                  <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-bold max-w-4xl">
                     "Generic solutions dilute enterprise potential. We build for the unique <span className="text-red-600">complexity</span> of your industry."
                   </p>
                 </div>
@@ -1816,7 +1853,7 @@ const Services = () => {
                   viewport={{ once: true }}
                   className="lg:col-span-12 xl:col-span-5 space-y-8"
                 >
-                  <p className="text-xl text-slate-600 leading-relaxed font-medium">
+                  <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
                     Every industry operates under unique regulations, customer expectations, and operational complexity. We combine deep domain expertise with cloud-native engineering to design industry-aligned digital ecosystems.
                   </p>
 
@@ -1839,14 +1876,19 @@ const Services = () => {
                   </ul>
                 </motion.div>
               </div>
-            </div>
+            </motion.div>
           </section>
 
           {/* 3. INDUSTRY SOLUTIONS */}
 
           {/* 3.1 HEALTHCARE */}
-          <section className="py-8 bg-slate-50 overflow-hidden">
-            <div className="enterprise-container">
+          <section id="industries" className="py-8 bg-slate-50 overflow-hidden">
+            <motion.div
+              onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
+              onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+              viewport={{ margin: "-10% 0px -70% 0px" }}
+              className="enterprise-container"
+            >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
@@ -1859,7 +1901,7 @@ const Services = () => {
                       <div className="w-10 h-0.5 bg-red-600" /> Intelligent Care Ecosystems
                     </span>
                     <h2 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4 tracking-tighter">Health<span className="text-red-600">care</span></h2>
-                    <p className="text-xl text-slate-600 font-medium leading-relaxed max-w-xl underline decoration-red-600/20 underline-offset-8">
+                    <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium max-w-xl">
                       Transforming healthcare delivery through secure, intelligent, and compliant platforms.
                     </p>
                   </div>
@@ -1901,12 +1943,17 @@ const Services = () => {
                   <div className="absolute -top-6 -right-6 w-32 h-32 bg-red-600/10 rounded-full blur-2xl" />
                 </motion.div>
               </div>
-            </div>
+            </motion.div>
           </section>
 
           {/* 3.2 EDUCATION */}
           <section className="py-8 bg-white relative overflow-hidden">
-            <div className="enterprise-container">
+            <motion.div
+              onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#f59e0b' } }))}
+              onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+              viewport={{ margin: "-10% 0px -70% 0px" }}
+              className="enterprise-container"
+            >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-stretch">
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
@@ -1941,7 +1988,7 @@ const Services = () => {
                   </header>
 
                   <div className="space-y-6">
-                    <p className="text-xl text-slate-500 font-medium leading-tight max-w-lg">
+                    <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium max-w-lg">
                       Enabling <span className="text-slate-900 font-bold">intelligent academic ecosystems</span> with scalable digital infrastructure.
                     </p>
 
@@ -1968,14 +2015,19 @@ const Services = () => {
                   </div>
                 </motion.div>
               </div>
-            </div>
+            </motion.div>
           </section>
 
           {/* 3.3 MANUFACTURING */}
           <section className="py-8 bg-white relative overflow-hidden">
             <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '100px 100px' }} />
 
-            <div className="enterprise-container relative z-10">
+            <motion.div
+              onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#16a34a' } }))}
+              onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+              viewport={{ margin: "-10% 0px -70% 0px" }}
+              className="enterprise-container relative z-10"
+            >
               <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
@@ -1985,10 +2037,10 @@ const Services = () => {
                 >
                   <div className="space-y-4">
                     <span className="inline-block px-4 py-1.5 bg-slate-950 text-white rounded-full text-[9px] font-black uppercase tracking-[0.2em]">Precision Engineering</span>
-                    <h2 className="text-4xl md:text-7xl font-bold text-slate-900 tracking-tighter leading-none italic">
+                    <h2 className="text-4xl md:text-6xl font-bold text-slate-900 tracking-tighter leading-none">
                       Manu<span className="text-red-600">facturing</span>
                     </h2>
-                    <p className="text-xl text-slate-500 font-medium leading-tight max-w-xl">
+                    <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium max-w-xl">
                       Bridging the gap between physical assets and digital intelligence with enterprise-grade IoT ecosystems.
                     </p>
                   </div>
@@ -2070,12 +2122,17 @@ const Services = () => {
                   </motion.div>
                 </motion.div>
               </div>
-            </div>
+            </motion.div>
           </section>
 
           {/* 3.5 RETAIL */}
           <section className="py-8 bg-slate-50 relative overflow-hidden">
-            <div className="enterprise-container">
+            <motion.div
+              onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
+              onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+              viewport={{ margin: "-10% 0px -70% 0px" }}
+              className="enterprise-container"
+            >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 <div className="lg:col-span-12 xl:col-span-7 relative h-[400px] lg:h-[450px] order-2 lg:order-1">
                   <motion.div
@@ -2122,7 +2179,7 @@ const Services = () => {
                     <p className="text-lg text-slate-400 font-bold uppercase tracking-widest italic leading-tight">Consumer experience <br /> re-architected.</p>
                   </div>
 
-                  <p className="text-xl text-slate-600 font-medium leading-relaxed italic">
+                  <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
                     "Transforming retail operations with AI-driven personalization, inventory intelligence, and omnichannel commerce systems."
                   </p>
 
@@ -2147,100 +2204,111 @@ const Services = () => {
                   </div>
                 </motion.div>
               </div>
-            </div>
+            </motion.div>
           </section>
 
           {/* 3.8 FINTECH */}
-          <section className="py-12 bg-white relative overflow-hidden">          <div className="enterprise-container">
-            <div className="flex flex-col lg:flex-row items-center gap-12">
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="lg:w-1/2 space-y-6"
-              >
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-950 rounded-full">
-                  <div className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
-                  <span className="text-[9px] font-bold text-white uppercase tracking-widest">Decentralized Finance</span>
-                </div>
-
-                <h2 className="text-5xl md:text-7xl font-bold text-slate-900 tracking-tighter leading-[0.9]">
-                  Fin<span className="text-red-600">Tech</span>
-                </h2>
-
-                <p className="text-xl text-slate-600 font-medium leading-relaxed italic mb-6">
-                  "The future of finance isn't just digital; it's decentralized, transparent, and instantaneous."
-                </p>
-                <p className="text-base text-slate-400 leading-relaxed max-w-lg mb-6 border-l-2 border-red-600 pl-4">
-                  We architect high-frequency trading platforms and secure blockchain ledgers that process millions of transactions with zero latency. Our solutions bridge the gap between traditional banking stability and <span className="text-red-600 font-bold">DeFi innovation.</span>
-                </p>
-
-                <div className="flex flex-wrap gap-3">
-                  {["Blockchain", "Algorithmic Trading", "Fraud Detection", "Digital Wallets"].map((tag, i) => (
-                    <span key={i} className="px-4 py-2 rounded-lg bg-slate-50 text-slate-600 text-[10px] font-bold uppercase tracking-wider border border-slate-100 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors cursor-default">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="pt-6">
-                  <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise bg-red-600 text-white border-red-600 hover:bg-slate-950 focus:ring-4 ring-red-200/50 rounded-full px-8 py-4 text-sm shadow-xl shadow-red-600/20">
-                    Secure Your Capital
-                  </Link>
-                </div>
-              </motion.div>
-
-              <div className="lg:w-1/2 relative">
+          <section className="py-12 bg-white relative overflow-hidden">
+            <motion.div
+              onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#2563eb' } }))}
+              onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+              viewport={{ margin: "-10% 0px -70% 0px" }}
+              className="enterprise-container"
+            >
+              <div className="flex flex-col lg:flex-row items-center gap-12">
                 <motion.div
-                  initial={{ opacity: 0, x: 50 }}
+                  initial={{ opacity: 0, x: -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl border-4 border-slate-50 group"
+                  className="lg:w-1/2 space-y-6"
                 >
-                  <img
-                    src={industryImg1_new}
-                    alt="FinTech"
-                    className="w-full aspect-square object-cover transition-transform duration-[3s] group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/80 via-transparent to-transparent" />
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-950 rounded-full">
+                    <div className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
+                    <span className="text-[9px] font-bold text-white uppercase tracking-widest">Decentralized Finance</span>
+                  </div>
+
+                  <h2 className="text-5xl md:text-7xl font-bold text-slate-900 tracking-tighter leading-[0.9]">
+                    Fin<span className="text-red-600">Tech</span>
+                  </h2>
+
+                  <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium mb-6">
+                    "The future of finance isn't just digital; it's decentralized, transparent, and instantaneous."
+                  </p>
+                  <p className="text-base text-slate-400 leading-relaxed max-w-lg mb-6 border-l-2 border-red-600 pl-4">
+                    We architect high-frequency trading platforms and secure blockchain ledgers that process millions of transactions with zero latency. Our solutions bridge the gap between traditional banking stability and <span className="text-red-600 font-bold">DeFi innovation.</span>
+                  </p>
+
+                  <div className="flex flex-wrap gap-3">
+                    {["Blockchain", "Algorithmic Trading", "Fraud Detection", "Digital Wallets"].map((tag, i) => (
+                      <span key={i} className="px-4 py-2 rounded-lg bg-slate-50 text-slate-600 text-[10px] font-bold uppercase tracking-wider border border-slate-100 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors cursor-default">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="pt-6">
+                    <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise bg-red-600 text-white border-red-600 hover:bg-slate-950 focus:ring-4 ring-red-200/50 rounded-full px-8 py-4 text-sm shadow-xl shadow-red-600/20">
+                      Secure Your Capital
+                    </Link>
+                  </div>
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8, x: 20 }}
-                  whileInView={{ opacity: 1, scale: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
-                  className="absolute -top-6 -left-6 z-20 max-w-[220px]"
-                >
+                <div className="lg:w-1/2 relative">
                   <motion.div
-                    animate={{ y: [0, -5, 0] }}
-                    transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                    className="bg-white p-6 rounded-[1.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.2)] border-l-4 border-red-600"
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl border-4 border-slate-50 group"
                   >
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="text-[10px] font-bold text-slate-500 tracking-[0.2em] uppercase">Secure Node</span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 bg-slate-50 rounded-full text-red-600 border border-slate-100 shadow-sm">
-                        <ShieldCheck size={24} />
-                      </div>
-                      <div>
-                        <p className="text-slate-900 text-sm font-bold">Encrypted</p>
-                        <p className="text-[10px] text-slate-500 font-medium tracking-wide"><CountUp end={256} />-bit AES</p>
-                      </div>
-                    </div>
+                    <img
+                      src={industryImg1_new}
+                      alt="FinTech"
+                      className="w-full aspect-square object-cover transition-transform duration-[3s] group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/80 via-transparent to-transparent" />
                   </motion.div>
-                </motion.div>
 
-                <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-900/20 blur-[100px] rounded-full" />
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8, x: 20 }}
+                    whileInView={{ opacity: 1, scale: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
+                    className="absolute -top-6 -left-6 z-20 max-w-[220px]"
+                  >
+                    <motion.div
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                      className="bg-white p-6 rounded-[1.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.2)] border-l-4 border-red-600"
+                    >
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="text-[10px] font-bold text-slate-500 tracking-[0.2em] uppercase">Secure Node</span>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="p-3 bg-slate-50 rounded-full text-red-600 border border-slate-100 shadow-sm">
+                          <ShieldCheck size={24} />
+                        </div>
+                        <div>
+                          <p className="text-slate-900 text-sm font-bold">Encrypted</p>
+                          <p className="text-[10px] text-slate-500 font-medium tracking-wide"><CountUp end={256} />-bit AES</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+
+                  <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-900/20 blur-[100px] rounded-full" />
+                </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
           </section>
 
           {/* 3.9 GLOBAL DIGITAL INFRASTRUCTURE */}
           <section className="py-8 bg-slate-50 relative overflow-hidden">
-            <div className="enterprise-container">
+            <motion.div
+              onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
+              onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+              viewport={{ margin: "-10% 0px -70% 0px" }}
+              className="enterprise-container"
+            >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
@@ -2254,7 +2322,7 @@ const Services = () => {
                       alt="Global Infrastructure"
                       className="w-full h-full object-cover transition-transform duration-[3s] group-hover:scale-105 filter grayscale group-hover:grayscale-0"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/80 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/80 via-transparent to-transparent" />
 
                     <div className="absolute inset-0">
                       {[1, 2, 3, 4, 5].map((n) => (
@@ -2294,7 +2362,7 @@ const Services = () => {
                     <h2 className="text-4xl md:text-6xl font-bold text-slate-900 tracking-tighter leading-none mb-4">
                       Global <span className="text-red-600">Digital Grid.</span>
                     </h2>
-                    <p className="text-lg text-slate-600 font-medium leading-relaxed max-w-lg">
+                    <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-lg font-medium">
                       Connecting continents with a unified, secure, and low-latency digital backbone that powers the next industrial revolution.
                     </p>
                   </header>
@@ -2318,6 +2386,103 @@ const Services = () => {
                     ))}
                   </div>
                 </motion.div>
+              </div>
+            </motion.div>
+          </section>
+
+          {/* 3.10 TESTIMONIALS - THE ENTERPRISE VOICE */}
+          <section className="py-32 bg-white relative overflow-hidden">
+            <div className="enterprise-container">
+              <div className="flex flex-col lg:flex-row items-end justify-between mb-20 gap-8">
+                <div className="max-w-2xl">
+                  <span className="text-red-600 font-black uppercase tracking-[0.4em] text-[10px] mb-4 block">Client Perspectives</span>
+                  <h2 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter leading-[0.9]">
+                    Voice of <br />
+                    <span className="text-red-600">Success.</span>
+                  </h2>
+                </div>
+                <div className="flex gap-4">
+                  <button onClick={prevReview} className="w-16 h-16 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-950 hover:text-white transition-all shadow-lg hover:shadow-slate-200">
+                    <ChevronLeft size={24} />
+                  </button>
+                  <button onClick={nextReview} className="w-16 h-16 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-950 hover:text-white transition-all shadow-lg hover:shadow-slate-200">
+                    <ChevronRight size={24} />
+                  </button>
+                </div>
+              </div>
+
+              <div className="relative h-[400px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentReview}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="absolute inset-0 flex flex-col lg:flex-row items-center gap-12"
+                  >
+                    <div className="lg:w-2/3">
+                      <Quote size={80} className="text-red-600/10 mb-8" />
+                      <p className="text-3xl md:text-5xl font-black text-slate-900 leading-tight tracking-tight italic">
+                        "{reviews[currentReview].quote}"
+                      </p>
+                    </div>
+                    <div className="lg:w-1/3 w-full">
+                      <div className={`p-8 rounded-[3rem] bg-gradient-to-br ${reviews[currentReview].color} text-white shadow-2xl`}>
+                        <div className="flex items-center gap-6 mb-8">
+                          <div className="w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-3xl font-black">
+                            {reviews[currentReview].author}
+                          </div>
+                          <div>
+                            <h4 className="text-xl font-black leading-tight">{reviews[currentReview].author}</h4>
+                            <p className="text-sm font-bold opacity-80 uppercase tracking-widest">{reviews[currentReview].role}</p>
+                          </div>
+                        </div>
+                        <div className="pt-8 border-t border-white/20">
+                          <p className="text-xs font-black uppercase tracking-[0.2em] opacity-60 mb-2">Enterprise Partner</p>
+                          <p className="text-2xl font-black tracking-tight">{reviews[currentReview].company}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+          </section>
+
+          {/* 4. THE VELDURSEN EDGE - WHY CHOOSE US */}
+          <section className="py-32 bg-slate-50 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 via-transparent to-red-600 opacity-20" />
+            <div className="enterprise-container">
+              <div className="text-center mb-20">
+                <span className="text-red-600 font-black uppercase tracking-[0.4em] text-[10px] mb-4 block">Strategic Differentiation</span>
+                <h2 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter">The VelDurSen <span className="text-red-600">Edge.</span></h2>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {whyChooseUsData.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05 }}
+                    className="p-10 bg-white rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:shadow-red-600/5 transition-all duration-500 group"
+                  >
+                    <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center text-red-600 mb-8 group-hover:bg-red-600 group-hover:text-white transition-all duration-500 shadow-sm">
+                      <item.icon size={32} />
+                    </div>
+                    <h3 className="text-2xl font-black text-slate-900 mb-4 tracking-tight group-hover:text-red-600 transition-colors uppercase italic">{item.title.split('. ')[1]}</h3>
+                    <p className="text-slate-500 font-medium leading-relaxed mb-6 group-hover:text-slate-700 transition-colors">
+                      {item.description}
+                    </p>
+                    <div className="pt-6 border-t border-slate-50">
+                      <p className="text-[11px] text-slate-400 font-bold leading-relaxed group-hover:text-slate-500">
+                        {item.note}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </section>
@@ -2346,7 +2511,7 @@ const Services = () => {
               </div>
             </div>
           </section>
-        </div>
+        </div >
       </PageLayout >
     </HelmetProvider >
   );

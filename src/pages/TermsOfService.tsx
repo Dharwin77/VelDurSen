@@ -18,7 +18,7 @@ const TermsOfService = () => {
                         <h1 className="text-5xl md:text-6xl font-black text-slate-900 mb-6 tracking-tighter">
                             Terms of Service
                         </h1>
-                        <p className="text-xl md:text-2xl text-slate-600 font-medium max-w-3xl leading-relaxed">
+                        <p className="text-lg md:text-xl text-slate-600 font-medium max-w-3xl leading-relaxed">
                             Conditions governing the use of VelDurSen’s website and services.
                         </p>
                     </div>

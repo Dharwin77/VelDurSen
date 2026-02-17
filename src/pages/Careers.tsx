@@ -323,11 +323,11 @@ const Careers = () => {
       <section id="culture" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <span className="text-red-600 font-bold text-sm uppercase tracking-[0.2em]">Culture</span>
+            <span className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em]">Culture</span>
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 mt-4 mb-6 tracking-tighter">
-              Life at <span className="text-red-600">Veldursen.</span>
+              Life at <span className="text-blue-600">Veldursen.</span>
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto font-medium leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto font-medium leading-relaxed">
               We're built on trust, creativity, and a passion for solving complex problems.
             </p>
           </motion.div>
@@ -350,7 +350,7 @@ const Careers = () => {
                 }}
                 className="text-center p-8 bg-slate-50 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"
               >
-                <div className="text-5xl font-bold text-[#C0392B] mb-2"><AnimatedCounter end={stat.end} suffix={stat.suffix} /></div>
+                <div className="text-5xl font-bold text-blue-600 mb-2"><AnimatedCounter end={stat.end} suffix={stat.suffix} /></div>
                 <div className="text-lg text-slate-600">{stat.label}</div>
               </motion.div>
             ))}
@@ -363,7 +363,7 @@ const Careers = () => {
               {cultureValues.map((value, i) => (
                 <motion.div key={i} initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-slate-50 rounded-xl p-6 hover:shadow-xl transition-all">
                   <div className="flex items-start gap-4">
-                    <div className="w-14 h-14 rounded-lg bg-[#C0392B]/10 flex items-center justify-center"><value.icon className="text-[#C0392B]" size={28} /></div>
+                    <div className="w-14 h-14 rounded-lg bg-blue-600/10 flex items-center justify-center"><value.icon className="text-blue-600" size={28} /></div>
                     <div>
                       <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
                       <p className="text-slate-600">{value.description}</p>
@@ -381,16 +381,16 @@ const Careers = () => {
         <div className="max-w-4xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter text-slate-900">
-              Your Growth Path at <span className="text-red-600">Veldursen.</span>
+              Your Growth Path at <span className="text-orange-600">Veldursen.</span>
             </h2>
-            <p className="text-xl text-slate-600 font-medium">Explore your potential career trajectory</p>
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">Explore your potential career trajectory</p>
           </motion.div>
           <div className="bg-white rounded-2xl p-8 shadow-xl">
             <label className="block mb-4 font-semibold">Experience Level: {experienceLevel} years</label>
             <input type="range" min="0" max="10" value={experienceLevel} onChange={(e) => setExperienceLevel(parseInt(e.target.value))} className="w-full mb-8" />
             <div className="grid grid-cols-3 gap-4 text-center">
               {[{ year: "Year 1", role: "Junior", salary: "$60-80K" }, { year: "Year 3", role: "Mid-Level", salary: "$90-120K" }, { year: "Year 5+", role: "Senior/Lead", salary: "$140-180K" }].map((stage, i) => (
-                <div key={i} className={`p-4 rounded-lg ${experienceLevel >= i * 2 ? "bg-[#C0392B] text-white" : "bg-slate-100"}`}>
+                <div key={i} className={`p-4 rounded-lg ${experienceLevel >= i * 2 ? "bg-orange-600 text-white" : "bg-slate-100"}`}>
                   <div className="font-bold">{stage.year}</div>
                   <div className="text-sm">{stage.role}</div>
                   <div className="text-xs mt-1">{stage.salary}</div>
@@ -406,15 +406,15 @@ const Careers = () => {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter text-slate-900">
-              A Day in the <span className="text-red-600">Life.</span>
+              A Day in the <span className="text-green-600">Life.</span>
             </h2>
-            <p className="text-xl text-slate-600 font-medium">Click to explore employee journeys</p>
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">Click to explore employee journeys</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {employeeProfiles.map((emp, i) => (
               <motion.div key={i} whileHover={{ scale: 1.02 }} className="bg-slate-50 rounded-2xl p-8 cursor-pointer overflow-hidden text-center" onClick={() => setSelectedEmployee(i)}>
                 <div className="mb-6 flex justify-center">
-                  <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-[#C0392B]/20 shadow-lg">
+                  <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-green-600/20 shadow-lg">
                     <img src={emp.image} alt={emp.name} className="w-full h-full object-cover" />
                   </div>
                 </div>
@@ -445,14 +445,14 @@ const Careers = () => {
                   <h4 className="font-bold mb-3">Daily Schedule:</h4>
                   {employeeProfiles[selectedEmployee].schedule.map((item, i) => (
                     <div key={i} className="flex items-center gap-3 mb-2">
-                      <Clock size={16} className="text-[#C0392B]" />
+                      <Clock size={16} className="text-green-600" />
                       <span>{item}</span>
                     </div>
                   ))}
                 </div>
                 <div className="mb-6">
                   <h4 className="font-bold mb-3">Tools:</h4>
-                  <div className="flex gap-2">{employeeProfiles[selectedEmployee].tools.map((tool, i) => <span key={i} className="px-3 py-1 bg-[#C0392B]/10 text-[#C0392B] rounded-full text-sm">{tool}</span>)}</div>
+                  <div className="flex gap-2">{employeeProfiles[selectedEmployee].tools.map((tool, i) => <span key={i} className="px-3 py-1 bg-green-600/10 text-green-600 rounded-full text-sm">{tool}</span>)}</div>
                 </div>
                 <div>
                   <h4 className="font-bold mb-2">Career Journey:</h4>
@@ -517,7 +517,7 @@ const Careers = () => {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter text-slate-900">
-              Our Hiring <span className="text-red-600">Journey.</span>
+              Our Hiring <span className="text-blue-600">Journey.</span>
             </h2>
           </motion.div>
           <div className="max-w-5xl mx-auto">
@@ -543,7 +543,7 @@ const Careers = () => {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter text-slate-900">
-              Hear From Our <span className="text-red-600">Team.</span>
+              Hear From Our <span className="text-orange-600">Team.</span>
             </h2>
           </motion.div>
           <div className="max-w-4xl mx-auto relative">
@@ -561,9 +561,9 @@ const Careers = () => {
               </motion.div>
             </AnimatePresence>
             <div className="flex items-center justify-center gap-4 mt-8">
-              <button onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)} className="w-12 h-12 rounded-full bg-[#C0392B] hover:bg-[#a02f24] text-white flex items-center justify-center"><ChevronLeft size={24} /></button>
-              <div className="flex gap-2">{testimonials.map((_, i) => <button key={i} onClick={() => setCurrentTestimonial(i)} className={`w-3 h-3 rounded-full transition-all ${i === currentTestimonial ? "bg-[#C0392B] w-8" : "bg-slate-300"}`} />)}</div>
-              <button onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)} className="w-12 h-12 rounded-full bg-[#C0392B] hover:bg-[#a02f24] text-white flex items-center justify-center"><ChevronRight size={24} /></button>
+              <button onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)} className="w-12 h-12 rounded-full bg-orange-600 hover:bg-orange-700 text-white flex items-center justify-center"><ChevronLeft size={24} /></button>
+              <div className="flex gap-2">{testimonials.map((_, i) => <button key={i} onClick={() => setCurrentTestimonial(i)} className={`w-3 h-3 rounded-full transition-all ${i === currentTestimonial ? "bg-orange-600 w-8" : "bg-slate-300"}`} />)}</div>
+              <button onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)} className="w-12 h-12 rounded-full bg-orange-600 hover:bg-orange-700 text-white flex items-center justify-center"><ChevronRight size={24} /></button>
             </div>
           </div>
         </div>
@@ -636,7 +636,7 @@ const Careers = () => {
             <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter text-[#3E2723]">
               Ready to Make an <span className="text-red-600">Impact?</span>
             </h2>
-            <p className="text-2xl text-[#5D4037] mb-10">Send us your resume and tell us what you're working on.</p>
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium mb-10">Send us your resume and tell us what you're working on.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <a href="#openings" className="bg-[#C0392B] hover:bg-[#a02f24] text-white rounded-lg px-10 py-4 text-lg font-semibold inline-flex items-center justify-center gap-2 transition-all transform hover:scale-105">Apply Today <ArrowRight size={20} /></a>
               <a href="mailto:careers@veldursen.com" className="btn-outline-enterprise"><MessageSquare size={20} />Contact HR</a>

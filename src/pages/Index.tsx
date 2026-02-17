@@ -1,5 +1,5 @@
 import { motion, useInView, AnimatePresence, Variants, useScroll, useTransform } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import {
   ArrowRight, Brain, Cloud, Shield, Database, Code, Leaf,
@@ -521,7 +521,7 @@ const WhatWeProvideSection = () => {
         <button
           onClick={() => setActiveTab('candidate')}
           className={`pb-3 px-2 text-base font-semibold transition-all relative ${activeTab === 'candidate'
-            ? 'text-violet-600'
+            ? 'text-blue-600'
             : 'text-slate-600 hover:text-foreground'
             }`}
         >
@@ -529,7 +529,7 @@ const WhatWeProvideSection = () => {
           {activeTab === 'candidate' && (
             <motion.div
               layoutId="activeTab"
-              className="absolute bottom-0 left-0 right-0 h-0.5 bg-violet-600"
+              className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
               initial={false}
               transition={{ type: 'spring', stiffness: 500, damping: 30 }}
             />
@@ -538,7 +538,7 @@ const WhatWeProvideSection = () => {
         <button
           onClick={() => setActiveTab('client')}
           className={`pb-3 px-2 text-base font-semibold transition-all relative ${activeTab === 'client'
-            ? 'text-violet-600'
+            ? 'text-blue-600'
             : 'text-slate-600 hover:text-foreground'
             }`}
         >
@@ -546,7 +546,7 @@ const WhatWeProvideSection = () => {
           {activeTab === 'client' && (
             <motion.div
               layoutId="activeTab"
-              className="absolute bottom-0 left-0 right-0 h-0.5 bg-violet-600"
+              className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
               initial={false}
               transition={{ type: 'spring', stiffness: 500, damping: 30 }}
             />
@@ -572,7 +572,7 @@ const WhatWeProvideSection = () => {
               transition={{ delay: index * 0.1 }}
               className="flex items-start gap-4"
             >
-              <div className="mt-1 shrink-0 w-5 h-5 rounded-full bg-violet-600 flex items-center justify-center">
+              <div className="mt-1 shrink-0 w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center">
                 <Check size={14} className="text-white stroke-[3px]" />
               </div>
               <p className="text-base text-foreground leading-relaxed">
@@ -640,7 +640,7 @@ const WhatWeAreUptoSection = () => {
                 className="col-span-4 md:col-span-10 relative"
               >
                 <GlareHover glareOpacity={0.2} glareSize={500} className="rounded-2xl">
-                  <div className="rounded-2xl overflow-hidden shadow-2xl border-l-[12px] border-sky-600">
+                  <div className="rounded-2xl overflow-hidden shadow-2xl border-l-[12px] border-blue-600">
                     <img
                       src={highlight1}
                       alt="Innovation focus"
@@ -659,7 +659,7 @@ const WhatWeAreUptoSection = () => {
                 className="col-start-2 col-span-3 md:col-start-4 md:col-span-8 -mt-12 md:-mt-24 relative z-20"
               >
                 <GlareHover glareOpacity={0.25} glareSize={400} className="rounded-2xl">
-                  <div className="rounded-2xl overflow-hidden shadow-2xl border-b-[12px] border-sky-600 bg-white">
+                  <div className="rounded-2xl overflow-hidden shadow-2xl border-b-[12px] border-blue-600 bg-white">
                     <img
                       src={highlight2}
                       alt="Strategic planning"
@@ -668,7 +668,7 @@ const WhatWeAreUptoSection = () => {
                   </div>
                 </GlareHover>
                 {/* Decorative red square background */}
-                <div className="absolute -bottom-6 -left-6 w-24 h-12 bg-sky-600 -z-10" />
+                <div className="absolute -bottom-6 -left-6 w-24 h-12 bg-blue-600 -z-10" />
               </motion.div>
 
               {/* Decorative dots - bottom right */}
@@ -707,7 +707,7 @@ const WhatWeAreUptoSection = () => {
                       whileInView={{ width: `${stat.percentage}%` }}
                       viewport={{ once: false }}
                       transition={{ duration: 1, delay: index * 0.1, ease: "easeOut" }}
-                      className="absolute h-full bg-sky-600 rounded-full"
+                      className="absolute h-full bg-blue-600 rounded-full"
                     />
                   </div>
                 </div>
@@ -765,11 +765,11 @@ const FoundersSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false }}
           >
-            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-amber-500 mb-3 px-3 py-0.5 bg-amber-500/10 rounded-full">
+            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-orange-500 mb-3 px-3 py-0.5 bg-orange-500/10 rounded-full">
               The Visionaries
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white leading-tight">
-              Meet the Minds Behind <span className="text-amber-500">VelDurSen</span>
+              Meet the Minds Behind <span className="text-orange-500">VelDurSen</span>
             </h2>
           </motion.div>
         </div>
@@ -833,7 +833,7 @@ const FoundersSection = () => {
                   </div>
 
                   {/* Decorative border bottom */}
-                  <div className="absolute bottom-0 left-0 w-0 h-1 bg-amber-500 group-hover:w-full transition-all duration-700" />
+                  <div className="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 group-hover:w-full transition-all duration-700" />
                 </div>
               </GlareHover>
             </motion.div>
@@ -881,7 +881,7 @@ const RapidSupportSection = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false }}
-            className="text-slate-700 leading-relaxed text-lg"
+            className="text-lg md:text-xl text-slate-600 leading-relaxed"
           >
             Our dedicated recruitment consultants bridge the gap between niche technology requirements and top-tier global talent.
             By combining deep domain expertise across critical industry verticals with architectural foresight, we ensure every
@@ -977,9 +977,9 @@ const milestones = [
     image: img1,
     pos: "left",
     y: 300,
-    yearColor: "text-indigo-500",
-    iconColor: "text-indigo-600",
-    iconBg: "bg-indigo-50"
+    yearColor: "text-blue-500",
+    iconColor: "text-blue-600",
+    iconBg: "bg-blue-50"
   },
   {
     year: "2020",
@@ -1001,9 +1001,9 @@ const milestones = [
     image: img2,
     pos: "left",
     y: 900,
-    yearColor: "text-rose-500",
-    iconColor: "text-rose-600",
-    iconBg: "bg-rose-50"
+    yearColor: "text-red-500",
+    iconColor: "text-red-600",
+    iconBg: "bg-red-50"
   },
   {
     year: "2022",
@@ -1013,9 +1013,9 @@ const milestones = [
     image: aboutImage2,
     pos: "right",
     y: 1200,
-    yearColor: "text-purple-500",
-    iconColor: "text-purple-600",
-    iconBg: "bg-purple-50"
+    yearColor: "text-blue-500",
+    iconColor: "text-blue-600",
+    iconBg: "bg-blue-50"
   },
   {
     year: "2023",
@@ -1025,9 +1025,9 @@ const milestones = [
     image: highlight2,
     pos: "left",
     y: 1500,
-    yearColor: "text-emerald-500",
-    iconColor: "text-emerald-600",
-    iconBg: "bg-emerald-50"
+    yearColor: "text-green-500",
+    iconColor: "text-green-600",
+    iconBg: "bg-green-50"
   },
   {
     year: "2024",
@@ -1037,9 +1037,9 @@ const milestones = [
     image: globalMap,
     pos: "right",
     y: 1800,
-    yearColor: "text-cyan-500",
-    iconColor: "text-cyan-600",
-    iconBg: "bg-cyan-50"
+    yearColor: "text-blue-500",
+    iconColor: "text-blue-600",
+    iconBg: "bg-blue-50"
   },
   {
     year: "2025",
@@ -1049,13 +1049,14 @@ const milestones = [
     image: aboutImage1,
     pos: "left",
     y: 2100,
-    yearColor: "text-lime-500",
-    iconColor: "text-lime-600",
-    iconBg: "bg-lime-50"
+    yearColor: "text-green-500",
+    iconColor: "text-green-600",
+    iconBg: "bg-green-50"
   }
 ];
 
 const Index = () => {
+  const location = useLocation();
   const [scrollY, setScrollY] = useState(false);
   const [selectedMilestone, setSelectedMilestone] = useState<typeof milestones[0] | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -1071,6 +1072,23 @@ const Index = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const scrollToElement = (id: string) => {
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    };
+
+    if (location.hash) {
+      scrollToElement(location.hash.slice(1));
+    } else if (location.state?.scrollTo) {
+      scrollToElement(location.state.scrollTo);
+    }
+  }, [location]);
 
   return (
     <PageLayout>
@@ -1123,15 +1141,15 @@ const Index = () => {
           <div className="flex whitespace-nowrap animate-scroll-slow hover:[animation-play-state:paused] transition-all duration-300">
             {/* First Set */}
             <div className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-white px-8 gap-8">
-              <Link to="/technologies" className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
+              <Link to="/services" state={{ scrollTo: 'technology-pillars', fromButton: true }} className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
                 <Code size={14} className="text-red-400" /> Next-Gen Technology Stack: AI, Cloud & Modern Ops
               </Link>
               <span className="opacity-50">•</span>
-              <Link to="/achievements" className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
+              <Link to="/" state={{ scrollTo: 'achievements-section', fromButton: true }} className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
                 <Trophy size={14} className="text-red-400" /> Best Enterprise AI Innovation Award
               </Link>
               <span className="opacity-50">•</span>
-              <Link to="/industries" className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
+              <Link to="/services" state={{ scrollTo: 'industries-full-content', fromButton: true }} className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
                 <Factory size={14} className="text-red-400" /> Empowering Industries: Finance, Healthcare, Retail & Manufacturing
               </Link>
               <span className="opacity-50">•</span>
@@ -1154,7 +1172,7 @@ const Index = () => {
                 <Trophy size={14} className="text-red-400" /> Best Enterprise AI Innovation Award
               </Link>
               <span className="opacity-50">•</span>
-              <Link to="/industries" className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
+              <Link to="/services" state={{ scrollTo: 'industries-full-content', fromButton: true }} className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
                 <Factory size={14} className="text-red-400" /> Empowering Industries: Finance, Healthcare, Retail & Manufacturing
               </Link>
               <span className="opacity-50">•</span>
@@ -1187,7 +1205,7 @@ const Index = () => {
             backgroundImage: `radial-gradient(circle at 20% 50%, rgba(24, 119, 242, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(24, 119, 242, 0.3) 0%, transparent 50%)`
           }}></div>
           <motion.div
-            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#facc15' } }))}
+            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#f59e0b' } }))}
             onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
             className="relative z-20 text-center px-6"
             variants={scaleUp}
@@ -1195,16 +1213,15 @@ const Index = () => {
             whileInView="visible"
             viewport={{ margin: "-10% 0px -70% 0px" }}
           >
-
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-400 mb-6 drop-shadow-lg">Global Delivery Network</h3>
-
+            <span className="text-xs font-black uppercase tracking-[0.4em] text-orange-400 mb-4 block">Connectivity</span>
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-6 drop-shadow-lg tracking-tighter">Global Delivery <span className="text-orange-500">Network</span></h3>
           </motion.div>
         </section>
 
         {/* About Brief */}
-        <section className="section-padding bg-emerald-50/50">
+        <section className="section-padding bg-green-50/50">
           <motion.div
-            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#10b981' } }))}
+            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#16a34a' } }))}
             onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
             viewport={{ margin: "-10% 0px -70% 0px" }}
             className="enterprise-container"
@@ -1216,21 +1233,21 @@ const Index = () => {
                 whileInView="visible"
                 viewport={{ once: false }}
               >
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700 mb-3 block">About VelDurSen</span>
-                <h2 className="section-title leading-snug mb-6">Your Trusted Partner in<br /><span className="text-emerald-600">Enterprise Digital Transformation</span></h2>
-                <p className="text-slate-700 leading-relaxed mb-6">
+                <span className="text-xs font-black uppercase tracking-[0.4em] text-green-600 mb-6 block">Our Story</span>
+                <h2 className="section-title leading-[1.1] mb-8 font-black tracking-tighter">Your Trusted Partner in<br /><span className="text-green-600">Enterprise Transformation</span></h2>
+                <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-6">
                   VelDurSen is a global Enterprise Technology & Digital Transformation company specializing in AI-first, security-first, and sustainability-driven solutions for the world's most demanding enterprises.
                 </p>
-                <p className="text-slate-700 leading-relaxed mb-6">
+                <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-6">
                   With operations spanning multiple continents and regional delivery centers worldwide, we deliver cutting-edge technology solutions that help organizations achieve their digital transformation goals while maintaining the highest standards of security, scalability, and sustainability.
                 </p>
-                <p className="text-slate-700 leading-relaxed mb-8">
+                <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-8">
                   From Fortune 500 enterprises to high-growth organizations across healthcare, finance, manufacturing, and beyond—our architecture-first engineering approach ensures every system we build is resilient, performant, and future-proof for global operations.
                 </p>
                 <Link
                   to="/about"
                   state={{ fromButton: true }}
-                  className="btn-enterprise !bg-emerald-600 !border-emerald-600 hover:!bg-slate-950 hover:!border-slate-950"
+                  className="btn-enterprise !bg-green-600 !border-green-600 hover:!bg-slate-950 hover:!border-slate-950"
                 >
                   Learn More About Us <ArrowRight size={16} className="ml-2" />
                 </Link>
@@ -1264,7 +1281,7 @@ const Index = () => {
         {/* What We Provide Section */}
         <section className="section-padding bg-slate-50">
           <motion.div
-            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#7c3aed' } }))}
+            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#2563eb' } }))}
             onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
             viewport={{ margin: "-10% 0px -70% 0px" }}
             className="enterprise-container"
@@ -1274,10 +1291,11 @@ const Index = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false }}
-                className="text-3xl md:text-5xl font-bold mb-4"
+                className="text-4xl md:text-6xl font-black mb-6 tracking-tighter"
               >
-                What we <span className="text-violet-600">provide</span>
+                What we <span className="text-blue-600">provide.</span>
               </motion.h2>
+              <span className="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block">Solutions Ecosystem</span>
             </div>
 
             {/* Tab Navigation */}
@@ -1286,7 +1304,7 @@ const Index = () => {
         </section>
 
         {/* 1.5 CRISPY ACHIEVEMENTS HIGHLIGHTS - REFINED TEXT VERSION */}
-        <section className="py-16 bg-white border-b border-slate-100">
+        <section id="achievements-section" className="py-16 bg-white border-b border-slate-100">
           <motion.div
             onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
             onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
@@ -1299,10 +1317,11 @@ const Index = () => {
               viewport={{ once: true }}
               className="max-w-4xl"
             >
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-slate-900">
-                Our <span className="text-red-600">Achievements</span>
+              <span className="text-xs font-black uppercase tracking-[0.4em] text-red-600 mb-6 block">Excellence Benchmarks</span>
+              <h2 className="text-4xl md:text-6xl font-black mb-8 text-slate-900 tracking-tighter leading-tight">
+                Our <span className="text-red-600">Achievements.</span>
               </h2>
-              <div className="space-y-6 text-slate-500 leading-relaxed text-lg font-medium">
+              <div className="space-y-6 text-lg md:text-xl text-slate-600 leading-relaxed">
                 <p>
                   VelDurSen’s achievements represent a decade of relentless engineering innovation and architectural integrity. We have successfully deployed mission-critical systems across 150+ countries, earning over 50 global awards for our pioneering work in AI safety and cloud resilience.
                 </p>
@@ -1320,12 +1339,12 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-x-12 md:gap-y-20 relative">
               {achievementsData.map((achievement, idx) => {
                 const colorMaps: Record<string, { bg: string, ring: string, iconBg: string }> = {
-                  "Artificial Intelligence Innovation": { bg: "bg-[#2dd4bf]", ring: "ring-teal-200", iconBg: "bg-teal-700/20" },
-                  "Multi-Cloud Infrastructure Excellence": { bg: "bg-[#6366f1]", ring: "ring-indigo-200", iconBg: "bg-indigo-700/20" },
-                  "Zero-Trust Security Framework": { bg: "bg-[#f43f5e]", ring: "ring-rose-200", iconBg: "bg-rose-700/20" },
-                  "Green Computing & Ethical AI": { bg: "bg-[#10b981]", ring: "ring-emerald-200", iconBg: "bg-emerald-700/20" },
-                  "Smart Manufacturing Solutions": { bg: "bg-[#f59e0b]", ring: "ring-amber-200", iconBg: "bg-amber-700/20" },
-                  "Precision Agriculture & AI Analytics": { bg: "bg-[#8b5cf6]", ring: "ring-purple-200", iconBg: "bg-purple-700/20" }
+                  "Artificial Intelligence Innovation": { bg: "bg-[#2563eb]", ring: "ring-blue-200", iconBg: "bg-blue-700/20" },
+                  "Multi-Cloud Infrastructure Excellence": { bg: "bg-[#3b82f6]", ring: "ring-blue-100", iconBg: "bg-blue-600/20" },
+                  "Zero-Trust Security Framework": { bg: "bg-[#dc2626]", ring: "ring-red-200", iconBg: "bg-red-700/20" },
+                  "Green Computing & Ethical AI": { bg: "bg-[#16a34a]", ring: "ring-green-200", iconBg: "bg-green-700/20" },
+                  "Smart Manufacturing Solutions": { bg: "bg-[#ea580c]", ring: "ring-orange-200", iconBg: "bg-orange-700/20" },
+                  "Precision Agriculture & AI Analytics": { bg: "bg-[#2563eb]", ring: "ring-blue-200", iconBg: "bg-blue-700/20" }
                 };
 
                 const style = colorMaps[achievement.category] || colorMaps["Artificial Intelligence Innovation"];
@@ -1436,13 +1455,13 @@ const Index = () => {
                 <div className="relative z-10">
                   {/* Abstract Trophy Composition defined by Icons/Divs since we don't have the SVG asset this exact matching is an approximation */}
                   <div className="relative drop-shadow-2xl filter">
-                    <Trophy size={320} className="text-amber-400" strokeWidth={1} fill="#fbbf24" />
+                    <Trophy size={320} className="text-orange-400" strokeWidth={1} fill="#fb923c" />
                     {/* Trophy Details/Shine */}
-                    <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-yellow-300/30 blur-2xl rounded-full" />
+                    <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-orange-300/30 blur-2xl rounded-full" />
                   </div>
                   {/* Pedestal */}
-                  <div className="h-16 w-48 bg-amber-800 mx-auto rounded-t-lg mt-[-20px] relative z-0 flex items-center justify-center shadow-lg">
-                    <span className="text-amber-100 font-bold tracking-widest text-sm uppercase">Excellence</span>
+                  <div className="h-16 w-48 bg-orange-800 mx-auto rounded-t-lg mt-[-20px] relative z-0 flex items-center justify-center shadow-lg">
+                    <span className="text-orange-100 font-bold tracking-widest text-sm uppercase">Excellence</span>
                   </div>
                 </div>
               </div>
@@ -1451,15 +1470,15 @@ const Index = () => {
               <div className="w-full lg:w-2/3 space-y-5">
                 <div className="mb-8">
                   <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-4">Our Growth <span className="text-red-600">Trajectory.</span></h2>
-                  <p className="text-lg text-slate-500 font-medium">Consistent performance and measurable impact year over year.</p>
+                  <p className="text-lg md:text-xl text-slate-600 leading-relaxed">Consistent performance and measurable impact year over year.</p>
                 </div>
 
                 {[
-                  { label: "Increase Client ROI", value: "300%", bg: "bg-[#a3e635]", hoverBg: "hover:bg-[#a3e635]", width: "w-[85%]", icon: TrendingUp, text: "text-lime-900" },
-                  { label: "Revenue Growth", value: "150%", bg: "bg-[#4ade80]", hoverBg: "hover:bg-[#4ade80]", width: "w-[90%]", icon: BarChart3, text: "text-green-900" },
-                  { label: "Special Projects Delivered", value: "2500+", bg: "bg-[#2dd4bf]", hoverBg: "hover:bg-[#2dd4bf]", width: "w-[95%]", icon: Briefcase, text: "text-teal-900" },
-                  { label: "Best IT Service Company", value: "2026", bg: "bg-[#0d9488]", hoverBg: "hover:bg-[#0d9488]", width: "w-[100%]", icon: Building2, text: "text-white" },
-                  { label: "Industry Awards Won", value: "50+", bg: "bg-[#0f766e]", hoverBg: "hover:bg-[#0f766e]", width: "w-[100%]", icon: Award, text: "text-white" },
+                  { label: "Increase Client ROI", value: "300%", bg: "bg-green-400", hoverBg: "hover:bg-green-400", width: "w-[85%]", icon: TrendingUp, text: "text-green-900" },
+                  { label: "Revenue Growth", value: "150%", bg: "bg-green-500", hoverBg: "hover:bg-green-500", width: "w-[90%]", icon: BarChart3, text: "text-green-900" },
+                  { label: "Special Projects Delivered", value: "2500+", bg: "bg-blue-400", hoverBg: "hover:bg-blue-400", width: "w-[95%]", icon: Briefcase, text: "text-blue-900" },
+                  { label: "Best IT Service Company", value: "2026", bg: "bg-blue-600", hoverBg: "hover:bg-blue-600", width: "w-[100%]", icon: Building2, text: "text-white" },
+                  { label: "Industry Awards Won", value: "50+", bg: "bg-blue-700", hoverBg: "hover:bg-blue-700", width: "w-[100%]", icon: Award, text: "text-white" },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
@@ -1499,7 +1518,7 @@ const Index = () => {
             {/* Header */}
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-6">Global Deployment <span className="text-red-600">Milestones.</span></h2>
-              <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
+              <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
                 Enterprise achievements in scale, reliability, and transformation. We deliver large-scale platforms that power mission-critical operations globally.
               </p>
             </div>
@@ -1552,7 +1571,7 @@ const Index = () => {
                 className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 bg-white flex flex-col h-full"
               >
                 {/* Colored Header Bar */}
-                <div className="bg-gradient-to-r from-red-400 to-rose-500 px-6 py-6 relative flex-shrink-0 min-h-[100px] flex items-center">
+                <div className="bg-gradient-to-r from-red-400 to-red-600 px-6 py-6 relative flex-shrink-0 min-h-[100px] flex items-center">
                   <h3 className="text-white font-bold text-lg italic">SYSTEM MODERNIZATION</h3>
                   {/* Icon Badge */}
                   <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform z-10">
@@ -1626,7 +1645,7 @@ const Index = () => {
                 className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 bg-white flex flex-col h-full"
               >
                 {/* Colored Header Bar */}
-                <div className="bg-gradient-to-r from-green-400 to-emerald-500 px-6 py-6 relative flex-shrink-0 min-h-[100px] flex items-center">
+                <div className="bg-gradient-to-r from-green-400 to-green-600 px-6 py-6 relative flex-shrink-0 min-h-[100px] flex items-center">
                   <h3 className="text-white font-bold text-lg italic">SECURITY & COMPLIANCE</h3>
                   {/* Icon Badge */}
                   <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform z-10">
@@ -1663,11 +1682,11 @@ const Index = () => {
                 className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 bg-white flex flex-col h-full"
               >
                 {/* Colored Header Bar */}
-                <div className="bg-gradient-to-r from-purple-400 to-violet-500 px-6 py-6 relative flex-shrink-0 min-h-[100px] flex items-center">
+                <div className="bg-gradient-to-r from-blue-400 to-blue-600 px-6 py-6 relative flex-shrink-0 min-h-[100px] flex items-center">
                   <h3 className="text-white font-bold text-lg italic">DIGITAL TRANSFORMATION</h3>
                   {/* Icon Badge */}
                   <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform z-10">
-                    <CheckCircle className="w-12 h-12 text-purple-600" />
+                    <CheckCircle className="w-12 h-12 text-blue-600" />
                   </div>
                 </div>
 
@@ -1700,11 +1719,11 @@ const Index = () => {
                 className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 bg-white flex flex-col h-full"
               >
                 {/* Colored Header Bar */}
-                <div className="bg-gradient-to-r from-cyan-400 to-teal-500 px-6 py-6 relative flex-shrink-0 min-h-[100px] flex items-center">
+                <div className="bg-gradient-to-r from-blue-400 to-blue-700 px-6 py-6 relative flex-shrink-0 min-h-[100px] flex items-center">
                   <h3 className="text-white font-bold text-lg italic">INDUSTRY RECOGNITION</h3>
                   {/* Icon Badge */}
                   <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform z-10">
-                    <Trophy className="w-12 h-12 text-teal-600" />
+                    <Trophy className="w-12 h-12 text-blue-600" />
                   </div>
                 </div>
 
@@ -1749,7 +1768,7 @@ const Index = () => {
               <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-6">
                 Our Journey of <span className="text-red-600">Innovation.</span>
               </h2>
-              <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
+              <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto font-medium leading-relaxed">
                 From foundation to global scaling, explore the milestones that defined our evolution.
               </p>
             </div>
@@ -1760,7 +1779,7 @@ const Index = () => {
                 {/* Central Spine Line */}
                 <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-slate-200" />
                 <motion.div
-                  className="absolute left-6 md:left-1/2 -translate-x-1/2 top-0 bottom-0 w-[3px] bg-gradient-to-b from-red-600 via-orange-500 to-amber-500 origin-top"
+                  className="absolute left-6 md:left-1/2 -translate-x-1/2 top-0 bottom-0 w-[3px] bg-gradient-to-b from-red-600 via-orange-500 to-orange-400 origin-top"
                   style={{ scaleY: scrollYProgress }}
                 />
 
@@ -1792,7 +1811,7 @@ const Index = () => {
                         >
                           <div className={`relative bg-white rounded-[2rem] p-8 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] border border-slate-100 transition-all duration-300 transform group-hover:-translate-y-2 group-hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.15)] overflow-hidden`}>
                             {/* Card Decoration Gradient */}
-                            <div className={`absolute top-0 left-0 w-1.5 h-full ${i % 2 === 0 ? 'bg-gradient-to-b from-red-500 to-amber-500' : 'bg-gradient-to-b from-blue-500 to-cyan-500'}`} />
+                            <div className={`absolute top-0 left-0 w-1.5 h-full ${i % 2 === 0 ? 'bg-gradient-to-b from-red-500 to-orange-500' : 'bg-gradient-to-b from-blue-500 to-blue-400'}`} />
 
                             {/* Mobile Year Badge */}
                             <div className="md:hidden absolute top-6 right-6 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-bold">
@@ -1987,13 +2006,13 @@ const Index = () => {
             >
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-8 leading-[1.15] tracking-tight">
                 Give your business the <br />
-                <span className="text-[#d946ef]">Professional Assistance</span> <br />
+                <span className="text-blue-600">Professional Assistance</span> <br />
                 it requires with our team
               </h2>
-              <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-medium">
+              <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
                 Your vision is our starting point. Our team of expert developers, with 16+ years of experience, harmoniously collaborates with your team to create the custom software solution you aspire to.
               </p>
-              <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-medium mt-6">
+              <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium mt-6">
                 We transform ideas into scalable, future-ready digital products that empower your business, optimize operations, and accelerate growth.
               </p>
             </motion.div>
@@ -2052,7 +2071,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 className="text-4xl md:text-6xl font-black text-slate-900 leading-tight"
               >
-                Few words from our <span className="text-pink-600">happy customers</span>
+                Few words from our <span className="text-red-600">happy customers</span>
               </motion.h2>
             </div>
 

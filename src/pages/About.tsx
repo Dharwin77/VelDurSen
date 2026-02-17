@@ -401,132 +401,148 @@ const About = () => {
   return (
     <PageLayout>
       <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
-        <video autoPlay muted loop playsInline className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]">
-          <source src={aboutVideo} type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to4.jpeg-transparent z-10" />
+        <motion.div
+          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+          className="contents"
+        >
+          <video autoPlay muted loop playsInline className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]">
+            <source src={aboutVideo} type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to4.jpeg-transparent z-10" />
 
-        <div className="enterprise-container relative z-20">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl">
-            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-              About Veldursen
-            </span>
-            <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[6.5rem] font-bold text-amber-200 leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
-              Software with <br />
-              <span className="text-amber-100">a human heartbeat.</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-300 font-medium mb-12 max-w-3xl leading-relaxed drop-shadow-md">
-              The Visionary Vibe: We are a remote-first team of product experts dedicated to replacing digital friction with focus. Whether you are a founder launching a dream or a large-scale enterprise reaching millions, we craft the dependable software that keeps you moving forward.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20">
-                Meet the team
-              </Link>
-              <div className="flex items-center gap-4 px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">
-                <Globe2 size={16} className="text-red-600 shadow-sm" /> Remote-first, serving clients worldwide
+          <div className="enterprise-container relative z-20">
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl">
+              <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+                About Veldursen
+              </span>
+              <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[6.5rem] font-bold text-amber-200 leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+                Software with <br />
+                <span className="text-amber-100">a human heartbeat.</span>
+              </h1>
+              <p className="text-lg md:text-xl text-slate-300 font-medium mb-12 max-w-3xl leading-relaxed drop-shadow-md">
+                The Visionary Vibe: We are a remote-first team of product experts dedicated to replacing digital friction with focus. Whether you are a founder launching a dream or a large-scale enterprise reaching millions, we craft the dependable software that keeps you moving forward.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20">
+                  Meet the team
+                </Link>
+                <div className="flex items-center gap-4 px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">
+                  <Globe2 size={16} className="text-red-600 shadow-sm" /> Remote-first, serving clients worldwide
+                </div>
               </div>
-            </div>
-          </motion.div>
-        </div>
+            </motion.div>
+          </div>
 
-        <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[120px] -z-0" />
+          <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[120px] -z-0" />
+        </motion.div>
       </section>
 
       <section className="py-12 md:py-16 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "radial-gradient(#ef4444 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+        <motion.div
+          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#16a34a' } }))}
+          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+          viewport={{ margin: "-10% 0px -70% 0px" }}
+        >
+          <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "radial-gradient(#ef4444 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+          <div className="enterprise-container relative z-10">
+            <div className="max-w-5xl mb-12">
+              <motion.span initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="inline-block text-xs font-black uppercase tracking-[0.4em] text-green-600 mb-8 block bg-green-50 px-6 py-2 rounded-full border border-green-100 shadow-sm">
+                Our Story
+              </motion.span>
 
-        <div className="enterprise-container relative z-10">
-          <div className="max-w-5xl mb-12">
-            <motion.span initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="inline-block text-sm md:text-base font-black uppercase tracking-[0.65em] text-red-700 drop-shadow-sm mb-6 bg-red-50 px-6 py-3 rounded-2xl shadow-[0_12px_36px_-18px_rgba(239,68,68,0.55)]">
-              Our Story
-            </motion.span>
+              <p className="text-2xl md:text-3xl font-semibold uppercase tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 mb-3">
+                Building the Digital Future Since Day One
+              </p>
 
-            <p className="text-2xl md:text-3xl font-semibold uppercase tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 mb-3">
-              Building the Digital Future Since Day One
-            </p>
-
-            <h2 className="text-4xl md:text-5xl font-[900] text-[#0f172a] leading-[1.1] tracking-tight">
-              {"Human software, crafted with care".split(" ").map((word, i) => (
-                <span key={`${word}-${i}`} className="inline-block overflow-hidden mr-[0.2em] pb-[0.1em]">
-                  <motion.span
-                    initial={{ y: "100%" }}
-                    whileInView={{ y: 0 }}
-                    viewport={{ once: false, amount: 0.25 }}
-                    transition={{ duration: 0.6, delay: i * 0.05, ease: [0.33, 1, 0.68, 1] }}
-                    className={`inline-block leading-tight ${i >= 2 ? "text-[#dc2626]" : ""}`}
-                  >
-                    {word}
-                  </motion.span>
-                </span>
-              ))}
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-            <div className="lg:col-span-7">
-              <div className="space-y-8">
-                {story.map((text) => (
-                  <motion.div
-                    key={text}
-                    initial={{ opacity: 0.1, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ margin: "-20% 0px -20% 0px" }}
-                    transition={{ duration: 0.8 }}
-                    className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium relative pl-10 group"
-                  >
-                    <div className="absolute left-0 top-1 bottom-1 w-1.5 bg-slate-100 rounded-full overflow-hidden">
-                      <motion.div initial={{ height: 0 }} whileInView={{ height: "100%" }} transition={{ duration: 1 }} className="w-full bg-red-600" />
-                    </div>
-                    <p>{text}</p>
-                  </motion.div>
+              <h2 className="text-4xl md:text-5xl font-[900] text-[#0f172a] leading-[1.1] tracking-tight">
+                {"Human software, crafted with care".split(" ").map((word, i) => (
+                  <span key={`${word}-${i}`} className="inline-block overflow-hidden mr-[0.2em] pb-[0.1em]">
+                    <motion.span
+                      initial={{ y: "100%" }}
+                      whileInView={{ y: 0 }}
+                      viewport={{ once: false, amount: 0.25 }}
+                      transition={{ duration: 0.6, delay: i * 0.05, ease: [0.33, 1, 0.68, 1] }}
+                      className={`inline-block leading-tight ${i >= 2 ? "text-[#dc2626]" : ""}`}
+                    >
+                      {word}
+                    </motion.span>
+                  </span>
                 ))}
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0.1, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ margin: "-20% 0px -20% 0px" }}
-                transition={{ duration: 0.8 }}
-                className="text-lg md:text-xl text-slate-700 leading-relaxed font-semibold mt-6 border-l-4 border-red-500/70 pl-5 bg-red-50/50 rounded-xl py-5 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.2)]"
-              >
-                At Veldursen, we measure our success by the silence of a system that just works and the confidence of the teams who use it. Technology will always evolve, but the need for honesty, reliability, and human care in how we build it never will. Whether you’re launching your first idea or managing a global platform, we’re here to ensure your digital future has a heartbeat.
-              </motion.div>
+              </h2>
             </div>
 
-            <div className="lg:col-span-5 relative mt-12 lg:mt-4">
-              <div className="lg:sticky lg:top-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5 perspective-[2000px]">
-                {stats.map((m, i) => (
-                  <motion.div
-                    key={m.label}
-                    initial={{ opacity: 0, rotateX: -45, z: -200, y: 150 }}
-                    whileInView={{ opacity: 1, rotateX: 0, z: 0, y: 0 }}
-                    viewport={{ once: false, amount: 0.25 }}
-                    transition={{ duration: 1, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                    whileHover={{ scale: 1.03, rotateY: -5, x: 12, transition: { duration: 0.4 } }}
-                    className="bg-white border border-slate-100 p-6 rounded-[2rem] shadow-[0_10px_30px_-15px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_50px_-10px_rgba(239,68,68,0.12)] transition-all group relative"
-                  >
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <div className="text-4xl font-black text-slate-900 group-hover:text-red-600 transition-colors duration-300 tracking-tighter">{m.value}</div>
-                        <div className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-3">{m.label}</div>
-                        <div className="text-[10px] text-slate-300 font-semibold mt-1">{m.sublabel}</div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+              <div className="lg:col-span-7">
+                <div className="space-y-8">
+                  {story.map((text) => (
+                    <motion.div
+                      key={text}
+                      initial={{ opacity: 0.1, x: -30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ margin: "-20% 0px -20% 0px" }}
+                      transition={{ duration: 0.8 }}
+                      className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium relative pl-10 group"
+                    >
+                      <div className="absolute left-0 top-1 bottom-1 w-1.5 bg-slate-100 rounded-full overflow-hidden">
+                        <motion.div initial={{ height: 0 }} whileInView={{ height: "100%" }} transition={{ duration: 1 }} className="w-full bg-red-600" />
                       </div>
-                      <div className="text-5xl font-black text-slate-50 group-hover:text-red-500/5 transition-colors select-none">0{i + 1}</div>
-                    </div>
-                  </motion.div>
-                ))}
+                      <p>{text}</p>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <motion.div
+                  initial={{ opacity: 0.1, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ margin: "-20% 0px -20% 0px" }}
+                  transition={{ duration: 0.8 }}
+                  className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium mt-6 border-l-4 border-red-500/70 pl-5 bg-red-50/50 rounded-xl py-5 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.2)]"
+                >
+                  At Veldursen, we measure our success by the silence of a system that just works and the confidence of the teams who use it. Technology will always evolve, but the need for honesty, reliability, and human care in how we build it never will. Whether you’re launching your first idea or managing a global platform, we’re here to ensure your digital future has a heartbeat.
+                </motion.div>
+              </div>
+
+              <div className="lg:col-span-5 relative mt-12 lg:mt-4">
+                <div className="lg:sticky lg:top-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5 perspective-[2000px]">
+                  {stats.map((m, i) => (
+                    <motion.div
+                      key={m.label}
+                      initial={{ opacity: 0, rotateX: -45, z: -200, y: 150 }}
+                      whileInView={{ opacity: 1, rotateX: 0, z: 0, y: 0 }}
+                      viewport={{ once: false, amount: 0.25 }}
+                      transition={{ duration: 1, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                      whileHover={{ scale: 1.03, rotateY: -5, x: 12, transition: { duration: 0.4 } }}
+                      className="bg-white border border-slate-100 p-6 rounded-[2rem] shadow-[0_10px_30px_-15px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_50px_-10px_rgba(239,68,68,0.12)] transition-all group relative"
+                    >
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <div className="text-4xl font-black text-slate-900 group-hover:text-red-600 transition-colors duration-300 tracking-tighter">{m.value}</div>
+                          <div className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-3">{m.label}</div>
+                          <div className="text-[10px] text-slate-300 font-semibold mt-1">{m.sublabel}</div>
+                        </div>
+                        <div className="text-5xl font-black text-slate-50 group-hover:text-red-500/5 transition-colors select-none">0{i + 1}</div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section className="py-12 md:py-16 bg-white relative overflow-hidden">
-        <div className="enterprise-container relative space-y-16">
+        <motion.div
+          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#2563eb' } }))}
+          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+          viewport={{ margin: "-10% 0px -70% 0px" }}
+          className="enterprise-container relative space-y-16"
+        >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <div className="relative">
-              <motion.h2 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-3xl font-[900] uppercase tracking-wider text-[#0f172a] mb-12 border-b-2 border-[#dc2626] pb-4 inline-block">
-                Our <span className="text-[#dc2626]">Vision</span>
+              <span className="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-6 block">The North Star</span>
+              <motion.h2 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl font-[900] tracking-tighter text-[#0f172a] mb-12">
+                Our <span className="text-blue-600">Vision.</span>
               </motion.h2>
 
               <div className="space-y-6">
@@ -583,8 +599,9 @@ const About = () => {
             </div>
 
             <div className="relative">
-              <motion.h2 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-3xl font-[900] uppercase tracking-wider text-[#0f172a] mb-12 border-b-2 border-[#dc2626] pb-4 inline-block">
-                Our <span className="text-[#dc2626]">Mission</span>
+              <span className="text-xs font-black uppercase tracking-[0.4em] text-red-600 mb-6 block">Driving Impact</span>
+              <motion.h2 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl font-[900] tracking-tighter text-[#0f172a] mb-12" onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}>
+                Our <span className="text-red-600">Mission.</span>
               </motion.h2>
 
               <div className="space-y-6">
@@ -600,15 +617,20 @@ const About = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section className="py-12 md:py-16">
-        <div className="enterprise-container space-y-8">
+        <motion.div
+          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#f59e0b' } }))}
+          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+          viewport={{ margin: "-10% 0px -70% 0px" }}
+          className="enterprise-container space-y-8"
+        >
           <div className="flex items-center justify-between gap-4">
             <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-amber-300">Leadership</p>
-              <h2 className="text-3xl md:text-4xl font-[900] tracking-tight leading-tight text-[#0f172a]">People who steer the vision</h2>
+              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-500 mb-4 block">Leadership Collective</p>
+              <h2 className="text-4xl md:text-5xl font-[900] tracking-tighter leading-tight text-[#0f172a] mb-4">People who steer the <span className="text-orange-500">vision.</span></h2>
             </div>
             <div className="hidden md:block text-sm text-slate-500 max-w-sm text-right">
               Four seats, one direction. Each leader brings a different lens but a shared commitment to people-first products.
@@ -668,7 +690,7 @@ const About = () => {
           </div>
 
           {selectedReports.length > 0 && <div className="mt-6" />}
-        </div>
+        </motion.div>
       </section>
 
       <Dialog open={open} onOpenChange={setOpen}>
@@ -713,26 +735,35 @@ const About = () => {
       </Dialog>
 
       <section className="py-12 md:py-16 bg-white text-slate-900 relative overflow-hidden">
-        <div className="enterprise-container space-y-10">
+        <motion.div
+          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#16a34a' } }))}
+          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+          viewport={{ margin: "-10% 0px -70% 0px" }}
+          className="enterprise-container space-y-10"
+        >
           <div>
-            <h2 className="text-3xl md:text-4xl font-[900] tracking-tight leading-tight mb-2 text-slate-900">09+ years of building expertise and growing with our clients</h2>
-            <p className="text-slate-600 max-w-3xl">Tap a year to see the milestone story, photo, and what changed for our clients.</p>
+            <span className="text-xs font-black uppercase tracking-[0.4em] text-green-600 mb-6 block">Evolution Journey</span>
+            <h2 className="text-4xl md:text-5xl font-[900] tracking-tighter leading-tight mb-8 text-slate-900">09+ Years of Building <span className="text-green-600">Expertise.</span></h2>
+            <p className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-3xl font-medium">Tap a year to see the milestone story, photo, and what changed for our clients.</p>
           </div>
 
           <MilestonesInteractive />
-        </div>
+        </motion.div>
       </section>
 
       <section className="py-12 md:py-16 bg-white text-slate-900">
-        <div className="enterprise-container grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <motion.div
+          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#2563eb' } }))}
+          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+          viewport={{ margin: "-10% 0px -70% 0px" }}
+          className="enterprise-container grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+        >
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-200 bg-amber-50 text-[10px] font-black uppercase tracking-[0.35em] text-amber-700">
-              Our people
-            </div>
-            <h2 className="text-3xl md:text-4xl font-[900] leading-tight tracking-tight">
-              The crew giving VelDurSen its spark
+            <span className="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-6 block">Cultural Fabric</span>
+            <h2 className="text-4xl md:text-5xl font-[900] leading-tight tracking-tighter mb-8 italic">
+              The crew giving <span className="text-blue-600">VelDurSen Its Spark.</span>
             </h2>
-            <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-2xl">
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl">
               Scenes from the teams you will collaborate with—strategy rooms, research park deep-dives, and the smiles that show up when hard problems finally click.
             </p>
 
@@ -760,11 +791,16 @@ const About = () => {
           </div>
 
           <TeamCarousel />
-        </div>
+        </motion.div>
       </section>
 
       <section className="py-12 md:py-16 bg-gradient-to-b from-slate-900 to-slate-950 text-white relative overflow-hidden">
-        <div className="enterprise-container relative z-10">
+        <motion.div
+          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#8b5cf6' } }))}
+          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+          viewport={{ margin: "-10% 0px -70% 0px" }}
+          className="enterprise-container relative z-10"
+        >
           <div className="text-center mb-12">
             <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} className="text-amber-400 font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">
               Our Services
@@ -792,12 +828,17 @@ const About = () => {
               disableAnimations={false}
             />
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Our Technology Section */}
       <section className="py-12 md:py-20 bg-gradient-to-b from-slate-900 to-slate-800 relative overflow-hidden">
-        <div className="enterprise-container relative z-10 max-w-5xl">
+        <motion.div
+          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#3b82f6' } }))}
+          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+          viewport={{ margin: "-10% 0px -70% 0px" }}
+          className="enterprise-container relative z-10 max-w-5xl"
+        >
           <div className="text-center mb-16">
             <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} className="text-blue-400 font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">
               Technology
@@ -805,7 +846,7 @@ const About = () => {
             <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl md:text-5xl font-[900] text-white mb-6">
               Our <span className="text-blue-400">technology</span> foundations
             </motion.h2>
-            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-slate-300 max-w-3xl mx-auto text-lg leading-relaxed">
+            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto font-medium">
               Built on cutting-edge technologies that power enterprise-grade solutions.
             </motion.p>
           </div>
@@ -897,11 +938,16 @@ const About = () => {
               </div>
             </ScrollStackItem>
           </ScrollStack>
-        </div>
+        </motion.div>
       </section>
 
       <section className="py-12 md:py-16 bg-white relative overflow-hidden" id="principles-section">
-        <div className="enterprise-container relative z-10">
+        <motion.div
+          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
+          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+          viewport={{ margin: "-10% 0px -70% 0px" }}
+          className="enterprise-container relative z-10"
+        >
           <div className="text-center mb-16">
             <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} className="text-red-600 font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">
               Core Values
@@ -909,7 +955,7 @@ const About = () => {
             <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl md:text-5xl font-[900] text-[#0f172a] mb-6">
               Principles that <span className="text-[#dc2626]">define us</span>
             </motion.h2>
-            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-slate-500 max-w-3xl mx-auto text-lg leading-relaxed">
+            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium">
               The values that guide every decision, every system we build, and every relationship we nurture across our global organization.
             </motion.p>
           </div>
@@ -924,7 +970,7 @@ const About = () => {
             <div className="relative z-10 p-8 md:p-16 max-w-3xl drop-shadow-2xl">
               <span className="text-white/80 font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">Values in action</span>
               <h3 className="text-3xl md:text-4xl font-bold text-sky-200 mb-6 leading-tight">Where strategy, security, and sustainability meet disciplined delivery</h3>
-              <p className="text-sky-100 text-lg font-medium leading-relaxed max-w-2xl">
+              <p className="text-lg md:text-xl text-sky-100 font-medium leading-relaxed max-w-2xl">
                 A glimpse into the teams that live these principles daily--architecting resilient systems, protecting trust, and driving innovation for enterprises around the world.
               </p>
             </div>
@@ -969,17 +1015,22 @@ const About = () => {
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section className="py-12 bg-white relative overflow-hidden">
-        <div className="enterprise-container relative z-10">
+        <motion.div
+          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
+          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+          viewport={{ margin: "-10% 0px -70% 0px" }}
+          className="enterprise-container relative z-10"
+        >
           <div className="text-center mb-10">
             <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl md:text-5xl font-[900] text-[#0f172a] mb-4 tracking-tighter">
               The values that <br className="hidden md:block" />
               <span className="text-[#dc2626]">guide how we work.</span>
             </motion.h2>
-            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-slate-500 max-w-4xl mx-auto text-base leading-relaxed">
+            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-4xl mx-auto font-medium">
               We want every interaction with Veldursen to feel clear, honest, and thoughtful--whether we are workshopping a product brief or deploying code at midnight.
             </motion.p>
           </div>
@@ -996,40 +1047,46 @@ const About = () => {
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section className="py-24 bg-white text-slate-900 overflow-hidden border-t border-slate-50">
-        <div className="enterprise-container mb-16 text-center">
-          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl md:text-5xl font-[900] text-[#0f172a] mb-6 tracking-tight">
-            Team behind the <span className="text-[#dc2626]">scene</span>
-          </motion.h2>
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-slate-500 max-w-2xl mx-auto text-sm md:text-base font-medium">
-            Explore how we have helped companies turn ideas into digital products that convert, scale, and grow.
-          </motion.p>
-        </div>
-
-        <div className="relative flex flex-col gap-6 overflow-hidden">
-          <div className="flex w-full overflow-hidden">
-            <motion.div animate={{ x: [0, -1920] }} transition={{ duration: 50, repeat: Infinity, ease: "linear" }} className="flex gap-6 shrink-0">
-              {[blog1, blog2, blog3, blog4, blog5, blog6, blog7, blog8, blog9, blog10, blog1, blog2, blog3, blog4].map((img, i) => (
-                <div key={`row1-${i}`} className="w-[320px] h-[220px] bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 shrink-0 shadow-sm transition-shadow duration-500 hover:shadow-xl">
-                  <img src={img} alt="Veldursen work" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" />
-                </div>
-              ))}
-            </motion.div>
+        <motion.div
+          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
+          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+          viewport={{ margin: "-10% 0px -70% 0px" }}
+        >
+          <div className="enterprise-container mb-16 text-center">
+            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl md:text-5xl font-[900] text-[#0f172a] mb-6 tracking-tight">
+              Team behind the <span className="text-[#dc2626]">scene</span>
+            </motion.h2>
+            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
+              Explore how we have helped companies turn ideas into digital products that convert, scale, and grow.
+            </motion.p>
           </div>
 
-          <div className="flex w-full overflow-hidden">
-            <motion.div animate={{ x: [-1920, 0] }} transition={{ duration: 55, repeat: Infinity, ease: "linear" }} className="flex gap-6 shrink-0">
-              {[blog5, blog6, blog7, blog8, blog9, blog10, blog1, blog2, blog3, blog4, blog5, blog6, blog7, blog8].map((img, i) => (
-                <div key={`row2-${i}`} className="w-[320px] h-[220px] bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 shrink-0 shadow-sm transition-shadow duration-500 hover:shadow-xl">
-                  <img src={img} alt="Veldursen culture" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" />
-                </div>
-              ))}
-            </motion.div>
+          <div className="relative flex flex-col gap-6 overflow-hidden">
+            <div className="flex w-full overflow-hidden">
+              <motion.div animate={{ x: [0, -1920] }} transition={{ duration: 50, repeat: Infinity, ease: "linear" }} className="flex gap-6 shrink-0">
+                {[blog1, blog2, blog3, blog4, blog5, blog6, blog7, blog8, blog9, blog10, blog1, blog2, blog3, blog4].map((img, i) => (
+                  <div key={`row1-${i}`} className="w-[320px] h-[220px] bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 shrink-0 shadow-sm transition-shadow duration-500 hover:shadow-xl">
+                    <img src={img} alt="Veldursen work" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" />
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
+            <div className="flex w-full overflow-hidden">
+              <motion.div animate={{ x: [-1920, 0] }} transition={{ duration: 55, repeat: Infinity, ease: "linear" }} className="flex gap-6 shrink-0">
+                {[blog5, blog6, blog7, blog8, blog9, blog10, blog1, blog2, blog3, blog4, blog5, blog6, blog7, blog8].map((img, i) => (
+                  <div key={`row2-${i}`} className="w-[320px] h-[220px] bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 shrink-0 shadow-sm transition-shadow duration-500 hover:shadow-xl">
+                    <img src={img} alt="Veldursen culture" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" />
+                  </div>
+                ))}
+              </motion.div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </PageLayout>
   );

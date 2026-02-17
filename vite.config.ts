@@ -10,6 +10,9 @@ export default defineConfig(({ mode }) => ({
     hmr: {
       overlay: false,
     },
+    headers: {
+      'Cache-Control': 'no-cache',
+    },
   },
   plugins: [react()],
   resolve: {
@@ -17,4 +20,8 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  optimizeDeps: {
+    exclude: ['*.mp4', '*.webm', '*.ogg'],
+  },
+  assetsInclude: ['**/*.mp4', '**/*.webm', '**/*.ogg'],
 }));

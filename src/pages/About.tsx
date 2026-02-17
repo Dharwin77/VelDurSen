@@ -11,7 +11,6 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Link } from "react-router-dom";
-import MagicBento from "@/components/MagicBento";
 import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 import aboutTeam from "@/assets/about-team.jpg";
 import aboutImage2 from "@/assets/Gemini_Generated_Image_zh56h0zh56h0zh56.png";
@@ -107,7 +106,7 @@ const TeamCarousel = () => {
 
   return (
     <div
-      className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_20px_50px_-25px_rgba(15,23,42,0.35)] w-full max-w-3xl lg:max-w-4xl mx-auto group"
+      className="relative overflow-hidden rounded-2xl md:rounded-3xl border border-slate-200 bg-white shadow-[0_20px_50px_-25px_rgba(15,23,42,0.35)] w-full max-w-3xl lg:max-w-4xl mx-auto group"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onClick={() => goTo(idx + 1)}
@@ -306,7 +305,7 @@ const MilestonesInteractive = () => {
   }, [images, hasImages, paused]);
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 md:p-8 space-y-6 shadow-[0_20px_50px_-35px_rgba(15,23,42,0.35)]">
+    <div className="relative overflow-hidden rounded-2xl md:rounded-3xl border border-slate-200 bg-white p-4 sm:p-6 md:p-8 space-y-4 md:space-y-6 shadow-[0_20px_50px_-35px_rgba(15,23,42,0.35)]">
       <div className="flex items-center gap-3 overflow-x-auto pb-2">
         {milestones.map((m) => (
           <button
@@ -388,6 +387,24 @@ const About = () => {
     setOpen(true);
   };
 
+  // Lock body scroll when dialog is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    };
+  }, [open]);
+
   const getInitials = (fullName: string) =>
     fullName
       .split(" ")
@@ -400,7 +417,7 @@ const About = () => {
 
   return (
     <PageLayout>
-      <section className="relative h-[50vh] sm:h-[80vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden">
+      <section className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden">
         <motion.div
           onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
           className="contents"
@@ -415,11 +432,11 @@ const About = () => {
               <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
                 About Veldursen
               </span>
-              <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[6.5rem] font-bold text-amber-200 leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+              <h1 className="text-[2rem] xs:text-[2.5rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] font-bold text-amber-200 leading-[1.05] mb-6 md:mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
                 Software with <br />
                 <span className="text-amber-100">a human heartbeat.</span>
               </h1>
-              <p className="text-lg md:text-xl text-slate-300 font-medium mb-12 max-w-3xl leading-relaxed drop-shadow-md">
+              <p className="text-base sm:text-lg md:text-xl text-slate-300 font-medium mb-8 md:mb-12 max-w-3xl leading-relaxed drop-shadow-md">
                 The Visionary Vibe: We are a remote-first team of product experts dedicated to replacing digital friction with focus. Whether you are a founder launching a dream or a large-scale enterprise reaching millions, we craft the dependable software that keeps you moving forward.
               </p>
               <div className="flex flex-wrap gap-4">
@@ -437,7 +454,7 @@ const About = () => {
         </motion.div>
       </section>
 
-      <section className="py-12 md:py-16 bg-white relative overflow-hidden">
+      <section className="py-8 sm:py-12 md:py-16 bg-white relative overflow-hidden">
         <motion.div
           onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#16a34a' } }))}
           onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
@@ -450,11 +467,11 @@ const About = () => {
                 Our Story
               </motion.span>
 
-              <p className="text-2xl md:text-3xl font-semibold uppercase tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 mb-3">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 mb-3">
                 Building the Digital Future Since Day One
               </p>
 
-              <h2 className="text-4xl md:text-5xl font-[900] text-[#0f172a] leading-[1.1] tracking-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-[900] text-[#0f172a] leading-[1.1] tracking-tight">
                 {"Human software, crafted with care".split(" ").map((word, i) => (
                   <span key={`${word}-${i}`} className="inline-block overflow-hidden mr-[0.2em] pb-[0.1em]">
                     <motion.span
@@ -502,7 +519,7 @@ const About = () => {
                 </motion.div>
               </div>
 
-              <div className="lg:col-span-5 relative mt-12 lg:mt-4">
+              <div className="lg:col-span-5 relative mt-8 lg:mt-4">
                 <div className="lg:sticky lg:top-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5 perspective-[2000px]">
                   {stats.map((m, i) => (
                     <motion.div
@@ -531,7 +548,7 @@ const About = () => {
         </motion.div>
       </section>
 
-      <section className="py-12 md:py-16 bg-white relative overflow-hidden">
+      <section className="py-8 sm:py-12 md:py-16 bg-white relative overflow-hidden">
         <motion.div
           onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#2563eb' } }))}
           onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
@@ -541,7 +558,7 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <div className="relative">
               <span className="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-6 block">The North Star</span>
-              <motion.h2 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl font-[900] tracking-tighter text-[#0f172a] mb-12">
+              <motion.h2 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-2xl sm:text-3xl md:text-4xl font-[900] tracking-tighter text-[#0f172a] mb-8 md:mb-12">
                 Our <span className="text-blue-600">Vision.</span>
               </motion.h2>
 
@@ -559,7 +576,7 @@ const About = () => {
             </div>
 
             <div className="relative">
-              <motion.div initial={{ opacity: 0, scale: 0.9, x: 20 }} whileInView={{ opacity: 1, scale: 1, x: 0 }} viewport={{ once: false, amount: 0.25 }} className="relative group cursor-pointer max-w-md mx-auto">
+              <motion.div initial={{ opacity: 0, scale: 0.9, x: 20 }} whileInView={{ opacity: 1, scale: 1, x: 0 }} viewport={{ once: false, amount: 0.25 }} className="relative group cursor-pointer max-w-md mx-auto lg:mx-0">
                 <div className="absolute inset-0 bg-red-100/40 rounded-full blur-3xl -z-10 group-hover:bg-red-200/60 transition-colors duration-700 animate-pulse" />
                 <div className="relative overflow-hidden rounded-2xl group-hover:rounded-2xl aspect-square shadow-2xl shadow-red-200/50 border-4 border-white/50 backdrop-blur-sm transition-all duration-1000">
                   <img src="/team/vis.jpg" alt="Veldursen team" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
@@ -582,7 +599,7 @@ const About = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <div className="relative order-last lg:order-first">
-              <motion.div initial={{ opacity: 0, scale: 0.9, x: -20 }} whileInView={{ opacity: 1, scale: 1, x: 0 }} viewport={{ once: false, amount: 0.25 }} className="relative group cursor-pointer max-w-md mx-auto">
+              <motion.div initial={{ opacity: 0, scale: 0.9, x: -20 }} whileInView={{ opacity: 1, scale: 1, x: 0 }} viewport={{ once: false, amount: 0.25 }} className="relative group cursor-pointer max-w-md mx-auto lg:mx-0">
                 <div className="absolute inset-0 bg-slate-100/40 rounded-full blur-3xl -z-10 group-hover:bg-slate-200/60 transition-colors duration-700 animate-pulse" />
                 <div className="relative overflow-hidden rounded-2xl group-hover:rounded-2xl aspect-square shadow-2xl shadow-slate-200/50 border-4 border-white/50 backdrop-blur-sm transition-all duration-1000">
                   <img src="/team/miss.jpg" alt="Veldursen culture" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
@@ -600,7 +617,7 @@ const About = () => {
 
             <div className="relative">
               <span className="text-xs font-black uppercase tracking-[0.4em] text-red-600 mb-6 block">Driving Impact</span>
-              <motion.h2 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl font-[900] tracking-tighter text-[#0f172a] mb-12" onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}>
+              <motion.h2 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-2xl sm:text-3xl md:text-4xl font-[900] tracking-tighter text-[#0f172a] mb-8 md:mb-12" onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}>
                 Our <span className="text-red-600">Mission.</span>
               </motion.h2>
 
@@ -620,7 +637,7 @@ const About = () => {
         </motion.div>
       </section>
 
-      <section className="py-12 md:py-16">
+      <section className="py-8 sm:py-12 md:py-16">
         <motion.div
           onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#f59e0b' } }))}
           onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
@@ -630,14 +647,14 @@ const About = () => {
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-500 mb-4 block">Leadership Collective</p>
-              <h2 className="text-4xl md:text-5xl font-[900] tracking-tighter leading-tight text-[#0f172a] mb-4">People who steer the <span className="text-orange-500">vision.</span></h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-[900] tracking-tighter leading-tight text-[#0f172a] mb-4">People who steer the <span className="text-orange-500">vision.</span></h2>
             </div>
             <div className="hidden md:block text-sm text-slate-500 max-w-sm text-right">
               Four seats, one direction. Each leader brings a different lens but a shared commitment to people-first products.
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-sm sm:max-w-none mx-auto">
             {leadership.map((person, idx) => (
               <motion.div
                 key={person.name}
@@ -646,7 +663,7 @@ const About = () => {
                 whileHover={{ y: -6, scale: 1.02, rotateX: -2, rotateY: 2 }}
                 viewport={{ once: false, margin: "-10%" }}
                 transition={{ delay: idx * 0.08, duration: 0.5, type: "spring", stiffness: 230, damping: 18 }}
-                className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_20px_40px_-24px_rgba(0,0,0,0.8)] cursor-pointer ${selectedLeader === person.name ? "ring-2 ring-amber-400/70" : ""}`}
+                className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_20px_40px_-24px_rgba(0,0,0,0.8)] cursor-pointer aspect-[3/4] w-full ${selectedLeader === person.name ? "ring-2 ring-amber-400/70" : ""}`}
                 style={{ perspective: 1200 }}
                 onClick={() => handleSelectLeader(person.name)}
                 role="button"
@@ -694,15 +711,20 @@ const About = () => {
       </section>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-5xl w-[1100px]">
-          <DialogHeader className="pb-2">
-            <DialogTitle className="text-2xl font-bold text-slate-900">Team reporting to {selectedLeader}</DialogTitle>
+        <DialogContent className="max-w-5xl w-[95vw] sm:w-[90vw] md:w-[1100px] max-h-[90vh] !flex !flex-col !gap-0 p-0">
+          <DialogHeader className="pb-2 flex-shrink-0 px-6 pt-6">
+            <DialogTitle className="text-xl sm:text-2xl font-bold text-slate-900">Team reporting to {selectedLeader}</DialogTitle>
             <DialogDescription className="text-sm text-slate-500">
               Click a leader card to view their direct reports.
             </DialogDescription>
           </DialogHeader>
-          <div className="max-h-[70vh] overflow-y-auto pr-1">
-            <div className="grid [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))] gap-5">
+          <div
+            className="flex-1 overflow-y-auto overflow-x-hidden px-6 pb-6"
+            style={{ WebkitOverflowScrolling: 'touch', minHeight: 0 }}
+            onTouchStart={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
               {selectedReports.map((member) => (
                 <div
                   key={member.name}
@@ -734,7 +756,7 @@ const About = () => {
         </DialogContent>
       </Dialog>
 
-      <section className="py-12 md:py-16 bg-white text-slate-900 relative overflow-hidden">
+      <section className="py-8 sm:py-12 md:py-16 bg-white text-slate-900 relative overflow-hidden">
         <motion.div
           onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#16a34a' } }))}
           onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
@@ -743,7 +765,7 @@ const About = () => {
         >
           <div>
             <span className="text-xs font-black uppercase tracking-[0.4em] text-green-600 mb-6 block">Evolution Journey</span>
-            <h2 className="text-4xl md:text-5xl font-[900] tracking-tighter leading-tight mb-8 text-slate-900">09+ Years of Building <span className="text-green-600">Expertise.</span></h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-[900] tracking-tighter leading-tight mb-6 md:mb-8 text-slate-900">09+ Years of Building <span className="text-green-600">Expertise.</span></h2>
             <p className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-3xl font-medium">Tap a year to see the milestone story, photo, and what changed for our clients.</p>
           </div>
 
@@ -751,7 +773,7 @@ const About = () => {
         </motion.div>
       </section>
 
-      <section className="py-12 md:py-16 bg-white text-slate-900">
+      <section className="py-8 sm:py-12 md:py-16 bg-white text-slate-900">
         <motion.div
           onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#2563eb' } }))}
           onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
@@ -760,7 +782,7 @@ const About = () => {
         >
           <div className="space-y-6">
             <span className="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-6 block">Cultural Fabric</span>
-            <h2 className="text-4xl md:text-5xl font-[900] leading-tight tracking-tighter mb-8 italic">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-[900] leading-tight tracking-tighter mb-6 md:mb-8 italic">
               The crew giving <span className="text-blue-600">VelDurSen Its Spark.</span>
             </h2>
             <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl">
@@ -794,42 +816,6 @@ const About = () => {
         </motion.div>
       </section>
 
-      <section className="py-12 md:py-16 bg-gradient-to-b from-slate-900 to-slate-950 text-white relative overflow-hidden">
-        <motion.div
-          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#8b5cf6' } }))}
-          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
-          viewport={{ margin: "-10% 0px -70% 0px" }}
-          className="enterprise-container relative z-10"
-        >
-          <div className="text-center mb-12">
-            <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} className="text-amber-400 font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">
-              Our Services
-            </motion.span>
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl md:text-5xl font-[900] text-white mb-6">
-              Powered by <span className="text-purple-400">innovation</span>
-            </motion.h2>
-            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-slate-300 max-w-3xl mx-auto text-lg leading-relaxed">
-              Explore the services we deliver to turn ideas into digital products that scale.
-            </motion.p>
-          </div>
-
-          <div className="flex justify-center items-center">
-            <MagicBento
-              textAutoHide={true}
-              enableStars
-              enableSpotlight
-              enableBorderGlow={true}
-              enableTilt={false}
-              enableMagnetism
-              clickEffect
-              spotlightRadius={510}
-              particleCount={18}
-              glowColor="132, 0, 255"
-              disableAnimations={false}
-            />
-          </div>
-        </motion.div>
-      </section>
 
       {/* Our Technology Section */}
       <section className="py-12 md:py-20 bg-gradient-to-b from-slate-900 to-slate-800 relative overflow-hidden">
@@ -863,8 +849,8 @@ const About = () => {
             <ScrollStackItem>
               <div className="h-full flex flex-col justify-between">
                 <div>
-                  <h3 className="font-bold mb-4 text-yellow-500">Artificial Intelligence & Machine Learning</h3>
-                  <p className="text-slate-200 leading-relaxed">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-yellow-500">Artificial Intelligence & Machine Learning</h3>
+                  <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
                     Advanced AI algorithms and machine learning models that provide intelligent automation, predictive analytics, and data-driven decision making for enterprise applications.
                   </p>
                 </div>
@@ -875,8 +861,8 @@ const About = () => {
             <ScrollStackItem>
               <div className="h-full flex flex-col justify-between">
                 <div>
-                  <h3 className="font-bold mb-4 text-yellow-500">Cloud & Infrastructure</h3>
-                  <p className="text-slate-200 leading-relaxed">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-yellow-500">Cloud & Infrastructure</h3>
+                  <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
                     Scalable cloud-native architecture with microservices, containerization, and orchestration technologies that ensure reliability, performance, and cost efficiency.
                   </p>
                 </div>
@@ -887,8 +873,8 @@ const About = () => {
             <ScrollStackItem>
               <div className="h-full flex flex-col justify-between">
                 <div>
-                  <h3 className="font-bold mb-4 text-yellow-500">Cybersecurity & Compliance</h3>
-                  <p className="text-slate-200 leading-relaxed">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-yellow-500">Cybersecurity & Compliance</h3>
+                  <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
                     Zero-trust security frameworks, threat detection, and compliance technologies that protect sensitive enterprise data and maintain regulatory standards.
                   </p>
                 </div>
@@ -899,8 +885,8 @@ const About = () => {
             <ScrollStackItem>
               <div className="h-full flex flex-col justify-between">
                 <div>
-                  <h3 className="font-bold mb-4 text-yellow-500">Data Engineering</h3>
-                  <p className="text-slate-200 leading-relaxed">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-yellow-500">Data Engineering</h3>
+                  <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
                     Modern data pipelines and analytics platforms that transform raw data into actionable insights, enabling informed business decisions at scale.
                   </p>
                 </div>
@@ -911,8 +897,8 @@ const About = () => {
             <ScrollStackItem>
               <div className="h-full flex flex-col justify-between">
                 <div>
-                  <h3 className="font-bold mb-4 text-yellow-500">Ethical Technology</h3>
-                  <p className="text-slate-200 leading-relaxed">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-yellow-500">Ethical Technology</h3>
+                  <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
                     Sustainable practices, responsible AI, and ethical design principles that ensure our technology solutions align with societal values and environmental impact.
                   </p>
                 </div>
@@ -967,7 +953,7 @@ const About = () => {
               <div className="absolute inset-0 border-[6px] border-red-500/30 rounded-3xl m-3 pointer-events-none" />
             </div>
 
-            <div className="relative z-10 p-8 md:p-16 max-w-3xl drop-shadow-2xl">
+            <div className="relative z-10 p-6 sm:p-8 md:p-16 max-w-3xl drop-shadow-2xl">
               <span className="text-white/80 font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">Values in action</span>
               <h3 className="text-3xl md:text-4xl font-bold text-sky-200 mb-6 leading-tight">Where strategy, security, and sustainability meet disciplined delivery</h3>
               <p className="text-lg md:text-xl text-sky-100 font-medium leading-relaxed max-w-2xl">

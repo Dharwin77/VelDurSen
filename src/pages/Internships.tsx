@@ -119,7 +119,7 @@ const Internships = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center mb-20"
+            className="max-w-4xl mx-auto text-center mb-12 sm:mb-20"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -131,10 +131,10 @@ const Internships = () => {
               <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600">CSR Mission Architecture</span>
             </motion.div>
 
-            <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-8 tracking-tighter">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 mb-6 sm:mb-8 tracking-tighter leading-tight">
               Growing <span className="text-blue-600 italic">Future</span> Tech Leaders
             </h2>
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
+            <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed font-medium px-4">
               This is <span className="text-slate-900 font-bold border-b-2 border-red-200">not a coaching institute</span>. VelDurSen's Internship Program is a <br className="hidden md:block" />
               <span className="text-red-600 font-bold">CSR-driven early talent engine</span> designed to architect real-world engineering excellence.
             </p>
@@ -229,26 +229,26 @@ const Internships = () => {
             <div className="absolute inset-0 bg-slate-900" />
             <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-red-600/20 to-transparent opacity-50" />
 
-            <div className="relative p-10 flex flex-col lg:flex-row items-center gap-10">
-              <div className="flex-shrink-0 flex items-center gap-6">
+            <div className="relative p-6 sm:p-10 flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-10">
+              <div className="flex-shrink-0 flex items-center lg:items-start gap-6">
                 <div className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-[0_0_30px_rgba(220,38,38,0.4)]">
                   <Lightbulb className="w-8 h-8 text-white" />
                 </div>
-                <div className="h-10 w-px bg-white/20 hidden lg:block" />
+                <div className="h-20 w-px bg-white/20 hidden lg:block" />
               </div>
 
-              <div className="flex-grow">
-                <div className="flex items-center gap-3 mb-3">
+              <div className="flex-grow text-center lg:text-left">
+                <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
                   <span className="text-[10px] font-black text-red-500 uppercase tracking-[0.4em]">Proprietary Advisory</span>
-                  <div className="h-px w-10 bg-red-600" />
+                  <div className="h-px w-10 bg-red-600 hidden sm:block" />
                 </div>
-                <h4 className="text-2xl font-bold text-white mb-3">Program Integrity Notice</h4>
-                <p className="text-slate-300 leading-relaxed font-medium">
+                <h4 className="text-xl sm:text-2xl font-bold text-white mb-3 tracking-tight">Program Integrity Notice</h4>
+                <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-medium">
                   VelDurSen is <span className="text-white font-bold underline decoration-red-600 underline-offset-4">not a training institute</span> or placement agency. We operate as a global enterprise tech powerhouse. This initiative is strictly for <span className="text-white">early-talent architectural development</span>. Capability growth is the primary objective; long-term recruitment is not a guaranteed outcome of the program.
                 </p>
               </div>
 
-              <div className="flex-shrink-0 opacity-20 group-hover:opacity-100 transition-opacity duration-700">
+              <div className="flex-shrink-0 opacity-20 group-hover:opacity-100 transition-opacity duration-700 hidden lg:block">
                 <div className="text-[10px] font-black text-white/50 uppercase tracking-[0.5em] [writing-mode:vertical-lr] rotate-180">
                   SYSTEM_PRIORITY_HIGH
                 </div>
@@ -265,15 +265,15 @@ const Internships = () => {
         <div className="absolute top-0 right-0 w-96 h-96 bg-slate-900/[0.02] -z-10" />
 
         <div className="enterprise-container relative z-10">
-          <header className="mb-12">
-            <div className="flex items-center gap-4 mb-6">
+          <header className="mb-12 text-center lg:text-left">
+            <div className="flex items-center justify-center lg:justify-start gap-4 mb-6">
               <div className="h-0.5 w-12 bg-red-600" />
               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-600">Architectural Core</span>
             </div>
-            <h2 className="text-4xl md:text-7xl font-black text-slate-950 tracking-tighter mb-8 italic">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-950 tracking-tighter mb-6 sm:mb-8 italic leading-tight">
               Technology <span className="text-slate-300">Focus Areas</span>
             </h2>
-            <p className="text-lg md:text-xl text-slate-600 font-medium max-w-2xl leading-tight">
+            <p className="text-base sm:text-lg md:text-xl text-slate-600 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               Interns engage with <span className="text-slate-950 underline decoration-red-600/20 underline-offset-8">mission-critical tech stacks</span>. Guidance is provided by senior architects through a deep-dive engineering immersion.
             </p>
           </header>
@@ -422,7 +422,7 @@ const Internships = () => {
 
           <div className="max-w-5xl mx-auto relative px-4 md:px-0">
             {/* The Central Terminal Line */}
-            <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-1 bg-slate-100 overflow-hidden hidden md:block">
+            <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-1 bg-slate-100 overflow-hidden">
               <motion.div
                 className="w-full h-full bg-red-600 origin-top"
                 initial={{ scaleY: 0 }}
@@ -476,8 +476,8 @@ const Internships = () => {
                   className={`relative flex items-center md:justify-between ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
                 >
                   {/* Content Module */}
-                  <div className={`w-full md:w-[42%] group`}>
-                    <div className="relative p-4 md:p-6 rounded-[2rem] bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-2xl hover:shadow-red-200/30 transition-all duration-700 overflow-hidden">
+                  <div className={`w-full md:w-[42%] group ml-12 md:ml-0`}>
+                    <div className="relative p-5 md:p-6 rounded-[2rem] bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-2xl hover:shadow-red-200/30 transition-all duration-700 overflow-hidden">
                       {/* Holographic Number */}
                       <div className="absolute -top-6 -right-6 text-[12rem] font-black text-slate-200/20 leading-none select-none group-hover:text-red-500/10 transition-colors">
                         {phase.phase}
@@ -516,8 +516,8 @@ const Internships = () => {
                   </div>
 
                   {/* Operational Gateway Node */}
-                  <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 w-8 h-8 flex items-center justify-center">
-                    <div className="w-4 h-4 rounded-full bg-white border-4 border-red-600 z-20 shadow-[0_0_20px_rgba(220,38,38,0.5)] group-hover:scale-150 transition-transform duration-500" />
+                  <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 w-8 h-8 flex items-center justify-center -translate-x-1/2 md:-translate-x-1/2 bg-white rounded-full z-20">
+                    <div className="w-4 h-4 rounded-full bg-white border-4 border-red-600 z-30 shadow-[0_0_20px_rgba(220,38,38,0.5)] group-hover:scale-150 transition-transform duration-500" />
                     <div className="absolute w-12 h-12 rounded-full border border-red-600/20 animate-ping" />
                   </div>
                 </motion.div>
@@ -530,33 +530,33 @@ const Internships = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="mt-12 max-w-6xl mx-auto rounded-3xl bg-slate-950 py-8 relative overflow-hidden group shadow-[0_40px_80px_rgba(0,0,0,0.3)]"
+            className="mt-12 max-w-6xl mx-auto rounded-3xl bg-slate-950 py-12 px-6 relative overflow-hidden group shadow-[0_40px_80px_rgba(0,0,0,0.3)]"
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(220,38,38,0.2),transparent)]" />
             <div className="relative flex flex-col items-center text-center">
               <div className="w-12 h-12 rounded-xl bg-red-600 flex items-center justify-center mb-6 shadow-[0_20px_40px_rgba(220,38,38,0.4)] transition-transform duration-700 group-hover:rotate-[360deg]">
                 <Calendar className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter leading-none italic">
-                12 Weeks. <br />
+              <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 tracking-tighter leading-tight italic">
+                12 Weeks. <br className="sm:hidden" />
                 <span className="text-red-600">Pure Architecture.</span>
               </h3>
-              <p className="text-sm md:text-base text-slate-400 font-medium max-w-2xl mb-8 leading-relaxed">
+              <p className="text-sm md:text-base text-slate-400 font-medium max-w-2xl mb-10 leading-relaxed px-4">
                 "We engineer growth at scale. Our roadmap is not a schedule; it is an optimized system for transforming potential into professional engineering velocity."
               </p>
-              <div className="flex flex-wrap justify-center gap-16 text-slate-500 font-black text-xs uppercase tracking-[0.4em]">
-                <div className="flex flex-col gap-3">
-                  <span className="text-white text-4xl font-black">100%</span>
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-16 text-slate-500 font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.4em]">
+                <div className="flex flex-col gap-2 sm:gap-3">
+                  <span className="text-white text-3xl sm:text-4xl font-black">100%</span>
                   <span>System Exposure</span>
                 </div>
                 <div className="hidden md:block w-px h-16 bg-white/10" />
-                <div className="flex flex-col gap-3">
-                  <span className="text-white text-4xl font-black">Senior</span>
+                <div className="flex flex-col gap-2 sm:gap-3">
+                  <span className="text-white text-3xl sm:text-4xl font-black">Senior</span>
                   <span>Architect Lead</span>
                 </div>
                 <div className="hidden md:block w-px h-16 bg-white/10" />
-                <div className="flex flex-col gap-3">
-                  <span className="text-white text-4xl font-black">Global</span>
+                <div className="flex flex-col gap-2 sm:gap-3">
+                  <span className="text-white text-3xl sm:text-4xl font-black">Global</span>
                   <span>Validation</span>
                 </div>
               </div>

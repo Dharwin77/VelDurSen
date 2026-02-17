@@ -30,21 +30,25 @@ const Preloader = () => {
                 >
                     {/* Multi-Panel Background System */}
                     <div className="absolute inset-0 z-0 flex w-full h-full opacity-60">
-                        {/* Left Panel */}
+                        {/* Left Panel - Hidden on mobile */}
                         <div
-                            className="flex-1 bg-cover bg-center bg-no-repeat border-r border-white/5"
+                            className="hidden md:flex flex-1 bg-cover bg-center bg-no-repeat border-r border-white/5"
                             style={{ backgroundImage: `url(${loadingLeft})` }}
                         />
 
-                        {/* Center Panel (Main Building) */}
+                        {/* Center Panel (Main Building) - Full width on mobile, centered on desktop */}
                         <div
-                            className="flex-[1.5] bg-cover bg-center bg-no-repeat"
-                            style={{ backgroundImage: `url(${loadingBg})` }}
+                            className="flex-1 md:flex-[1.5] bg-cover bg-center bg-no-repeat"
+                            style={{
+                                backgroundImage: `url(${loadingBg})`,
+                                backgroundPosition: 'center center',
+                                backgroundSize: 'cover'
+                            }}
                         />
 
-                        {/* Right Panel */}
+                        {/* Right Panel - Hidden on mobile */}
                         <div
-                            className="flex-1 bg-cover bg-center bg-no-repeat border-l border-white/5"
+                            className="hidden md:flex flex-1 bg-cover bg-center bg-no-repeat border-l border-white/5"
                             style={{ backgroundImage: `url(${loadingRight})` }}
                         />
                     </div>

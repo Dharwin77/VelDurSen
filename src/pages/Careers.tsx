@@ -432,31 +432,73 @@ const Careers = () => {
       {/* Employee Modal */}
       <AnimatePresence>
         {selectedEmployee !== null && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/50 backdrop-blur-md z-50 flex items-center justify-center p-4" onClick={() => setSelectedEmployee(null)}>
-            <button onClick={() => setSelectedEmployee(null)} className="absolute top-6 right-6 z-50 bg-white rounded-full p-3 hover:bg-slate-100 shadow-lg transition-all"><X size={24} className="text-slate-800" /></button>
-            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }} onClick={(e) => e.stopPropagation()} className="bg-white rounded-2xl overflow-hidden max-w-4xl w-full flex flex-col md:flex-row">
-              <div className="md:w-1/2">
-                <img src={employeeProfiles[selectedEmployee].image} alt={employeeProfiles[selectedEmployee].name} className="w-full h-full object-cover" />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-md z-[100] flex items-center justify-center p-4 sm:p-6"
+            onClick={() => setSelectedEmployee(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-3xl overflow-hidden max-w-4xl w-full max-h-[90vh] flex flex-col md:flex-row shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] relative"
+            >
+              <button
+                onClick={() => setSelectedEmployee(null)}
+                className="absolute top-4 right-4 z-[110] bg-white/80 backdrop-blur-sm rounded-full p-2 hover:bg-white shadow-lg transition-all border border-slate-200"
+              >
+                <X size={20} className="text-slate-800" />
+              </button>
+
+              <div className="w-full md:w-1/2 aspect-square md:aspect-auto md:min-h-full overflow-hidden">
+                <img
+                  src={employeeProfiles[selectedEmployee].image}
+                  alt={employeeProfiles[selectedEmployee].name}
+                  className="w-full h-full object-cover object-center"
+                />
               </div>
-              <div className="md:w-1/2 p-8">
-                <h3 className="text-2xl font-bold mb-2">{employeeProfiles[selectedEmployee].name}</h3>
-                <p className="text-lg text-slate-600 mb-6">{employeeProfiles[selectedEmployee].role}</p>
-                <div className="mb-6">
-                  <h4 className="font-bold mb-3">Daily Schedule:</h4>
-                  {employeeProfiles[selectedEmployee].schedule.map((item, i) => (
-                    <div key={i} className="flex items-center gap-3 mb-2">
-                      <Clock size={16} className="text-green-600" />
-                      <span>{item}</span>
+
+              <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 overflow-y-auto custom-scrollbar">
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-2xl sm:text-3xl font-black text-slate-900 mb-2 tracking-tight">{employeeProfiles[selectedEmployee].name}</h3>
+                    <p className="text-lg text-red-600 font-bold uppercase tracking-widest text-xs">{employeeProfiles[selectedEmployee].role}</p>
+                  </div>
+
+                  <div className="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+                    <h4 className="font-black text-slate-900 text-sm mb-4 uppercase tracking-wider flex items-center gap-2">
+                      <Clock size={16} className="text-red-500" /> Daily Schedule
+                    </h4>
+                    <div className="space-y-3">
+                      {employeeProfiles[selectedEmployee].schedule.map((item, i) => (
+                        <div key={i} className="flex items-center gap-3 text-sm font-medium text-slate-600">
+                          <div className="w-1.5 h-1.5 rounded-full bg-red-500" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-                <div className="mb-6">
-                  <h4 className="font-bold mb-3">Tools:</h4>
-                  <div className="flex gap-2">{employeeProfiles[selectedEmployee].tools.map((tool, i) => <span key={i} className="px-3 py-1 bg-green-600/10 text-green-600 rounded-full text-sm">{tool}</span>)}</div>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-2">Career Journey:</h4>
-                  <p className="text-slate-600">{employeeProfiles[selectedEmployee].journey}</p>
+                  </div>
+
+                  <div>
+                    <h4 className="font-black text-slate-900 text-sm mb-3 uppercase tracking-wider">Core Tools</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {employeeProfiles[selectedEmployee].tools.map((tool, i) => (
+                        <span key={i} className="px-3 py-1.5 bg-white border border-slate-200 shadow-sm text-slate-700 font-bold rounded-lg text-[10px] uppercase tracking-widest">
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-6 border-t border-slate-100">
+                    <h4 className="font-black text-slate-900 text-sm mb-3 uppercase tracking-wider">The Journey</h4>
+                    <p className="text-slate-600 font-medium leading-relaxed italic border-l-4 border-red-500 pl-4 py-1">
+                      "{employeeProfiles[selectedEmployee].journey}"
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>

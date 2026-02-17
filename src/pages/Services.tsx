@@ -911,21 +911,21 @@ const Services = () => {
                 transition={{ duration: 0.8 }}
                 className="max-w-4xl"
               >
-                <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-white mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+                <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
                   Our Services
                 </span>
-                <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+                <h1 className="text-[2.0rem] xs:text-[2.5rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] font-bold text-amber-200 leading-[1.05] mb-6 md:mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
                   Enterprise <br />
-                  <span className="text-slate-200">Performance.</span>
+                  <span className="text-amber-100">Performance.</span>
                 </h1>
-                <p className="text-xl md:text-2xl text-slate-300 font-medium mb-12 max-w-3xl leading-relaxed drop-shadow-md">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 font-medium mb-6 sm:mb-8 md:mb-12 max-w-3xl leading-relaxed drop-shadow-md">
                   Comprehensive technology services designed for global enterprises. From AI and cloud to security and data engineering, we deliver end-to-end solutions that power mission-critical operations worldwide.
                 </p>
-                <div className="flex flex-wrap gap-4">
-                  <button onClick={() => document.getElementById('our-solutions-architecture')?.scrollIntoView({ behavior: 'smooth' })} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20">
+                <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+                  <button onClick={() => document.getElementById('our-solutions-architecture')?.scrollIntoView({ behavior: 'smooth' })} className="btn-enterprise py-4 sm:py-5 px-8 sm:px-12 text-base sm:text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20 w-full sm:w-auto">
                     Explore Our Services
                   </button>
-                  <div className="flex items-center gap-4 px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">
+                  <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-4 px-4 sm:px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">
                     <Globe2 size={16} className="text-red-600 shadow-sm" /> Global Delivery Network
                   </div>
                 </div>
@@ -949,7 +949,7 @@ const Services = () => {
               style={{ backgroundImage: 'radial-gradient(#0f172a 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
 
             <div className="enterprise-container relative z-10">
-              <div className="max-w-full mb-20 group">
+              <div className="max-w-4xl mx-auto mb-20 group text-center">
                 <span className="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-6 block">Lifecycle Model</span>
                 <motion.h2
                   initial={{ opacity: 0, y: 20 }}
@@ -1144,9 +1144,9 @@ const Services = () => {
 
         {/* --- TECHNOLOGIES SECTION START --- */}
         {/* 3. TECHNOLOGY PILLARS SECTION (VERTICAL HOVER STYLE) */}
-        <section id="technology-pillars" className="section-padding bg-white overflow-hidden">
+        <section id="technology-pillars" className="pt-12 md:pt-20 pb-0 bg-white overflow-hidden">
           <div className="enterprise-container">
-            <div className="mb-12">
+            <div className="mb-12 text-center">
               <span className="text-green-600 font-black uppercase tracking-widest text-xs mb-4 block">Core Competencies</span>
               <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Technology <span className="text-green-600">Pillars.</span></h2>
             </div>
@@ -1215,12 +1215,12 @@ const Services = () => {
         {/* 5. LEGACY MODERNIZATION BRIDGE (ENHANCED) */}
         <section className="section-padding bg-white relative overflow-hidden">
           <div className="enterprise-container">
-            <div className="flex flex-col lg:flex-row items-center gap-20">
+            <div className="flex flex-col items-center justify-center gap-16 text-center">
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="w-full lg:w-1/2"
+                className="w-full max-w-4xl"
               >
                 <span className="text-red-600 font-black uppercase tracking-[0.3em] text-[10px] mb-6 block">Legacy to Modern</span>
                 <h2 className="text-4xl md:text-5xl font-black text-slate-900 leading-[1.1] mb-8 tracking-tighter">
@@ -1231,7 +1231,7 @@ const Services = () => {
                   VelDurSen specializes in building high-performance bridges that enable bi-directional data flow and gradual modernization without disrupting mission-critical operations.
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
                   {[
                     { title: "Legacy Encapsulation", desc: "Wrapping monolithic systems in modern API layers.", icon: Layers },
                     { title: "Data Synchronization", desc: "Real-time consistency between on-prem and cloud.", icon: ArrowRightLeft }
@@ -1239,7 +1239,7 @@ const Services = () => {
                     <motion.div
                       key={i}
                       whileHover={{ y: -5, backgroundColor: "#fff", borderColor: "#ef4444" }}
-                      className="flex gap-4 p-6 rounded-3xl bg-slate-50 border border-slate-100 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-red-600/5 group"
+                      className="flex flex-col items-center text-center gap-4 p-6 rounded-3xl bg-slate-50 border border-slate-100 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-red-600/5 group"
                     >
                       <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 group-hover:bg-red-600 transition-colors">
                         <item.icon className="text-red-500 group-hover:text-white" size={20} />
@@ -1257,10 +1257,10 @@ const Services = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="w-full lg:w-1/2 relative p-12 bg-slate-50 rounded-[4rem] border border-slate-200 shadow-2xl flex flex-col items-center justify-center min-h-[450px]"
+                className="w-full lg:w-1/2 relative p-6 sm:p-8 md:p-12 bg-slate-50 rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] border border-slate-200 shadow-2xl flex flex-col items-center justify-center min-h-[350px] sm:min-h-[400px] md:min-h-[450px]"
               >
                 {/* Animated Connection Path */}
-                <div className="absolute inset-x-20 top-1/2 -translate-y-1/2 h-1 bg-slate-200 overflow-hidden rounded-full">
+                <div className="absolute inset-x-12 sm:inset-x-16 md:inset-x-20 top-1/2 -translate-y-1/2 h-1 bg-slate-200 overflow-hidden rounded-full">
                   <motion.div
                     animate={{ x: ["-100%", "100%"] }}
                     transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
@@ -1271,10 +1271,10 @@ const Services = () => {
                 <div className="flex justify-between items-center w-full relative z-10">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
-                    className="text-center p-8 bg-white rounded-3xl shadow-lg border border-slate-100 w-44 relative group"
+                    className="text-center p-4 sm:p-6 md:p-8 bg-white rounded-2xl sm:rounded-3xl shadow-lg border border-slate-100 w-32 sm:w-36 md:w-44 relative group"
                   >
-                    <div className="text-slate-400 text-[9px] font-black uppercase mb-3 tracking-widest">Legacy Core</div>
-                    <div className="text-slate-900 font-black text-xl tracking-tighter">MAINFRAME</div>
+                    <div className="text-slate-400 text-[8px] sm:text-[9px] font-black uppercase mb-2 sm:mb-3 tracking-widest">Legacy Core</div>
+                    <div className="text-slate-900 font-black text-base sm:text-lg md:text-xl tracking-tighter">MAINFRAME</div>
                     <div className="absolute -bottom-2 -left-2 w-4 h-4 rounded-full bg-red-600/10 group-hover:bg-red-600 transition-colors" />
                   </motion.div>
 
@@ -1282,9 +1282,9 @@ const Services = () => {
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                      className="w-20 h-20 rounded-full bg-white shadow-2xl flex items-center justify-center relative border border-slate-100"
+                      className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full bg-white shadow-2xl flex items-center justify-center relative border border-slate-100"
                     >
-                      <InfinityIcon size={32} className="text-red-600" />
+                      <InfinityIcon size={28} className="text-red-600 sm:w-7 sm:h-7 md:w-8 md:h-8" />
                     </motion.div>
                     {/* Digital Pulse Ring */}
                     <motion.div
@@ -1296,10 +1296,10 @@ const Services = () => {
 
                   <motion.div
                     whileHover={{ scale: 1.05 }}
-                    className="text-center p-8 bg-red-600 rounded-3xl shadow-2xl shadow-red-600/30 w-44 relative group"
+                    className="text-center p-4 sm:p-6 md:p-8 bg-red-600 rounded-2xl sm:rounded-3xl shadow-2xl shadow-red-600/30 w-32 sm:w-36 md:w-44 relative group"
                   >
-                    <div className="text-red-200 text-[9px] font-black uppercase mb-3 tracking-widest">Modern Cloud</div>
-                    <div className="text-white font-black text-xl tracking-tighter">SERVERLESS</div>
+                    <div className="text-red-200 text-[8px] sm:text-[9px] font-black uppercase mb-2 sm:mb-3 tracking-widest">Modern Cloud</div>
+                    <div className="text-white font-black text-base sm:text-lg md:text-xl tracking-tighter">SERVERLESS</div>
                     <div className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-white/20 group-hover:bg-white transition-colors" />
                   </motion.div>
                 </div>
@@ -1315,7 +1315,7 @@ const Services = () => {
                       />
                     ))}
                   </div>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.4em]">VelDurSen Hybrid Bridge Architecture</p>
+                  <p className="text-[8px] sm:text-[9px] md:text-[10px] text-slate-400 font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em] text-center px-2">VelDurSen Hybrid Bridge Architecture</p>
                 </div>
               </motion.div>
             </div>
@@ -1421,7 +1421,7 @@ const Services = () => {
             <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
 
             <div className="enterprise-container relative z-10">
-              <div className="flex flex-col lg:flex-row items-end justify-between mb-12 gap-8">
+              <div className="flex flex-col items-center justify-center mb-12 gap-8 text-center">
                 <div className="max-w-2xl">
                   <span className="text-orange-600 font-black uppercase tracking-[0.4em] text-[10px] mb-4 block">Precision Telemetry</span>
                   <h2 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter leading-[0.9] mb-2">
@@ -1430,7 +1430,7 @@ const Services = () => {
                   </h2>
                 </div>
                 <div className="max-w-md pb-2">
-                  <p className="text-slate-500 text-sm font-medium leading-relaxed lg:text-right border-r-4 border-red-600 pr-8">
+                  <p className="text-slate-500 text-sm font-medium leading-relaxed border-t-4 border-orange-600 pt-4">
                     Our infrastructure is stress-tested against extreme concurrent loads, ensuring mission-critical stability for global deployments.
                   </p>
                 </div>
@@ -2393,10 +2393,10 @@ const Services = () => {
           {/* 3.10 TESTIMONIALS - THE ENTERPRISE VOICE */}
           <section className="py-32 bg-white relative overflow-visible">
             <div className="enterprise-container">
-              <div className="flex flex-col lg:flex-row items-end justify-between mb-20 gap-8">
+              <div className="flex flex-col items-center justify-center mb-20 gap-6 text-center">
                 <div className="max-w-2xl">
                   <span className="text-red-600 font-black uppercase tracking-[0.4em] text-[10px] mb-4 block">Client Perspectives</span>
-                  <h2 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter leading-[0.9]">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-[1.1] mb-6 sm:mb-8 tracking-tighter">
                     Voice of <br />
                     <span className="text-red-600">Success.</span>
                   </h2>
@@ -2411,7 +2411,7 @@ const Services = () => {
                 </div>
               </div>
 
-              <div className="relative h-[400px]">
+              <div className="relative min-h-[500px] sm:min-h-[450px] md:h-[400px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentReview}
@@ -2423,7 +2423,7 @@ const Services = () => {
                   >
                     <div className="lg:w-2/3">
                       <Quote size={80} className="text-red-600/10 mb-8" />
-                      <p className="text-3xl md:text-5xl font-black text-slate-900 leading-tight tracking-tight italic">
+                      <p className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black text-slate-900 leading-tight tracking-tight italic">
                         "{reviews[currentReview].quote}"
                       </p>
                     </div>
@@ -2490,19 +2490,19 @@ const Services = () => {
           {/* 4. CROSS-INDUSTRY ADVANTAGE */}
           <section className="py-12 bg-red-600">
             <div className="enterprise-container">
-              <div className="flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
-                <div className="max-w-sm">
+              <div className="flex flex-col items-center justify-center gap-12 text-center">
+                <div className="max-w-md">
                   <h4 className="text-white text-2xl font-bold mb-2">The VelDurSen Advantage</h4>
                   <p className="text-white/90 text-sm font-medium">Standardized excellence across every vertical we serve.</p>
                 </div>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                   {[
                     { label: "Cloud Native", icon: Globe2 },
                     { label: "Security First", icon: ShieldCheck },
                     { label: "Enterprise AI", icon: Cpu },
                     { label: "Global Scale", icon: TrendingUp }
                   ].map((item, i) => (
-                    <div key={i} className="flex flex-col items-center md:items-start gap-3">
+                    <div key={i} className="flex flex-col items-center gap-3">
                       <item.icon className="text-white" size={24} />
                       <span className="text-[10px] font-bold text-white uppercase tracking-widest">{item.label}</span>
                     </div>

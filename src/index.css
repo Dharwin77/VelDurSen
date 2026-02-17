@@ -194,7 +194,14 @@
   }
 
   .animate-scroll-slow {
-    animation: scroll 20s linear infinite;
+    animation: scroll 6.67s linear infinite;
+  }
+
+  /* Desktop: slower scroll */
+  @media (min-width: 768px) {
+    .animate-scroll-slow {
+      animation: scroll 20s linear infinite;
+    }
   }
 
   @keyframes scroll {

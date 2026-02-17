@@ -50,10 +50,10 @@
 
 <body>
   <div id="root">
-    <!-- SEO Fallback Content for Non-JS Crawlers -->
-    <header>
-      <h1>VelDurSen | Enterprise AI & Digital Transformation Partner</h1>
-      <nav>
+    <!-- SEO Fallback Content (Visually Hidden for Audit/Bots, removed by React on load) -->
+    <div style="opacity: 0; position: absolute; pointer-events: none; z-index: -9999;">
+      <header>
+        <h1>VelDurSen | Enterprise AI & Digital Transformation Partner</h1>
         <ul>
           <li><a href="/about">About Us</a></li>
           <li><a href="/services">Our Services</a></li>
@@ -62,19 +62,19 @@
           <li><a href="/blog">Insights & Blog</a></li>
           <li><a href="/contact">Contact Us</a></li>
         </ul>
-      </nav>
-    </header>
-    <main>
-      <p>VelDurSen delivers enterprise AI, cloud engineering, and digital transformation for global Fortune 500 firms.
-      </p>
-      <h2>Enterprise Technology Services</h2>
-      <ul>
-        <li>AI & Machine Learning Solutions</li>
-        <li>Cloud Infrastructure & DevOps</li>
-        <li>Cybersecurity & Compliance</li>
-        <li>Data Engineering & Analytics</li>
-      </ul>
-    </main>
+      </header>
+      <main>
+        <p>VelDurSen delivers enterprise AI, cloud engineering, and digital transformation for global Fortune 500 firms.
+        </p>
+        <h2>Enterprise Technology Services</h2>
+        <ul>
+          <li>AI & Machine Learning Solutions</li>
+          <li>Cloud Infrastructure & DevOps</li>
+          <li>Cybersecurity & Compliance</li>
+          <li>Data Engineering & Analytics</li>
+        </ul>
+      </main>
+    </div>
   </div>
   <script type="module" src="/src/main.tsx"></script>
 </body>

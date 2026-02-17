@@ -22,6 +22,7 @@ import TermsOfService from "./pages/TermsOfService";
 import Security from "./pages/Security";
 import Sitemap from "./pages/Sitemap";
 import Preloader from "./components/shared/Preloader";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
       <Preloader />
       <Toaster />
       <Sonner />
+      <SpeedInsights />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />

@@ -417,7 +417,7 @@ const About = () => {
 
   return (
     <PageLayout>
-      <section className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden">
+      <section className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] min-h-[450px] md:min-h-[550px] flex items-center overflow-hidden">
         <motion.div
           onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
           className="contents"
@@ -425,26 +425,26 @@ const About = () => {
           <video autoPlay muted loop playsInline className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]">
             <source src={aboutVideo} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to4.jpeg-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent z-10" />
 
           <div className="enterprise-container relative z-20">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl">
               <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
                 About Veldursen
               </span>
-              <h1 className="text-[2rem] xs:text-[2.5rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] font-bold text-amber-200 leading-[1.05] mb-6 md:mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
-                Software with <br />
+              <h1 className="text-[2.25rem] xs:text-[2.75rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] font-bold text-amber-200 leading-[1.05] mb-6 md:mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+                Software with <br className="hidden xs:block" />
                 <span className="text-amber-100">a human heartbeat.</span>
               </h1>
               <p className="text-base sm:text-lg md:text-xl text-slate-300 font-medium mb-8 md:mb-12 max-w-3xl leading-relaxed drop-shadow-md">
                 The Visionary Vibe: We are a remote-first team of product experts dedicated to replacing digital friction with focus. Whether you are a founder launching a dream or a large-scale enterprise reaching millions, we craft the dependable software that keeps you moving forward.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+                <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-4 sm:py-5 px-8 sm:px-12 text-base sm:text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20 w-full sm:w-auto text-center">
                   Meet the team
                 </Link>
-                <div className="flex items-center gap-4 px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">
-                  <Globe2 size={16} className="text-red-600 shadow-sm" /> Remote-first, serving clients worldwide
+                <div className="flex items-center justify-center sm:justify-start gap-4 px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">
+                  <Globe2 size={16} className="text-red-600 shadow-sm" /> Remote-first, worldwide
                 </div>
               </div>
             </motion.div>

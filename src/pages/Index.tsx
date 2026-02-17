@@ -1093,9 +1093,30 @@ const Index = () => {
   return (
     <PageLayout>
       <SEO
-        title="Enterprise AI Solutions | VelDurSen Technologies"
-        description="VelDurSen Technologies is a global leader in Enterprise AI solutions, digital transformation, and cloud engineering. We empower large-scale businesses with secure, scalable technology."
-        keywords={["Enterprise AI solutions", "Digital transformation company", "Cloud engineering services", "Enterprise cybersecurity solutions", "Data engineering consulting"]}
+        title="VelDurSen - Enterprise AI Solutions, Digital Transformation & Cloud Engineering | Global IT Consulting"
+        description="VelDurSen Technologies delivers enterprise AI solutions, digital transformation, cloud engineering, cybersecurity, and data analytics services to Fortune 500 companies across 50+ countries. Trusted by 500+ global enterprises for mission-critical technology systems."
+        keywords={[
+          "Enterprise AI solutions",
+          "Digital transformation company",
+          "Cloud engineering services",
+          "Enterprise cybersecurity solutions",
+          "Data engineering consulting",
+          "AI-powered enterprise systems",
+          "Cloud-native architectures",
+          "DevOps engineering",
+          "Cybersecurity compliance",
+          "Big data analytics",
+          "Enterprise software development",
+          "Sustainable technology solutions",
+          "Global IT consulting",
+          "Fortune 500 technology partner",
+          "Machine learning solutions",
+          "Enterprise cloud migration",
+          "Zero-trust security",
+          "Data warehouse solutions",
+          "Enterprise CRM development",
+          "Global technology services"
+        ]}
         schemas={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA]}
       />
       {/* 1. HERO SECTION - Redesigned to match Premium Industry Style */}

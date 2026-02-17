@@ -199,7 +199,7 @@ const CRMUseCaseCard = ({ useCase, index }: { useCase: any, index: number }) => 
 
             {/* Content Container */}
             <div className="relative h-full pt-10 pb-16 flex flex-col items-center text-center z-10">
-                <div className="relative w-full h-56 mb-16 flex items-center justify-center">
+                <div className="relative w-full h-40 sm:h-56 mb-8 sm:mb-16 flex items-center justify-center">
                     <div className={`absolute inset-0 rounded-full blur-3xl transition-all duration-700 ${isHovered ? 'bg-white/40 scale-150' : 'bg-blue-100 opacity-40'}`} />
 
                     <div className={`relative z-10 transform transition-all duration-700 ${isHovered ? '-translate-y-8 rotate-3' : ''}`}>
@@ -207,12 +207,12 @@ const CRMUseCaseCard = ({ useCase, index }: { useCase: any, index: number }) => 
                             <img
                                 src={avatarUrl}
                                 alt={useCase.title}
-                                className={`w-36 h-36 rounded-full border-4 border-white shadow-2xl transition-all duration-700 ${isHovered ? 'scale-110' : ''}`}
+                                className={`w-28 h-28 sm:w-36 sm:h-36 rounded-full border-4 border-white shadow-2xl transition-all duration-700 ${isHovered ? 'scale-110' : ''}`}
                             />
                             <motion.div
                                 animate={{ y: [0, -12, 0], rotate: [0, 8, 0] }}
                                 transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-                                className="absolute -top-2 -right-6 w-20 h-20 bg-white/95 backdrop-blur-sm rounded-[1.5rem] shadow-xl border border-white p-3 flex items-center justify-center z-20"
+                                className="absolute -top-2 -right-4 sm:-right-6 w-14 h-14 sm:w-20 sm:h-20 bg-white/95 backdrop-blur-sm rounded-[1rem] sm:rounded-[1.5rem] shadow-xl border border-white p-2 sm:p-3 flex items-center justify-center z-20"
                             >
                                 <img src={useCase.fluentIcon} alt="Icon" className="w-full h-full object-contain" />
                             </motion.div>
@@ -289,10 +289,10 @@ export const EnterpriseCRMContent = () => {
                             className="space-y-8"
                         >
                             <motion.div variants={fadeInUp}>
-                                <h1 className="text-5xl lg:text-7xl font-black tracking-tighter text-slate-900 leading-[1.1]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tighter text-slate-900 leading-[1.1]" style={{ fontFamily: "'Inter', sans-serif" }}>
                                     Enterprise CRM & <br />
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-700">Product Engineering</span>
-                                </h1>
+                                </h2>
                             </motion.div>
 
                             <motion.div variants={fadeInUp}>
@@ -627,7 +627,7 @@ export const EnterpriseCRMContent = () => {
             </section>
 
             {/* 6. Why Choose & Case Studies Snapshots */}
-            <section className="section-padding bg-green-50/20">
+            <section className="section-padding bg-green-50/20 overflow-visible">
                 <div className="enterprise-container">
                     <motion.div
                         initial="hidden"
@@ -669,7 +669,7 @@ export const EnterpriseCRMContent = () => {
                                         <h4 className="font-black text-lg text-slate-900 tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>Global FinTech CRM Transformation</h4>
                                         <TrendingUp className="text-green-600 w-5 h-5" />
                                     </div>
-                                    <div className="grid grid-cols-3 gap-4 mt-4 text-center">
+                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 text-center">
                                         <div>
                                             <div className="text-2xl font-black text-slate-900">42%</div>
                                             <div className="text-[10px] uppercase font-bold text-slate-600">Faster Response</div>
@@ -690,7 +690,7 @@ export const EnterpriseCRMContent = () => {
                                         <h4 className="font-bold text-lg text-slate-900">Manufacturing Process Automation</h4>
                                         <Factory className="text-green-600 w-5 h-5" />
                                     </div>
-                                    <div className="grid grid-cols-3 gap-4 mt-4 text-center">
+                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 text-center">
                                         <div>
                                             <div className="text-2xl font-black text-slate-900">35%</div>
                                             <div className="text-[10px] uppercase font-bold text-slate-600">Efficiency Boost</div>
@@ -728,7 +728,7 @@ export const EnterpriseCRMContent = () => {
                         variants={fadeInUp}
                         className="text-center max-w-4xl mx-auto mb-8"
                     >
-                        <h2 className="text-4xl font-black text-slate-900 mb-6">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 mb-6">
                             Enterprise Product Innovation <span className="text-orange-600">Framework</span>
                         </h2>
                         <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">Structured Software Engineering for Long-Term Scalability.</p>
@@ -843,11 +843,11 @@ export const EnterpriseCRMContent = () => {
                             {/* Floating Regional Badges */}
                             <div className="absolute inset-0">
                                 {[
-                                    { name: "North America", top: "15%", left: "10%", delay: 0 },
-                                    { name: "Europe", top: "20%", right: "15%", delay: 0.2 },
-                                    { name: "Asia-Pacific", bottom: "25%", right: "5%", delay: 0.4 },
-                                    { name: "Middle East", top: "50%", right: "20%", delay: 0.6 },
-                                    { name: "Latin America", bottom: "15%", left: "20%", delay: 0.8 },
+                                    { name: "North America", className: "top-[10%] left-[5%] md:top-[15%] md:left-[10%]", delay: 0 },
+                                    { name: "Europe", className: "top-[15%] right-[5%] md:top-[20%] md:right-[15%]", delay: 0.2 },
+                                    { name: "Asia-Pacific", className: "bottom-[20%] right-[2%] md:bottom-[25%] md:right-[5%]", delay: 0.4 },
+                                    { name: "Middle East", className: "top-[48%] right-[2%] md:top-[50%] md:right-[20%]", delay: 0.6 },
+                                    { name: "Latin America", className: "bottom-[10%] left-[5%] md:bottom-[15%] md:left-[20%]", delay: 0.8 },
                                 ].map((region, i) => (
                                     <motion.div
                                         key={i}
@@ -855,12 +855,11 @@ export const EnterpriseCRMContent = () => {
                                         whileInView={{ opacity: 1, scale: 1 }}
                                         viewport={{ once: false }}
                                         transition={{ delay: region.delay }}
-                                        style={{ top: region.top, left: region.left, right: region.right, bottom: region.bottom }}
-                                        className="absolute group cursor-pointer pointer-events-auto"
+                                        className={`absolute group cursor-pointer pointer-events-auto ${region.className}`}
                                     >
-                                        <div className="flex items-center gap-3 bg-white/5 backdrop-blur-md border border-white/10 px-5 py-3 rounded-2xl group-hover:bg-white/10 group-hover:border-blue-500/50 transition-all duration-300">
-                                            <div className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6] animate-pulse" />
-                                            <span className="text-white/80 font-black text-xs uppercase tracking-widest" style={{ fontFamily: "'Inter', sans-serif" }}>{region.name}</span>
+                                        <div className="flex items-center gap-2 md:gap-3 bg-white/5 backdrop-blur-md border border-white/10 px-3 py-2 md:px-5 md:py-3 rounded-xl md:rounded-2xl group-hover:bg-white/10 group-hover:border-blue-500/50 transition-all duration-300">
+                                            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6] animate-pulse" />
+                                            <span className="text-white/80 font-black text-[9px] md:text-xs uppercase tracking-widest" style={{ fontFamily: "'Inter', sans-serif" }}>{region.name}</span>
                                         </div>
                                     </motion.div>
                                 ))}
@@ -876,7 +875,7 @@ export const EnterpriseCRMContent = () => {
                                 variants={fadeInRight}
                             >
                                 <span className="inline-block px-4 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 font-black uppercase tracking-[0.2em] text-[10px] mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>Global Presence</span>
-                                <h2 className="text-5xl lg:text-7xl font-black text-white mb-8 tracking-tighter leading-none" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-white mb-8 tracking-tighter leading-[1.1]" style={{ fontFamily: "'Inter', sans-serif" }}>
                                     Global Delivery Ecosystem <br />
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">24/7 Connectivity</span>
                                 </h2>
@@ -909,7 +908,7 @@ export const EnterpriseCRMContent = () => {
 
 
             {/* 14. CRM Migration & Modernization - Technical Transformation */}
-            <section className="section-padding bg-white relative overflow-hidden">
+            <section className="section-padding bg-white relative overflow-visible">
                 <motion.div
                     onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#65a30d' } }))}
                     viewport={{ amount: 0.1 }}
@@ -1036,7 +1035,7 @@ export const EnterpriseCRMContent = () => {
             </section>
 
             {/* 15 & 16. Customer Success & Enterprise Compliance - Bento Grid Resilience */}
-            <section className="section-padding bg-slate-50 relative overflow-hidden">
+            <section className="section-padding bg-slate-50 relative overflow-visible">
                 <div className="enterprise-container relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
@@ -1075,7 +1074,7 @@ export const EnterpriseCRMContent = () => {
                                 Banking-grade security embedded at the system architecture level.
                             </p>
 
-                            <div className="grid grid-cols-2 gap-3 relative z-10">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 relative z-10">
                                 {["GDPR", "CCPA", "SOC2", "ISO 27001"].map((c, i) => (
                                     <div key={i} className="py-2.5 px-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-bold hover:bg-white/10 transition-colors">
                                         {c}
@@ -1114,7 +1113,7 @@ export const EnterpriseCRMContent = () => {
             </section>
 
             {/* 17. Strategic Consulting & 18. Thought Leadership - Advisory Intelligence */}
-            <section className="section-padding bg-white relative overflow-hidden">
+            <section className="section-padding bg-white relative overflow-visible">
                 <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-50/50 -skew-x-6 translate-x-12"></div>
 
                 <div className="enterprise-container relative z-10">
@@ -1185,7 +1184,7 @@ export const EnterpriseCRMContent = () => {
 
             {/* 8. Future Vision & CTA (Original preserved as Final) */}
             {/* 19. Enterprise CRM Architecture Blueprint - Engineering Schematic */}
-            <section className="section-padding bg-[#0f172a] relative overflow-hidden">
+            <section className="section-padding bg-[#0f172a] relative overflow-visible">
                 <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
 
                 <div className="enterprise-container relative z-10">
@@ -1272,7 +1271,7 @@ export const EnterpriseCRMContent = () => {
             </section>
 
             {/* 20. Digital Revenue Acceleration Framework - High Velocity Engine */}
-            <section className="section-padding bg-slate-50 relative overflow-hidden">
+            <section className="section-padding bg-slate-50 relative overflow-visible">
                 <div className="enterprise-container">
                     <div className="flex flex-col lg:flex-row gap-16 items-end mb-12">
                         <div className="max-w-3xl">
@@ -1348,9 +1347,9 @@ export const EnterpriseCRMContent = () => {
                             className="lg:col-span-8 relative z-10"
                         >
                             <div className="w-12 h-1 bg-red-600 mb-8" />
-                            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black mb-8 leading-tight tracking-tighter uppercase break-words" style={{ fontFamily: "'Inter', sans-serif" }}>
+                            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black mb-8 leading-[1.1] tracking-tighter uppercase" style={{ fontFamily: "'Inter', sans-serif" }}>
                                 <span className="text-slate-200/40 block text-lg mb-1 font-black">Product</span>
-                                <span className="text-red-500">Engineering Labs.</span>
+                                <span className="text-red-500 block sm:inline">Engineering</span> <span className="text-red-500">Labs.</span>
                             </h2>
                             <p className="text-lg md:text-xl text-slate-400 leading-relaxed mb-12 max-w-2xl font-medium">
                                 Where enterprise software is forged. We treat product development as a high-precision engineering discipline — evolving through constant experimentation.
@@ -1449,7 +1448,7 @@ export const EnterpriseCRMContent = () => {
                                 className="bg-gradient-to-br from-slate-900 to-slate-950 border border-white/5 rounded-[3rem] p-8 md:p-12 shadow-2xl relative overflow-hidden"
                             >
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl" />
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative z-10">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 relative z-10">
                                     {[
                                         { l: "Monitoring", v: "Live", c: "text-emerald-400" },
                                         { l: "Risk Exposure", v: "Low", c: "text-blue-400" },

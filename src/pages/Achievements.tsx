@@ -10,7 +10,7 @@ const Achievements = () => {
   return (
     <PageLayout>
       {/* 1. HERO SECTION WITH VIDEO BACKGROUND */}
-      <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden bg-slate-900">
+      <section className="relative h-[50vh] sm:h-[80vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden bg-slate-900">
         <video
           autoPlay
           muted
@@ -71,9 +71,9 @@ const Achievements = () => {
       </section>
 
       {/* 2. DYNAMIC ACHIEVEMENT GRID - WITH STACKED-TO-SPLIT ANIMATION */}
-      <section className="py-24 bg-white overflow-hidden min-h-screen flex items-center">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white overflow-visible">
         <div className="enterprise-container">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-x-12 md:gap-y-20 relative">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12 relative">
             {achievementsData.map((achievement, idx) => {
               const colorMaps: Record<string, { bg: string, ring: string, iconBg: string }> = {
                 "Artificial Intelligence Innovation": { bg: "bg-[#2dd4bf]", ring: "ring-teal-200", iconBg: "bg-teal-700/20" },
@@ -86,12 +86,24 @@ const Achievements = () => {
 
               const style = colorMaps[achievement.category] || colorMaps["Artificial Intelligence Innovation"];
 
-              // Calculate stack offsets to make them cluster in the center
-              // On desktop (3 cols):
-              // col 0: x: 100%, col 1: x: 0, col 2: x: -100%
-              // row 0: y: 20%, row 1: y: -20%
-              const xOffset = idx % 3 === 0 ? "100%" : idx % 3 === 2 ? "-100%" : "0%";
-              const yOffset = idx < 3 ? "20%" : "-20%";
+              // Responsive animation offsets
+              // Default (Mobile): Fly up from bottom
+              let xOffset: string | number = 0;
+              let yOffset: string | number = 50;
+              let initialRotate = 0;
+
+              // Tablet/Desktop logic
+              if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+                // On desktop (3 cols)
+                xOffset = idx % 3 === 0 ? "50%" : idx % 3 === 2 ? "-50%" : "0%";
+                yOffset = idx < 3 ? "10%" : "-10%";
+                initialRotate = (idx - 2.5) * 5;
+              } else if (typeof window !== 'undefined' && window.innerWidth >= 640) {
+                // On tablet (2 cols)
+                xOffset = idx % 2 === 0 ? "30%" : "-30%";
+                yOffset = 20;
+                initialRotate = (idx % 2 === 0 ? 5 : -5);
+              }
 
               return (
                 <motion.div
@@ -100,8 +112,8 @@ const Achievements = () => {
                     opacity: 0,
                     x: xOffset,
                     y: yOffset,
-                    rotate: (idx - 2.5) * 10, // Fanned rotation
-                    scale: 0.8
+                    rotate: initialRotate,
+                    scale: 0.9
                   }}
                   whileInView={{
                     opacity: 1,
@@ -189,8 +201,9 @@ const Achievements = () => {
             <div className="w-full lg:w-1/3 flex justify-center relative">
               <div className="relative z-10">
                 {/* Abstract Trophy Composition defined by Icons/Divs since we don't have the SVG asset this exact matching is an approximation */}
-                <div className="relative drop-shadow-2xl filter">
-                  <Trophy size={320} className="text-amber-400" strokeWidth={1} fill="#fbbf24" />
+                <div className="relative drop-shadow-2xl filter flex justify-center">
+                  <Trophy size={200} className="text-amber-400 block sm:hidden" strokeWidth={1} fill="#fbbf24" />
+                  <Trophy size={320} className="text-amber-400 hidden sm:block" strokeWidth={1} fill="#fbbf24" />
                   {/* Trophy Details/Shine */}
                   <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-yellow-300/30 blur-2xl rounded-full" />
                 </div>

@@ -118,48 +118,46 @@ const DeliveredOutcomes = () => {
                         showControls={true}
                     >
                         {projects.map((project, index) => (
-                            <Card key={project.id} className={`${project.bg} p-8 md:p-12 lg:p-16 w-full max-w-5xl h-[550px]`}>
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 w-full h-full">
+                            <Card key={project.id} className={`${project.bg} p-6 sm:p-8 md:p-12 lg:p-16 w-full max-w-5xl h-[550px] sm:h-[600px] lg:h-[550px]`}>
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center relative z-10 w-full h-full">
                                     {/* Content Side */}
-                                    <div className="flex flex-col h-full justify-between">
+                                    <div className="flex flex-col h-full justify-between order-2 lg:order-1">
                                         <div>
-                                            <div className="flex items-center gap-3 mb-6">
-                                                <span className={`inline-block text-xs font-black uppercase tracking-[0.2em] ${project.accent} opacity-70`}>
+                                            <div className="flex items-center gap-3 mb-4 lg:mb-6">
+                                                <span className={`inline-block text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] ${project.accent} opacity-70`}>
                                                     {project.category}
                                                 </span>
                                                 <div className={`h-px w-10 ${project.accent} opacity-30`} />
                                             </div>
 
-                                            <h3 className={`text-4xl md:text-5xl font-black mb-6 ${project.accent} tracking-tight`}>
+                                            <h3 className={`text-2xl sm:text-3xl md:text-5xl font-black mb-4 lg:mb-6 ${project.accent} tracking-tight`}>
                                                 {project.title}
                                             </h3>
-                                            <p className={`text-lg md:text-xl font-medium leading-relaxed mb-6 ${project.accent} opacity-90 max-w-xl`}>
+                                            <p className={`text-sm sm:text-base md:text-xl font-medium leading-relaxed mb-4 lg:mb-6 ${project.accent} opacity-90 max-w-xl line-clamp-3 sm:line-clamp-none`}>
                                                 {project.description}
                                             </p>
                                         </div>
 
-                                        <div className="mt-auto pt-6 border-t border-black/5">
-                                            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-                                                <div className="flex gap-8">
+                                        <div className="mt-auto pt-4 lg:pt-6 border-t border-black/5">
+                                            <div className="flex flex-row items-end justify-between gap-6">
+                                                <div className="flex gap-4 sm:gap-8">
                                                     {project.stats.map((stat, i) => (
                                                         <div key={i}>
-                                                            <div className={`text-3xl md:text-4xl font-black mb-1 ${project.accent} tracking-tighter`}>
+                                                            <div className={`text-xl sm:text-2xl md:text-4xl font-black mb-1 ${project.accent} tracking-tighter`}>
                                                                 {stat.value}
                                                             </div>
-                                                            <div className={`text-[10px] font-bold uppercase tracking-wider ${project.accent} opacity-70`}>
+                                                            <div className={`text-[8px] sm:text-[10px] font-bold uppercase tracking-wider ${project.accent} opacity-70`}>
                                                                 {stat.label}
                                                             </div>
                                                         </div>
                                                     ))}
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
 
                                     {/* Image Side */}
-                                    <div className="relative h-full w-full hidden lg:block overflow-hidden rounded-2xl shadow-lg group-hover:shadow-2xl transition-shadow duration-500">
+                                    <div className="relative h-40 sm:h-64 lg:h-full w-full overflow-hidden rounded-2xl shadow-lg group-hover:shadow-2xl transition-shadow duration-500 order-1 lg:order-2">
                                         <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent z-10" />
                                         <img
                                             src={project.image}

@@ -2019,7 +2019,7 @@ const Services = () => {
           </section>
 
           {/* 3.3 MANUFACTURING */}
-          <section className="py-8 bg-white relative overflow-hidden">
+          <section className="py-8 bg-white relative overflow-visible">
             <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '100px 100px' }} />
 
             <motion.div
@@ -2126,7 +2126,7 @@ const Services = () => {
           </section>
 
           {/* 3.5 RETAIL */}
-          <section className="py-8 bg-slate-50 relative overflow-hidden">
+          <section className="py-8 bg-slate-50 relative overflow-visible">
             <motion.div
               onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
               onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
@@ -2183,7 +2183,7 @@ const Services = () => {
                     "Transforming retail operations with AI-driven personalization, inventory intelligence, and omnichannel commerce systems."
                   </p>
 
-                  <div className="grid grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {[
                       { title: "Omnichannel", icon: ShoppingCart },
                       { title: "Smart Inventory", icon: Cpu },
@@ -2208,7 +2208,7 @@ const Services = () => {
           </section>
 
           {/* 3.8 FINTECH */}
-          <section className="py-12 bg-white relative overflow-hidden">
+          <section className="py-12 bg-white relative overflow-visible">
             <motion.div
               onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#2563eb' } }))}
               onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
@@ -2302,7 +2302,7 @@ const Services = () => {
           </section>
 
           {/* 3.9 GLOBAL DIGITAL INFRASTRUCTURE */}
-          <section className="py-8 bg-slate-50 relative overflow-hidden">
+          <section className="py-8 bg-slate-50 relative overflow-visible">
             <motion.div
               onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
               onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
@@ -2367,7 +2367,7 @@ const Services = () => {
                     </p>
                   </header>
 
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-8">
                     {[
                       { icon: ShieldCheck, label: "Cyber Defense", val: "Zero Trust" },
                       { icon: Activity, label: "Uptime", val: "99.999%" },
@@ -2391,7 +2391,7 @@ const Services = () => {
           </section>
 
           {/* 3.10 TESTIMONIALS - THE ENTERPRISE VOICE */}
-          <section className="py-32 bg-white relative overflow-hidden">
+          <section className="py-32 bg-white relative overflow-visible">
             <div className="enterprise-container">
               <div className="flex flex-col lg:flex-row items-end justify-between mb-20 gap-8">
                 <div className="max-w-2xl">
@@ -2451,7 +2451,7 @@ const Services = () => {
           </section>
 
           {/* 4. THE VELDURSEN EDGE - WHY CHOOSE US */}
-          <section className="py-32 bg-slate-50 relative overflow-hidden">
+          <section className="py-32 bg-slate-50 relative overflow-visible">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 via-transparent to-red-600 opacity-20" />
             <div className="enterprise-container">
               <div className="text-center mb-20">

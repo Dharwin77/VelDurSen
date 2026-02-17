@@ -494,7 +494,7 @@ export default function DomeGallery({
             const originalImg = overlay.querySelector('img');
             if (originalImg) {
                 const img = originalImg.cloneNode() as HTMLImageElement;
-                img.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
+                img.style.cssText = 'width: 100%; height: 100%; object-fit: contain;';
                 animatingOverlay.appendChild(img);
             }
 
@@ -620,7 +620,7 @@ export default function DomeGallery({
         const img = document.createElement('img');
         img.src = rawSrc;
         img.alt = rawAlt;
-        img.style.cssText = `width:100%; height:100%; object-fit:cover; filter:${grayscale ? 'grayscale(1)' : 'none'};`;
+        img.style.cssText = `width:100%; height:100%; object-fit:contain; filter:${grayscale ? 'grayscale(1)' : 'none'};`;
         overlay.appendChild(img);
         viewerRef.current!.appendChild(overlay);
         const tx0 = tileR.left - frameR.left;

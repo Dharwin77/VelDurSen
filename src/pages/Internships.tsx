@@ -62,7 +62,7 @@ const Internships = () => {
         }]}
       />
       {/* HERO SECTION - Redesigned to match Industry Page */}
-      <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
+      <section className="relative h-[50vh] sm:h-[80vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden">
         <video
           autoPlay
           muted

@@ -1093,34 +1093,24 @@ const Index = () => {
   return (
     <PageLayout>
       <SEO
-        title="VelDurSen - Enterprise AI Solutions, Digital Transformation & Cloud Engineering | Global IT Consulting"
-        description="VelDurSen Technologies delivers enterprise AI solutions, digital transformation, cloud engineering, cybersecurity, and data analytics services to Fortune 500 companies across 50+ countries. Trusted by 500+ global enterprises for mission-critical technology systems."
+        title="VelDurSen | Enterprise AI & Digital Transformation Partner"
+        description="VelDurSen delivers enterprise AI, cloud engineering, and digital transformation for global Fortune 500 firms. Secure and scalable mission-critical technology."
         keywords={[
-          "Enterprise AI solutions",
-          "Digital transformation company",
-          "Cloud engineering services",
-          "Enterprise cybersecurity solutions",
-          "Data engineering consulting",
-          "AI-powered enterprise systems",
-          "Cloud-native architectures",
-          "DevOps engineering",
-          "Cybersecurity compliance",
-          "Big data analytics",
-          "Enterprise software development",
-          "Sustainable technology solutions",
-          "Global IT consulting",
-          "Fortune 500 technology partner",
-          "Machine learning solutions",
-          "Enterprise cloud migration",
-          "Zero-trust security",
-          "Data warehouse solutions",
-          "Enterprise CRM development",
-          "Global technology services"
+          "Enterprise AI",
+          "Digital Transformation",
+          "Cloud Engineering",
+          "Cybersecurity",
+          "Data Analytics",
+          "Fortune 500 IT Partner",
+          "Enterprise Software",
+          "Cloud-native Architecture",
+          "DevOps Consulting",
+          "VelDurSen"
         ]}
         schemas={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA]}
       />
       {/* 1. HERO SECTION - Redesigned to match Premium Industry Style */}
-      <section className="relative h-[90vh] min-h-[600px] flex items-center overflow-hidden bg-white">
+      <section className="relative h-[60vh] sm:h-[80vh] md:h-[90vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden bg-white">
         <motion.div
           onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
           className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[10s] brightness-110 hover:scale-105"
@@ -1140,8 +1130,8 @@ const Index = () => {
               Global Enterprise Technology Partner
             </span>
             <h1 className="text-[2.25rem] xs:text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-slate-900 leading-[0.95] mb-8 tracking-tighter break-words hyphens-auto">
-              Digital <br />
-              <span className="text-red-600">Transformation.</span>
+              VelDurSen <br />
+              <span className="text-red-600">Digital Transformation.</span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-600 font-medium mb-12 max-w-2xl leading-relaxed">
               We architect intelligent, secure, and sustainable enterprise ecosystems that power mission-critical operations across industries worldwide.
@@ -1214,7 +1204,7 @@ const Index = () => {
 
 
         {/* World Map Visualization - Full Screen */}
-        <section className="relative w-full min-h-[600px] lg:h-screen overflow-hidden bg-gradient-to-br from-indigo-900 via-slate-900 to-black flex items-start justify-center pt-20">
+        <section className="relative w-full min-h-[400px] sm:min-h-[500px] lg:h-screen overflow-hidden bg-gradient-to-br from-indigo-900 via-slate-900 to-black flex items-start justify-center pt-20">
           {/* Background Video */}
           <img
             src={backgroundImage}
@@ -1355,9 +1345,9 @@ const Index = () => {
         </section>
 
         {/* 2. DYNAMIC ACHIEVEMENT GRID - WITH STACKED-TO-SPLIT ANIMATION */}
-        <section className="py-24 bg-white overflow-hidden min-h-screen flex items-center">
+        <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white overflow-visible">
           <div className="enterprise-container">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-x-12 md:gap-y-20 relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12 relative">
               {achievementsData.map((achievement, idx) => {
                 const colorMaps: Record<string, { bg: string, ring: string, iconBg: string }> = {
                   "Artificial Intelligence Innovation": { bg: "bg-[#2563eb]", ring: "ring-blue-200", iconBg: "bg-blue-700/20" },
@@ -1370,12 +1360,24 @@ const Index = () => {
 
                 const style = colorMaps[achievement.category] || colorMaps["Artificial Intelligence Innovation"];
 
-                // Calculate stack offsets to make them cluster in the center
-                // On desktop (3 cols):
-                // col 0: x: 100%, col 1: x: 0, col 2: x: -100%
-                // row 0: y: 20%, row 1: y: -20%
-                const xOffset = idx % 3 === 0 ? "100%" : idx % 3 === 2 ? "-100%" : "0%";
-                const yOffset = idx < 3 ? "20%" : "-20%";
+                // Responsive animation offsets
+                // Default (Mobile): Fly up from bottom
+                let xOffset: string | number = 0;
+                let yOffset: string | number = 50;
+                let initialRotate = 0;
+
+                // Tablet/Desktop logic
+                if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+                  // On desktop (3 cols)
+                  xOffset = idx % 3 === 0 ? "50%" : idx % 3 === 2 ? "-50%" : "0%";
+                  yOffset = idx < 3 ? "10%" : "-10%";
+                  initialRotate = (idx - 2.5) * 5;
+                } else if (typeof window !== 'undefined' && window.innerWidth >= 640) {
+                  // On tablet (2 cols)
+                  xOffset = idx % 2 === 0 ? "30%" : "-30%";
+                  yOffset = 20;
+                  initialRotate = (idx % 2 === 0 ? 5 : -5);
+                }
 
                 return (
                   <motion.div
@@ -1384,8 +1386,8 @@ const Index = () => {
                       opacity: 0,
                       x: xOffset,
                       y: yOffset,
-                      rotate: (idx - 2.5) * 10, // Fanned rotation
-                      scale: 0.8
+                      rotate: initialRotate,
+                      scale: 0.9
                     }}
                     whileInView={{
                       opacity: 1,
@@ -1403,11 +1405,11 @@ const Index = () => {
                       mass: 0.5
                     }}
                     whileHover={{ y: -10, rotateZ: idx % 2 === 0 ? 1 : -1, scale: 1.02, zIndex: 50, transition: { duration: 0.2, ease: "easeOut" } }}
-                    className="group relative h-[420px] w-full"
+                    className="group relative h-[380px] sm:h-[400px] md:h-[420px] w-full"
                   >
                     <Link to={`/achievements/${achievement.id}`} className="block h-full w-full">
                       {/* Main Card Body */}
-                      <div className={`relative h-full w-full ${style.bg} rounded-[2.5rem] p-8 shadow-2xl transition-shadow duration-300 overflow-hidden will-change-transform flex flex-col`}>
+                      <div className={`relative h-full w-full ${style.bg} rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] p-6 sm:p-7 md:p-8 shadow-2xl transition-shadow duration-300 overflow-hidden will-change-transform flex flex-col`}>
 
                         {/* Top Header */}
                         <div className="flex justify-between items-start mb-2 shrink-0 z-20">
@@ -2009,8 +2011,9 @@ const Index = () => {
             segments={34}
             dragDampening={2}
             grayscale={false}
-            openedImageWidth="80vw"
-            openedImageHeight="80vh"
+            openedImageWidth="min(95vw, 800px)"
+            openedImageHeight="min(85vh, 800px)"
+            padFactor={0.05}
           />
         </div>
 
@@ -2043,7 +2046,7 @@ const Index = () => {
               whileInView="visible"
               viewport={{ once: false }}
               variants={scaleUp}
-              className="w-full max-w-5xl h-[400px] md:h-[500px] lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl relative group cursor-pointer"
+              className="w-full max-w-5xl h-[250px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl relative group cursor-pointer"
             >
               <img src={copter5} alt="Team Culture" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all duration-500" />
@@ -2057,7 +2060,7 @@ const Index = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="w-full h-screen overflow-hidden relative bg-slate-900"
+          className="w-full h-[40vh] sm:h-[60vh] md:h-screen overflow-hidden relative bg-slate-900"
         >
           <video
             autoPlay

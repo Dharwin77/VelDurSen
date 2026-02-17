@@ -400,7 +400,7 @@ const About = () => {
 
   return (
     <PageLayout>
-      <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
+      <section className="relative h-[50vh] sm:h-[80vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden">
         <motion.div
           onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
           className="contents"

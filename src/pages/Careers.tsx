@@ -255,7 +255,7 @@ const Careers = () => {
       </AnimatePresence>
 
       {/* Hero Section - PRESERVED from original */}
-      <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
+      <section className="relative h-[50vh] sm:h-[80vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden">
         <video
           autoPlay
           muted
@@ -388,7 +388,7 @@ const Careers = () => {
           <div className="bg-white rounded-2xl p-8 shadow-xl">
             <label className="block mb-4 font-semibold">Experience Level: {experienceLevel} years</label>
             <input type="range" min="0" max="10" value={experienceLevel} onChange={(e) => setExperienceLevel(parseInt(e.target.value))} className="w-full mb-8" />
-            <div className="grid grid-cols-3 gap-4 text-center">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
               {[{ year: "Year 1", role: "Junior", salary: "$60-80K" }, { year: "Year 3", role: "Mid-Level", salary: "$90-120K" }, { year: "Year 5+", role: "Senior/Lead", salary: "$140-180K" }].map((stage, i) => (
                 <div key={i} className={`p-4 rounded-lg ${experienceLevel >= i * 2 ? "bg-orange-600 text-white" : "bg-slate-100"}`}>
                   <div className="font-bold">{stage.year}</div>

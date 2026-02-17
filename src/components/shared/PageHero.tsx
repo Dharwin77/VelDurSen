@@ -29,7 +29,7 @@ const PageHero = ({ tag, title, subtitle, ctaText, ctaLink, bgImage, bgImages, v
 
   return (
     <section
-      className="relative min-h-[480px] md:min-h-[540px] flex items-center overflow-hidden"
+      className="relative min-h-[350px] sm:min-h-[450px] md:min-h-[540px] flex items-center overflow-hidden"
     >
       {images.length > 0 && images.map((img, index) => (
         <div

@@ -92,7 +92,7 @@ const Contact = () => {
         }]}
       />
       {/* 1. HERO SECTION WITH VIDEO BACKGROUND */}
-      <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden bg-slate-900">
+      <section className="relative h-[50vh] sm:h-[80vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden bg-slate-900">
         <video
           autoPlay
           muted
@@ -375,7 +375,7 @@ const Contact = () => {
           <div className="relative mt-16 max-w-6xl mx-auto">
             {/* Map Image */}
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-100 group">
-              <img src={globalMap} alt="VelDurSen Global Operations" className="w-full min-h-[400px] md:h-[600px] object-cover transition-transform duration-[10s] group-hover:scale-105" />
+              <img src={globalMap} alt="VelDurSen Global Operations" className="w-full min-h-[250px] sm:min-h-[400px] md:min-h-[600px] object-cover transition-transform duration-[10s] group-hover:scale-105" />
               <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors duration-500" />
 
               {/* Animated PING Markers */}

@@ -319,7 +319,7 @@ const CardSwap = forwardRef<CardSwapRef, CardSwapProps>(({
             style={{ width, minHeight: typeof height === 'number' ? `${height + 100}px` : height, height: 'auto' }}
         >
             <div
-                className="relative perspective-[1200px] flex items-center justify-center p-20 w-full"
+                className="relative perspective-[1200px] flex items-center justify-center p-4 sm:p-20 w-full"
                 style={{ height }}
                 ref={containerRef}
             >

@@ -102,6 +102,28 @@ export default defineConfig({
                                     ])
                             ),
                         S.listItem()
+                            .title('Services Page Content')
+                            .child(
+                                S.list()
+                                    .title('Sections')
+                                    .items([
+                                        S.listItem().title('01. Hero').child(S.document().schemaType('servicesHero').documentId('servicesHero')),
+                                        S.listItem().title('02. What\'s Included').child(S.document().schemaType('whatsIncluded').documentId('whatsIncluded')),
+                                        S.listItem().title('03. What\'s Included Explanation').child(S.document().schemaType('whatsIncludedExplanation').documentId('whatsIncludedExplanation')),
+                                        S.listItem().title('04. Our Services').child(S.document().schemaType('ourServices').documentId('ourServices')),
+                                        S.listItem().title('05. Technology Pillars').child(S.document().schemaType('technologyPillars').documentId('technologyPillars')),
+                                        S.listItem().title('06. Bridging the Gap').child(S.document().schemaType('bridgingTheGap').documentId('bridgingTheGap')),
+                                        S.listItem().title('07. The Path').child(S.document().schemaType('thePath').documentId('thePath')),
+                                        S.listItem().title('08. Reliability').child(S.document().schemaType('reliability').documentId('reliability')),
+                                        S.listItem().title('09. Innovation Engine').child(S.document().schemaType('innovationEngine').documentId('innovationEngine')),
+                                        S.listItem().title('10. Why Global Leaders Choose Us').child(S.document().schemaType('whyGlobalLeadersChooseUs').documentId('whyGlobalLeadersChooseUs')),
+                                        S.listItem().title('11. Client Stories').child(S.document().schemaType('clientStories').documentId('clientStories')),
+                                        S.listItem().title('12. Our Industries').child(S.document().schemaType('ourIndustries').documentId('ourIndustries')),
+                                        S.listItem().title('13. Strategic Differentiation').child(S.document().schemaType('strategicDifferentiation').documentId('strategicDifferentiation')),
+                                        S.listItem().title('14. The VelDurSen Advantage').child(S.document().schemaType('velDurSenAdvantage').documentId('velDurSenAdvantage')),
+                                    ])
+                            ),
+                        S.listItem()
                             .title('What We Do')
                             .child(S.document().schemaType('whatWeDoPage').documentId('whatWeDo')),
                         S.listItem()

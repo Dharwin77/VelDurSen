@@ -1,12 +1,28 @@
+import { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ArrowRight, Trophy, MapPin, Calendar, Award, Bookmark, TrendingUp, BarChart3, Briefcase, Building2, Globe, Globe2, Lightbulb, Layers, Shield, Zap, Server, BarChart, Lock, Gauge, CheckCircle } from "lucide-react";
+import { Trophy, MapPin, Calendar, Award, Bookmark, TrendingUp, BarChart3, Briefcase, Building2, Globe, Globe2, Lightbulb, Layers, Shield, Zap, Server, BarChart, Lock, Gauge, CheckCircle } from "lucide-react";
 import PageLayout from "@/components/layout/PageLayout";
 import { achievementsData } from "@/data/achievements";
+import { client } from "@/lib/sanity";
 
 import achievementVideo from "@/assets/achievement.mp4";
 
 const Achievements = () => {
+  const [data, setData] = useState<any>(null);
+
+  useEffect(() => {
+    // Fetching from homeSection8 (Excellence Benchmarks)
+    client.fetch(`*[_id == "homeSection8"][0]`).then(setData).catch(console.error);
+  }, []);
+
+  const heading = data?.heading || "Global Excellence & Recognition";
+
+  // Handle text blocks (Sanity 'text' type in array returns array of strings)
+  const textBlocks = data?.text || [
+    "VelDurSen’s achievements represent a decade of relentless engineering innovation and architectural integrity. We have successfully deployed mission-critical systems across 150+ countries, earning over 50 global awards for our pioneering work in AI safety and cloud resilience.",
+    "Our journey is defined by transforming complex legacy environments into high-performance digital ecosystems that empower the world’s most ambitious enterprises. Every award is a milestone in our mission to build a more secure, intelligent, and sustainable future for global technology."
+  ];
+
   return (
     <PageLayout>
       {/* 1. HERO SECTION WITH VIDEO BACKGROUND */}
@@ -46,7 +62,7 @@ const Achievements = () => {
         <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[120px] -z-0" />
       </section>
 
-      {/* 1.5 CRISPY ACHIEVEMENTS HIGHLIGHTS - REFINED TEXT VERSION */}
+      {/* 1.5 CRISPY ACHIEVEMENTS HIGHLIGHTS - DYNAMIC VERSION */}
       <section className="py-16 bg-white border-b border-slate-100">
         <div className="enterprise-container">
           <motion.div
@@ -56,15 +72,12 @@ const Achievements = () => {
             className="max-w-4xl"
           >
             <span className="text-blue-600 font-bold uppercase tracking-widest text-xs mb-4 block">
-              Global Excellence & Recognition
+              {heading}
             </span>
             <div className="space-y-6 text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
-              <p>
-                VelDurSen’s achievements represent a decade of relentless engineering innovation and architectural integrity. We have successfully deployed mission-critical systems across 150+ countries, earning over 50 global awards for our pioneering work in AI safety and cloud resilience.
-              </p>
-              <p>
-                Our journey is defined by transforming complex legacy environments into high-performance digital ecosystems that empower the world’s most ambitious enterprises. Every award is a milestone in our mission to build a more secure, intelligent, and sustainable future for global technology.
-              </p>
+              {textBlocks.map((block: string, idx: number) => (
+                <p key={idx}>{block}</p>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -133,58 +146,49 @@ const Achievements = () => {
                   whileHover={{ y: -10, rotateZ: idx % 2 === 0 ? 1 : -1, scale: 1.02, zIndex: 50, transition: { duration: 0.2, ease: "easeOut" } }}
                   className="group relative h-[420px] w-full"
                 >
-                  <Link to={`/achievements/${achievement.id}`} className="block h-full w-full">
-                    {/* Main Card Body */}
-                    <div className={`relative h-full w-full ${style.bg} rounded-[2.5rem] p-8 shadow-2xl transition-shadow duration-300 overflow-hidden will-change-transform`}>
+                  {/* Main Card Body */}
+                  <div className={`relative h-full w-full ${style.bg} rounded-[2.5rem] p-8 shadow-2xl transition-shadow duration-300 overflow-hidden will-change-transform`}>
 
-                      {/* Top Header */}
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="text-white">
-                          <h4 className="text-2xl font-black tracking-tight">{achievement.category.split(' ')[0]}</h4>
-                          <p className="text-white/70 text-xs font-bold uppercase tracking-widest">{achievement.venue.split(',')[0]}</p>
-                        </div>
-
-                        <div className="bg-black/20 backdrop-blur-md rounded-full px-3 py-1.5 flex items-center gap-1.5 border border-white/10">
-                          <Trophy size={14} className="text-white" />
-                          <span className="text-white text-[10px] font-black">{achievement.date.split(' ').pop()}</span>
-                        </div>
+                    {/* Top Header */}
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="text-white">
+                        <h4 className="text-2xl font-black tracking-tight">{achievement.category.split(' ')[0]}</h4>
+                        <p className="text-white/70 text-xs font-bold uppercase tracking-widest">{achievement.venue.split(',')[0]}</p>
                       </div>
 
-                      {/* Floating Image Section */}
-                      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-center z-10 px-8">
-                        <motion.div className="relative">
-                          <div className={`absolute inset-0 rounded-full blur-2xl opacity-40 ${style.bg} transition-transform duration-300 group-hover:scale-125 will-change-transform`} />
-                          <div className="relative w-48 h-48 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white/30 transform group-hover:-translate-y-4 transition-transform duration-300 ease-out will-change-transform">
-                            <img
-                              src={achievement.image}
-                              alt={achievement.title}
-                              className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-300"
-                            />
-                          </div>
-                        </motion.div>
+                      <div className="bg-black/20 backdrop-blur-md rounded-full px-3 py-1.5 flex items-center gap-1.5 border border-white/10">
+                        <Trophy size={14} className="text-white" />
+                        <span className="text-white text-[10px] font-black">{achievement.date.split(' ').pop()}</span>
                       </div>
-
-                      {/* Bottom Title */}
-                      <div className="absolute bottom-10 left-8 right-8 z-20">
-                        <h3 className="text-white text-3xl font-black leading-[1.1] drop-shadow-lg mb-2">
-                          {achievement.title.split(' ').slice(0, 3).join(' ')}
-                          <br />
-                          {achievement.title.split(' ').slice(3).join(' ')}
-                        </h3>
-
-                        <div className="mt-4 flex items-center text-white/60 group-hover:text-white transition-colors">
-                          <span className="text-[10px] font-black uppercase tracking-[0.2em] pt-1">Explore Project</span>
-                          <div className="ml-3 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
-                            <ArrowRight size={14} className="transform group-hover:translate-x-0.5 transition-transform" />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Background Accents */}
-                      <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-[80px]" />
-                      <div className="absolute -top-20 -left-20 w-64 h-64 bg-black/5 rounded-full blur-[80px]" />
                     </div>
-                  </Link>
+
+                    {/* Floating Image Section */}
+                    <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-center z-10 px-8">
+                      <motion.div className="relative">
+                        <div className={`absolute inset-0 rounded-full blur-2xl opacity-40 ${style.bg} transition-transform duration-300 group-hover:scale-125 will-change-transform`} />
+                        <div className="relative w-48 h-48 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white/30 transform group-hover:-translate-y-4 transition-transform duration-300 ease-out will-change-transform">
+                          <img
+                            src={achievement.image}
+                            alt={achievement.title}
+                            className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-300"
+                          />
+                        </div>
+                      </motion.div>
+                    </div>
+
+                    {/* Bottom Title */}
+                    <div className="absolute bottom-10 left-8 right-8 z-20">
+                      <h3 className="text-white text-3xl font-black leading-[1.1] drop-shadow-lg mb-2">
+                        {achievement.title.split(' ').slice(0, 3).join(' ')}
+                        <br />
+                        {achievement.title.split(' ').slice(3).join(' ')}
+                      </h3>
+                    </div>
+
+                    {/* Background Accents */}
+                    <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-[80px]" />
+                    <div className="absolute -top-20 -left-20 w-64 h-64 bg-black/5 rounded-full blur-[80px]" />
+                  </div>
                 </motion.div>
               );
             })}

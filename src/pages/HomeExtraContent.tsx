@@ -262,7 +262,16 @@ const CRMUseCaseCard = ({ useCase, index }: { useCase: any, index: number }) => 
     );
 };
 
-export const EnterpriseCRMContent = () => {
+interface EnterpriseContentProps {
+    crm?: any;
+    productFocus?: any;
+    expertise?: any;
+    automation?: any;
+    whyChoose?: any;
+}
+
+export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps }) => {
+    const { crm, productFocus, expertise, automation, whyChoose } = data || {};
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     return (
@@ -290,32 +299,32 @@ export const EnterpriseCRMContent = () => {
                         >
                             <motion.div variants={fadeInUp}>
                                 <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tighter text-slate-900 leading-[1.1]" style={{ fontFamily: "'Inter', sans-serif" }}>
-                                    Enterprise CRM & <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-700">Product Engineering</span>
+                                    {crm?.heading || <>Enterprise CRM & <br />
+                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-700">Product Engineering</span></>}
                                 </h2>
                             </motion.div>
 
                             <motion.div variants={fadeInUp}>
                                 <h2 className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>
-                                    Purpose-built CRM platforms engineered for scale, intelligence, and measurable growth.
+                                    {crm?.subheading || "Purpose-built CRM platforms engineered for scale, intelligence, and measurable growth."}
                                 </h2>
                             </motion.div>
 
                             <motion.div variants={fadeInUp} className="space-y-6">
                                 <p className="text-lg text-slate-700 leading-relaxed font-normal" style={{ fontFamily: "'Inter', sans-serif" }}>
-                                    At VelDurSen, we don’t simply deploy CRM software — we architect <span className="font-semibold text-slate-900">intelligent ecosystems</span> that evolve with your enterprise. Every workflow, integration, and automation layer is engineered for performance, clarity, and long-term scalability.
+                                    {crm?.description || <>At VelDurSen, we don’t simply deploy CRM software — we architect <span className="font-semibold text-slate-900">intelligent ecosystems</span> that evolve with your enterprise. Every workflow, integration, and automation layer is engineered for performance, clarity, and long-term scalability.</>}
                                 </p>
 
                                 <p className="text-lg text-slate-700 font-medium" style={{ fontFamily: "'Inter', sans-serif" }}>Our CRM solutions are built to support:</p>
 
                                 <ul className="space-y-4">
-                                    {[
+                                    {(crm?.features?.length > 0 ? crm.features : [
                                         "Multi-region revenue operations 🌍",
                                         "High-volume customer engagement 📊",
                                         "Automated cross-functional workflows ⚙️",
                                         "Real-time analytics & forecasting 📈",
                                         "Unified customer lifecycle intelligence 🤖"
-                                    ].map((item, i) => (
+                                    ]).map((item: string, i: number) => (
                                         <motion.li
                                             key={i}
                                             whileHover={{ x: 5 }}
@@ -357,15 +366,15 @@ export const EnterpriseCRMContent = () => {
                                 </h3>
 
                                 <div className="space-y-8">
-                                    {[
+                                    {(crm?.biSystems?.length > 0 ? crm.biSystems : [
                                         { icon: Layers, title: "API-First Architecture", desc: "Designed for seamless integration across enterprise ecosystems and legacy systems." },
                                         { icon: Brain, title: "AI-Enhanced Intelligence", desc: "Built-in predictive models that turn raw customer data into actionable insight." },
                                         { icon: Server, title: "Enterprise-Grade Uptime", desc: "99.99% availability engineered through resilient cloud-native infrastructure." },
                                         { icon: Shield, title: "Secure by Design", desc: "Security embedded at the architectural level — not added as an afterthought 🔐" },
-                                    ].map((feature, idx) => (
+                                    ]).map((feature: any, idx: number) => (
                                         <div key={idx} className="flex gap-5 items-start group/item">
                                             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-blue-50 border border-white shadow-sm flex items-center justify-center shrink-0 group-hover/item:scale-110 transition-transform duration-300">
-                                                <feature.icon className="text-blue-600 w-5 h-5" />
+                                                {feature.icon ? <feature.icon className="text-blue-600 w-5 h-5" /> : <Layers className="text-blue-600 w-5 h-5" />}
                                             </div>
                                             <div>
                                                 <h4 className="font-bold text-slate-900 text-lg mb-1" style={{ fontFamily: "'Inter', sans-serif" }}>{feature.title}</h4>
@@ -438,15 +447,15 @@ export const EnterpriseCRMContent = () => {
                             </motion.span>
 
                             <h2 className="text-4xl lg:text-5xl font-black text-slate-900 mb-6 tracking-tighter leading-tight" style={{ fontFamily: "'Inter', sans-serif" }}>
-                                Product Engineering & <br /> SaaS Development
+                                {productFocus?.heading || <>Product Engineering & <br /> SaaS Development</>}
                             </h2>
 
                             <p className="text-lg md:text-xl text-slate-600 font-medium leading-relaxed mb-8" style={{ fontFamily: "'Inter', sans-serif" }}>
-                                From concept validation to enterprise-grade scale.
+                                {productFocus?.subheading || "From concept validation to enterprise-grade scale."}
                             </p>
 
                             <p className="text-lg text-slate-700 leading-relaxed mb-10 font-normal" style={{ fontFamily: "'Inter', sans-serif" }}>
-                                VelDurSen builds digital products with long-term architecture in mind. We don’t just ship features — we design <strong className="text-slate-900">scalable SaaS ecosystems</strong> that evolve with your business. Every release is structured for reliability, security, and performance under real-world enterprise load.
+                                {productFocus?.description || <>VelDurSen builds digital products with long-term architecture in mind. We don’t just ship features — we design <strong className="text-slate-900">scalable SaaS ecosystems</strong> that evolve with your business. Every release is structured for reliability, security, and performance under real-world enterprise load.</>}
                             </p>
 
                             <div className="bg-white/60 backdrop-blur-sm border border-blue-100 rounded-3xl p-8 shadow-sm group hover:border-blue-200 transition-colors duration-300">
@@ -462,7 +471,7 @@ export const EnterpriseCRMContent = () => {
                                     <div className="hidden sm:block absolute left-1/2 top-0 bottom-0 w-px bg-blue-100 -translate-x-1/2" />
 
                                     <div className="space-y-3">
-                                        {["Product Discovery", "Scalable Development", "Performance Optimization"].map((item, i) => (
+                                        {(productFocus?.features?.length > 0 ? productFocus.features.slice(0, 3) : ["Product Discovery", "Scalable Development", "Performance Optimization"]).map((item: string, i: number) => (
                                             <motion.div
                                                 key={i}
                                                 initial={{ opacity: 0, x: -10 }}
@@ -479,7 +488,7 @@ export const EnterpriseCRMContent = () => {
                                     </div>
 
                                     <div className="space-y-3">
-                                        {["System Architecture", "Security Validation 🔐", "Continuous Enhancement 🚀"].map((item, i) => (
+                                        {(productFocus?.features?.length > 0 ? productFocus.features.slice(3) : ["System Architecture", "Security Validation 🔐", "Continuous Enhancement 🚀"]).map((item: string, i: number) => (
                                             <motion.div
                                                 key={i}
                                                 initial={{ opacity: 0, x: 10 }}
@@ -519,18 +528,24 @@ export const EnterpriseCRMContent = () => {
                         className="text-center max-w-5xl mx-auto mb-16"
                     >
                         <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-green-600 to-green-700 font-extrabold text-xl md:text-2xl mb-4 tracking-tight drop-shadow-sm">
-                            Our Expertise. Your Advantage.
+                            {expertise?.subheading || "Our Expertise. Your Advantage."}
                         </span>
                         <h2 className="text-4xl md:text-6xl font-black text-slate-950 mb-8 tracking-tight leading-[1.1]">
-                            Premium CRM Solutions That <br className="hidden md:block" /> Accelerate Your Business Growth
+                            {expertise?.heading || <>Premium CRM Solutions That <br className="hidden md:block" /> Accelerate Your Business Growth</>}
                         </h2>
                         <p className="text-lg md:text-xl text-slate-600 font-medium leading-relaxed max-w-4xl mx-auto">
-                            We deliver end-to-end CRM development, strategy, and digital services crafted to accelerate enterprise growth. Our experienced team combines strategy, creativity, and technology to help you build meaningful products and stay ahead in a competitive market.
+                            {expertise?.description || "We deliver end-to-end CRM development, strategy, and digital services crafted to accelerate enterprise growth. Our experienced team combines strategy, creativity, and technology to help you build meaningful products and stay ahead in a competitive market."}
                         </p>
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10">
-                        {[
+                        {(expertise?.areas?.length > 0 ? expertise.areas.map((area: any) => ({
+                            title: area.title,
+                            desc: area.desc,
+                            // Cycle through default images/icons if not provided in schema
+                            avatar: cardImg1,
+                            fluentIcon: crmHealthcare
+                        })) : [
                             {
                                 title: "Healthcare CRM",
                                 desc: "Managing patient engagement, appointment workflows, HIPAA compliance, and analytics securely with cross-region reliability.",
@@ -555,7 +570,7 @@ export const EnterpriseCRMContent = () => {
                                 avatar: cardImg4,
                                 fluentIcon: crmManufacturing
                             }
-                        ].map((useCase, i) => (
+                        ]).map((useCase: any, i: number) => (
                             <CRMUseCaseCard key={i} useCase={useCase} index={i} />
                         ))}
                     </div>
@@ -579,7 +594,7 @@ export const EnterpriseCRMContent = () => {
                         className="text-center mb-16"
                     >
                         <h2 className="text-4xl font-black text-slate-900 mb-6 tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>
-                            Intelligent Automation & <span className="text-red-600">Digital Transformation</span>
+                            {automation?.heading || <>Intelligent Automation & <span className="text-red-600">Digital Transformation</span></>}
                         </h2>
                     </motion.div>
 
@@ -590,38 +605,42 @@ export const EnterpriseCRMContent = () => {
                         variants={staggerContainer}
                         className="grid grid-cols-1 md:grid-cols-3 gap-8"
                     >
-                        <motion.div variants={fadeInUp} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                            <Brain className="w-12 h-12 text-red-600 mb-6" />
-                            <h3 className="text-xl font-bold text-slate-900 mb-4">AI-Driven CRM</h3>
-                            <p className="text-slate-600 text-sm mb-4">Transforming CRM from data storage into a revenue engine.</p>
-                            <ul className="space-y-2 text-sm text-slate-600 font-medium">
-                                <li>• Predictive Forecasting</li>
-                                <li>• Lead Scoring Models</li>
-                                <li>• Behavioral Analytics</li>
-                            </ul>
-                        </motion.div>
-
-                        <motion.div variants={fadeInUp} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                            <RefreshCcw className="w-12 h-12 text-red-600 mb-6" />
-                            <h3 className="text-xl font-bold text-slate-900 mb-4">Digital Transformation</h3>
-                            <p className="text-slate-600 text-sm mb-4">Modernizing legacy systems with strategic rebuilding.</p>
-                            <ul className="space-y-2 text-sm text-slate-600 font-medium">
-                                <li>• Legacy Modernization</li>
-                                <li>• Cloud Migration</li>
-                                <li>• Process Automation</li>
-                            </ul>
-                        </motion.div>
-
-                        <motion.div variants={fadeInUp} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                            <Globe className="w-12 h-12 text-red-600 mb-6" />
-                            <h3 className="text-xl font-bold text-slate-900 mb-4">Global Deployment</h3>
-                            <p className="text-slate-600 text-sm mb-4">Supporting enterprise ecosystems without disruption.</p>
-                            <ul className="space-y-2 text-sm text-slate-600 font-medium">
-                                <li>• Multi-Timezone Teams</li>
-                                <li>• 24/7 Technical Support</li>
-                                <li>• International Scalability</li>
-                            </ul>
-                        </motion.div>
+                        {(automation?.columns?.length > 0 ? automation.columns.map((col: any, idx: number) => ({
+                            title: col.title,
+                            desc: col.desc,
+                            items: col.items || [],
+                            Icon: idx === 0 ? Brain : idx === 1 ? RefreshCcw : Globe // Map icons by index
+                        })) : [
+                            {
+                                title: "AI-Driven CRM",
+                                desc: "Transforming CRM from data storage into a revenue engine.",
+                                items: ["• Predictive Forecasting", "• Lead Scoring Models", "• Behavioral Analytics"],
+                                Icon: Brain
+                            },
+                            {
+                                title: "Digital Transformation",
+                                desc: "Modernizing legacy systems with strategic rebuilding.",
+                                items: ["• Legacy Modernization", "• Cloud Migration", "• Process Automation"],
+                                Icon: RefreshCcw
+                            },
+                            {
+                                title: "Global Deployment",
+                                desc: "Supporting enterprise ecosystems without disruption.",
+                                items: ["• Multi-Timezone Teams", "• 24/7 Technical Support", "• International Scalability"],
+                                Icon: Globe
+                            }
+                        ]).map((col: any, i: number) => (
+                            <motion.div key={i} variants={fadeInUp} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                                <col.Icon className="w-12 h-12 text-red-600 mb-6" />
+                                <h3 className="text-xl font-bold text-slate-900 mb-4">{col.title}</h3>
+                                <p className="text-slate-600 text-sm mb-4">{col.desc}</p>
+                                <ul className="space-y-2 text-sm text-slate-600 font-medium">
+                                    {col.items.map((item: string, k: number) => (
+                                        <li key={k}>{item.startsWith('•') ? item : `• ${item}`}</li>
+                                    ))}
+                                </ul>
+                            </motion.div>
+                        ))}
                     </motion.div>
                 </motion.div>
             </section>
@@ -638,18 +657,18 @@ export const EnterpriseCRMContent = () => {
                     >
                         <motion.div variants={fadeInLeft} className="lg:col-span-5">
                             <h2 className="text-4xl font-black text-slate-900 mb-8 tracking-tighter leading-none" style={{ fontFamily: "'Inter', sans-serif" }}>
-                                Why Enterprises <br /> Choose VelDurSen
+                                {whyChoose?.heading || <>Why Enterprises <br /> Choose VelDurSen</>}
                             </h2>
                             <div className="bg-slate-900 text-white p-8 rounded-2xl relative overflow-hidden">
                                 <div className="relative z-10 space-y-4">
-                                    {[
+                                    {(whyChoose?.features?.length > 0 ? whyChoose.features : [
                                         "Architecture-first engineering",
                                         "Security-first design",
                                         "Cloud-native scalability",
                                         "Enterprise-grade reliability",
                                         "Long-term product partnership",
                                         "Strategic business alignment"
-                                    ].map((item, i) => (
+                                    ]).map((item: string, i: number) => (
                                         <div key={i} className="flex items-center gap-3">
                                             <CheckCircle className="text-red-500 w-5 h-5 shrink-0" />
                                             <span className="font-bold" style={{ fontFamily: "'Inter', sans-serif" }}>{item}</span>

@@ -184,7 +184,7 @@ export const homeSection13 = createSection('homeSection13', 'Home Section 13 (De
     })
 ])
 
-export const homeSection14 = createSection('homeSection14', 'Home Section 14 (CRM Content)', [
+export const homeSection14 = createSection('homeSection14', 'Home Section 14 (Enterprise CRM)', [
     defineField({ name: 'heading', title: 'Heading', type: 'string' }),
     defineField({ name: 'subheading', title: 'Subheading', type: 'string' }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
@@ -192,7 +192,7 @@ export const homeSection14 = createSection('homeSection14', 'Home Section 14 (CR
     defineField({ name: 'biSystems', title: 'BI Systems List', type: 'array', of: [{ type: 'object', fields: [{ name: 'title', type: 'string' }, { name: 'desc', type: 'string' }] }] })
 ])
 
-export const homeSection15 = createSection('homeSection15', 'Home Section 15 (Expertise)', [
+export const homeSection15 = createSection('homeSection15', 'Home Section 15 (Our Expertise)', [
     defineField({ name: 'heading', title: 'Heading', type: 'string' }),
     defineField({ name: 'subheading', title: 'Subheading', type: 'string' }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
@@ -240,7 +240,7 @@ export const homeSection19 = createSection('homeSection19', 'Home Section 19 (In
     defineField({ name: 'steps', title: 'Steps', type: 'array', of: [{ type: 'string' }] })
 ])
 
-export const homeSection20 = createSection('homeSection20', 'Home Section 20 (Product Engineering)', [
+export const homeSection20 = createSection('homeSection20', 'Home Section 20 (Product Focus)', [
     defineField({ name: 'heading', title: 'Heading', type: 'string' }),
     defineField({ name: 'subheading', title: 'Subheading', type: 'string' }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),

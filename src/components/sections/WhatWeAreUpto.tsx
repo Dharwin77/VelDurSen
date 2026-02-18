@@ -31,11 +31,11 @@ export default function WhatWeAreUpto({ data }: Props) {
         { label: "STARTUP GROWTH PARTNERSHIPS", value: "100+", percentage: 60 }
     ];
 
-    const highlights = data?.highlights?.length ? data.highlights : defaultHighlights;
+    const highlights = data?.stats?.length ? data.stats : defaultHighlights;
 
     // Images
-    const image1 = data?.images && data.images[0] ? urlFor(data.images[0]).url() : highlight1;
-    const image2 = data?.images && data.images[1] ? urlFor(data.images[1]).url() : highlight2;
+    const image1 = data?.mainImage ? urlFor(data.mainImage).url() : highlight1;
+    const image2 = data?.secondaryImage ? urlFor(data.secondaryImage).url() : highlight2;
 
     return (
         <section className="section-padding overflow-hidden bg-sky-50/30">
@@ -122,7 +122,9 @@ export default function WhatWeAreUpto({ data }: Props) {
                             {highlights.map((stat: any, index: number) => (
                                 <div key={index} className="space-y-2">
                                     <div className="flex justify-between items-end">
-                                        <span className="text-[11px] font-bold tracking-wider text-slate-600 uppercase">{stat.label}</span>
+                                        <span className="text-[11px] font-bold tracking-wider text-slate-600 uppercase">
+                                            {stat.label} <span className="text-blue-600 ml-1">{stat.value}</span>
+                                        </span>
                                         <span className="text-sm font-bold text-foreground">{stat.percentage}%</span>
                                     </div>
                                     <div className="relative h-[2px] w-full bg-slate-100 rounded-full overflow-hidden">

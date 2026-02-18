@@ -570,12 +570,9 @@ const Index = () => {
       "expertise": *[_type == "homeSection15"][0],
       "automation": *[_type == "homeSection16"][0],
       "whyChoose": *[_type == "homeSection17"][0],
-      "sectors": *[_type == "homeSection18"][0],
-      "innovation": *[_type == "homeSection19"][0],
+
       "productEng": *[_type == "homeSection20"][0],
-      "crmUseCase": *[_type == "homeSection21"][0],
-      "intelAuto": *[_type == "homeSection22"][0],
-      "whyChoose2": *[_type == "homeSection23"][0],
+
       "accelerators": *[_type == "homeSection24"][0],
       "innFramework": *[_type == "homeSection25"][0],
       "globalDelivery": *[_type == "homeSection26"][0],
@@ -589,16 +586,11 @@ const Index = () => {
       "elasticArch": *[_type == "homeSection34"][0],
       "bankingGrade": *[_type == "homeSection35"][0],
       "greenComputing": *[_type == "homeSection36"][0],
-      "sectionFounders": *[_type == "homeSection37"][0],
+
       "gallery": *[_type == "homeSection38"][0],
       "assistance": *[_type == "homeSection39"][0],
       "video": *[_type == "homeSection40"][0],
-      "testimonials": *[_type == "homeSection41"][0],
-      "globalOps": *[_type == "homeSection42"][0],
-      "faq": *[_type == "homeSection43"][0],
-      "culture": *[_type == "homeSection44"][0],
-      "careersList": *[_type == "homeSection45"][0],
-      "blogList": *[_type == "homeSection46"][0]
+      "testimonials": *[_type == "homeSection41"][0]
     }`;
 
     client.fetch(query).then((data) => {
@@ -1343,7 +1335,13 @@ const Index = () => {
 
 
         {/* NEW: Enterprise CRM Content (Main Body) */}
-        < EnterpriseCRMContent />
+        <EnterpriseCRMContent data={{
+          crm: sanityData?.crm,
+          productFocus: sanityData?.productEng, // Map productEng from query to productFocus prop
+          expertise: sanityData?.expertise,
+          automation: sanityData?.automation,
+          whyChoose: sanityData?.whyChoose
+        }} />
 
 
         {/* New Dynamic Sections */}

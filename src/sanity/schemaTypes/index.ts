@@ -18,13 +18,13 @@ import * as homeSections from './homeSections'
 
 import { homePage } from './homePage'
 import { careersPage } from './careersPage'
-import { aboutPage, whatWeDoPage, contactPage, blogPage } from './otherPages'
+import * as aboutSections from './aboutSections'
+import { whatWeDoPage, contactPage, blogPage } from './otherPages'
 
 export const schemaTypes = [
     globalSettings,
     homePage,
     careersPage,
-    aboutPage,
     whatWeDoPage,
     contactPage,
     blogPage,
@@ -44,4 +44,5 @@ export const schemaTypes = [
     deliveredOutcomes,
     professionalAssistance,
     ...Object.values(homeSections),
+    ...Object.values(aboutSections),
 ]

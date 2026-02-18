@@ -12,6 +12,10 @@ import {
 } from "@/components/ui/dialog";
 import { Link } from "react-router-dom";
 import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
+import PageLayout from "@/components/layout/PageLayout";
+import { client, urlFor } from "@/lib/sanity";
+
+// Default assets for fallback
 import aboutTeam from "@/assets/about-team.jpg";
 import aboutImage2 from "@/assets/Gemini_Generated_Image_zh56h0zh56h0zh56.png";
 import aboutVideo from "@/assets/about.mp4";
@@ -29,7 +33,21 @@ import founder1 from "@/assets/founder1.png";
 import founder2 from "@/assets/founder2.png";
 import founder3 from "@/assets/founder3.png";
 import globalMap from "@/assets/global-map.jpg";
-import PageLayout from "@/components/layout/PageLayout";
+
+const aboutQuery = `
+  {
+    "hero": *[_type == "aboutSection1"][0],
+    "story": *[_type == "aboutSection2"][0],
+    "vision": *[_type == "aboutSection3"][0],
+    "mission": *[_type == "aboutSection4"][0],
+    "leadership": *[_type == "aboutSection5"][0],
+    "evolution": *[_type == "aboutSection6"][0],
+    "culture": *[_type == "aboutSection7"][0],
+    "values": *[_type == "aboutSection8"][0],
+    "howWeWork": *[_type == "aboutSection9"][0],
+    "teamBTS": *[_type == "aboutSection10"][0]
+  }
+`;
 
 type ValueCard = {
   icon: ComponentType<{ className?: string; size?: number | string }>;
@@ -91,18 +109,18 @@ const teamPhotos = [
   { src: "/team/4.jpeg", alt: "Team on the terrace", badge: "Offsite" },
 ];
 
-const TeamCarousel = () => {
+const TeamCarousel = ({ data = teamPhotos }: { data?: any[] }) => {
   const [idx, setIdx] = useState(0);
   const [paused, setPaused] = useState(false);
-  const current = teamPhotos[idx % teamPhotos.length];
+  const current = data[idx % data.length];
 
   useEffect(() => {
-    if (paused || teamPhotos.length === 0) return;
-    const id = setInterval(() => setIdx((prev) => (prev + 1) % teamPhotos.length), 4200);
+    if (paused || data.length === 0) return;
+    const id = setInterval(() => setIdx((prev) => (prev + 1) % data.length), 4200);
     return () => clearInterval(id);
-  }, [paused]);
+  }, [paused, data]);
 
-  const goTo = (next: number) => setIdx((next + teamPhotos.length) % teamPhotos.length);
+  const goTo = (next: number) => setIdx((next + data.length) % data.length);
 
   return (
     <div
@@ -112,13 +130,13 @@ const TeamCarousel = () => {
       onClick={() => goTo(idx + 1)}
     >
       <motion.div
-        key={current.src}
+        key={current.src || current.asset} // Use src or asset key
         initial={{ opacity: 0.3, scale: 1 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.35 }}
         className="relative aspect-[16/10] w-full"
       >
-        <img src={current.src} alt={current.alt} className="w-full h-full object-cover" loading="lazy" />
+        <img src={current.src ? current.src : (current.asset ? urlFor(current).url() : teamPhotos[0].src)} alt={current.alt || "Team photo"} className="w-full h-full object-cover" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent" />
         <div className="absolute top-4 left-4 right-4 text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur border border-white/15 text-[11px] font-semibold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -132,9 +150,9 @@ const TeamCarousel = () => {
       </motion.div>
 
       <div className="absolute inset-x-0 bottom-0 pb-4 flex items-center justify-center gap-2">
-        {teamPhotos.map((photo, i) => (
+        {data.map((photo: any, i: number) => (
           <button
-            key={photo.src}
+            key={photo.src || photo.asset || i}
             onClick={(e) => {
               e.stopPropagation();
               goTo(i);
@@ -277,12 +295,12 @@ const valuesPoints = [
   },
 ];
 
-const MilestonesInteractive = () => {
-  const [activeYear, setActiveYear] = useState(milestones[0].year);
+const MilestonesInteractive = ({ data = milestones }: { data?: any[] }) => {
+  const [activeYear, setActiveYear] = useState(data[0]?.year);
   const [slideIdx, setSlideIdx] = useState(0);
   const [paused, setPaused] = useState(false);
-  const active = milestones.find((m) => m.year === activeYear) ?? milestones[0];
-  const images = useMemo(() => active.images ?? [], [active]);
+  const active = data.find((m: any) => m.year === activeYear) ?? data[0];
+  const images = useMemo(() => active?.images ?? [], [active]);
   const hasImages = images.length > 0;
   const currentImage = hasImages ? images[slideIdx % images.length] : undefined;
 
@@ -303,10 +321,12 @@ const MilestonesInteractive = () => {
     return () => clearInterval(id);
   }, [images, hasImages, paused]);
 
+  if (!active) return null;
+
   return (
     <div className="relative overflow-hidden rounded-2xl md:rounded-3xl border border-slate-200 bg-white p-4 sm:p-6 md:p-8 space-y-4 md:space-y-6 shadow-[0_20px_50px_-35px_rgba(15,23,42,0.35)]">
       <div className="flex items-center gap-3 overflow-x-auto pb-2">
-        {milestones.map((m) => (
+        {data.map((m: any) => (
           <button
             key={m.year}
             onClick={() => setActiveYear(m.year)}
@@ -329,12 +349,12 @@ const MilestonesInteractive = () => {
           transition={{ duration: 0.25 }}
           className="space-y-3 h-full flex flex-col justify-center"
         >
-          <div className="text-xs font-bold uppercase tracking-[0.2em] text-amber-700">{active.year}</div>
-          <h3 className="text-2xl font-bold leading-tight text-slate-900">{active.title}</h3>
-          <p className="text-base text-slate-600 leading-relaxed">{active.desc}</p>
-          {active.highlights && active.highlights.length > 0 && (
+          <div className="text-xs font-bold uppercase tracking-[0.2em] text-amber-700">{active?.year}</div>
+          <h3 className="text-2xl font-bold leading-tight text-slate-900">{active?.title}</h3>
+          <p className="text-base text-slate-600 leading-relaxed">{active?.desc}</p>
+          {active?.highlights && active.highlights.length > 0 && (
             <ul className="text-sm text-slate-600 space-y-2 pl-4 list-disc">
-              {active.highlights.map((point) => (
+              {active.highlights.map((point: string) => (
                 <li key={point} className="leading-relaxed">
                   {point}
                 </li>
@@ -345,7 +365,7 @@ const MilestonesInteractive = () => {
 
         <div className="space-y-3">
           <motion.div
-            key={`${active.year}-${slideIdx}-image`}
+            key={`${active?.year}-${slideIdx}-image`}
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.25 }}
@@ -354,7 +374,7 @@ const MilestonesInteractive = () => {
             onMouseLeave={() => setPaused(false)}
             onClick={handleNextImage}
           >
-            <img src={currentImage ?? aboutTeam} alt={active.title} className="h-full w-full object-cover" />
+            <img src={currentImage ? (typeof currentImage === 'string' ? currentImage : urlFor(currentImage).url()) : aboutTeam} alt={active?.title} className="h-full w-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
           </motion.div>
 
@@ -378,8 +398,34 @@ const MilestonesInteractive = () => {
 };
 
 const About = () => {
-  const [selectedLeader, setSelectedLeader] = useState<string | null>(leadership[0]?.name ?? null);
+  const [data, setData] = useState<any>(null);
+  const [selectedLeader, setSelectedLeader] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    client.fetch(aboutQuery).then((res) => {
+      setData(res);
+      // Pre-select first leader if available
+      if (res?.leadership?.leadership?.length > 0) {
+        setSelectedLeader(res.leadership.leadership[0].name);
+      } else {
+        // Fallback or handle empty state
+        setSelectedLeader(leadership[0]?.name ?? null);
+      }
+    });
+  }, []);
+
+  // Hydrate local variables from Sanity data or fallbacks
+  const heroData = data?.hero;
+  const storyData = data?.story;
+  const visionData = data?.vision;
+  const missionData = data?.mission;
+  const leadershipData = data?.leadership?.leadership || leadership; // Fallback to hardcoded if empty
+  const evolutionData = data?.evolution?.evolutionJourney || milestones;
+  const cultureData = data?.culture;
+  const valuesData = data?.values;
+  const howWeWorkData = data?.howWeWork;
+  const teamBTSData = data?.teamBTS;
 
   const handleSelectLeader = (name: string) => {
     setSelectedLeader(name);
@@ -412,7 +458,7 @@ const About = () => {
       .map((part) => part[0]?.toUpperCase())
       .join("");
 
-  const selectedReports = leadership.find((person) => person.name === selectedLeader)?.reports ?? [];
+  const selectedReports = leadershipData.find((person: any) => person.name === selectedLeader)?.reports ?? [];
 
   return (
     <PageLayout>
@@ -429,18 +475,17 @@ const About = () => {
           <div className="enterprise-container relative z-20">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl">
               <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-                About Veldursen
+                {heroData?.badge || "About Veldursen"}
               </span>
               <h1 className="text-[2.25rem] xs:text-[2.75rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] font-bold text-amber-200 leading-[1.05] mb-6 md:mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
-                Software with <br className="hidden xs:block" />
-                <span className="text-amber-100">a human heartbeat.</span>
+                {heroData?.title || "Software with a human heartbeat."}
               </h1>
               <p className="text-base sm:text-lg md:text-xl text-slate-300 font-medium mb-8 md:mb-12 max-w-3xl leading-relaxed drop-shadow-md">
-                The Visionary Vibe: We are a remote-first team of product experts dedicated to replacing digital friction with focus. Whether you are a founder launching a dream or a large-scale enterprise reaching millions, we craft the dependable software that keeps you moving forward.
+                {heroData?.subtitle || "The Visionary Vibe: We are a remote-first team of product experts dedicated to replacing digital friction with focus. Whether you are a founder launching a dream or a large-scale enterprise reaching millions, we craft the dependable software that keeps you moving forward."}
               </p>
               <div className="flex flex-col sm:flex-row flex-wrap gap-4">
                 <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-4 sm:py-5 px-8 sm:px-12 text-base sm:text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20 w-full sm:w-auto text-center">
-                  Meet the team
+                  {heroData?.buttonText || "Meet the team"}
                 </Link>
                 <div className="flex items-center justify-center sm:justify-start gap-4 px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">
                   <Globe2 size={16} className="text-red-600 shadow-sm" /> Remote-first, worldwide
@@ -463,15 +508,15 @@ const About = () => {
           <div className="enterprise-container relative z-10">
             <div className="max-w-5xl mb-12">
               <motion.span initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="inline-block text-xs font-black uppercase tracking-[0.4em] text-green-600 mb-8 block bg-green-50 px-6 py-2 rounded-full border border-green-100 shadow-sm">
-                Our Story
+                {storyData?.badge || "Our Story"}
               </motion.span>
 
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 mb-3">
-                Building the Digital Future Since Day One
+                {storyData?.titlePrefix || "Building the Digital Future Since Day One"}
               </p>
 
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-[900] text-[#0f172a] leading-[1.1] tracking-tight">
-                {"Human software, crafted with care".split(" ").map((word, i) => (
+                {(storyData?.mainTitle || "Human software, crafted with care").split(" ").map((word: string, i: number) => (
                   <span key={`${word}-${i}`} className="inline-block overflow-hidden mr-[0.2em] pb-[0.1em]">
                     <motion.span
                       initial={{ y: "100%" }}
@@ -490,7 +535,7 @@ const About = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
               <div className="lg:col-span-7">
                 <div className="space-y-8">
-                  {story.map((text) => (
+                  {(storyData?.paragraphs || story).map((text: string) => (
                     <motion.div
                       key={text}
                       initial={{ opacity: 0.1, x: -30 }}
@@ -514,13 +559,13 @@ const About = () => {
                   transition={{ duration: 0.8 }}
                   className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium mt-6 border-l-4 border-red-500/70 pl-5 bg-red-50/50 rounded-xl py-5 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.2)]"
                 >
-                  At Veldursen, we measure our success by the silence of a system that just works and the confidence of the teams who use it. Technology will always evolve, but the need for honesty, reliability, and human care in how we build it never will. Whether you’re launching your first idea or managing a global platform, we’re here to ensure your digital future has a heartbeat.
+                  {storyData?.highlightBox || "At Veldursen, we measure our success by the silence of a system that just works and the confidence of the teams who use it. Technology will always evolve, but the need for honesty, reliability, and human care in how we build it never will. Whether you’re launching your first idea or managing a global platform, we’re here to ensure your digital future has a heartbeat."}
                 </motion.div>
               </div>
 
               <div className="lg:col-span-5 relative mt-8 lg:mt-4">
                 <div className="lg:sticky lg:top-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5 perspective-[2000px]">
-                  {stats.map((m, i) => (
+                  {(storyData?.stats || stats).map((m: any, i: number) => (
                     <motion.div
                       key={m.label}
                       initial={{ opacity: 0, rotateX: -45, z: -200, y: 150 }}
@@ -556,13 +601,13 @@ const About = () => {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <div className="relative">
-              <span className="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-6 block">The North Star</span>
+              <span className="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-6 block">{visionData?.badge || "The North Star"}</span>
               <motion.h2 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-2xl sm:text-3xl md:text-4xl font-[900] tracking-tighter text-[#0f172a] mb-8 md:mb-12">
-                Our <span className="text-blue-600">Vision.</span>
+                {visionData?.title || "Our Vision."}
               </motion.h2>
 
               <div className="space-y-6">
-                {vision.map((item, idx) => (
+                {(visionData?.points || vision).map((item: any, idx: number) => (
                   <motion.div key={item.title} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: idx * 0.1 }} className="flex gap-6 group">
                     <span className="text-slate-200 font-bold text-sm pt-1">0{idx + 1}</span>
                     <div>
@@ -578,7 +623,7 @@ const About = () => {
               <motion.div initial={{ opacity: 0, scale: 0.9, x: 20 }} whileInView={{ opacity: 1, scale: 1, x: 0 }} viewport={{ once: false, amount: 0.25 }} className="relative group cursor-pointer max-w-md mx-auto lg:mx-0">
                 <div className="absolute inset-0 bg-red-100/40 rounded-full blur-3xl -z-10 group-hover:bg-red-200/60 transition-colors duration-700 animate-pulse" />
                 <div className="relative overflow-hidden rounded-2xl group-hover:rounded-2xl aspect-square shadow-2xl shadow-red-200/50 border-4 border-white/50 backdrop-blur-sm transition-all duration-1000">
-                  <img src="/team/vis.jpg" alt="Veldursen team" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <img src={visionData?.image ? urlFor(visionData.image).url() : "/team/vis.jpg"} alt="Vision" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent p-8 flex flex-col justify-between">
                     <div className="text-white text-right self-end -rotate-3 group-hover:rotate-0 transition-transform duration-500">
                       <span className="block font-['Dancing_Script'] text-3xl md:text-4xl drop-shadow-md">Dharwin</span>
@@ -601,7 +646,7 @@ const About = () => {
               <motion.div initial={{ opacity: 0, scale: 0.9, x: -20 }} whileInView={{ opacity: 1, scale: 1, x: 0 }} viewport={{ once: false, amount: 0.25 }} className="relative group cursor-pointer max-w-md mx-auto lg:mx-0">
                 <div className="absolute inset-0 bg-slate-100/40 rounded-full blur-3xl -z-10 group-hover:bg-slate-200/60 transition-colors duration-700 animate-pulse" />
                 <div className="relative overflow-hidden rounded-2xl group-hover:rounded-2xl aspect-square shadow-2xl shadow-slate-200/50 border-4 border-white/50 backdrop-blur-sm transition-all duration-1000">
-                  <img src="/team/miss.jpg" alt="Veldursen culture" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <img src={missionData?.image ? urlFor(missionData.image).url() : "/team/miss.jpg"} alt="Mission" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent p-8 flex flex-col justify-between">
                     <div className="text-white text-right self-end -rotate-3 group-hover:rotate-0 transition-transform duration-500">
                       <span className="block font-['Dancing_Script'] text-3xl md:text-4xl drop-shadow-md">Innovation.</span>
@@ -615,13 +660,13 @@ const About = () => {
             </div>
 
             <div className="relative">
-              <span className="text-xs font-black uppercase tracking-[0.4em] text-red-600 mb-6 block">Driving Impact</span>
+              <span className="text-xs font-black uppercase tracking-[0.4em] text-red-600 mb-6 block">{missionData?.badge || "Driving Impact"}</span>
               <motion.h2 initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-2xl sm:text-3xl md:text-4xl font-[900] tracking-tighter text-[#0f172a] mb-8 md:mb-12" onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}>
-                Our <span className="text-red-600">Mission.</span>
+                {missionData?.title || "Our Mission."}
               </motion.h2>
 
               <div className="space-y-6">
-                {mission.map((item, idx) => (
+                {(missionData?.points || mission).map((item: any, idx: number) => (
                   <motion.div key={item.title} initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: idx * 0.1 }} className="flex gap-6 group">
                     <span className="text-slate-200 font-bold text-sm pt-1">0{idx + 6}</span>
                     <div>
@@ -654,7 +699,7 @@ const About = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-sm sm:max-w-none mx-auto">
-            {leadership.map((person, idx) => (
+            {leadershipData.map((person: any, idx: number) => (
               <motion.div
                 key={person.name}
                 initial={{ opacity: 0, y: 40 }}
@@ -682,7 +727,7 @@ const About = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="overflow-hidden h-full">
                   <motion.img
-                    src={person.image}
+                    src={person.image ? (typeof person.image === 'string' ? person.image : urlFor(person.image).url()) : founder1}
                     alt={`${person.name} - ${person.role}`}
                     className="h-full w-full object-cover"
                     initial={{ y: 32 }}
@@ -724,14 +769,14 @@ const About = () => {
             onTouchMove={(e) => e.stopPropagation()}
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-              {selectedReports.map((member) => (
+              {selectedReports.map((member: any) => (
                 <div
                   key={member.name}
                   className="rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_18px_50px_-24px_rgba(15,23,42,0.45)] hover:shadow-[0_22px_60px_-22px_rgba(15,23,42,0.5)] transition-shadow flex flex-col gap-4"
                 >
                   {member.photo ? (
                     <div className="w-full aspect-[4/3] rounded-xl overflow-hidden bg-slate-200 ring-2 ring-amber-200/70">
-                      <img src={member.photo} alt={member.name} className="h-full w-full object-cover" loading="lazy" />
+                      <img src={typeof member.photo === 'string' ? member.photo : urlFor(member.photo).url()} alt={member.name} className="h-full w-full object-cover" loading="lazy" />
                     </div>
                   ) : (
                     <div className="w-full aspect-[4/3] rounded-xl bg-gradient-to-br from-amber-200 to-amber-400 text-slate-900 font-bold flex items-center justify-center shadow-inner shadow-amber-900/10 ring-2 ring-amber-200/60 text-2xl">
@@ -768,7 +813,7 @@ const About = () => {
             <p className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-3xl font-medium">Tap a year to see the milestone story, photo, and what changed for our clients.</p>
           </div>
 
-          <MilestonesInteractive />
+          <MilestonesInteractive data={evolutionData} />
         </motion.div>
       </section>
 
@@ -780,16 +825,21 @@ const About = () => {
           className="enterprise-container grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
         >
           <div className="space-y-6">
-            <span className="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-6 block">Cultural Fabric</span>
+            <span className="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-6 block">{cultureData?.badge || "Cultural Fabric"}</span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-[900] leading-tight tracking-tighter mb-6 md:mb-8 italic">
-              The crew giving <span className="text-blue-600">VelDurSen Its Spark.</span>
+              {(cultureData?.title || "The crew giving VelDurSen Its Spark.").split("VelDurSen").map((part: string, i: number, arr: string[]) => (
+                <span key={i}>
+                  {part}
+                  {i < arr.length - 1 && <span className="text-blue-600">VelDurSen</span>}
+                </span>
+              ))}
             </h2>
             <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl">
-              Scenes from the teams you will collaborate with—strategy rooms, research park deep-dives, and the smiles that show up when hard problems finally click.
+              {cultureData?.desc || "Scenes from the teams you will collaborate with—strategy rooms, research park deep-dives, and the smiles that show up when hard problems finally click."}
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {teamHighlights.map((item) => (
+              {(cultureData?.teamHighlights || teamHighlights).map((item: any) => (
                 <motion.div
                   key={item.title}
                   initial={{ opacity: 0, y: 10 }}
@@ -811,120 +861,12 @@ const About = () => {
             </div>
           </div>
 
-          <TeamCarousel />
+          <TeamCarousel data={cultureData?.teamCarousel} />
         </motion.div>
       </section>
 
 
-      {/* Our Technology Section */}
-      <section className="py-12 md:py-20 bg-gradient-to-b from-slate-900 to-slate-800 relative overflow-hidden">
-        <motion.div
-          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#3b82f6' } }))}
-          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
-          viewport={{ margin: "-10% 0px -70% 0px" }}
-          className="enterprise-container relative z-10 max-w-5xl"
-        >
-          <div className="text-center mb-16">
-            <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} className="text-blue-400 font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">
-              Technology
-            </motion.span>
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl md:text-5xl font-[900] text-white mb-6">
-              Our <span className="text-blue-400">technology</span> foundations
-            </motion.h2>
-            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto font-medium">
-              Built on cutting-edge technologies that power enterprise-grade solutions.
-            </motion.p>
-          </div>
 
-          <ScrollStack
-            itemDistance={50}
-            itemScale={0.04}
-            itemStackDistance={20}
-            stackPosition="25%"
-            scaleEndPosition="15%"
-            baseScale={0.8}
-            useWindowScroll={true}
-          >
-            <ScrollStackItem>
-              <div className="h-full flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-yellow-500">Artificial Intelligence & Machine Learning</h3>
-                  <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
-                    Advanced AI algorithms and machine learning models that provide intelligent automation, predictive analytics, and data-driven decision making for enterprise applications.
-                  </p>
-                </div>
-                <div className="text-blue-400 font-semibold">AI/ML Stack</div>
-              </div>
-            </ScrollStackItem>
-
-            <ScrollStackItem>
-              <div className="h-full flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-yellow-500">Cloud & Infrastructure</h3>
-                  <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
-                    Scalable cloud-native architecture with microservices, containerization, and orchestration technologies that ensure reliability, performance, and cost efficiency.
-                  </p>
-                </div>
-                <div className="text-blue-400 font-semibold">Cloud Engineering</div>
-              </div>
-            </ScrollStackItem>
-
-            <ScrollStackItem>
-              <div className="h-full flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-yellow-500">Cybersecurity & Compliance</h3>
-                  <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
-                    Zero-trust security frameworks, threat detection, and compliance technologies that protect sensitive enterprise data and maintain regulatory standards.
-                  </p>
-                </div>
-                <div className="text-blue-400 font-semibold">Security First</div>
-              </div>
-            </ScrollStackItem>
-
-            <ScrollStackItem>
-              <div className="h-full flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-yellow-500">Data Engineering</h3>
-                  <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
-                    Modern data pipelines and analytics platforms that transform raw data into actionable insights, enabling informed business decisions at scale.
-                  </p>
-                </div>
-                <div className="text-blue-400 font-semibold">Data Operations</div>
-              </div>
-            </ScrollStackItem>
-
-            <ScrollStackItem>
-              <div className="h-full flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-yellow-500">Ethical Technology</h3>
-                  <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
-                    Sustainable practices, responsible AI, and ethical design principles that ensure our technology solutions align with societal values and environmental impact.
-                  </p>
-                </div>
-                <div className="flex justify-between items-end">
-                  <div className="text-blue-400 font-semibold">Sustainability</div>
-                  <a
-                    href="#principles-section"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const element = document.getElementById('principles-section');
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
-                    className="inline-flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-sm font-semibold rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/50"
-                  >
-                    <span>Explore Our Values</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </ScrollStackItem>
-          </ScrollStack>
-        </motion.div>
-      </section>
 
       <section className="py-12 md:py-16 bg-white relative overflow-hidden" id="principles-section">
         <motion.div
@@ -935,34 +877,40 @@ const About = () => {
         >
           <div className="text-center mb-16">
             <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} className="text-red-600 font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">
-              Core Values
+              {valuesData?.badge || "Core Values"}
             </motion.span>
             <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl md:text-5xl font-[900] text-[#0f172a] mb-6">
-              Principles that <span className="text-[#dc2626]">define us</span>
+              {(valuesData?.title || "Principles that define us").split("define us").map((part: string, i: number, arr: string[]) => (
+                <span key={i}>
+                  {part}
+                  {i < arr.length - 1 && <span className="text-[#dc2626]">define us</span>}
+                </span>
+              ))}
             </motion.h2>
             <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium">
-              The values that guide every decision, every system we build, and every relationship we nurture across our global organization.
+              {valuesData?.desc || "The values that guide every decision, every system we build, and every relationship we nurture across our global organization."}
             </motion.p>
           </div>
 
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="relative rounded-3xl overflow-hidden mb-12 group">
             <div className="absolute inset-0 z-0">
-              <img src={aboutTeam} alt="Teams in action" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <img src={valuesData?.highlightImage ? urlFor(valuesData.highlightImage).url() : aboutTeam} alt="Teams in action" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/75 transition-colors group-hover:bg-black/70" />
               <div className="absolute inset-0 border-[6px] border-red-500/30 rounded-3xl m-3 pointer-events-none" />
             </div>
 
             <div className="relative z-10 p-6 sm:p-8 md:p-16 max-w-3xl drop-shadow-2xl">
-              <span className="text-white/80 font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">Values in action</span>
-              <h3 className="text-3xl md:text-4xl font-bold text-sky-200 mb-6 leading-tight">Where strategy, security, and sustainability meet disciplined delivery</h3>
+              <span className="text-white/80 font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">{valuesData?.highlightBadge || "Values in action"}</span>
+              <h3 className="text-3xl md:text-4xl font-bold text-sky-200 mb-6 leading-tight">{valuesData?.highlightTitle || "Where strategy, security, and sustainability meet disciplined delivery"}</h3>
               <p className="text-lg md:text-xl text-sky-100 font-medium leading-relaxed max-w-2xl">
-                A glimpse into the teams that live these principles daily--architecting resilient systems, protecting trust, and driving innovation for enterprises around the world.
+                {valuesData?.highlightDesc || "A glimpse into the teams that live these principles daily--architecting resilient systems, protecting trust, and driving innovation for enterprises around the world."}
               </p>
             </div>
           </motion.div>
 
+          {/* Note: Icons handling might need a map if they are dynamic string names from Sanity, providing fallback/map here is complex without knowing icon names. Assuming hardcoded icons for now or we map them based on title if needed. For now using existing map with potentially overwritten text. */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {coreValues.map((v, i) => (
+            {(valuesData?.values || coreValues).map((v: any, i: number) => (
               <motion.div
                 key={v.title}
                 initial={{ opacity: 0, y: 30 }}
@@ -980,7 +928,8 @@ const About = () => {
                 <div className="relative z-10 flex flex-col h-full">
                   <div className="mb-6 relative">
                     <div className="w-12 h-12 rounded-xl bg-sky-600 flex items-center justify-center -rotate-6 group-hover:rotate-0 transition-transform duration-500 shadow-lg shadow-sky-600/20 relative z-10">
-                      <v.icon className="text-white" size={22} />
+                      {/* Icon mapping strategy or fallback to Shield for dynamic content if icon not present */}
+                      <Shield className="text-white" size={22} />
                     </div>
                     <div className="absolute inset-0 w-12 h-12 rounded-xl bg-sky-100 -rotate-12 group-hover:-rotate-6 transition-transform duration-500" />
                   </div>
@@ -1012,15 +961,19 @@ const About = () => {
         >
           <div className="text-center mb-10">
             <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl md:text-5xl font-[900] text-[#0f172a] mb-4 tracking-tighter">
-              The values that <br className="hidden md:block" />
-              <span className="text-[#dc2626]">guide how we work.</span>
+              {(howWeWorkData?.title || "The values that guide how we work.").split("guide how we work.").map((part: string, i: number, arr: string[]) => (
+                <span key={i}>
+                  {part}
+                  {i < arr.length - 1 && <span className="text-[#dc2626]">guide how we work.</span>}
+                </span>
+              ))}
             </motion.h2>
             <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-4xl mx-auto font-medium">
-              We want every interaction with Veldursen to feel clear, honest, and thoughtful--whether we are workshopping a product brief or deploying code at midnight.
+              {howWeWorkData?.desc || "We want every interaction with Veldursen to feel clear, honest, and thoughtful--whether we are workshopping a product brief or deploying code at midnight."}
             </motion.p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 max-w-6xl mx-auto">
-            {valuesPoints.map((value, i) => (
+            {(howWeWorkData?.points || valuesPoints).map((value: any, i: number) => (
               <motion.div key={value.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: i * 0.1 }} className="flex gap-4 group">
                 <div className="shrink-0 pt-1">
                   <CheckCircle className="text-red-600 w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
@@ -1043,19 +996,24 @@ const About = () => {
         >
           <div className="enterprise-container mb-16 text-center">
             <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl md:text-5xl font-[900] text-[#0f172a] mb-6 tracking-tight">
-              Team behind the <span className="text-[#dc2626]">scene</span>
+              {(teamBTSData?.title || "Team behind the scene").split("scene").map((part: string, i: number, arr: string[]) => (
+                <span key={i}>
+                  {part}
+                  {i < arr.length - 1 && <span className="text-[#dc2626]">scene</span>}
+                </span>
+              ))}
             </motion.h2>
             <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-              Explore how we have helped companies turn ideas into digital products that convert, scale, and grow.
+              {teamBTSData?.desc || "Explore how we have helped companies turn ideas into digital products that convert, scale, and grow."}
             </motion.p>
           </div>
 
           <div className="relative flex flex-col gap-6 overflow-hidden">
             <div className="flex w-full overflow-hidden">
               <motion.div animate={{ x: [0, -1920] }} transition={{ duration: 50, repeat: Infinity, ease: "linear" }} className="flex gap-6 shrink-0">
-                {[blog1, blog2, blog3, blog4, blog5, blog6, blog7, blog8, blog9, blog10, blog1, blog2, blog3, blog4].map((img, i) => (
+                {(teamBTSData?.images || [blog1, blog2, blog3, blog4, blog5, blog6, blog7, blog8, blog9, blog10, blog1, blog2, blog3, blog4]).map((img: any, i: number) => (
                   <div key={`row1-${i}`} className="w-[320px] h-[220px] bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 shrink-0 shadow-sm transition-shadow duration-500 hover:shadow-xl">
-                    <img src={img} alt="Veldursen work" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" />
+                    <img src={typeof img === 'string' ? img : urlFor(img).url()} alt="Veldursen work" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" />
                   </div>
                 ))}
               </motion.div>
@@ -1063,9 +1021,9 @@ const About = () => {
 
             <div className="flex w-full overflow-hidden">
               <motion.div animate={{ x: [-1920, 0] }} transition={{ duration: 55, repeat: Infinity, ease: "linear" }} className="flex gap-6 shrink-0">
-                {[blog5, blog6, blog7, blog8, blog9, blog10, blog1, blog2, blog3, blog4, blog5, blog6, blog7, blog8].map((img, i) => (
+                {(teamBTSData?.images || [blog5, blog6, blog7, blog8, blog9, blog10, blog1, blog2, blog3, blog4, blog5, blog6, blog7, blog8]).map((img: any, i: number) => (
                   <div key={`row2-${i}`} className="w-[320px] h-[220px] bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 shrink-0 shadow-sm transition-shadow duration-500 hover:shadow-xl">
-                    <img src={img} alt="Veldursen culture" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" />
+                    <img src={typeof img === 'string' ? img : urlFor(img).url()} alt="Veldursen culture" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" />
                   </div>
                 ))}
               </motion.div>

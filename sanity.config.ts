@@ -84,8 +84,23 @@ export default defineConfig({
                                     ])
                             ),
                         S.listItem()
-                            .title('About Us')
-                            .child(S.document().schemaType('aboutPage').documentId('about')),
+                            .title('About Page Content')
+                            .child(
+                                S.list()
+                                    .title('Sections')
+                                    .items([
+                                        S.listItem().title('01. Hero').child(S.document().schemaType('aboutSection1').documentId('aboutSection1')),
+                                        S.listItem().title('02. Our Story').child(S.document().schemaType('aboutSection2').documentId('aboutSection2')),
+                                        S.listItem().title('03. Vision').child(S.document().schemaType('aboutSection3').documentId('aboutSection3')),
+                                        S.listItem().title('04. Mission').child(S.document().schemaType('aboutSection4').documentId('aboutSection4')),
+                                        S.listItem().title('05. Leadership').child(S.document().schemaType('aboutSection5').documentId('aboutSection5')),
+                                        S.listItem().title('06. Evolution').child(S.document().schemaType('aboutSection6').documentId('aboutSection6')),
+                                        S.listItem().title('07. Cultural Fabric').child(S.document().schemaType('aboutSection7').documentId('aboutSection7')),
+                                        S.listItem().title('08. Core Values').child(S.document().schemaType('aboutSection8').documentId('aboutSection8')),
+                                        S.listItem().title('09. How We Work').child(S.document().schemaType('aboutSection9').documentId('aboutSection9')),
+                                        S.listItem().title('10. Team BTS').child(S.document().schemaType('aboutSection10').documentId('aboutSection10')),
+                                    ])
+                            ),
                         S.listItem()
                             .title('What We Do')
                             .child(S.document().schemaType('whatWeDoPage').documentId('whatWeDo')),

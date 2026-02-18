@@ -1,15 +1,7 @@
 
 import { defineField, defineType } from 'sanity'
 
-export const aboutPage = defineType({
-    name: 'aboutPage',
-    title: 'About Us Page',
-    type: 'document',
-    fields: [
-        defineField({ name: 'title', title: 'Page Title', type: 'string', initialValue: 'About Us', readOnly: true }),
-        defineField({ name: 'hero', title: 'Hero Section', type: 'hero' }),
-    ],
-})
+
 
 export const whatWeDoPage = defineType({
     name: 'whatWeDoPage',

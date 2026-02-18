@@ -19,7 +19,8 @@ import DomeGallery from "@/components/DomeGallery";
 import { SEO } from "@/components/shared/SEO";
 import GlareHover from "@/components/shared/GlareHover";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from "@/data/schemas";
-
+import { client } from "@/lib/sanity";
+import RenderSections from "@/components/RenderSections";
 import heroBg from "@/assets/hero-bg.jpg";
 import aboutTeam from "@/assets/coptercode3.png.jpeg";
 import aboutImage1 from "@/assets/coptercode1.png.jpeg";
@@ -444,6 +445,8 @@ const secondaryMetrics = [
   { value: "100%", label: "Compliance Record" },
   { value: "3,500+", label: "Engineers Worldwide" },
 ];
+
+
 
 // Global Operations Section Component
 const GlobalOperationsSection = () => (
@@ -1089,6 +1092,41 @@ const Index = () => {
       scrollToElement(location.state.scrollTo);
     }
   }, [location]);
+
+  const [sanityData, setSanityData] = useState<any>(null);
+
+  useEffect(() => {
+    const query = '*[_type == "homePage"][0]';
+    client.fetch(query).then((data) => {
+      if (data) {
+        const sections = [
+          data.hero,
+          data.globalOperations,
+          data.professionalAssistance,
+          data.whatWeAreUpto,
+          data.founders,
+          data.timeline,
+          data.deliveredOutcomes
+        ].filter(Boolean);
+        setSanityData({ ...data, sections });
+      }
+    }).catch(console.error);
+  }, []);
+
+
+  if (sanityData && sanityData.sections && sanityData.sections.length > 0) {
+    return (
+      <PageLayout>
+        <SEO
+          title={sanityData.title || "VelDurSen | Enterprise Technology Solutions"}
+          description="VelDurSen empowers global enterprises with AI-driven innovation, cloud-native architectures, and mission-critical software solutions."
+          keywords={["Enterprise AI", "Cloud Engineering", "Digital Transformation", "Cybersecurity", "VelDurSen"]}
+          schemas={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA]}
+        />
+        <RenderSections sections={sanityData.sections} />
+      </PageLayout>
+    )
+  }
 
   return (
     <PageLayout>

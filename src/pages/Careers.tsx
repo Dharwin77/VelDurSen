@@ -11,6 +11,8 @@ import PageLayout from "@/components/layout/PageLayout";
 import WhyChooseUsCards from "@/components/WhyChooseUsCards";
 import { SEO } from "@/components/shared/SEO";
 import careerVideo from "@/assets/career.mp4";
+import { client } from "@/lib/sanity";
+import RenderSections from "@/components/RenderSections";
 
 const allJobs = [
   { id: 1, role: "Senior AI/ML Engineer", department: "Engineering", location: "Remote – Global", type: "Full-time", description: "Design and implement cutting-edge AI models for enterprise scale." },
@@ -73,6 +75,37 @@ const AnimatedCounter = ({ end, duration = 2000, suffix = "" }: { end: number; d
 };
 
 const Careers = () => {
+  const [sanityData, setSanityData] = useState<any>(null);
+
+  useEffect(() => {
+    const query = '*[_type == "careersPage"][0]';
+    client.fetch(query).then((data) => {
+      if (data) {
+        // Construct sections array from fixed fields
+        const sections = [
+          data.hero,
+          data.culture,
+          data.careersList,
+          data.faq,
+          data.testimonials
+        ].filter(Boolean);
+
+        setSanityData({ ...data, sections });
+      }
+    }).catch(console.error);
+  }, []);
+
+  if (sanityData && sanityData.sections && sanityData.sections.length > 0) {
+    return (
+      <PageLayout>
+        <SEO
+          title={sanityData.title ? `${sanityData.title} | VelDurSen Careers` : "Careers | VelDurSen"}
+          description="Join our global team of innovators."
+        />
+        <RenderSections sections={sanityData.sections} />
+      </PageLayout>
+    )
+  }
   const [searchTerm, setSearchTerm] = useState("");
   const [departmentFilter, setDepartmentFilter] = useState("All");
   const [locationFilter, setLocationFilter] = useState("All");
@@ -138,6 +171,8 @@ const Careers = () => {
     { name: "Alex Rivera", role: "Senior Engineer", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=800&fit=crop", schedule: ["9:00 AM - Stand-up", "10:00 AM - Code Review", "2:00 PM - Architecture Planning", "4:00 PM - Mentoring"], tools: ["VS Code", "Docker", "Kubernetes"], journey: "Junior Dev → Senior in 3 years" },
     { name: "Maya Patel", role: "Product Designer", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=800&fit=crop", schedule: ["9:30 AM - Design Critique", "11:00 AM - User Research", "1:00 PM - Prototyping", "3:30 PM - Team Sync"], tools: ["Figma", "Miro", "Notion"], journey: "Intern → Lead Designer in 4 years" },
   ];
+
+
 
   return (
     <PageLayout>

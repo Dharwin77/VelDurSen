@@ -250,7 +250,6 @@ const milestones = [
     images: [blog7, blog10, aboutImage2],
   },
 ];
-
 const valuesPoints = [
   {
     title: "Build with people in mind",
@@ -258,7 +257,7 @@ const valuesPoints = [
   },
   {
     title: "Keep promises small and steady",
-    desc: "We prefer honest timelines, transparent tradeoffs, and iterative releases over heroic crunches.",
+    desc: "We prefer honest timelines, transparent tradeoffs, and iterative releases over ilic crunches.",
   },
   {
     title: "Stay curious",

@@ -14,6 +14,8 @@ import { whatWeAreUpto } from './sections/whatWeAreUpto'
 import { timeline } from './sections/timeline'
 import { deliveredOutcomes } from './sections/deliveredOutcomes'
 import { professionalAssistance } from './sections/professionalAssistance'
+import * as homeSections from './homeSections'
+
 import { homePage } from './homePage'
 import { careersPage } from './careersPage'
 import { aboutPage, whatWeDoPage, contactPage, blogPage } from './otherPages'
@@ -41,4 +43,5 @@ export const schemaTypes = [
     timeline,
     deliveredOutcomes,
     professionalAssistance,
+    ...Object.values(homeSections),
 ]

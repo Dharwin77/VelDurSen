@@ -1,0 +1,258 @@
+
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const seedPath = path.join(__dirname, '../sanity/data/seed.json');
+
+// Hardcoded content from Index.tsx
+const homeHero = {
+    _id: 'homeHero',
+    _type: 'homeHero',
+    title: 'Home Hero',
+    heading: 'VelDurSen Digital Transformation.',
+    subheading: 'Global Enterprise Technology Partner',
+    description: 'We architect intelligent, secure, and sustainable enterprise ecosystems that power mission-critical operations across industries worldwide.',
+    ctaButtons: [
+        { _key: 'btn1', label: 'Talk to Experts', link: '/contact' }
+    ]
+};
+
+const homeSection1 = {
+    _id: 'homeSection1',
+    _type: 'homeSection1',
+    title: 'Home Section 1 (Ticker)',
+    items: [
+        { _key: '1', text: 'Next-Gen Technology Stack: AI, Cloud & Modern Ops', link: '/services', icon: 'Code' },
+        { _key: '2', text: 'Best Enterprise AI Innovation Award', link: '/', icon: 'Trophy' },
+        { _key: '3', text: 'Empowering Industries: Finance, Healthcare, Retail & Manufacturing', link: '/services', icon: 'Factory' },
+        { _key: '4', text: 'Global Technology Internship Program 2026', link: '/internships', icon: 'GraduationCap' },
+        { _key: '5', text: 'Start Your Transformation Journey - Contact Us Today', link: '/contact', icon: 'Mail' }
+    ]
+};
+
+const homeSection2 = {
+    _id: 'homeSection2',
+    _type: 'homeSection2',
+    title: 'Home Section 2 (Global Network)',
+    heading: 'Global Delivery Network',
+    subheading: 'Connectivity',
+    // Image would need asset reference
+};
+
+const homeSection3 = {
+    _id: 'homeSection3',
+    _type: 'homeSection3',
+    title: 'Home Section 3 (Our Story)',
+    heading: 'Your Trusted Partner in Enterprise Transformation',
+    subheading: 'Our Story',
+    content: [
+        { _key: '1', _type: 'text', text: "VelDurSen is a global Enterprise Technology & Digital Transformation company specializing in AI-first, security-first, and sustainability-driven solutions for the world's most demanding enterprises." },
+        { _key: '2', _type: 'text', text: "With operations spanning multiple continents and regional delivery centers worldwide, we deliver cutting-edge technology solutions that help organizations achieve their digital transformation goals while maintaining the highest standards of security, scalability, and sustainability." }
+    ],
+    ctaText: 'Learn More About Us',
+    ctaLink: '/about'
+};
+
+const homeSection4 = {
+    _id: 'homeSection4',
+    _type: 'homeSection4',
+    title: 'Home Section 4 (Strategic Talent)',
+    heading: 'Strategic Global Talent on Demand',
+    subheading: 'We enable you to onboard specialized talent within 15 days (90% success rate)',
+    description: 'Our dedicated recruitment consultants bridge the gap between niche technology requirements and top-tier global talent. By combining deep domain expertise across critical industry verticals with architectural foresight, we ensure every placement is a perfect technical and cultural fit for your mission-critical operations.'
+};
+
+const homeSection5 = {
+    _id: 'homeSection5',
+    _type: 'homeSection5',
+    title: 'Home Section 5 (Partners)',
+    heading: 'Trusted by Industry Leaders Worldwide',
+    // logos need assets
+};
+
+const homeSection6 = {
+    _id: 'homeSection6',
+    _type: 'homeSection6',
+    title: 'Home Section 6 (Highlights)',
+    heading: 'What we are upto',
+    stats: [
+        { _key: '1', label: "GLOBAL ENTERPRISE CLIENTS", value: "500+", percentage: 85 },
+        { _key: '2', label: "YEARS OF TECHNOLOGY EXCELLENCE", value: "10+", percentage: 90 },
+        { _key: '3', label: "DIGITAL TRANSFORMATIONS DELIVERED", value: "1000+", percentage: 95 },
+        { _key: '4', label: "CLOUD-NATIVE ARCHITECTURES", value: "1000+", percentage: 80 },
+        { _key: '5', label: "AI & INTELLIGENT SYSTEMS", value: "500+", percentage: 75 },
+        { _key: '6', label: "STARTUP GROWTH PARTNERSHIPS", value: "100+", percentage: 60 }
+    ]
+};
+
+const homeSection7 = {
+    _id: 'homeSection7',
+    _type: 'homeSection7',
+    heading: 'What we provide.',
+    tabs: [
+        {
+            _key: 'candidate',
+            tabLabel: 'You as a Candidate',
+            benefits: [
+                "Get suggestions and advice from our search consultants/recruiters on your career path",
+                "Get career directions from us",
+                "Get right-fit positions/career opportunities",
+                "Your profile would get positioned appropriately with our global customers",
+                "Get suggestion & advice on compensation & benefits"
+            ]
+        },
+        {
+            _key: 'client',
+            tabLabel: 'You as a Client',
+            benefits: [
+                "Get dedicated support in fulfilling your human resource needs",
+                "Get a partner who has expertise in identifying candidates in many niche segments",
+                "Get a partner who has a global network of middle & senior-level technology professionals",
+                "Get an account manager who understands your business language & delivers on-time"
+            ]
+        }
+    ]
+};
+
+const homeSection8 = {
+    _id: 'homeSection8',
+    _type: 'homeSection8',
+    heading: 'Our Achievements.',
+    subheading: 'Excellence Benchmarks',
+    text: [
+        { _key: '1', _type: 'text', text: "VelDurSen’s achievements represent a decade of relentless engineering innovation and architectural integrity. We have successfully deployed mission-critical systems across 150+ countries, earning over 50 global awards for our pioneering work in AI safety and cloud resilience." }
+    ]
+};
+
+const homeSection9 = {
+    _id: 'homeSection9',
+    _type: 'homeSection9',
+    achievements: [
+        { _key: '1', category: 'Artificial Intelligence Innovation', title: 'Global Enterprise AI Excellence Award', venue: 'International Tech Summit', date: '2025' },
+        { _key: '2', category: 'Multi-Cloud Infrastructure Excellence', title: 'Cloud Transformation Leadership Trophy', venue: 'Global Cloud Expo', date: '2024' },
+        { _key: '3', category: 'Zero-Trust Security Framework', title: 'Cybersecurity Innovation Recognition', venue: 'World Cyber Defense Forum', date: '2024' },
+        { _key: '4', category: 'Green Computing & Ethical AI', title: 'Sustainable Technology Impact Award', venue: 'Global Sustainability Tech Forum', date: '2025' },
+        { _key: '5', category: 'Smart Manufacturing Solutions', title: 'Industry 4.0 Digital Transformation Award', venue: 'International Industry Innovation Expo', date: '2023' },
+        { _key: '6', category: 'Precision Agriculture & AI Analytics', title: 'Global AgriTech Innovation Award', venue: 'World AgriTech Summit', date: '2024' }
+    ]
+};
+
+const homeSection10 = {
+    _id: 'homeSection10',
+    _type: 'homeSection10',
+    heading: 'Our Growth Trajectory.',
+    subheading: 'Consistent performance and measurable impact year over year.',
+    metrics: [
+        { _key: '1', label: "Increase Client ROI", value: "300%", icon: "TrendingUp" },
+        { _key: '2', label: "Revenue Growth", value: "150%", icon: "BarChart3" },
+        { _key: '3', label: "Special Projects Delivered", value: "2500+", icon: "Briefcase" },
+        { _key: '4', label: "Best IT Service Company", value: "2026", icon: "Building2" },
+        { _key: '5', label: "Industry Awards Won", value: "50+", icon: "Award" }
+    ]
+};
+
+const homeSection11 = {
+    _id: 'homeSection11',
+    _type: 'homeSection11',
+    heading: 'Global Deployment Milestones.',
+    intro: 'Enterprise achievements in scale, reliability, and transformation. We deliver large-scale platforms that power mission-critical operations globally.',
+    cards: [
+        { _key: '1', title: 'Large-Scale Enterprise Platforms', description: 'Successfully delivered large-scale enterprise platforms across multiple regions.', items: ['Multi-region deployments', 'Continuous operations'] },
+        { _key: '2', title: 'Legacy to Digital Transformation', description: 'Transformed complex legacy environments into high-performance digital ecosystems.', items: ['Modernized complex legacy environments', 'High-performance digital ecosystems'] },
+        { _key: '3', title: 'Enterprise Uptime Excellence', description: 'Engineered and operated highly available enterprise systems.', items: ['Engineered highly available systems', 'Consistent uptime'] },
+        { _key: '4', title: 'Regulated Industry Excellence', description: 'Enabled enterprise-wide security modernization programs.', items: ['Enterprise-wide security', 'Aligned with regulatory frameworks'] },
+        { _key: '5', title: 'Multi-Year Enterprise Initiatives', description: 'Led multi-year enterprise transformation initiatives.', items: ['Led multi-year initiatives', 'Cloud migration'] },
+        { _key: '6', title: 'Global Technology Leadership', description: 'Acknowledged across global technology forums.', items: ['Acknowledged across forums', 'Contributions to AI safety'] }
+    ]
+};
+
+const homeSection12 = {
+    _id: 'homeSection12',
+    _type: 'homeSection12',
+    milestones: [
+        { _key: '1', year: "2018", title: "Foundation of VelDurSen", desc: "VelDurSen was established with a vision to build secure, scalable, and AI-driven enterprise technology solutions." },
+        { _key: '2', year: "2019", title: "Enterprise Software Expansion", desc: "Expanded into custom ERP & CRM systems and scalable web platforms." },
+        { _key: '3', year: "2020", title: "Cloud & DevOps Integration", desc: "Introduced cloud-native engineering: Multi-cloud architecture, CI/CD pipelines." },
+        { _key: '4', year: "2021", title: "Cybersecurity & Compliance", desc: "Launched a dedicated cybersecurity vertical. Implemented Zero-trust frameworks." },
+        { _key: '5', year: "2022", title: "AI & Data Engineering Adoption", desc: "Transitioned into an AI-first company. Introduced Generative AI solutions." },
+        { _key: '6', year: "2023", title: "Industry-Wise Specialization", desc: "Expanded into Healthcare, FinTech, Manufacturing, Retail, Smart Cities." },
+        { _key: '7', year: "2024", title: "Global Delivery & Workforce Growth", desc: "Expanded operations internationally with multi-region project execution." },
+        { _key: '8', year: "2025", title: "Sustainable & Future-Ready Innovation", desc: "Integrated sustainability into transformation. Focused on carbon-aware cloud systems." }
+    ]
+};
+
+const homeSection13 = {
+    _id: 'homeSection13',
+    _type: 'homeSection13',
+    heading: 'Enterprise Solutions That Deliver Outcomes.',
+    caseStudies: [
+        { _key: '1', title: 'FinGuard Core', description: 'AI-powered banking core processing millions of transactions.', stat1: '99.9%', stat2: '40%' },
+        { _key: '2', title: 'MediSync Pro', description: 'Telehealth platform connecting patients with specialists.', stat1: '300%', stat2: '15m' },
+        { _key: '3', title: 'LogiChain AI', description: 'Predictive AI optimizing global fleet routes.', stat1: '25%', stat2: 'Real-time' },
+        { _key: '4', title: 'RetailFlow', description: 'Omni-channel platform unifying online and offline customer data.', stat1: '40%', stat2: '2x' }
+    ]
+};
+
+// Sections 14-19
+const homeSection14 = { _id: 'homeSection14', _type: 'homeSection14', heading: 'Enterprise CRM & Product Engineering', subheading: 'Purpose-built CRM platforms engineered for scale, intelligence, and measurable growth.', description: 'At VelDurSen, we don’t simply deploy CRM software — we architect intelligent ecosystems.', features: ["Multi-region revenue operations", "High-volume customer engagement", "Automated cross-functional workflows"] };
+const homeSection15 = { _id: 'homeSection15', _type: 'homeSection15', heading: 'Expertise', description: 'Deep domain expertise across critical industry verticals.' };
+const homeSection16 = { _id: 'homeSection16', _type: 'homeSection16', heading: 'Intelligent Automation', features: ["AI-Driven Processes", "Robotic Process Automation"] };
+const homeSection17 = { _id: 'homeSection17', _type: 'homeSection17', heading: 'Why Choose VelDurSen', reasons: ["Global Scale", "Security First", "AI Native"] };
+const homeSection18 = { _id: 'homeSection18', _type: 'homeSection18', heading: 'Sector Expertise', sectors: ["Healthcare", "Finance", "Retail", "Manufacturing"] };
+const homeSection19 = { _id: 'homeSection19', _type: 'homeSection19', heading: 'Innovation', steps: ["Blueprinting", "Microservices", "Secure DevOps"] };
+
+// Sections 20-35
+const homeSection20 = {
+    _id: 'homeSection20',
+    _type: 'homeSection20',
+    title: 'Home Section 20 (Product Engineering)',
+    heading: 'Product Engineering & SaaS Development',
+    subheading: 'Product Focus',
+    description: 'VelDurSen builds digital products with long-term architecture in mind. We don’t just ship features — we design scalable SaaS ecosystems.',
+    features: ["Product Discovery", "Scalable Development", "Performance Optimization", "System Architecture", "Security Validation", "Continuous Enhancement"]
+};
+
+const homeSection21 = { _id: 'homeSection21', _type: 'homeSection21', title: 'Home Section 21 (CRM Use Cases)', heading: 'Premium CRM Solutions', description: 'End-to-end CRM development tailored to your industry.' };
+const homeSection22 = { _id: 'homeSection22', _type: 'homeSection22', title: 'Home Section 22 (Intelligent Automation)', heading: 'Intelligent Automation & Digital Transformation' };
+const homeSection23 = { _id: 'homeSection23', _type: 'homeSection23', title: 'Home Section 23 (Why Choose)', heading: 'Why Enterprises Choose VelDurSen', reasons: ["Architecture-first", "Security-first", "Cloud-native"] };
+const homeSection24 = { _id: 'homeSection24', _type: 'homeSection24', title: 'Home Section 24 (Accelerators)', heading: 'Industry-Specific CRM Accelerators' };
+const homeSection25 = { _id: 'homeSection25', _type: 'homeSection25', title: 'Home Section 25 (Innovation Framework)', heading: 'Enterprise Product Innovation Framework' };
+const homeSection26 = {
+    _id: 'homeSection26',
+    _type: 'homeSection26',
+    title: 'Home Section 26 (Founders)',
+    heading: 'Meet the Minds Behind VelDurSen',
+    founders: [
+        { name: "John Doe", role: "CEO", bio: "Visionary leader with 20 years of experience.", _key: "founder1" },
+        { name: "Jane Smith", role: "CTO", bio: "Tech innovator leading our AI initiatives.", _key: "founder2" },
+        { name: "Robert Johnson", role: "COO", bio: "Operations expert ensuring global scale.", _key: "founder3" }
+    ]
+};
+const homeSection27 = { _id: 'homeSection27', _type: 'homeSection27', title: 'Home Section 27 (Dome Gallery)', heading: 'Gallery' };
+const homeSection28 = { _id: 'homeSection28', _type: 'homeSection28', title: 'Home Section 28 (Professional Assistance)', heading: 'Give your business the Professional Assistance' };
+const homeSection29 = { _id: 'homeSection29', _type: 'homeSection29', title: 'Home Section 29 (Video)', caption: 'See it in action' };
+const homeSection30 = { _id: 'homeSection30', _type: 'homeSection30', title: 'Home Section 30 (Testimonials)', heading: 'Hear From Our Team' };
+const homeSection31 = { _id: 'homeSection31', _type: 'homeSection31', title: 'Home Section 31 (Global Operations)', heading: 'Worldwide Presence, Local Expertise' };
+const homeSection32 = { _id: 'homeSection32', _type: 'homeSection32', title: 'Home Section 32 (FAQ)', heading: 'Frequently Asked Questions' };
+const homeSection33 = { _id: 'homeSection33', _type: 'homeSection33', title: 'Home Section 33 (Culture)', heading: 'Our Culture' };
+const homeSection34 = { _id: 'homeSection34', _type: 'homeSection34', title: 'Home Section 34 (Careers List)', heading: 'Careers' };
+const homeSection35 = { _id: 'homeSection35', _type: 'homeSection35', title: 'Home Section 35 (Blog List)', heading: 'Latest Insights' };
+
+const docs = [
+    homeHero, homeSection1, homeSection2, homeSection3, homeSection4, homeSection5,
+    homeSection6, homeSection7, homeSection8, homeSection9, homeSection10,
+    homeSection11, homeSection12, homeSection13, homeSection14, homeSection15,
+    homeSection16, homeSection17, homeSection18, homeSection19,
+    homeSection20, homeSection21, homeSection22, homeSection23, homeSection24,
+    homeSection25, homeSection26, homeSection27, homeSection28, homeSection29,
+    homeSection30, homeSection31, homeSection32, homeSection33, homeSection34, homeSection35
+];
+
+// Write as NDJSON (Newline Delimited JSON)
+const ndjson = docs.map(doc => JSON.stringify(doc)).join('\n');
+fs.writeFileSync(seedPath, ndjson);
+console.log('Generated 35 home section documents in seed.json (NDJSON format)');

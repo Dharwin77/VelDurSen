@@ -1,13 +1,11 @@
 import { motion } from "framer-motion";
 import GlareHover from "@/components/shared/GlareHover";
 import { urlFor } from "@/lib/sanity";
+import highlight1 from "@/assets/coptercode9.png.jpeg";
+import highlight2 from "@/assets/coptercode10.png.jpeg";
 
 interface Props {
-    data: {
-        heading?: string;
-        highlights?: { label: string; value: string; percentage: number }[];
-        images?: any[];
-    }
+    data: any
 }
 
 const rotateIn = {
@@ -21,18 +19,23 @@ const scaleUp = {
 };
 
 export default function WhatWeAreUpto({ data }: Props) {
-    const {
-        heading = "What we are upto",
-        highlights = [],
-        images = []
-    } = data || {};
+    const heading = data?.heading || "What we are upto";
 
-    // Fallback images if none provided in Sanity
-    // In a real scenario, we'd handle this better or require images in schema validation.
-    const image1Url = images[0] ? urlFor(images[0]).width(600).url() : "https://via.placeholder.com/600x400";
-    const image2Url = images[1] ? urlFor(images[1]).width(600).url() : "https://via.placeholder.com/600x400";
+    // Default highlights
+    const defaultHighlights = [
+        { label: "GLOBAL ENTERPRISE CLIENTS", value: "500+", percentage: 85 },
+        { label: "YEARS OF TECHNOLOGY EXCELLENCE", value: "10+", percentage: 90 },
+        { label: "DIGITAL TRANSFORMATIONS DELIVERED", value: "1000+", percentage: 95 },
+        { label: "CLOUD-NATIVE ARCHITECTURES", value: "1000+", percentage: 80 },
+        { label: "AI & INTELLIGENT SYSTEMS", value: "500+", percentage: 75 },
+        { label: "STARTUP GROWTH PARTNERSHIPS", value: "100+", percentage: 60 }
+    ];
 
-    if (!highlights.length) return null;
+    const highlights = data?.highlights?.length ? data.highlights : defaultHighlights;
+
+    // Images
+    const image1 = data?.images && data.images[0] ? urlFor(data.images[0]).url() : highlight1;
+    const image2 = data?.images && data.images[1] ? urlFor(data.images[1]).url() : highlight2;
 
     return (
         <section className="section-padding overflow-hidden bg-sky-50/30">
@@ -41,7 +44,16 @@ export default function WhatWeAreUpto({ data }: Props) {
 
                     {/* Images Column */}
                     <div className="relative">
+                        {/* Decorative background circle */}
+                        <div className="absolute -right-20 top-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-slate-50 rounded-full -z-10" />
+
                         <div className="relative z-10 grid grid-cols-4 md:grid-cols-12 gap-4 max-w-lg mx-auto lg:ml-0">
+                            {/* Decorative dots - top left */}
+                            <div className="absolute -top-10 -left-10 grid grid-cols-4 gap-2 opacity-20">
+                                {[...Array(16)].map((_, i) => (
+                                    <div key={i} className="w-1 h-1 bg-foreground rounded-full" />
+                                ))}
+                            </div>
 
                             {/* Main Image */}
                             <motion.div
@@ -54,7 +66,7 @@ export default function WhatWeAreUpto({ data }: Props) {
                                 <GlareHover glareOpacity={0.2} glareSize={500} className="rounded-2xl">
                                     <div className="rounded-2xl overflow-hidden shadow-2xl border-l-[12px] border-blue-600">
                                         <img
-                                            src={image1Url}
+                                            src={image1}
                                             alt="Innovation focus"
                                             className="w-full h-auto object-cover transition-transform duration-700 hover:scale-110"
                                         />
@@ -73,13 +85,22 @@ export default function WhatWeAreUpto({ data }: Props) {
                                 <GlareHover glareOpacity={0.25} glareSize={400} className="rounded-2xl">
                                     <div className="rounded-2xl overflow-hidden shadow-2xl border-b-[12px] border-blue-600 bg-white">
                                         <img
-                                            src={image2Url}
+                                            src={image2}
                                             alt="Strategic planning"
                                             className="w-full h-auto object-cover transition-transform duration-700 hover:scale-110"
                                         />
                                     </div>
                                 </GlareHover>
+                                {/* Decorative red square background */}
+                                <div className="absolute -bottom-6 -left-6 w-24 h-12 bg-blue-600 -z-10" />
                             </motion.div>
+                        </div>
+
+                        {/* Decorative dots - bottom right */}
+                        <div className="absolute -bottom-10 right-10 grid grid-cols-4 gap-2 opacity-20">
+                            {[...Array(16)].map((_, i) => (
+                                <div key={i} className="w-1 h-1 bg-foreground rounded-full" />
+                            ))}
                         </div>
                     </div>
 
@@ -98,7 +119,7 @@ export default function WhatWeAreUpto({ data }: Props) {
                         </motion.div>
 
                         <div className="space-y-8">
-                            {highlights.map((stat, index) => (
+                            {highlights.map((stat: any, index: number) => (
                                 <div key={index} className="space-y-2">
                                     <div className="flex justify-between items-end">
                                         <span className="text-[11px] font-bold tracking-wider text-slate-600 uppercase">{stat.label}</span>

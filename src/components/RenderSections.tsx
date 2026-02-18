@@ -1,7 +1,6 @@
-import Hero from './sections/Hero';
 import GlobalOperations from './sections/GlobalOperations';
-import Features from './sections/Features';
 import Testimonials from './sections/Testimonials';
+
 import Founders from './sections/Founders';
 import FAQ from './sections/FAQ';
 import Culture from './sections/Culture';
@@ -15,9 +14,7 @@ import React from 'react';
 
 // Map of Sanity _type to React Components
 const sectionComponents: { [key: string]: React.ComponentType<any> } = {
-    hero: Hero,
     globalOperations: GlobalOperations,
-    features: Features,
     testimonials: Testimonials,
     founders: Founders,
     faq: FAQ,

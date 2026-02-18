@@ -73,7 +73,5 @@ const transformed = data.map(doc => {
 // Filter out old "page" types if we are replacing them?
 // The map above replaces them.
 
-// Output as NDJSON (Newline Delimited JSON) for robust import
-const ndjson = transformed.map(doc => JSON.stringify(doc)).join('\n');
-fs.writeFileSync(seedPath, ndjson);
-console.log('Seed file transformed to NDJSON.');
+fs.writeFileSync(seedPath, JSON.stringify(transformed, null, 2));
+console.log('Seed file transformed.');

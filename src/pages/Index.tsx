@@ -21,6 +21,13 @@ import GlareHover from "@/components/shared/GlareHover";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from "@/data/schemas";
 import { client } from "@/lib/sanity";
 import RenderSections from "@/components/RenderSections";
+import OurStory from "@/components/sections/OurStory";
+import Hero from "@/components/sections/Hero";
+import GlobalOperations from "@/components/sections/GlobalOperations";
+import RapidSupport from "@/components/sections/RapidSupport";
+import TrustedPartners from "@/components/sections/TrustedPartners";
+import WhatWeAreUpto from "@/components/sections/WhatWeAreUpto";
+import WhatWeProvide from "@/components/sections/WhatWeProvide";
 import heroBg from "@/assets/hero-bg.jpg";
 import aboutTeam from "@/assets/coptercode3.png.jpeg";
 import aboutImage1 from "@/assets/coptercode1.png.jpeg";
@@ -110,50 +117,7 @@ const staggerContainer: Variants = {
   }
 };
 
-// Image Carousel Component
-const ImageCarousel = ({ images, interval = 4000 }: { images: string[]; interval?: number }) => {
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, interval);
-    return () => clearInterval(timer);
-  }, [images.length, interval]);
-
-  return (
-    <GlareHover glareOpacity={0.15} glareSize={400}>
-      <motion.div
-        whileHover={{ scale: 1.05 }}
-        transition={{ duration: 0.5 }}
-        className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl cursor-pointer"
-      >
-        {images.map((image, index) => (
-          <img
-            key={index}
-            src={image}
-            alt={`VelDurSen team ${index + 1}`}
-            className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ${index === currentIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'
-              }`}
-          />
-        ))}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentIndex
-                ? 'bg-white scale-125 shadow-lg'
-                : 'bg-white/50 hover:bg-white/70'
-                }`}
-            />
-          ))}
-        </div>
-      </motion.div>
-    </GlareHover>
-  );
-};
 
 // Testimonials Carousel Component
 const TestimonialsCarousel = () => {
@@ -448,516 +412,7 @@ const secondaryMetrics = [
 
 
 
-// Global Operations Section Component
-const GlobalOperationsSection = () => (
-  <section className="section-padding bg-gradient-to-b from-white to-slate-50/50">
-    <div className="enterprise-container">
-      <SectionHeader
-        tag="Global Operations"
-        title={<><span className="text-blue-600">Worldwide</span> Presence, Local Expertise</>}
-        subtitle="Operating across multiple continents with a follow-the-sun delivery model, serving global enterprises around the clock."
-      />
 
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false }}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
-      >
-        {globalMetrics.map((stat, i) => (
-          <motion.div
-            key={i}
-            variants={zoomIn}
-            className="group relative"
-          >
-            <GlareHover glareOpacity={0.12} glareSize={250} className="rounded-[2rem]">
-              <div className="text-center p-10 md:p-12 h-full rounded-[2rem] border border-slate-100 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(239,68,68,0.12)] hover:border-red-200 transition-all duration-700 group relative overflow-hidden">
-                {/* Subtle background glow on hover */}
-                <div className="absolute -right-4 -top-4 w-24 h-24 bg-red-500/5 rounded-full blur-3xl group-hover:bg-red-500/10 transition-colors" />
-
-                <div className="text-6xl md:text-7xl font-black text-red-600 mb-6 tracking-tighter group-hover:scale-110 transition-transform duration-700">
-                  <AnimatedCounter value={stat.value} />
-                </div>
-                <div className="text-xl md:text-2xl font-black text-slate-900 mb-3 tracking-tight">{stat.label}</div>
-                <div className="text-sm md:text-base font-bold text-slate-400 uppercase tracking-widest">{stat.sublabel}</div>
-              </div>
-            </GlareHover>
-          </motion.div>
-        ))}
-      </motion.div>
-    </div>
-  </section>
-);
-
-// What We Provide Section Component
-const WhatWeProvideSection = () => {
-  const [activeTab, setActiveTab] = useState<'candidate' | 'client'>('candidate');
-
-  const candidateContent = {
-    benefits: [
-      "Get suggestions and advice from our search consultants/recruiters on your career path",
-      "Get career directions from us",
-      "Get right-fit positions/career opportunities",
-      "Your profile would get positioned appropriately with our global customers, resulting in you getting the role/growth you have been looking for",
-      "Get suggestion & advice on compensation & benefits"
-    ],
-    image: img1
-  };
-
-  const clientContent = {
-    benefits: [
-      "Get dedicated support in fulfilling your human resource needs",
-      "Get a partner who has expertise in identifying candidates in many niche segments",
-      "Get a partner who has a global network of middle & senior-level technology professionals",
-      "Get an account manager who understands your business language & delivers on-time"
-    ],
-    image: img2
-  };
-
-  const currentContent = activeTab === 'candidate' ? candidateContent : clientContent;
-
-  return (
-    <div>
-      {/* Tab Buttons */}
-      <div className="flex gap-6 mb-10 border-b border-border">
-        <button
-          onClick={() => setActiveTab('candidate')}
-          className={`pb-3 px-2 text-base font-semibold transition-all relative ${activeTab === 'candidate'
-            ? 'text-blue-600'
-            : 'text-slate-600 hover:text-foreground'
-            }`}
-        >
-          You as a Candidate
-          {activeTab === 'candidate' && (
-            <motion.div
-              layoutId="activeTab"
-              className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
-              initial={false}
-              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-            />
-          )}
-        </button>
-        <button
-          onClick={() => setActiveTab('client')}
-          className={`pb-3 px-2 text-base font-semibold transition-all relative ${activeTab === 'client'
-            ? 'text-blue-600'
-            : 'text-slate-600 hover:text-foreground'
-            }`}
-        >
-          You as a Client
-          {activeTab === 'client' && (
-            <motion.div
-              layoutId="activeTab"
-              className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
-              initial={false}
-              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-            />
-          )}
-        </button>
-      </div>
-
-      {/* Content */}
-      <motion.div
-        key={activeTab}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
-      >
-        {/* Benefits List */}
-        <div className="space-y-5">
-          {currentContent.benefits.map((benefit, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="flex items-start gap-4"
-            >
-              <div className="mt-1 shrink-0 w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center">
-                <Check size={14} className="text-white stroke-[3px]" />
-              </div>
-              <p className="text-base text-foreground leading-relaxed">
-                {benefit}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4 }}
-          className="relative"
-        >
-          <GlareHover glareOpacity={0.2} glareSize={400} className="rounded-2xl">
-            <div className="relative flex items-center justify-center overflow-hidden rounded-2xl shadow-xl cursor-pointer">
-              <img
-                src={currentContent.image}
-                alt={activeTab === 'candidate' ? 'Career opportunities' : 'Client solutions'}
-                className="w-full max-h-[400px] object-contain transition-transform duration-500 hover:scale-105"
-              />
-            </div>
-          </GlareHover>
-        </motion.div>
-      </motion.div>
-    </div>
-  );
-};
-
-const WhatWeAreUptoSection = () => {
-  const highlights = [
-    { label: "GLOBAL ENTERPRISE CLIENTS", value: "500+", percentage: 85 },
-    { label: "YEARS OF TECHNOLOGY EXCELLENCE", value: "10+", percentage: 90 },
-    { label: "DIGITAL TRANSFORMATIONS DELIVERED", value: "1000+", percentage: 95 },
-    { label: "CLOUD-NATIVE ARCHITECTURES", value: "1000+", percentage: 80 },
-    { label: "AI & INTELLIGENT SYSTEMS", value: "500+", percentage: 75 },
-    { label: "STARTUP GROWTH PARTNERSHIPS", value: "100+", percentage: 60 }
-  ];
-
-  return (
-    <section className="section-padding overflow-hidden bg-sky-50/30">
-      <div className="enterprise-container">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-          {/* Images Column */}
-          <div className="relative">
-            {/* Decorative background circle */}
-            <div className="absolute -right-20 top-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-slate-50 rounded-full -z-10" />
-
-            <div className="relative z-10 grid grid-cols-4 md:grid-cols-12 gap-4 max-w-lg mx-auto lg:ml-0">
-              {/* Decorative dots - top left */}
-              <div className="absolute -top-10 -left-10 grid grid-cols-4 gap-2 opacity-20">
-                {[...Array(16)].map((_, i) => (
-                  <div key={i} className="w-1 h-1 bg-foreground rounded-full" />
-                ))}
-              </div>
-
-              {/* Main Image (Large) */}
-              <motion.div
-                variants={rotateIn}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false }}
-                className="col-span-4 md:col-span-10 relative"
-              >
-                <GlareHover glareOpacity={0.2} glareSize={500} className="rounded-2xl">
-                  <div className="rounded-2xl overflow-hidden shadow-2xl border-l-[12px] border-blue-600">
-                    <img
-                      src={highlight1}
-                      alt="Innovation focus"
-                      className="w-full h-auto object-cover transition-transform duration-700 hover:scale-110"
-                    />
-                  </div>
-                </GlareHover>
-              </motion.div>
-
-              {/* Secondary Image (Overlapping) */}
-              <motion.div
-                variants={scaleUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false }}
-                className="col-start-2 col-span-3 md:col-start-4 md:col-span-8 -mt-12 md:-mt-24 relative z-20"
-              >
-                <GlareHover glareOpacity={0.25} glareSize={400} className="rounded-2xl">
-                  <div className="rounded-2xl overflow-hidden shadow-2xl border-b-[12px] border-blue-600 bg-white">
-                    <img
-                      src={highlight2}
-                      alt="Strategic planning"
-                      className="w-full h-auto object-cover transition-transform duration-700 hover:scale-110"
-                    />
-                  </div>
-                </GlareHover>
-                {/* Decorative red square background */}
-                <div className="absolute -bottom-6 -left-6 w-24 h-12 bg-blue-600 -z-10" />
-              </motion.div>
-
-              {/* Decorative dots - bottom right */}
-              <div className="absolute -bottom-10 right-10 grid grid-cols-4 gap-2 opacity-20">
-                {[...Array(16)].map((_, i) => (
-                  <div key={i} className="w-1 h-1 bg-foreground rounded-full" />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Stats Column */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false }}
-              className="mb-8"
-            >
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3 block">Highlights</span>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-foreground leading-tight">
-                What we are upto
-              </h2>
-            </motion.div>
-
-            <div className="space-y-8">
-              {highlights.map((stat, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="flex justify-between items-end">
-                    <span className="text-[11px] font-bold tracking-wider text-slate-600 uppercase">{stat.label}</span>
-                    <span className="text-sm font-bold text-foreground">{stat.percentage}%</span>
-                  </div>
-                  <div className="relative h-[2px] w-full bg-slate-100 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${stat.percentage}%` }}
-                      viewport={{ once: false }}
-                      transition={{ duration: 1, delay: index * 0.1, ease: "easeOut" }}
-                      className="absolute h-full bg-blue-600 rounded-full"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const FoundersSection = () => {
-  const founders = [
-    {
-      name: "Veldurthi Senthil",
-      role: "Founder & Chief Executive Officer",
-      image: founder1,
-      bio: "Visionary leader with 20+ years of experience in global enterprise technology and strategic digital transformation.",
-      linkedin: "#",
-      twitter: "#",
-      mail: "senthil@veldursen.com"
-    },
-    {
-      name: "Dr. Elena Volkov",
-      role: "Co-Founder & Chief Technology Officer",
-      image: founder2,
-      bio: "Expert in AI-driven architectures and scalable cloud solutions, dedicated to engineering the digital backbone of modern business.",
-      linkedin: "#",
-      twitter: "#",
-      mail: "elena@veldursen.com"
-    },
-    {
-      name: "Marcus Dupont",
-      role: "Co-Founder & Chief Operations Officer",
-      image: founder3,
-      bio: "Operational strategist specializing in global talent acquisition and localized excellence across international borders.",
-      linkedin: "#",
-      twitter: "#",
-      mail: "marcus@veldursen.com"
-    }
-  ];
-
-  return (
-    <section className="section-padding bg-gradient-to-br from-slate-900 to-slate-800 relative overflow-hidden text-white">
-      {/* Decorative background elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-red-50 to-transparent -z-10 opacity-50" />
-      <div className="absolute bottom-0 left-0 w-1/4 h-1/2 bg-gradient-to-tr from-accent/10 to-transparent -z-10 blur-3xl opacity-30" />
-
-      <div className="enterprise-container">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-          >
-            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-orange-500 mb-3 px-3 py-0.5 bg-orange-500/10 rounded-full">
-              The Visionaries
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white leading-tight">
-              Meet the Minds Behind <span className="text-orange-500">VelDurSen</span>
-            </h2>
-          </motion.div>
-        </div>
-
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto"
-        >
-          {founders.map((founder, index) => (
-            <motion.div
-              key={index}
-              variants={fadeInUp}
-              className="group relative"
-            >
-              {/* Card Container */}
-              <GlareHover glareOpacity={0.15} glareSize={300} className="rounded-2xl h-full">
-                <div className="relative z-10 bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 flex flex-col h-full">
-
-                  {/* Image Section */}
-                  <div className="relative aspect-square overflow-hidden bg-slate-100">
-                    <img
-                      src={founder.image}
-                      alt={founder.name}
-                      className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
-                    />
-                    {/* Subtle Gradient Overlay */}
-                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                    {/* Role Tag over image on hover */}
-                    <div className="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <p className="text-white text-[10px] font-bold uppercase tracking-widest leading-none bg-amber-500 px-2 py-1 rounded-sm">
-                        {founder.role}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Info Section */}
-                  <div className="p-5 flex flex-col flex-grow text-center items-center">
-                    <h3 className="text-xl font-bold mb-2 text-slate-900 transition-colors group-hover:text-amber-600">
-                      {founder.name}
-                    </h3>
-                    <p className="text-slate-600 text-xs leading-relaxed mb-6 flex-grow max-w-[200px]">
-                      {founder.bio}
-                    </p>
-
-                    {/* Social Links */}
-                    <div className="flex items-center gap-3">
-                      <a href={founder.linkedin} className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-amber-500 hover:text-white transition-all duration-300">
-                        <Linkedin size={14} />
-                      </a>
-                      <a href={founder.twitter} className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-amber-500 hover:text-white transition-all duration-300">
-                        <Twitter size={14} />
-                      </a>
-                      <a href={`mailto:${founder.mail}`} className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-amber-500 hover:text-white transition-all duration-300">
-                        <Mail size={14} />
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Decorative border bottom */}
-                  <div className="absolute bottom-0 left-0 w-0 h-1 bg-orange-500 group-hover:w-full transition-all duration-700" />
-                </div>
-              </GlareHover>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-};
-
-const RapidSupportSection = () => {
-  return (
-    <section
-      className="section-padding bg-amber-50/30 overflow-hidden"
-    >
-      <motion.div
-        onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#ea580c' } }))}
-        onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
-        viewport={{ margin: "-100px 0px -80% 0px" }}
-        className="enterprise-container"
-      >
-        <div className="text-center max-w-4xl mx-auto mb-16">
-          <motion.h2
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false }}
-            className="text-3xl md:text-5xl font-bold mb-6 text-foreground"
-          >
-            Strategic Global Talent on <span className="text-orange-600">Demand</span>
-          </motion.h2>
-
-          <motion.p
-            variants={fadeInLeft}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false }}
-            className="text-lg md:text-xl font-bold text-orange-600 mb-6"
-          >
-            We enable you to onboard specialized talent within 15 days (90% success rate)
-          </motion.p>
-
-          <motion.p
-            variants={fadeInRight}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false }}
-            className="text-lg md:text-xl text-slate-600 leading-relaxed"
-          >
-            Our dedicated recruitment consultants bridge the gap between niche technology requirements and top-tier global talent.
-            By combining deep domain expertise across critical industry verticals with architectural foresight, we ensure every
-            placement is a perfect technical and cultural fit for your mission-critical operations.
-          </motion.p>
-        </div>
-
-        <div className="flex justify-center">
-          <motion.div
-            variants={zoomIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false }}
-            className="relative w-full max-w-4xl"
-          >
-            {/* Decorative background map (subtle) */}
-            <div className="absolute inset-0 -z-10 opacity-5">
-              <Globe className="w-full h-full text-slate-400" />
-            </div>
-
-            <GlareHover glareOpacity={0.1} glareSize={600} className="rounded-[2rem] overflow-hidden shadow-2xl">
-              <img
-                src={supportBg}
-                alt="Strategic Global Talent"
-                className="w-full h-auto object-cover transition-transform duration-1000 hover:scale-105"
-              />
-            </GlareHover>
-          </motion.div>
-        </div>
-      </motion.div>
-    </section>
-  );
-};
-
-const TrustedPartnersLogos = () => {
-  const logos = [partner1, partner2, partner3, partner4, partner5, partner6, partner7, partner8];
-  // Duplicate the logos array to ensure a seamless infinite scroll loop
-  const scrollLogos = [...logos, ...logos, ...logos];
-
-  return (
-    <motion.div
-      variants={fadeInUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false }}
-      className="bg-white py-16 border-t border-b border-border/50 overflow-hidden"
-    >
-      <div className="text-center mb-12">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-600">
-          Trusted by Industry Leaders Worldwide
-        </p>
-      </div>
-
-      <div className="relative flex items-center">
-        {/* Continuous Marquee Container */}
-        <div className="flex gap-8 animate-scroll-slow hover:[animation-play-state:paused] transition-all duration-300 px-4">
-          {scrollLogos.map((logo, index) => (
-            <div
-              key={index}
-              className="w-40 md:w-56 h-24 flex items-center justify-center p-4 transition-transform duration-500 hover:scale-110 shrink-0"
-            >
-              <img
-                src={logo}
-                alt={`Partner Logo ${(index % logos.length) + 1}`}
-                className="max-w-full max-h-full object-contain filter drop-shadow-sm"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-};
 
 const milestones = [
   {
@@ -1096,19 +551,59 @@ const Index = () => {
   const [sanityData, setSanityData] = useState<any>(null);
 
   useEffect(() => {
-    const query = '*[_type == "homePage"][0]';
+    const query = `{
+      "hero": *[_type == "homeHero"][0],
+      "ticker": *[_type == "homeSection1"][0],
+      "connectivity": *[_type == "homeSection2"][0],
+      "ourStory": *[_type == "homeSection3"][0],
+      "talent": *[_type == "homeSection4"][0],
+      "partners": *[_type == "homeSection5"][0],
+      "highlights": *[_type == "homeSection6"][0],
+      "whatWeProvide": *[_type == "homeSection7"][0],
+      "excellence": *[_type == "homeSection8"][0],
+      "achievements": *[_type == "homeSection9"][0],
+      "growth": *[_type == "homeSection10"][0],
+      "milestones": *[_type == "homeSection11"][0],
+      "chronicle": *[_type == "homeSection12"][0],
+      "outcomes": *[_type == "homeSection13"][0],
+      "crm": *[_type == "homeSection14"][0],
+      "expertise": *[_type == "homeSection15"][0],
+      "automation": *[_type == "homeSection16"][0],
+      "whyChoose": *[_type == "homeSection17"][0],
+      "sectors": *[_type == "homeSection18"][0],
+      "innovation": *[_type == "homeSection19"][0],
+      "productEng": *[_type == "homeSection20"][0],
+      "crmUseCase": *[_type == "homeSection21"][0],
+      "intelAuto": *[_type == "homeSection22"][0],
+      "whyChoose2": *[_type == "homeSection23"][0],
+      "accelerators": *[_type == "homeSection24"][0],
+      "innFramework": *[_type == "homeSection25"][0],
+      "globalDelivery": *[_type == "homeSection26"][0],
+      "modernization": *[_type == "homeSection27"][0],
+      "beyondDeployment": *[_type == "homeSection28"][0],
+      "advisory": *[_type == "homeSection29"][0],
+      "coreBlueprint": *[_type == "homeSection30"][0],
+      "commResilience": *[_type == "homeSection31"][0],
+      "engLabs": *[_type == "homeSection32"][0],
+      "dataCommand": *[_type == "homeSection33"][0],
+      "elasticArch": *[_type == "homeSection34"][0],
+      "bankingGrade": *[_type == "homeSection35"][0],
+      "greenComputing": *[_type == "homeSection36"][0],
+      "sectionFounders": *[_type == "homeSection37"][0],
+      "gallery": *[_type == "homeSection38"][0],
+      "assistance": *[_type == "homeSection39"][0],
+      "video": *[_type == "homeSection40"][0],
+      "testimonials": *[_type == "homeSection41"][0],
+      "globalOps": *[_type == "homeSection42"][0],
+      "faq": *[_type == "homeSection43"][0],
+      "culture": *[_type == "homeSection44"][0],
+      "careersList": *[_type == "homeSection45"][0],
+      "blogList": *[_type == "homeSection46"][0]
+    }`;
+
     client.fetch(query).then((data) => {
       if (data) {
-        const sections = [
-          data.hero,
-          data.globalOperations,
-          data.professionalAssistance,
-          data.whatWeAreUpto,
-          data.founders,
-          data.timeline,
-          data.deliveredOutcomes
-        ].filter(Boolean);
-        setSanityData({ ...data, sections });
+        setSanityData(data);
       }
     }).catch(console.error);
   }, []);
@@ -1148,170 +643,15 @@ const Index = () => {
         schemas={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA]}
       />
       {/* 1. HERO SECTION - Redesigned to match Premium Industry Style */}
-      <section className="relative h-[60vh] sm:h-[80vh] md:h-[90vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden bg-white">
-        <motion.div
-          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
-          className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[10s] brightness-110 hover:scale-105"
-          style={{ backgroundImage: `url(${heroBg})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent z-10" />
-
-
-        <div className="enterprise-container relative z-20">
-          <motion.div
-            variants={scaleUp}
-            initial="hidden"
-            animate="visible"
-            className="max-w-4xl"
-          >
-            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-600 mb-6 px-4 py-1.5 bg-red-50 rounded-full border border-red-100 backdrop-blur-md shadow-sm">
-              Global Enterprise Technology Partner
-            </span>
-            <h1 className="text-[2.25rem] xs:text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-slate-900 leading-[0.95] mb-8 tracking-tighter break-words hyphens-auto">
-              VelDurSen <br />
-              <span className="text-red-600">Digital Transformation.</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-600 font-medium mb-12 max-w-2xl leading-relaxed">
-              We architect intelligent, secure, and sustainable enterprise ecosystems that power mission-critical operations across industries worldwide.
-            </p>
-            <div className="flex flex-wrap gap-4 items-center">
-              <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-xl shadow-red-600/10">
-                Talk to Experts <ArrowRight size={18} className="ml-2" />
-              </Link>
-              <div className="flex items-center gap-4 px-6 text-slate-500 font-bold uppercase tracking-widest text-[10px]">
-                <Globe2 size={16} className="text-red-600" /> Trusted in 150+ Countries
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Scrolling News Ticker - Integrated with new design */}
-        <div className="absolute bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm py-4 overflow-hidden z-20">
-          <div className="flex whitespace-nowrap animate-scroll-slow hover:[animation-play-state:paused] transition-all duration-300">
-            {/* First Set */}
-            <div className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-white px-8 gap-8">
-              <Link to="/services" state={{ scrollTo: 'technology-pillars', fromButton: true }} className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
-                <Code size={14} className="text-red-400" /> Next-Gen Technology Stack: AI, Cloud & Modern Ops
-              </Link>
-              <span className="opacity-50">•</span>
-              <Link to="/" state={{ scrollTo: 'achievements-section', fromButton: true }} className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
-                <Trophy size={14} className="text-red-400" /> Best Enterprise AI Innovation Award
-              </Link>
-              <span className="opacity-50">•</span>
-              <Link to="/services" state={{ scrollTo: 'industries-full-content', fromButton: true }} className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
-                <Factory size={14} className="text-red-400" /> Empowering Industries: Finance, Healthcare, Retail & Manufacturing
-              </Link>
-              <span className="opacity-50">•</span>
-              <Link to="/internships" className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
-                <GraduationCap size={14} className="text-red-400" /> Global Technology Internship Program 2026
-              </Link>
-              <span className="opacity-50">•</span>
-              <Link to="/contact" className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
-                <Mail size={14} className="text-red-400" /> Start Your Transformation Journey - Contact Us Today
-              </Link>
-              <span className="opacity-50">•</span>
-            </div>
-            {/* Duplicate Set for Infinite Scroll */}
-            <div className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-white px-8 gap-8">
-              <Link to="/technologies" className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
-                <Code size={14} className="text-red-400" /> Next-Gen Technology Stack: AI, Cloud & Modern Ops
-              </Link>
-              <span className="opacity-50">•</span>
-              <Link to="/achievements" className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
-                <Trophy size={14} className="text-red-400" /> Best Enterprise AI Innovation Award
-              </Link>
-              <span className="opacity-50">•</span>
-              <Link to="/services" state={{ scrollTo: 'industries-full-content', fromButton: true }} className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
-                <Factory size={14} className="text-red-400" /> Empowering Industries: Finance, Healthcare, Retail & Manufacturing
-              </Link>
-              <span className="opacity-50">•</span>
-              <Link to="/internships" className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
-                <GraduationCap size={14} className="text-red-400" /> Global Technology Internship Program 2026
-              </Link>
-              <span className="opacity-50">•</span>
-              <Link to="/contact" className="flex items-center gap-2 hover:text-red-300 hover:underline transition-all">
-                <Mail size={14} className="text-red-400" /> Start Your Transformation Journey - Contact Us Today
-              </Link>
-              <span className="opacity-50">•</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero data={sanityData?.hero} tickerData={sanityData?.ticker} />
       <div className="font-heading space-y-0">
 
 
 
-        {/* World Map Visualization - Full Screen */}
-        <section className="relative w-full min-h-[400px] sm:min-h-[500px] lg:h-screen overflow-hidden bg-gradient-to-br from-indigo-900 via-slate-900 to-black flex items-start justify-center pt-20">
-          {/* Background Video */}
-          <img
-            src={backgroundImage}
-            alt="World Map Background"
-            className="absolute inset-0 w-full h-full object-cover opacity-70"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/50 z-10"></div>
-          <div className="absolute inset-0 opacity-20 z-10" style={{
-            backgroundImage: `radial-gradient(circle at 20% 50%, rgba(24, 119, 242, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(24, 119, 242, 0.3) 0%, transparent 50%)`
-          }}></div>
-          <motion.div
-            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#f59e0b' } }))}
-            onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
-            className="relative z-20 text-center px-6"
-            variants={scaleUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ margin: "-10% 0px -70% 0px" }}
-          >
-            <span className="text-xs font-black uppercase tracking-[0.4em] text-orange-400 mb-4 block">Connectivity</span>
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-6 drop-shadow-lg tracking-tighter">Global Delivery <span className="text-orange-500">Network</span></h3>
-          </motion.div>
-        </section>
+        <GlobalOperations data={sanityData?.connectivity} />
 
         {/* About Brief */}
-        <section className="section-padding bg-green-50/50">
-          <motion.div
-            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#16a34a' } }))}
-            onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
-            viewport={{ margin: "-10% 0px -70% 0px" }}
-            className="enterprise-container"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              <motion.div
-                variants={fadeInLeft}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false }}
-              >
-                <span className="text-xs font-black uppercase tracking-[0.4em] text-green-600 mb-6 block">Our Story</span>
-                <h2 className="section-title leading-[1.1] mb-8 font-black tracking-tighter">Your Trusted Partner in<br /><span className="text-green-600">Enterprise Transformation</span></h2>
-                <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-6">
-                  VelDurSen is a global Enterprise Technology & Digital Transformation company specializing in AI-first, security-first, and sustainability-driven solutions for the world's most demanding enterprises.
-                </p>
-                <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-6">
-                  With operations spanning multiple continents and regional delivery centers worldwide, we deliver cutting-edge technology solutions that help organizations achieve their digital transformation goals while maintaining the highest standards of security, scalability, and sustainability.
-                </p>
-                <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-8">
-                  From Fortune 500 enterprises to high-growth organizations across healthcare, finance, manufacturing, and beyond—our architecture-first engineering approach ensures every system we build is resilient, performant, and future-proof for global operations.
-                </p>
-                <Link
-                  to="/about"
-                  state={{ fromButton: true }}
-                  className="btn-enterprise !bg-green-600 !border-green-600 hover:!bg-slate-950 hover:!border-slate-950"
-                >
-                  Learn More About Us <ArrowRight size={16} className="ml-2" />
-                </Link>
-              </motion.div>
-              <motion.div
-                variants={fadeInRight}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false }}
-              >
-                <ImageCarousel images={[aboutTeam, aboutImage1, aboutImage2]} interval={4000} />
-              </motion.div>
-            </div>
-          </motion.div>
-        </section>
+        <OurStory data={sanityData?.ourStory} />
 
 
 
@@ -1322,35 +662,12 @@ const Index = () => {
 
 
 
-        {/* Rapid Support Section */}
-        <RapidSupportSection />
-        <TrustedPartnersLogos />
-        <WhatWeAreUptoSection />
+        {/* Rapid Support, Partners, Highlights */}
+        <RapidSupport data={sanityData?.talent} />
+        <TrustedPartners data={sanityData?.partners} />
+        <WhatWeAreUpto data={sanityData?.highlights} />
 
-        {/* What We Provide Section */}
-        <section className="section-padding bg-slate-50">
-          <motion.div
-            onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#2563eb' } }))}
-            onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
-            viewport={{ margin: "-10% 0px -70% 0px" }}
-            className="enterprise-container"
-          >
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false }}
-                className="text-4xl md:text-6xl font-black mb-6 tracking-tighter"
-              >
-                What we <span className="text-blue-600">provide.</span>
-              </motion.h2>
-              <span className="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-4 block">Solutions Ecosystem</span>
-            </div>
-
-            {/* Tab Navigation */}
-            <WhatWeProvideSection />
-          </motion.div>
-        </section>
+        <WhatWeProvide data={sanityData?.whatWeProvide} />
 
         {/* 1.5 CRISPY ACHIEVEMENTS HIGHLIGHTS - REFINED TEXT VERSION */}
         <section id="achievements-section" className="py-16 bg-white border-b border-slate-100">
@@ -2028,8 +1345,11 @@ const Index = () => {
         {/* NEW: Enterprise CRM Content (Main Body) */}
         < EnterpriseCRMContent />
 
-        {/* Founders Section */}
-        < FoundersSection />
+
+        {/* New Dynamic Sections */}
+
+
+        {/* Founders Component Removed - Replaced by sections above or to be added if specific component needed */}
 
         {/* Dome Gallery Section */}
         <div style={{ width: '100%', height: '100vh', position: 'relative', overflow: 'hidden' }}>
@@ -2141,11 +1461,9 @@ const Index = () => {
           </div>
         </section >
 
-        {/* Global Operations Section (Moved Here) */}
-        < GlobalOperationsSection />
-      </div>
 
-    </PageLayout >
+      </div>
+    </PageLayout>
   );
 };
 

@@ -1,79 +1,92 @@
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { Globe2 } from "lucide-react";
-import { urlFor } from "@/lib/sanity";
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Globe2 } from 'lucide-react';
+import { urlFor } from '@/lib/sanity';
+import Ticker from './Ticker';
+import heroBg from "@/assets/hero-bg.jpg";
 
-interface HeroProps {
-    data: {
-        title?: string;
-        subtitle?: string;
-        backgroundImage?: any;
-        backgroundVideo?: any; // Sanity file object
-        ctaButtons?: { label: string; link: string; variant: string }[];
-    }
-}
+// Animation Variants
+const scaleUp = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeInOut" } }
+};
 
-export default function Hero({ data }: HeroProps) {
-    const {
-        title = "Engineering the Digital Backbone of Global Enterprises.",
-        subtitle = "We build the mission-critical systems that power the world's largest organizations.",
-        ctaButtons = [
-            { label: "Explore Solutions", link: "/solutions", variant: "primary" },
-            { label: "View Case Studies", link: "/work", variant: "secondary" }
-        ]
-    } = data || {};
+export default function Hero({ data, tickerData }: { data: any, tickerData?: any }) {
+    const bgImage = data?.backgroundImage ? urlFor(data.backgroundImage).url() : heroBg;
+    const heading = data?.heading || "VelDurSen";
+    const subheading = data?.subheading || "Global Enterprise Technology Partner";
+    const description = data?.description || "We architect intelligent, secure, and sustainable enterprise ecosystems that power mission-critical operations across industries worldwide.";
 
-    const backgroundImageUrl = data?.backgroundImage ? urlFor(data.backgroundImage).width(1920).url() : null;
-    // Video handling in Sanity requires fetching the file URL. For now we assume image fallback or implementation later.
+    // Parse heading to handle <br/> or special formatting if needed. 
+    // For now simple rendering. If data.heading contains specifically "Digital Transformation." we might want to color it.
+    // The user schema just has "heading".
 
     return (
-        <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden">
-            {/* Background */}
-            <div className="absolute inset-0 z-0">
-                {backgroundImageUrl ? (
-                    <img src={backgroundImageUrl} alt="Hero Background" className="w-full h-full object-cover" />
-                ) : (
-                    <div className="w-full h-full bg-slate-900" /> // Fallback
-                )}
-                <div className="absolute inset-0 bg-slate-950/80" />
-            </div>
+        <section className="relative h-[60vh] sm:h-[80vh] md:h-[90vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden bg-white">
+            <motion.div
+                onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
+                className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[10s] brightness-110 hover:scale-105"
+                style={{ backgroundImage: `url(${bgImage})` }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/50 to-transparent z-10" />
 
-            <div className="enterprise-container relative z-20 pt-20">
+            <div className="enterprise-container relative z-20">
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="max-w-5xl"
+                    variants={scaleUp}
+                    initial="hidden"
+                    animate="visible"
+                    className="max-w-4xl"
                 >
-                    <span className="inline-block text-xs font-bold uppercase tracking-[0.2em] text-blue-400 mb-6 px-4 py-2 bg-blue-500/10 rounded-full border border-blue-500/20 backdrop-blur-md">
-                        Global Enterprise Technology
+                    <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-600 mb-6 px-4 py-1.5 bg-red-50 rounded-full border border-red-100 backdrop-blur-md shadow-sm">
+                        {subheading}
                     </span>
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[1.1] mb-8 tracking-tighter">
-                        {/* Simple parser for line breaks if needed, or just render string */}
-                        {title}
+                    <h1 className="text-[2.25rem] xs:text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-slate-900 leading-[0.95] mb-8 tracking-tighter break-words hyphens-auto">
+                        {/* Hack to style the heading similar to hardcoded version if it matches basic structure, 
+                 otherwise just render text */}
+                        {data?.heading ? (
+                            <>
+                                {data.heading.split(' ').slice(0, -2).join(' ')} <br />
+                                <span className="text-red-600">{data.heading.split(' ').slice(-2).join(' ')}</span>
+                            </>
+                        ) : (
+                            <>
+                                VelDurSen <br />
+                                <span className="text-red-600">Digital Transformation.</span>
+                            </>
+                        )}
                     </h1>
-                    <p className="text-xl md:text-2xl text-slate-400 font-medium mb-12 max-w-2xl leading-relaxed">
-                        {subtitle}
+                    <p className="text-xl md:text-2xl text-slate-600 font-medium mb-12 max-w-2xl leading-relaxed">
+                        {description}
                     </p>
 
-                    <div className="flex flex-wrap gap-4">
-                        {ctaButtons.map((btn, idx) => (
-                            <Link
-                                key={idx}
-                                to={btn.link}
-                                className={`btn-enterprise py-4 px-8 text-lg ${btn.variant === 'secondary' ? 'btn-outline-enterprise' : ''}`}
-                            >
-                                {btn.label}
-                            </Link>
-                        ))}
-                    </div>
-
-                    <div className="mt-16 flex items-center gap-4 text-slate-500 font-bold uppercase tracking-widest text-xs">
-                        <Globe2 size={16} className="text-blue-500" />
-                        Trusted by 500+ Enterprises in 150 Countries
+                    <div className="flex flex-wrap gap-4 items-center">
+                        {data?.ctaButtons && data.ctaButtons.length > 0 ? (
+                            data.ctaButtons.map((btn: any, i: number) => (
+                                i === 0 ? (
+                                    <Link key={i} to={btn.link} state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-xl shadow-red-600/10">
+                                        {btn.label} <ArrowRight size={18} className="ml-2" />
+                                    </Link>
+                                ) : (
+                                    <div key={i} className="flex items-center gap-4 px-6 text-slate-500 font-bold uppercase tracking-widest text-[10px]">
+                                        <Globe2 size={16} className="text-red-600" /> {btn.label}
+                                    </div>
+                                )
+                            ))
+                        ) : (
+                            <>
+                                <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-xl shadow-red-600/10">
+                                    Talk to Experts <ArrowRight size={18} className="ml-2" />
+                                </Link>
+                                <div className="flex items-center gap-4 px-6 text-slate-500 font-bold uppercase tracking-widest text-[10px]">
+                                    <Globe2 size={16} className="text-red-600" /> Trusted in 150+ Countries
+                                </div>
+                            </>
+                        )}
                     </div>
                 </motion.div>
             </div>
+
+            <Ticker data={tickerData} />
         </section>
     );
 }

@@ -87,19 +87,22 @@ const AcceleratorSection: React.FC<{ data?: any }> = ({ data }) => {
         { title: "Manufacturing Accelerator", sub: "Dealer networks & production analytics.", color: "text-green-600", bg: "bg-green-600", img: crmManufacturing }
     ];
 
-    const displayAccelerators = data?.accelerators?.map((item: any, index: number) => ({
+    const mappedAccelerators = data?.accelerators?.map((item: any, index: number) => ({
         title: item.title,
         sub: item.sub,
         img: item.image ? (typeof item.image === 'string' ? item.image : urlFor(item.image).url()) : defaultAccelerators[index % defaultAccelerators.length].img,
         color: defaultAccelerators[index % defaultAccelerators.length].color,
         bg: defaultAccelerators[index % defaultAccelerators.length].bg
-    })) || defaultAccelerators;
+    })) || [];
+
+    const displayAccelerators = mappedAccelerators.length > 0 ? mappedAccelerators : defaultAccelerators;
 
     // Ensure we have exactly 4 items for the logic to work, or adjust logic. 
     // For now, let's assume 4 items or cycle/slice. 
     // If fewer than 4, we might duplicate. If more, we slice.
     // The current logic supports 4 specific slots (0-25, 25-50, etc).
     const accelerators = displayAccelerators.slice(0, 4);
+    const currentAccelerator = accelerators[activeIndex] || accelerators[0] || defaultAccelerators[0];
 
     // Add import for urlFor if not present, or pass it? 
     // urlFor is likely needed. I'll need to check imports.
@@ -180,9 +183,9 @@ const AcceleratorSection: React.FC<{ data?: any }> = ({ data }) => {
                                         transition={{ duration: 0.5 }}
                                         className="text-center p-8 active-acc-content"
                                     >
-                                        <img src={accelerators[activeIndex].img} alt="Accelerator" className="w-32 h-32 md:w-48 md:h-48 object-contain mx-auto mb-6 drop-shadow-2xl" />
-                                        <div className={`text-2xl font-black tracking-tight ${accelerators[activeIndex].color}`} style={{ fontFamily: "'Inter', sans-serif" }}>{accelerators[activeIndex].title.split(' ')[0]}</div>
-                                        <div className="text-white/60 font-black uppercase text-[10px] tracking-[0.4em] mt-2" style={{ fontFamily: "'Inter', sans-serif" }}>{accelerators[activeIndex].title.split(' ').slice(1).join(' ')}</div>
+                                        <img src={currentAccelerator.img} alt="Accelerator" className="w-32 h-32 md:w-48 md:h-48 object-contain mx-auto mb-6 drop-shadow-2xl" />
+                                        <div className={`text-2xl font-black tracking-tight ${currentAccelerator.color}`} style={{ fontFamily: "'Inter', sans-serif" }}>{currentAccelerator.title.split(' ')[0]}</div>
+                                        <div className="text-white/60 font-black uppercase text-[10px] tracking-[0.4em] mt-2" style={{ fontFamily: "'Inter', sans-serif" }}>{currentAccelerator.title.split(' ').slice(1).join(' ')}</div>
                                     </motion.div>
                                 </AnimatePresence>
                             </div>

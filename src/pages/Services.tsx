@@ -1253,71 +1253,7 @@ const Services = () => {
                 </div>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="w-full lg:w-1/2 relative p-6 sm:p-8 md:p-12 bg-slate-50 rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] border border-slate-200 shadow-2xl flex flex-col items-center justify-center min-h-[350px] sm:min-h-[400px] md:min-h-[450px]"
-              >
-                {/* Animated Connection Path */}
-                <div className="absolute inset-x-12 sm:inset-x-16 md:inset-x-20 top-1/2 -translate-y-1/2 h-1 bg-slate-200 overflow-hidden rounded-full">
-                  <motion.div
-                    animate={{ x: ["-100%", "100%"] }}
-                    transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                    className="absolute inset-0 w-1/3 h-full bg-gradient-to-r from-transparent via-red-600 to-transparent"
-                  />
-                </div>
 
-                <div className="flex justify-between items-center w-full relative z-10">
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="text-center p-4 sm:p-6 md:p-8 bg-white rounded-2xl sm:rounded-3xl shadow-lg border border-slate-100 w-32 sm:w-36 md:w-44 relative group"
-                  >
-                    <div className="text-slate-400 text-[8px] sm:text-[9px] font-black uppercase mb-2 sm:mb-3 tracking-widest">Legacy Core</div>
-                    <div className="text-slate-900 font-black text-base sm:text-lg md:text-xl tracking-tighter">MAINFRAME</div>
-                    <div className="absolute -bottom-2 -left-2 w-4 h-4 rounded-full bg-red-600/10 group-hover:bg-red-600 transition-colors" />
-                  </motion.div>
-
-                  <div className="relative z-20">
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                      className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full bg-white shadow-2xl flex items-center justify-center relative border border-slate-100"
-                    >
-                      <InfinityIcon size={28} className="text-red-600 sm:w-7 sm:h-7 md:w-8 md:h-8" />
-                    </motion.div>
-                    {/* Digital Pulse Ring */}
-                    <motion.div
-                      animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
-                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                      className="absolute inset-0 rounded-full border-4 border-red-600 -z-10"
-                    />
-                  </div>
-
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    className="text-center p-4 sm:p-6 md:p-8 bg-red-600 rounded-2xl sm:rounded-3xl shadow-2xl shadow-red-600/30 w-32 sm:w-36 md:w-44 relative group"
-                  >
-                    <div className="text-red-200 text-[8px] sm:text-[9px] font-black uppercase mb-2 sm:mb-3 tracking-widest">Modern Cloud</div>
-                    <div className="text-white font-black text-base sm:text-lg md:text-xl tracking-tighter">SERVERLESS</div>
-                    <div className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-white/20 group-hover:bg-white transition-colors" />
-                  </motion.div>
-                </div>
-
-                <div className="mt-16 flex flex-col items-center">
-                  <div className="flex gap-2 mb-4">
-                    {[1, 2, 3, 4, 5].map(i => (
-                      <motion.div
-                        key={i}
-                        animate={{ height: [4, 12, 4], opacity: [0.3, 1, 0.3] }}
-                        transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, delay: i * 0.2 }}
-                        className="w-1 bg-red-600 rounded-full"
-                      />
-                    ))}
-                  </div>
-                  <p className="text-[8px] sm:text-[9px] md:text-[10px] text-slate-400 font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em] text-center px-2">VelDurSen Hybrid Bridge Architecture</p>
-                </div>
-              </motion.div>
             </div>
           </div>
         </section>
@@ -1387,24 +1323,7 @@ const Services = () => {
                 ))}
               </div>
 
-              {/* Bottom Status Feed */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                className="mt-20 p-6 bg-white rounded-3xl border border-slate-100 shadow-sm flex items-center justify-between"
-              >
-                <div className="flex items-center gap-6">
-                  <div className="flex gap-1">
-                    {[1, 2, 3].map(i => (
-                      <div key={i} className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    ))}
-                  </div>
-                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Active Lifecycle Protocol: VDT-EN-2026</span>
-                </div>
-                <div className="hidden md:block text-[10px] font-mono text-slate-300">
-                  TRANSITION_COMPLETE: STATUS_EXECUTION_STABLE
-                </div>
-              </motion.div>
+
             </div>
           </div>
         </section>
@@ -1455,10 +1374,7 @@ const Services = () => {
                       transition={{ delay: i * 0.1, duration: 0.5 }}
                       className="relative group cursor-default"
                     >
-                      {/* Technical ID */}
-                      <div className="font-mono text-[9px] font-black text-slate-300 mb-4 tracking-[0.3em] group-hover:text-red-600 transition-colors">
-                        REF_ID: // {item.id}
-                      </div>
+
 
                       {/* Lead bar */}
                       <div className="w-full h-[3px] bg-slate-50 mb-6 overflow-hidden rounded-full">
@@ -1495,13 +1411,7 @@ const Services = () => {
               </div>
 
               {/* Bottom Data Legend */}
-              <div className="mt-12 pt-6 border-t border-slate-100 flex justify-between items-center text-[9px] font-black text-slate-300 uppercase tracking-[0.5em]">
-                <span>Telemetry Stream Active</span>
-                <div className="flex gap-4">
-                  <span>Vector-22</span>
-                  <span className="text-red-600">Verified Stability</span>
-                </div>
-              </div>
+
             </div>
           </motion.div>
         </section>

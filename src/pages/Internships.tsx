@@ -7,17 +7,131 @@ import BlogPreview from "@/components/shared/BlogPreview";
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/shared/SEO";
 import internshipVideo from "@/assets/internship.mp4";
+import { client, urlFor } from "@/lib/sanity";
+import { useEffect, useState } from "react";
 
 import csrBg from "@/assets/internships/csr-bg.jpg";
 import experienceBg from "@/assets/internships/experience-bg.jpg";
 import growthBg from "@/assets/internships/growth-bg.jpg";
-import softwareBg from "@/assets/internships/software-bg.jpg";
+import softwareBg from "@/assets/internships/software-bg.jpg"; // Keep for fallback imports if needed, though specific mapping might be tricky without exact string matches from Sanity.
 import dataAiBg from "@/assets/internships/data-ai-bg.jpg";
 import securityBg from "@/assets/internships/security-bg.jpg";
 import cloudBg from "@/assets/internships/cloud-bg.jpg";
 
-const InternshipTicker = () => {
-  const messages = [
+// --- Interfaces for Sanity Data ---
+interface SanityHero {
+  tag: string;
+  headingLine1: string;
+  headingLine2: string;
+  description: string;
+  heroVideo: any;
+  heroImage: any;
+  primaryButtonText: string;
+  primaryButtonLink: string;
+  secondaryTagText: string;
+}
+
+interface SanityTicker {
+  messages: string[];
+}
+
+interface SanityOverview {
+  tag: string;
+  headingLine1: string;
+  headingLine2: string;
+  headingLine3: string;
+  subHeading: string;
+  cards: {
+    tag: string;
+    title: string;
+    desc: string;
+    bgImage: any;
+    iconName: string;
+  }[];
+}
+
+interface SanityAdvisory {
+  tag: string;
+  title: string;
+  content: string;
+  sideTag: string;
+}
+
+interface SanityTechnology {
+  tag: string;
+  headingLine1: string;
+  headingLine2: string;
+  description: string;
+  focusAreas: {
+    title: string;
+    subtitle: string;
+    iconName: string;
+    bgImage: any;
+    areas: string[];
+  }[];
+}
+
+interface SanityPipeline {
+  smallTag: string;
+  headingLine1: string;
+  headingLine2: string;
+  phases: {
+    phaseId: string;
+    title: string;
+    tag: string;
+    description: string;
+    activities: string[];
+  }[];
+}
+
+interface SanitySummary {
+  title: string;
+  description: string;
+  stats: {
+    value: string;
+    label1: string;
+    label2: string;
+  }[];
+}
+
+interface SanityEligibility {
+  headingLine1: string;
+  headingLine2: string;
+  targetProfiles: { title: string; description: string }[];
+  coreCapabilities: { title: string; description: string }[];
+}
+
+interface SanityEvolution {
+  tag: string;
+  headingLine1: string;
+  headingLine2: string;
+  description: string;
+  primaryButtonText: string;
+  primaryButtonLink: string;
+  secondaryButtonText: string;
+  secondaryButtonLink: string;
+}
+
+interface InternshipPageData {
+  hero: SanityHero;
+  ticker: SanityTicker;
+  overview: SanityOverview;
+  advisory: SanityAdvisory;
+  technology: SanityTechnology;
+  pipeline: SanityPipeline;
+  summary: SanitySummary;
+  eligibility: SanityEligibility;
+  evolution: SanityEvolution;
+}
+
+// Icon Mapping Helper
+const getIcon = (iconName: string, defaultIcon: any) => {
+  const icons: any = { Heart, Users, Sparkles, Code, Database, Shield, Globe2 };
+  return icons[iconName] || defaultIcon;
+};
+
+const InternshipTicker = ({ data }: { data?: SanityTicker }) => {
+  const defaultMessages = [
     "HIRING NOW: SUMMER 2025 COHORT",
     "DON'T MISS THE OPPORTUNITY TO COLLABORATE WITH US",
     "JOIN THE FUTURE OF ENTERPRISE TECHNOLOGY",
@@ -25,6 +139,7 @@ const InternshipTicker = () => {
     "ARCHITECT YOUR CAREER WITH VELDURSEN",
     "SYSTEM ADMISSION NOW IN PROGRESS"
   ];
+  const messages = data?.messages || defaultMessages;
   const scrollMessages = [...messages, ...messages, ...messages];
 
   return (
@@ -42,6 +157,34 @@ const InternshipTicker = () => {
 };
 
 const Internships = () => {
+  const [data, setData] = useState<InternshipPageData | null>(null);
+
+  useEffect(() => {
+    const query = `{
+            "hero": *[_type == "internshipHero"][0],
+            "ticker": *[_type == "internshipTicker"][0],
+            "overview": *[_type == "internshipGrowingFuture"][0],
+            "advisory": *[_type == "internshipAdvisory"][0],
+            "technology": *[_type == "internshipTechnology"][0],
+            "pipeline": *[_type == "internshipPipeline"][0],
+            "summary": *[_type == "internship12Weeks"][0],
+            "eligibility": *[_type == "internshipEligibility"][0],
+            "evolution": *[_type == "internshipEvolution"][0]
+        }`;
+
+    client.fetch(query).then(setData).catch(console.error);
+  }, []);
+
+  // --- Data Fallbacks ---
+  const hero = data?.hero;
+  const overview = data?.overview;
+  const advisory = data?.advisory;
+  const technology = data?.technology;
+  const pipeline = data?.pipeline;
+  const summary = data?.summary;
+  const eligibility = data?.eligibility;
+  const evolution = data?.evolution;
+
   return (
     <PageLayout>
       <SEO
@@ -61,17 +204,25 @@ const Internships = () => {
           "occupationalCategory": "Software Engineer"
         }]}
       />
-      {/* HERO SECTION - Redesigned to match Industry Page */}
+
+      {/* HERO SECTION */}
       <section className="relative h-[50vh] sm:h-[80vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]"
-        >
-          <source src={internshipVideo} type="video/mp4" />
-        </video>
+        {hero?.heroImage ? (
+          <div className="absolute inset-0 z-0 w-full h-full">
+            <img src={urlFor(hero.heroImage).url()} className="w-full h-full object-cover" alt="Internship Hero" />
+          </div>
+        ) : (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]"
+          >
+            <source src={internshipVideo} type="video/mp4" />
+          </video>
+        )}
+
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent z-10" />
 
         <div className="enterprise-container relative z-20">
@@ -82,21 +233,21 @@ const Internships = () => {
             className="max-w-4xl"
           >
             <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-              Internships
+              {hero?.tag || "Internships"}
             </span>
             <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
-              Growing <br />
-              <span className="text-red-600">Future Tech.</span>
+              {hero?.headingLine1 || "Growing"} <br />
+              <span className="text-red-600">{hero?.headingLine2 || "Future Tech."}</span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-300 font-medium mb-12 max-w-2xl leading-relaxed drop-shadow-md">
-              VelDurSen's commitment to nurturing the next generation of technology professionals through hands-on learning, mentorship, and real CSR engagement.
+              {hero?.description || "VelDurSen's commitment to nurturing the next generation of technology professionals through hands-on learning, mentorship, and real CSR engagement."}
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20">
-                Apply for Internship
+              <Link to={hero?.primaryButtonLink || "/contact"} state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20">
+                {hero?.primaryButtonText || "Apply for Internship"}
               </Link>
               <div className="flex items-center gap-4 px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">
-                <Globe2 size={16} className="text-red-600 shadow-sm" /> CSR DRIVEN INITIATIVE
+                <Globe2 size={16} className="text-red-600 shadow-sm" /> {hero?.secondaryTagText || "CSR DRIVEN INITIATIVE"}
               </div>
             </div>
           </motion.div>
@@ -105,9 +256,9 @@ const Internships = () => {
         <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[120px] -z-0" />
       </section>
 
-      <InternshipTicker />
+      <InternshipTicker data={data?.ticker} />
 
-      {/* Program Overview - Redesigned with Prism Module Aesthetic */}
+      {/* Program Overview */}
       <section className="py-12 md:py-16 bg-section relative overflow-hidden">
         {/* Decorative Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#dc2626 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
@@ -128,23 +279,26 @@ const Internships = () => {
               className="inline-flex items-center gap-3 px-4 py-1 rounded-full border border-red-200 bg-red-50/50 backdrop-blur-sm text-red-600 mb-6"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600">CSR Mission Architecture</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600">{overview?.tag || "CSR Mission Architecture"}</span>
             </motion.div>
 
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 mb-6 sm:mb-8 tracking-tighter leading-tight">
-              Growing <span className="text-blue-600 italic">Future</span> Tech Leaders
+              {overview?.headingLine1 || "Growing"} <span className="text-blue-600 italic">{overview?.headingLine2 || "Future"}</span> {overview?.headingLine3 || "Tech Leaders"}
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed font-medium px-4">
-              This is <span className="text-slate-900 font-bold border-b-2 border-red-200">not a coaching institute</span>. VelDurSen's Internship Program is a <br className="hidden md:block" />
-              <span className="text-red-600 font-bold">CSR-driven early talent engine</span> designed to architect real-world engineering excellence.
+              {overview?.subHeading || (
+                <>This is <span className="text-slate-900 font-bold border-b-2 border-red-200">not a coaching institute</span>. VelDurSen's Internship Program is a <br className="hidden md:block" />
+                  <span className="text-red-600 font-bold">CSR-driven early talent engine</span> designed to architect real-world engineering excellence.</>
+              )}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8 relative">
-            {[
+            {(overview?.cards && overview.cards.length > 0 ? overview.cards : [
               {
                 id: "01",
                 icon: Heart,
+                iconName: "Heart",
                 tag: "PURPOSE",
                 title: "CSR-Driven Initiative",
                 desc: "Nurturing global tech talent as a core social responsibility, giving back to the engineering community.",
@@ -153,6 +307,7 @@ const Internships = () => {
               {
                 id: "02",
                 icon: Users,
+                iconName: "Users",
                 tag: "EXPOSURE",
                 title: "Real-World Experience",
                 desc: "Deep integration with senior engineering squads on live enterprise ecosystems, not simulations.",
@@ -161,65 +316,69 @@ const Internships = () => {
               {
                 id: "03",
                 icon: Sparkles,
+                iconName: "Sparkles",
                 tag: "GROWTH",
                 title: "Pure Skill Evolution",
                 desc: "100% focused on capability building and knowledge transfer, prioritizing growth over recruitment.",
                 bgImg: growthBg
               }
-            ].map((principle, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15, duration: 0.6 }}
-                whileHover={{ y: -10 }}
-                className="group relative"
-              >
-                {/* Prism Module Card */}
-                <div className="relative p-8 rounded-3xl bg-white border border-slate-100 shadow-2xl shadow-slate-200/50 overflow-hidden h-full flex flex-col group/card transition-all duration-500 hover:border-red-600/50">
-                  {/* Background Image Wrapper */}
-                  <div className="absolute inset-0 z-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700">
-                    <img
-                      src={principle.bgImg}
-                      alt=""
-                      className="w-full h-full object-cover scale-110 group-hover/card:scale-100 transition-transform duration-[2s]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/20" />
-                  </div>
-
-                  {/* Card Corner Accents */}
-                  <div className="absolute top-6 left-6 w-2 h-2 border-t-2 border-l-2 border-red-600 opacity-20 group-hover:opacity-100 transition-opacity z-10" />
-                  <div className="absolute bottom-6 right-6 w-2 h-2 border-b-2 border-r-2 border-red-600 opacity-20 group-hover:opacity-100 transition-opacity z-10" />
-
-                  <div className="relative z-10 flex flex-col h-full">
-                    <div className="w-14 h-14 rounded-2xl bg-white shadow-xl shadow-red-200/20 flex items-center justify-center mb-8 rotate-3 group-hover:rotate-12 transition-transform duration-500 border border-red-50">
-                      <principle.icon className="w-7 h-7 text-red-600" />
+            ]).map((principle: any, i: number) => {
+              const Icon = getIcon(principle.iconName, Heart);
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.15, duration: 0.6 }}
+                  whileHover={{ y: -10 }}
+                  className="group relative"
+                >
+                  {/* Prism Module Card */}
+                  <div className="relative p-8 rounded-3xl bg-white border border-slate-100 shadow-2xl shadow-slate-200/50 overflow-hidden h-full flex flex-col group/card transition-all duration-500 hover:border-red-600/50">
+                    {/* Background Image Wrapper */}
+                    <div className="absolute inset-0 z-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700">
+                      <img
+                        src={principle.bgImage ? urlFor(principle.bgImage).url() : principle.bgImg}
+                        alt=""
+                        className="w-full h-full object-cover scale-110 group-hover/card:scale-100 transition-transform duration-[2s]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/20" />
                     </div>
 
-                    <span className="text-[10px] font-black text-red-600 uppercase tracking-[0.3em] mb-3 opacity-60 group-hover:text-red-500 group-hover:opacity-100">
-                      {principle.tag}
-                    </span>
+                    {/* Card Corner Accents */}
+                    <div className="absolute top-6 left-6 w-2 h-2 border-t-2 border-l-2 border-red-600 opacity-20 group-hover:opacity-100 transition-opacity z-10" />
+                    <div className="absolute bottom-6 right-6 w-2 h-2 border-b-2 border-r-2 border-red-600 opacity-20 group-hover:opacity-100 transition-opacity z-10" />
 
-                    <h4 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight group-hover:text-white transition-colors duration-300">
-                      {principle.title}
-                    </h4>
+                    <div className="relative z-10 flex flex-col h-full">
+                      <div className="w-14 h-14 rounded-2xl bg-white shadow-xl shadow-red-200/20 flex items-center justify-center mb-8 rotate-3 group-hover:rotate-12 transition-transform duration-500 border border-red-50">
+                        <Icon className="w-7 h-7 text-red-600" />
+                      </div>
 
-                    <p className="text-sm text-slate-500 leading-relaxed font-medium group-hover:text-slate-200 transition-colors duration-300">
-                      {principle.desc}
-                    </p>
+                      <span className="text-[10px] font-black text-red-600 uppercase tracking-[0.3em] mb-3 opacity-60 group-hover:text-red-500 group-hover:opacity-100">
+                        {principle.tag}
+                      </span>
 
-                    <div className="mt-8 pt-6 border-t border-slate-100 group-hover:border-white/10 flex items-center justify-between transition-colors">
-                      <span className="text-[10px] font-bold text-slate-400 group-hover:text-slate-500">MODULE {principle.id}</span>
-                      <div className="w-8 h-[2px] bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
+                      <h4 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight group-hover:text-white transition-colors duration-300">
+                        {principle.title}
+                      </h4>
+
+                      <p className="text-sm text-slate-500 leading-relaxed font-medium group-hover:text-slate-200 transition-colors duration-300">
+                        {principle.desc}
+                      </p>
+
+                      <div className="mt-8 pt-6 border-t border-slate-100 group-hover:border-white/10 flex items-center justify-between transition-colors">
+                        <span className="text-[10px] font-bold text-slate-400 group-hover:text-slate-500">MODULE 0{i + 1}</span>
+                        <div className="w-8 h-[2px] bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              )
+            })}
           </div>
 
-          {/* Technical Advisory - High Visibility Style */}
+          {/* Technical Advisory */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -239,18 +398,20 @@ const Internships = () => {
 
               <div className="flex-grow text-center lg:text-left">
                 <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
-                  <span className="text-[10px] font-black text-red-500 uppercase tracking-[0.4em]">Proprietary Advisory</span>
+                  <span className="text-[10px] font-black text-red-500 uppercase tracking-[0.4em]">{advisory?.tag || "Proprietary Advisory"}</span>
                   <div className="h-px w-10 bg-red-600 hidden sm:block" />
                 </div>
-                <h4 className="text-xl sm:text-2xl font-bold text-white mb-3 tracking-tight">Program Integrity Notice</h4>
+                <h4 className="text-xl sm:text-2xl font-bold text-white mb-3 tracking-tight">{advisory?.title || "Program Integrity Notice"}</h4>
                 <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-medium">
-                  VelDurSen is <span className="text-white font-bold underline decoration-red-600 underline-offset-4">not a training institute</span> or placement agency. We operate as a global enterprise tech powerhouse. This initiative is strictly for <span className="text-white">early-talent architectural development</span>. Capability growth is the primary objective; long-term recruitment is not a guaranteed outcome of the program.
+                  {advisory?.content || (
+                    <>VelDurSen is <span className="text-white font-bold underline decoration-red-600 underline-offset-4">not a training institute</span> or placement agency. We operate as a global enterprise tech powerhouse. This initiative is strictly for <span className="text-white">early-talent architectural development</span>. Capability growth is the primary objective; long-term recruitment is not a guaranteed outcome of the program.</>
+                  )}
                 </p>
               </div>
 
               <div className="flex-shrink-0 opacity-20 group-hover:opacity-100 transition-opacity duration-700 hidden lg:block">
                 <div className="text-[10px] font-black text-white/50 uppercase tracking-[0.5em] [writing-mode:vertical-lr] rotate-180">
-                  SYSTEM_PRIORITY_HIGH
+                  {advisory?.sideTag || "SYSTEM_PRIORITY_HIGH"}
                 </div>
               </div>
             </div>
@@ -258,7 +419,7 @@ const Internships = () => {
         </div>
       </section>
 
-      {/* Technology Focus Areas - Glassmorphic Schematic Redesign */}
+      {/* Technology Focus Areas */}
       <section className="py-12 md:py-16 bg-section relative overflow-hidden">
         {/* Animated Radial Gradients */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-red-600/5 rounded-full blur-[160px] animate-pulse" />
@@ -268,20 +429,23 @@ const Internships = () => {
           <header className="mb-12 text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start gap-4 mb-6">
               <div className="h-0.5 w-12 bg-red-600" />
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-600">Architectural Core</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-600">{technology?.tag || "Architectural Core"}</span>
             </div>
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-950 tracking-tighter mb-6 sm:mb-8 italic leading-tight">
-              Technology <span className="text-slate-300">Focus Areas</span>
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-900 tracking-tighter mb-6 sm:mb-8 italic leading-tight">
+              {technology?.headingLine1 || "Technology"} <span className="text-slate-300">{technology?.headingLine2 || "Focus Areas"}</span>
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-slate-600 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              Interns engage with <span className="text-slate-950 underline decoration-red-600/20 underline-offset-8">mission-critical tech stacks</span>. Guidance is provided by senior architects through a deep-dive engineering immersion.
+              {technology?.description || (
+                <>Interns engage with <span className="text-slate-950 underline decoration-red-600/20 underline-offset-8">mission-critical tech stacks</span>. Guidance is provided by senior architects through a deep-dive engineering immersion.</>
+              )}
             </p>
           </header>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
+            {(technology?.focusAreas && technology.focusAreas.length > 0 ? technology.focusAreas : [
               {
                 icon: Code,
+                iconName: "Code",
                 title: "Software",
                 subtitle: "Enterprise Development",
                 areas: [
@@ -291,11 +455,11 @@ const Internships = () => {
                   "Modern frontend frameworks",
                   "Backend system design"
                 ],
-
                 bgImg: softwareBg
               },
               {
                 icon: Database,
+                iconName: "Database",
                 title: "Data & AI",
                 subtitle: "Intelligent Systems",
                 areas: [
@@ -305,11 +469,11 @@ const Internships = () => {
                   "Big data processing",
                   "AI model deployment"
                 ],
-
                 bgImg: dataAiBg
               },
               {
                 icon: Shield,
+                iconName: "Shield",
                 title: "Security",
                 subtitle: "Defensive Architecture",
                 areas: [
@@ -319,11 +483,11 @@ const Internships = () => {
                   "Compliance awareness",
                   "Threat modeling basics"
                 ],
-
                 bgImg: securityBg
               },
               {
                 icon: Globe2,
+                iconName: "Globe2",
                 title: "Cloud",
                 subtitle: "DevOps & SRE",
                 areas: [
@@ -333,71 +497,72 @@ const Internships = () => {
                   "Infrastructure as code",
                   "Monitoring and observability"
                 ],
-
                 bgImg: cloudBg
               }
-            ].map((domain, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="group relative"
-              >
+            ]).map((domain: any, i: number) => {
+              const Icon = getIcon(domain.iconName, Code);
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.6 }}
+                  className="group relative"
+                >
 
-
-                <div className="ml-4 h-full bg-white border border-slate-100 rounded-[2rem] p-6 hover:shadow-2xl hover:shadow-red-200/40 transition-all duration-500 overflow-hidden flex flex-col group/card relative">
-                  {/* Thematic Background Image */}
-                  <div className="absolute inset-0 z-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 overflow-hidden">
-                    <img
-                      src={domain.bgImg}
-                      alt=""
-                      className="w-full h-full object-cover scale-125 group-hover/card:scale-100 transition-transform duration-[3s]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/20" />
-                  </div>
-                  {/* Glassmorphic Icon Header */}
-                  <div className="relative mb-6 z-10">
-                    <div className="w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center group-hover:bg-red-600 transition-colors duration-500">
-                      <domain.icon size={24} className="text-red-600 group-hover:text-white transition-colors" />
+                  <div className="ml-4 h-full bg-white border border-slate-100 rounded-[2rem] p-6 hover:shadow-2xl hover:shadow-red-200/40 transition-all duration-500 overflow-hidden flex flex-col group/card relative">
+                    {/* Thematic Background Image */}
+                    <div className="absolute inset-0 z-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 overflow-hidden">
+                      <img
+                        src={domain.bgImage ? urlFor(domain.bgImage).url() : domain.bgImg}
+                        alt=""
+                        className="w-full h-full object-cover scale-125 group-hover/card:scale-100 transition-transform duration-[3s]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/20" />
                     </div>
-                    {/* Scanner Effect */}
-                    <div className="absolute -inset-1 border-2 border-red-600/0 rounded-[1.5rem] group-hover:border-red-600/20 group-hover:scale-110 transition-all duration-700" />
-                  </div>
+                    {/* Glassmorphic Icon Header */}
+                    <div className="relative mb-6 z-10">
+                      <div className="w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center group-hover:bg-red-600 transition-colors duration-500">
+                        <Icon size={24} className="text-red-600 group-hover:text-white transition-colors" />
+                      </div>
+                      {/* Scanner Effect */}
+                      <div className="absolute -inset-1 border-2 border-red-600/0 rounded-[1.5rem] group-hover:border-red-600/20 group-hover:scale-110 transition-all duration-700" />
+                    </div>
 
-                  <div className="mb-6 overflow-hidden z-10">
-                    <h3 className="text-2xl font-black text-slate-950 leading-none mb-1 group-hover:text-white transition-colors duration-300">
-                      {domain.title}
-                    </h3>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest group-hover:text-slate-300">
-                      {domain.subtitle}
-                    </p>
-                  </div>
+                    <div className="mb-6 overflow-hidden z-10">
+                      <h3 className="text-2xl font-black text-slate-950 leading-none mb-1 group-hover:text-white transition-colors duration-300">
+                        {domain.title}
+                      </h3>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest group-hover:text-slate-300">
+                        {domain.subtitle}
+                      </p>
+                    </div>
 
-                  <ul className="space-y-3 mb-8 flex-grow z-10">
-                    {domain.areas.map((area, idx) => (
-                      <li key={idx} className="flex gap-2.5 group/item">
-                        <div className="w-1 h-1 rounded-full bg-red-600 mt-1.5 shrink-0 group-hover/item:scale-150 transition-transform" />
-                        <span className="text-[11px] font-bold text-slate-600 group-hover:text-slate-200 transition-colors leading-relaxed">
-                          {area}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                    <ul className="space-y-3 mb-8 flex-grow z-10">
+                      {domain.areas.map((area: string, idx: number) => (
+                        <li key={idx} className="flex gap-2.5 group/item">
+                          <div className="w-1 h-1 rounded-full bg-red-600 mt-1.5 shrink-0 group-hover/item:scale-150 transition-transform" />
+                          <span className="text-[11px] font-bold text-slate-600 group-hover:text-slate-200 transition-colors leading-relaxed">
+                            {area}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
 
-                  {/* Expand CTA */}
-                  <div className="flex items-center gap-2 text-[9px] font-black text-slate-950 uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 z-10 group-hover:text-white">
-                    Explore Stack <ArrowRight size={12} className="text-red-600" />
+                    {/* Expand CTA */}
+                    <div className="flex items-center gap-2 text-[9px] font-black text-slate-950 uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 z-10 group-hover:text-white">
+                      Explore Stack <ArrowRight size={12} className="text-red-600" />
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      {/* Program Structure - Vertical Terminal Feed Redesign */}
+      {/* Program Structure - Pipeline */}
       <section className="py-16 md:py-20 bg-white relative overflow-hidden">
         {/* Background Grid Accent */}
         <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '50px 50px' }} />
@@ -410,10 +575,10 @@ const Internships = () => {
               viewport={{ once: true }}
               className="text-[10px] font-black uppercase text-green-600 mb-6"
             >
-              System Execution Roadmap
+              {pipeline?.smallTag || "System Execution Roadmap"}
             </motion.div>
             <h2 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter mb-8 leading-[0.8]">
-              Operational <span className="text-green-600">Pipeline.</span>
+              {pipeline?.headingLine1 || "Operational"} <span className="text-green-600">{pipeline?.headingLine2 || "Pipeline."}</span>
             </h2>
           </header>
 
@@ -430,7 +595,7 @@ const Internships = () => {
             </div>
 
             <div className="space-y-1">
-              {[
+              {(pipeline?.phases && pipeline.phases.length > 0 ? pipeline.phases : [
                 {
                   phase: "01",
                   title: "Architectural Onboarding",
@@ -459,7 +624,7 @@ const Internships = () => {
                   description: "Final execution and demonstration of technical growth. Strategic review with engineering leadership.",
                   activities: ["Live Demos", "Growth Review", "Certification", "Merit Check"]
                 }
-              ].map((phase, i) => (
+              ]).map((phase: any, i: number) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -473,7 +638,7 @@ const Internships = () => {
                     <div className="relative p-5 md:p-6 rounded-[2rem] bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-2xl hover:shadow-red-200/30 transition-all duration-700 overflow-hidden">
                       {/* Holographic Number */}
                       <div className="absolute -top-6 -right-6 text-[12rem] font-black text-slate-200/20 leading-none select-none group-hover:text-red-500/10 transition-colors">
-                        {phase.phase}
+                        {phase.phase || phase.phaseId}
                       </div>
 
                       <div className="relative z-10">
@@ -493,7 +658,7 @@ const Internships = () => {
                         </p>
 
                         <div className="grid grid-cols-2 gap-2">
-                          {phase.activities.map((act) => (
+                          {phase.activities.map((act: string) => (
                             <div key={act} className="flex items-center gap-2">
                               <div className="w-1 h-1 rounded-full bg-red-600" />
                               <span className="text-[10px] font-black text-slate-900 uppercase tracking-tighter">
@@ -529,34 +694,34 @@ const Internships = () => {
                 <Calendar className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6 tracking-tighter leading-tight italic">
-                12 Weeks. <br className="sm:hidden" />
-                <span className="text-red-600">Pure Architecture.</span>
+                {summary?.title || (
+                  <>12 Weeks. <br className="sm:hidden" /> <span className="text-red-600">Pure Architecture.</span></>
+                )}
               </h3>
               <p className="text-sm md:text-base text-slate-400 font-medium max-w-2xl mb-10 leading-relaxed px-4">
-                "We engineer growth at scale. Our roadmap is not a schedule; it is an optimized system for transforming potential into professional engineering velocity."
+                {summary?.description || '"We engineer growth at scale. Our roadmap is not a schedule; it is an optimized system for transforming potential into professional engineering velocity."'}
               </p>
               <div className="flex flex-wrap justify-center gap-8 sm:gap-16 text-slate-500 font-black text-[10px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.4em]">
-                <div className="flex flex-col gap-2 sm:gap-3">
-                  <span className="text-white text-3xl sm:text-4xl font-black">100%</span>
-                  <span>System Exposure</span>
-                </div>
-                <div className="hidden md:block w-px h-16 bg-white/10" />
-                <div className="flex flex-col gap-2 sm:gap-3">
-                  <span className="text-white text-3xl sm:text-4xl font-black">Senior</span>
-                  <span>Architect Lead</span>
-                </div>
-                <div className="hidden md:block w-px h-16 bg-white/10" />
-                <div className="flex flex-col gap-2 sm:gap-3">
-                  <span className="text-white text-3xl sm:text-4xl font-black">Global</span>
-                  <span>Validation</span>
-                </div>
+                {(summary?.stats && summary.stats.length > 0 ? summary.stats : [
+                  { value: "100%", label1: "System Exposure" },
+                  { value: "Senior", label1: "Architect Lead" },
+                  { value: "Global", label1: "Validation" }
+                ]).map((stat: any, index: number) => (
+                  <div key={index} className="flex items-center gap-8 md:gap-16">
+                    <div className="flex flex-col gap-2 sm:gap-3">
+                      <span className="text-white text-3xl sm:text-4xl font-black">{stat.value}</span>
+                      <span>{stat.label1} {stat.label2 && <br />} {stat.label2}</span>
+                    </div>
+                    {index < (summary?.stats?.length || 3) - 1 && <div className="hidden md:block w-px h-16 bg-white/10" />}
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Who Can Apply - Technical Blueprint Redesign */}
+      {/* Who Can Apply - Eligibility */}
       <section className="py-12 md:py-16 bg-[#fafafa] relative overflow-hidden">
         {/* Schematic Grid Background */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
@@ -572,7 +737,7 @@ const Internships = () => {
           >
             <div className="max-w-2xl">
               <h2 className="text-4xl md:text-6xl font-black text-slate-950 tracking-tighter leading-none">
-                Candidate <span className="text-slate-300">Eligibility.</span>
+                {eligibility?.headingLine1 || "Candidate"} <span className="text-slate-300">{eligibility?.headingLine2 || "Eligibility."}</span>
               </h2>
             </div>
           </motion.div>
@@ -594,17 +759,17 @@ const Internships = () => {
 
                 <h3 className="text-3xl font-black text-slate-950 mb-10 italic uppercase tracking-tighter">Target Profiles</h3>
                 <div className="space-y-8">
-                  {[
-                    { title: "Academic Core", desc: "College students in final or pre-final cycles." },
-                    { title: "Early Professional", desc: "Recent graduates within L+1 year context." },
-                    { title: "Strategic Pivots", desc: "Professionals transitioning with core logic bases." },
-                    { title: "System Autodidacts", desc: "Self-taught architects with proven builds." }
-                  ].map((item, i) => (
+                  {(eligibility?.targetProfiles && eligibility.targetProfiles.length > 0 ? eligibility.targetProfiles : [
+                    { title: "Academic Core", description: "College students in final or pre-final cycles." },
+                    { title: "Early Professional", description: "Recent graduates within L+1 year context." },
+                    { title: "Strategic Pivots", description: "Professionals transitioning with core logic bases." },
+                    { title: "System Autodidacts", description: "Self-taught architects with proven builds." }
+                  ]).map((item: any, i: number) => (
                     <div key={i} className="flex gap-6 group/item">
                       <div className="text-[10px] font-black text-slate-300 mt-1">0{i + 1}</div>
                       <div>
                         <h4 className="text-sm font-black text-slate-900 uppercase mb-1 group-hover/item:text-red-600 transition-colors">{item.title}</h4>
-                        <p className="text-xs font-bold text-slate-400 group-hover/item:text-slate-600 transition-colors leading-tight">{item.desc}</p>
+                        <p className="text-xs font-bold text-slate-400 group-hover/item:text-slate-600 transition-colors leading-tight">{item.description || item.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -625,17 +790,17 @@ const Internships = () => {
 
                 <h3 className="text-3xl font-black text-slate-950 mb-10 italic uppercase tracking-tighter">Key Capabilities</h3>
                 <div className="space-y-8">
-                  {[
-                    { title: "Algorithmic Logic", desc: "Fundamental understanding of data structures." },
-                    { title: "Environment Literacy", desc: "Familiarity with modern web ecosystems (JS/React)." },
-                    { title: "Growth Velocity", desc: "Proven ability to synthesize new concepts rapidly." },
-                    { title: "Operational Focus", desc: "Commitment to a 12-week intensive execution cycle." }
-                  ].map((item, i) => (
+                  {(eligibility?.coreCapabilities && eligibility.coreCapabilities.length > 0 ? eligibility.coreCapabilities : [
+                    { title: "Algorithmic Logic", description: "Fundamental understanding of data structures." },
+                    { title: "Environment Literacy", description: "Familiarity with modern web ecosystems (JS/React)." },
+                    { title: "Growth Velocity", description: "Proven ability to synthesize new concepts rapidly." },
+                    { title: "Operational Focus", description: "Commitment to a 12-week intensive execution cycle." }
+                  ]).map((item: any, i: number) => (
                     <div key={i} className="flex gap-6 group/item">
                       <div className="text-[10px] font-black text-slate-300 mt-1">0{i + 5}</div>
                       <div>
                         <h4 className="text-sm font-black text-slate-900 uppercase mb-1 group-hover/item:text-red-600 transition-colors">{item.title}</h4>
-                        <p className="text-xs font-bold text-slate-400 group-hover/item:text-slate-600 transition-colors leading-tight">{item.desc}</p>
+                        <p className="text-xs font-bold text-slate-400 group-hover/item:text-slate-600 transition-colors leading-tight">{item.description || item.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -645,14 +810,10 @@ const Internships = () => {
             </div>
           </motion.div>
 
-          {/* Selection Pipeline - Modular Node Design */}
-
         </div>
       </section>
 
-
-
-      {/* Final CTA Section - High Impact Redesign */}
+      {/* Final CTA Section - Evolution */}
       <section className="py-8 bg-slate-950 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-red-600 opacity-10 blur-[120px] -translate-y-1/2 translate-x-1/2" />
         <div className="enterprise-container relative z-10">
@@ -669,20 +830,20 @@ const Internships = () => {
               viewport={{ once: true }}
               className="inline-block px-3 py-1 rounded-full border border-red-500/30 text-red-500 text-[9px] font-black uppercase tracking-[0.4em] mb-6"
             >
-              System Ready for Admission
+              {evolution?.tag || "System Ready for Admission"}
             </motion.div>
             <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tighter leading-none">
-              Initiate Your <span className="text-red-600">Evolution.</span>
+              {evolution?.headingLine1 || "Initiate Your"} <span className="text-red-600">{evolution?.headingLine2 || "Evolution."}</span>
             </h2>
             <p className="text-base text-slate-400 mb-8 max-w-2xl mx-auto font-medium leading-relaxed">
-              Professional velocity is the key metric. Access the interface below to begin your immersion.
+              {evolution?.description || "Professional velocity is the key metric. Access the interface below to begin your immersion."}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/contact" state={{ fromButton: true }} className="w-full sm:w-auto px-8 py-4 bg-red-600 text-white font-black text-xs uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all duration-500 shadow-[0_20px_40px_rgba(220,38,38,0.2)]">
-                Commence Application
+              <Link to={evolution?.primaryButtonLink || "/contact"} state={{ fromButton: true }} className="w-full sm:w-auto px-8 py-4 bg-red-600 text-white font-black text-xs uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all duration-500 shadow-[0_20px_40px_rgba(220,38,38,0.2)]">
+                {evolution?.primaryButtonText || "Commence Application"}
               </Link>
-              <Link to="/careers" state={{ fromButton: true }} className="w-full sm:w-auto px-8 py-4 border border-white/20 text-white font-black text-xs uppercase tracking-widest hover:bg-red-600 hover:border-red-600 transition-all duration-500">
-                Full-Time Roles
+              <Link to={evolution?.secondaryButtonLink || "/careers"} state={{ fromButton: true }} className="w-full sm:w-auto px-8 py-4 border border-white/20 text-white font-black text-xs uppercase tracking-widest hover:bg-red-600 hover:border-red-600 transition-all duration-500">
+                {evolution?.secondaryButtonText || "Full-Time Roles"}
               </Link>
             </div>
           </motion.div>

@@ -123,9 +123,7 @@ export default defineConfig({
                                         S.listItem().title('14. The VelDurSen Advantage').child(S.document().schemaType('velDurSenAdvantage').documentId('velDurSenAdvantage')),
                                     ])
                             ),
-                        S.listItem()
-                            .title('What We Do')
-                            .child(S.document().schemaType('whatWeDoPage').documentId('whatWeDo')),
+
                         S.listItem()
                             .title('Blog')
                             .child(S.document().schemaType('blogPage').documentId('blog')),

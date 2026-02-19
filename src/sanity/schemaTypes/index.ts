@@ -20,13 +20,12 @@ import { homePage } from './homePage'
 import { careersPage } from './careersPage'
 import * as aboutSections from './aboutSections'
 import * as servicesSections from './servicesSections'
-import { whatWeDoPage, contactPage, blogPage } from './otherPages'
+import { contactPage, blogPage } from './otherPages'
 
 export const schemaTypes = [
     globalSettings,
     homePage,
     careersPage,
-    whatWeDoPage,
     contactPage,
     blogPage,
     page, // Keeping generic page for now just in case

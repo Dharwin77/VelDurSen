@@ -291,7 +291,7 @@ const Internships = () => {
                   "Modern frontend frameworks",
                   "Backend system design"
                 ],
-                label: "CORE_ENG",
+
                 bgImg: softwareBg
               },
               {
@@ -305,7 +305,7 @@ const Internships = () => {
                   "Big data processing",
                   "AI model deployment"
                 ],
-                label: "DATA_OPS",
+
                 bgImg: dataAiBg
               },
               {
@@ -319,7 +319,7 @@ const Internships = () => {
                   "Compliance awareness",
                   "Threat modeling basics"
                 ],
-                label: "ZERO_TRUST",
+
                 bgImg: securityBg
               },
               {
@@ -333,7 +333,7 @@ const Internships = () => {
                   "Infrastructure as code",
                   "Monitoring and observability"
                 ],
-                label: "SRE_FABRIC",
+
                 bgImg: cloudBg
               }
             ].map((domain, i) => (
@@ -345,10 +345,7 @@ const Internships = () => {
                 transition={{ delay: i * 0.1, duration: 0.6 }}
                 className="group relative"
               >
-                {/* Vertical Label */}
-                <div className="absolute -left-4 top-1/2 -translate-y-1/2 rotate-180 [writing-mode:vertical-lr] text-[8px] font-black text-slate-300 tracking-[0.5em] group-hover:text-red-600 transition-colors">
-                  {domain.label}
-                </div>
+
 
                 <div className="ml-4 h-full bg-white border border-slate-100 rounded-[2rem] p-6 hover:shadow-2xl hover:shadow-red-200/40 transition-all duration-500 overflow-hidden flex flex-col group/card relative">
                   {/* Thematic Background Image */}
@@ -436,7 +433,6 @@ const Internships = () => {
               {[
                 {
                   phase: "01",
-                  duration: "W01 - W02",
                   title: "Architectural Onboarding",
                   tag: "SYSTEM_INITIALIZATION",
                   description: "Immersion into VelDurSen's core engineering culture, specialized toolsets, and enterprise-scale methodologies.",
@@ -444,7 +440,6 @@ const Internships = () => {
                 },
                 {
                   phase: "02",
-                  duration: "W03 - W06",
                   title: "Guided Technical Ops",
                   tag: "MODULE_INTEGRATION",
                   description: "Active contribution to high-stakes tasks under senior mentorship. Integration with live enterprise engineering squads.",
@@ -452,7 +447,6 @@ const Internships = () => {
                 },
                 {
                   phase: "03",
-                  duration: "W07 - W10",
                   title: "Autonomous Contribution",
                   tag: "CORE_EXECUTION",
                   description: "Scale-up of independent task execution. Direct ownership of specific system modules and feature architectures.",
@@ -460,7 +454,6 @@ const Internships = () => {
                 },
                 {
                   phase: "04",
-                  duration: "W11 - W12",
                   title: "Capstone & Validation",
                   tag: "FINAL_VALIDATION",
                   description: "Final execution and demonstration of technical growth. Strategic review with engineering leadership.",
@@ -488,9 +481,7 @@ const Internships = () => {
                           <span className="text-[10px] font-black text-red-600 bg-red-50 px-3 py-1 rounded-full uppercase tracking-widest border border-red-100">
                             {phase.tag}
                           </span>
-                          <span className="font-mono text-[10px] font-bold text-slate-400">
-                            {phase.duration}
-                          </span>
+
                         </div>
 
                         <h4 className="text-2xl md:text-3xl font-black text-slate-950 mb-3 tracking-tight group-hover:text-red-600 transition-colors italic">
@@ -580,17 +571,10 @@ const Internships = () => {
             className="flex flex-col lg:flex-row lg:items-end justify-between mb-24 gap-8"
           >
             <div className="max-w-2xl">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-[1px] bg-red-600" />
-                <span className="text-[10px] font-black uppercase tracking-[0.6em] text-red-600">Admission_Parameters.v2</span>
-              </div>
               <h2 className="text-4xl md:text-6xl font-black text-slate-950 tracking-tighter leading-none">
                 Candidate <span className="text-slate-300">Eligibility.</span>
               </h2>
             </div>
-            <p className="text-sm font-bold text-slate-500 max-w-xs leading-relaxed uppercase tracking-tighter text-right">
-              Defining the technical substrate and cognitive baseline for high-velocity system immersion.
-            </p>
           </motion.div>
 
           <motion.div
@@ -607,9 +591,7 @@ const Internships = () => {
               <div className="absolute top-8 right-8 w-4 h-4 border-t border-r border-slate-300" />
 
               <div className="relative z-10">
-                <div className="inline-block px-3 py-1 rounded-sm border border-red-600/20 bg-red-50 text-[10px] font-black text-red-600 uppercase tracking-widest mb-10">
-                  REF_01: TARGET_PROFILES
-                </div>
+
                 <h3 className="text-3xl font-black text-slate-950 mb-10 italic uppercase tracking-tighter">Target Profiles</h3>
                 <div className="space-y-8">
                   {[
@@ -640,9 +622,7 @@ const Internships = () => {
               <div className="absolute bottom-8 right-8 w-4 h-4 border-b border-r border-slate-300" />
 
               <div className="relative z-10">
-                <div className="inline-block px-3 py-1 rounded-sm border border-slate-600/20 bg-slate-50 text-[10px] font-black text-slate-600 uppercase tracking-widest mb-10">
-                  REF_02: CORE_COMPETENCIES
-                </div>
+
                 <h3 className="text-3xl font-black text-slate-950 mb-10 italic uppercase tracking-tighter">Key Capabilities</h3>
                 <div className="space-y-8">
                   {[
@@ -666,59 +646,7 @@ const Internships = () => {
           </motion.div>
 
           {/* Selection Pipeline - Modular Node Design */}
-          <div className="mt-32">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="flex items-center justify-between mb-16 px-4"
-            >
-              <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.5em]">System_Selection_Pipeline</h4>
-              <div className="h-px flex-grow mx-8 bg-slate-200" />
-              <div className="flex gap-2">
-                <div className="w-2 h-2 rounded-full bg-red-600" />
-                <div className="w-2 h-2 rounded-full bg-slate-200" />
-                <div className="w-2 h-2 rounded-full bg-slate-200" />
-              </div>
-            </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                { label: "Digital Application", status: "READY", id: "01" },
-                { label: "Algorithmic Assessment", status: "PENDING", id: "02" },
-                { label: "Architectural Interview", status: "LOCKED", id: "03" },
-                { label: "System Admission", status: "FINAL", id: "04" }
-              ].map((stage, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="relative group cursor-crosshair"
-                >
-                  <div className="bg-white border border-slate-200 p-8 rounded-xl group-hover:border-red-600/50 transition-all duration-500 shadow-sm group-hover:shadow-xl group-hover:shadow-red-600/5">
-                    <div className="flex justify-between items-start mb-6">
-                      <span className="font-mono text-[9px] font-bold text-slate-400 group-hover:text-red-600 transition-colors tracking-widest">GATE_{stage.id}</span>
-                      <div className={`w-1.5 h-1.5 rounded-full ${stage.status === 'READY' ? 'bg-red-600' : 'bg-slate-200'} group-hover:scale-150 transition-transform`} />
-                    </div>
-                    <h5 className="text-sm font-black text-slate-900 uppercase tracking-tighter mb-4 leading-tight group-hover:italic transition-all">
-                      {stage.label}
-                    </h5>
-                    <div className="h-[1px] w-full bg-slate-100 group-hover:bg-red-100 mb-4 transition-colors" />
-                    <div className="flex items-center justify-between">
-                      <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest">{stage.status}</span>
-                      <ArrowRight size={10} className="text-slate-300 group-hover:text-red-600 transition-colors" />
-                    </div>
-                  </div>
-                  {/* Connecting Line (hidden on last and mobile) */}
-                  {i < 3 && (
-                    <div className="absolute top-1/2 -right-2 w-4 h-px bg-slate-200 hidden lg:block z-0" />
-                  )}
-                </motion.div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 

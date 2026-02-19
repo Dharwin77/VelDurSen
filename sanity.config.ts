@@ -194,6 +194,23 @@ export default defineConfig({
                                         S.listItem().title('05. Global Persistence').child(S.document().schemaType('contactGlobal').documentId('contactGlobal')),
                                     ])
                             ),
+                        S.listItem()
+                            .title('Internship Page Content')
+                            .child(
+                                S.list()
+                                    .title('Sections')
+                                    .items([
+                                        S.listItem().title('01. Hero').child(S.document().schemaType('internshipHero').documentId('internshipHero')),
+                                        S.listItem().title('02. Ticker').child(S.document().schemaType('internshipTicker').documentId('internshipTicker')),
+                                        S.listItem().title('03. Growing Future (Overview)').child(S.document().schemaType('internshipGrowingFuture').documentId('internshipGrowingFuture')),
+                                        S.listItem().title('04. Advisory').child(S.document().schemaType('internshipAdvisory').documentId('internshipAdvisory')),
+                                        S.listItem().title('05. Technology Focus').child(S.document().schemaType('internshipTechnology').documentId('internshipTechnology')),
+                                        S.listItem().title('06. Pipeline').child(S.document().schemaType('internshipPipeline').documentId('internshipPipeline')),
+                                        S.listItem().title('07. 12 Weeks Summary').child(S.document().schemaType('internship12Weeks').documentId('internship12Weeks')),
+                                        S.listItem().title('08. Candidate Eligibility').child(S.document().schemaType('internshipEligibility').documentId('internshipEligibility')),
+                                        S.listItem().title('09. Evolution (CTA)').child(S.document().schemaType('internshipEvolution').documentId('internshipEvolution')),
+                                    ])
+                            ),
 
                     ]),
         }),

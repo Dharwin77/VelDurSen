@@ -125,18 +125,39 @@ export default defineConfig({
                             ),
 
                         S.listItem()
-                            .title('Blog')
-                            .child(S.document().schemaType('blogPage').documentId('blog')),
+                            .title('Blog Page Content')
+                            .child(
+                                S.list()
+                                    .title('Sections')
+                                    .items([
+                                        S.listItem().title('01. Hero').child(S.document().schemaType('blogPageHero').documentId('blogPageHero')),
+                                    ])
+                            ),
                         S.listItem()
-                            .title('Careers')
-                            .child(S.document().schemaType('careersPage').documentId('careers')),
+                            .title('Blog Posts')
+                            .child(S.documentTypeList('blogPost').title('All Blog Posts')),
+                        S.listItem()
+                            .title('Careers Page Content')
+                            .child(
+                                S.list()
+                                    .title('Sections')
+                                    .items([
+                                        S.listItem().title('01. Hero').child(S.document().schemaType('careersHero').documentId('careersHero')),
+                                        S.listItem().title('02. Our Approach').child(S.document().schemaType('careersOurApproach').documentId('careersOurApproach')),
+                                        S.listItem().title('03. Life at Veldursen').child(S.document().schemaType('careersLifeAtVeldursen').documentId('careersLifeAtVeldursen')),
+                                        S.listItem().title('04. Growth').child(S.document().schemaType('careersGrowth').documentId('careersGrowth')),
+                                        S.listItem().title('05. A Day in the Life').child(S.document().schemaType('careersDayInTheLife').documentId('careersDayInTheLife')),
+                                        S.listItem().title('06. Find Your Perfect Role').child(S.document().schemaType('careersFindYourRole').documentId('careersFindYourRole')),
+                                        S.listItem().title('07. Our Hiring Journey').child(S.document().schemaType('careersHiringJourney').documentId('careersHiringJourney')),
+                                        S.listItem().title('08. Hear From Our Team').child(S.document().schemaType('careersHearFromTeam').documentId('careersHearFromTeam')),
+                                        S.listItem().title('09. FAQ').child(S.document().schemaType('careersFAQ').documentId('careersFAQ')),
+                                        S.listItem().title('10. Ready to Make an Impact?').child(S.document().schemaType('careersReadyToMakeImpact').documentId('careersReadyToMakeImpact')),
+                                    ])
+                            ),
                         S.listItem()
                             .title('Contact')
                             .child(S.document().schemaType('contactPage').documentId('contact')),
-                        S.divider(),
-                        S.listItem()
-                            .title('Blog Posts')
-                            .child(S.documentTypeList('blogPost').title('Blog Posts')),
+
                     ]),
         }),
         visionTool(),

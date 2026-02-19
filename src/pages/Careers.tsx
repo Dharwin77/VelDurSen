@@ -214,7 +214,12 @@ const Careers = () => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
-            onClick={() => setShowQuickApply(true)}
+            onClick={() => {
+              const openingsSection = document.getElementById('openings');
+              if (openingsSection) {
+                openingsSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             className="group fixed bottom-8 right-8 z-50 bg-white hover:bg-gray-50 text-[#C0392B] border-2 border-red-300 hover:border-[#C0392B] rounded-full shadow-2xl flex items-center gap-2 font-semibold transition-all duration-300 overflow-hidden"
             style={{ width: '64px', height: '64px' }}
             whileHover={{ width: '180px' }}
@@ -223,71 +228,15 @@ const Careers = () => {
               <Rocket size={24} />
             </div>
             <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pr-4">
-              Quick Apply
+              View Roles
             </span>
           </motion.button>
         )}
       </AnimatePresence>
 
-      {/* Quick Apply Modal */}
-      <AnimatePresence>
-        {showQuickApply && !showResumeUpload && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowQuickApply(false)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-slate-800 rounded-2xl p-8 max-w-md w-full relative">
-              <button onClick={() => setShowQuickApply(false)} className="absolute top-4 right-4"><X size={24} /></button>
-              <h3 className="text-2xl font-bold mb-4">Quick Apply</h3>
-              <input type="text" placeholder="Full Name" className="w-full p-3 border rounded-lg mb-3" />
-              <input type="email" placeholder="Email" className="w-full p-3 border rounded-lg mb-3" />
-              <button onClick={() => setShowResumeUpload(true)} className="w-full bg-[#C0392B] text-white py-3 rounded-lg font-semibold">Upload Resume</button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
-      {/* Resume Upload Modal */}
-      <AnimatePresence>
-        {showResumeUpload && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowResumeUpload(false)}>
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-slate-800 rounded-2xl p-8 max-w-md w-full relative">
-              <button onClick={() => setShowResumeUpload(false)} className="absolute top-4 right-4"><X size={24} /></button>
-              <h3 className="text-2xl font-bold mb-4 flex items-center gap-2"><Upload size={24} className="text-[#C0392B]" />Upload Resume</h3>
-              <p className="text-slate-600 mb-6">Upload your resume (PDF, JPG, or PNG)</p>
-              <div className="relative">
-                <input
-                  type="file"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={handleResumeUpload}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                />
-                <div className="border-2 border-dashed border-[#C0392B] rounded-lg p-8 text-center hover:bg-[#C0392B]/5 transition-colors">
-                  <Upload size={40} className="mx-auto mb-3 text-[#C0392B]" />
-                  <p className="font-semibold mb-1">Click to upload or drag & drop</p>
-                  <p className="text-sm text-slate-500">PDF, JPG, or PNG</p>
-                </div>
-              </div>
-              {resumeFile && (
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
-                  <div className="flex items-center gap-2 text-green-700 font-semibold mb-2">
-                    <CheckCircle size={20} /> Resume uploaded successfully
-                  </div>
-                  <p className="text-sm text-green-600">{resumeFile.name}</p>
-                  <div className="mt-4 bg-green-200 h-2 rounded-full">
-                    <div className="bg-green-600 h-2 rounded-full" style={{ width: `${profileStrength}%` }}></div>
-                  </div>
-                  <p className="text-xs text-green-700 mt-2">Profile strength: {profileStrength}%</p>
-                </motion.div>
-              )}
-              <button
-                onClick={() => { setShowResumeUpload(false); setShowQuickApply(false); }}
-                className="w-full mt-6 bg-[#C0392B] hover:bg-[#a02f24] text-white py-3 rounded-lg font-semibold transition-all transform hover:scale-105 disabled:opacity-50"
-                disabled={!resumeFile}
-              >
-                {resumeFile ? "Complete Application" : "Continue"}
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
+
 
       {/* Hero Section - PRESERVED from original */}
       <section className="relative h-[50vh] sm:h-[80vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden">
@@ -549,22 +498,9 @@ const Careers = () => {
               Find Your Perfect <span className="text-red-600">Role.</span>
             </h2>
           </motion.div>
-          <div className="mb-12 space-y-4">
-            <div className="relative max-w-2xl mx-auto">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" size={20} />
-              <input type="text" placeholder="Search roles..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full pl-12 pr-4 py-4 rounded-xl border-2 focus:border-[#C0392B] focus:outline-none" />
-            </div>
-            <div className="flex flex-wrap gap-4 justify-center">
-              {[{ val: departmentFilter, set: setDepartmentFilter, opts: departments }, { val: locationFilter, set: setLocationFilter, opts: locations }, { val: typeFilter, set: setTypeFilter, opts: types }].map((filter, i) => (
-                <select key={i} value={filter.val} onChange={(e) => filter.set(e.target.value)} className="px-6 py-3 rounded-lg border-2 focus:border-[#C0392B] focus:outline-none">
-                  {filter.opts.map((opt) => <option key={opt}>{opt}</option>)}
-                </select>
-              ))}
-            </div>
-          </div>
           <div className="space-y-4 max-w-5xl mx-auto">
             <AnimatePresence mode="wait">
-              {filteredJobs.length > 0 ? filteredJobs.map((job) => (
+              {allJobs.length > 0 ? allJobs.map((job) => (
                 <motion.div key={job.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="bg-slate-50 border-2 border-slate-200 rounded-xl p-6 hover:border-[#C0392B] hover:shadow-xl transition-all">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <div className="flex-1">
@@ -582,7 +518,7 @@ const Careers = () => {
                   </div>
                 </motion.div>
               )) : (
-                <p className="text-center text-slate-500">No roles found matching your criteria.</p>
+                <p className="text-center text-slate-500">No roles found.</p>
               )}
             </AnimatePresence>
           </div>

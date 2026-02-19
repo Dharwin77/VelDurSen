@@ -20,30 +20,61 @@ export const blogPost = defineType({
             },
         }),
         defineField({
-            name: 'author',
-            title: 'Author',
-            type: 'string', // Could be reference to author document if we had one
+            name: 'subtitle',
+            title: 'Subtitle',
+            type: 'string',
         }),
         defineField({
-            name: 'mainImage',
-            title: 'Main image',
-            type: 'image',
-            options: {
-                hotspot: true,
-            },
+            name: 'author',
+            title: 'Author',
+            type: 'string',
         }),
         defineField({
             name: 'publishedAt',
             title: 'Published at',
             type: 'datetime',
+            initialValue: () => new Date().toISOString(),
         }),
         defineField({
-            name: 'body',
-            title: 'Body',
+            name: 'readTime',
+            title: 'Read Time',
+            type: 'string',
+            initialValue: '5 min read',
+        }),
+        defineField({
+            name: 'category',
+            title: 'Category',
+            type: 'string',
+        }),
+        defineField({
+            name: 'excerpt',
+            title: 'Excerpt',
+            type: 'text',
+        }),
+        defineField({
+            name: 'coverImage',
+            title: 'Hero Image',
+            type: 'image',
+            options: { hotspot: true },
+        }),
+        defineField({
+            name: 'sections',
+            title: 'Post Sections',
+            description: 'Add references to section documents (Content, Cards, Applications, Challenges, Conclusion)',
             type: 'array',
             of: [
-                { type: 'block' },
-                { type: 'image' }
+                {
+                    type: 'reference',
+                    name: 'sectionReference',
+                    title: 'Section Reference',
+                    to: [
+                        { type: 'blogNormalSection' },
+                        { type: 'blogCards' },
+                        { type: 'blogRealWorldApplications' },
+                        { type: 'blogChallenges' },
+                        { type: 'blogConclusion' },
+                    ]
+                }
             ]
         }),
     ],

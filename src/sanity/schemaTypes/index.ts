@@ -22,6 +22,8 @@ import * as servicesSections from './servicesSections'
 import * as blogSections from './blogSections'
 import * as careersSections from './careersSections'
 import * as contactSections from './contactSections'
+import * as footerSections from './footerSections'
+import * as legalPages from './legalPages'
 import { contactPage } from './otherPages'
 
 export const schemaTypes = [
@@ -50,4 +52,6 @@ export const schemaTypes = [
     ...Object.values(blogSections),
     ...Object.values(careersSections),
     ...Object.values(contactSections),
+    ...Object.values(footerSections),
+    ...Object.values(legalPages),
 ]

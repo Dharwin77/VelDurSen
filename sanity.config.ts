@@ -25,6 +25,33 @@ export default defineConfig({
                         S.listItem()
                             .title('Global Settings')
                             .child(S.document().schemaType('globalSettings').documentId('globalSettings')),
+                        S.listItem()
+                            .title('Footer Content')
+                            .child(
+                                S.list()
+                                    .title('Sections')
+                                    .items([
+                                        S.listItem().title('01. Branding (Logo/Desc)').child(S.document().schemaType('footerBranding').documentId('footerBranding')),
+                                        S.listItem().title('02. Company Links').child(S.document().schemaType('footerCompany').documentId('footerCompany')),
+                                        S.listItem().title('03. Services Links').child(S.document().schemaType('footerServices').documentId('footerServices')),
+                                        S.listItem().title('04. Industries Links').child(S.document().schemaType('footerIndustries').documentId('footerIndustries')),
+                                        S.listItem().title('05. Resources (Legal)').child(S.document().schemaType('footerResources').documentId('footerResources')),
+                                        S.listItem().title('06. Social Media').child(S.document().schemaType('footerSocial').documentId('footerSocial')),
+                                        S.listItem().title('07. Country Marquee').child(S.document().schemaType('footerMarquee').documentId('footerMarquee')),
+                                    ])
+                            ),
+                        S.listItem()
+                            .title('Legal & Support Pages')
+                            .child(
+                                S.list()
+                                    .title('Pages')
+                                    .items([
+                                        S.listItem().title('Sitemap').child(S.document().schemaType('pageSitemap').documentId('pageSitemap')),
+                                        S.listItem().title('Privacy Policy').child(S.document().schemaType('pagePrivacyPolicy').documentId('pagePrivacyPolicy')),
+                                        S.listItem().title('Terms of Service').child(S.document().schemaType('pageTermsOfService').documentId('pageTermsOfService')),
+                                        S.listItem().title('Security').child(S.document().schemaType('pageSecurity').documentId('pageSecurity')),
+                                    ])
+                            ),
                         S.divider(),
                         S.listItem()
                             .title('Home Page Content')

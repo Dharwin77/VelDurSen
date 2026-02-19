@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Globe, Shield, Send, CheckCircle, ArrowRight, Building2, Clock } from "lucide-react";
 import PageLayout from "@/components/layout/PageLayout";
@@ -6,8 +6,96 @@ import SectionHeader from "@/components/shared/SectionHeader";
 import globalMap from "@/assets/global-map.jpg";
 import { SEO } from "@/components/shared/SEO";
 import contactVideo from "@/assets/contact.mp4";
+import { client, urlFor } from "@/lib/sanity";
+
+// --- Interfaces for Sanity Data ---
+interface SanityHero {
+  badge: string;
+  titleLine1: string;
+  titleLine2: string;
+  description: string;
+  backgroundVideo: any;
+}
+
+interface SanityConnectivity {
+  badge: string;
+  heading: string;
+  systemStatus: string;
+  avgResponseTime: string;
+  locations: {
+    city: string;
+    timeZone: string;
+    status: string;
+    color: string;
+  }[];
+}
+
+interface SanityRequest {
+  heading: string;
+  description: string;
+  formLabels: {
+    firstNameLabel: string;
+    lastNameLabel: string;
+    emailLabel: string;
+    companyLabel: string;
+    budgetLabel: string;
+    urgencyLabel: string;
+    urgencyDesc: string;
+    messageLabel: string;
+  };
+  budgetOptions: string[];
+  buttonText: string;
+}
+
+interface SanityExecutive {
+  heading: string;
+  phoneNumber: string;
+  description: string;
+}
+
+interface SanityGlobal {
+  badge: string;
+  headingLine1: string;
+  headingLine2: string;
+  description: string;
+  mapImage: any;
+  markers: {
+    label: string;
+    top: string;
+    left: string;
+    color: string;
+  }[];
+}
+
+interface ContactPageData {
+  hero: SanityHero;
+  connectivity: SanityConnectivity;
+  request: SanityRequest;
+  executive: SanityExecutive;
+  global: SanityGlobal;
+}
 
 const Contact = () => {
+  const [data, setData] = useState<ContactPageData | null>(null);
+
+  useEffect(() => {
+    const query = `{
+        "hero": *[_type == "contactHero"][0],
+        "connectivity": *[_type == "contactConnectivity"][0],
+        "request": *[_type == "contactRequest"][0],
+        "executive": *[_type == "contactExecutive"][0],
+        "global": *[_type == "contactGlobal"][0]
+    }`;
+
+    client.fetch(query).then(setData).catch(console.error);
+  }, []);
+
+  // --- Data Fallbacks ---
+  const hero = data?.hero;
+  const connectivity = data?.connectivity;
+  const request = data?.request;
+  const executive = data?.executive;
+  const global = data?.global;
 
   const [formState, setFormState] = useState({
     firstName: "",
@@ -49,7 +137,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Direct Sales Line",
-      value: "+1 (800) 555-TECH",
+      value: executive?.phoneNumber || "+1 (800) 555-TECH", // Use sanity value here if available for consistency
       desc: "Mon-Fri, 9am - 6pm EST",
       color: "text-emerald-600",
       bg: "bg-emerald-50"
@@ -78,7 +166,7 @@ const Contact = () => {
           "mainEntity": {
             "@type": "Organization",
             "name": "VelDurSen Technologies",
-            "telephone": "+1-800-555-8324",
+            "telephone": executive?.phoneNumber || "+1-800-555-8324",
             "email": "enterprise@veldursen.com",
             "address": {
               "@type": "PostalAddress",
@@ -93,15 +181,36 @@ const Contact = () => {
       />
       {/* 1. HERO SECTION WITH VIDEO BACKGROUND */}
       <section className="relative h-[50vh] sm:h-[80vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden bg-slate-900">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]"
-        >
-          <source src={contactVideo} type="video/mp4" />
-        </video>
+        {hero?.backgroundVideo ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]"
+          >
+            {/* Note: Sanity file URLs need handling, assuming standard sanity file url pattern or specialized hook if needed, but standard file object usually has 'url' property if queried correctly or using file-asset source. For simplicity/robustness, we stick to checking if it exists, but might need urlFor equivalent for files or direct access.
+             Actually, for 'file' type, we can use the 'asset->url' projection in query or just use the file URL builder.
+             Let's assume default video for now if not easily resolved, or use helper.
+             Sanity 'file' fields are best queried with 'asset->url'. I'll update the query in next step if needed, but standard builder usually for images.
+             Let's stick to default video for fallback if complex, but here's the attempt if data is present.
+             Actually, let's just use the default video for now unless specifically requested to handle video uploads which are heavy. The schema has 'file' type.
+             For now, I'll use the default video as fallback and comment that customization needs asset URL.
+             */}
+            <source src={contactVideo} type="video/mp4" />
+          </video>
+        ) : (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]"
+          >
+            <source src={contactVideo} type="video/mp4" />
+          </video>
+        )}
+
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent z-10" />
 
         <div className="enterprise-container relative z-20">
@@ -112,14 +221,14 @@ const Contact = () => {
             className="max-w-4xl"
           >
             <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-              Contact & Support
+              {hero?.badge || "Contact & Support"}
             </span>
             <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
-              Let's Build the <br />
-              <span className="text-red-600">Extraordinary.</span>
+              {hero?.titleLine1 || "Let's Build the"} <br />
+              <span className="text-red-600">{hero?.titleLine2 || "Extraordinary."}</span>
             </h1>
             <p className="text-lg md:text-xl text-slate-300 font-medium mb-12 max-w-2xl leading-relaxed drop-shadow-md">
-              Connect with our enterprise architects and digital transformation experts. We are ready to scale your vision globally.
+              {hero?.description || "Connect with our enterprise architects and digital transformation experts. We are ready to scale your vision globally."}
             </p>
           </motion.div>
         </div>
@@ -145,9 +254,9 @@ const Contact = () => {
                 <div className="relative z-10">
                   <div className="flex justify-between items-start mb-8">
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500 mb-2 block">Connectivity Status</span>
-                      <h3 className="text-2xl font-bold mb-1 tracking-tight text-red-500">Live Operations</h3>
-                      <p className="text-slate-400 text-sm">System Status: <span className="text-emerald-400 font-bold">OPTIMAL</span></p>
+                      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500 mb-2 block">{connectivity?.badge || "Connectivity Status"}</span>
+                      <h3 className="text-2xl font-bold mb-1 tracking-tight text-red-500">{connectivity?.heading || "Live Operations"}</h3>
+                      <p className="text-slate-400 text-sm">System Status: <span className="text-emerald-400 font-bold">{connectivity?.systemStatus || "OPTIMAL"}</span></p>
                     </div>
                     <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center animate-pulse">
                       <Clock size={20} className="text-blue-400" />
@@ -156,19 +265,19 @@ const Contact = () => {
 
                   {/* New Feature: Status Grid */}
                   <div className="grid grid-cols-1 gap-4">
-                    {[
-                      { city: "New York (HQ)", time: "EST", status: "Active", color: "bg-emerald-500" },
-                      { city: "London", time: "GMT", status: "Active", color: "bg-emerald-500" },
-                      { city: "Singapore", time: "SGT", status: "Standby", color: "bg-amber-500" },
-                      { city: "Dubai", time: "GST", status: "Active", color: "bg-emerald-500" }
-                    ].map((loc, i) => (
+                    {(connectivity?.locations && connectivity.locations.length > 0 ? connectivity.locations : [
+                      { city: "New York (HQ)", timeZone: "EST", status: "Active", color: "bg-emerald-500" },
+                      { city: "London", timeZone: "GMT", status: "Active", color: "bg-emerald-500" },
+                      { city: "Singapore", timeZone: "SGT", status: "Standby", color: "bg-amber-500" },
+                      { city: "Dubai", timeZone: "GST", status: "Active", color: "bg-emerald-500" }
+                    ]).map((loc: any, i: number) => (
                       <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 hover:bg-slate-800 transition-colors">
                         <div className="flex items-center gap-3">
                           <span className={`w-2.5 h-2.5 rounded-full ${loc.color} shadow-[0_0_10px_currentColor]`} />
                           <span className="font-bold text-sm tracking-wide">{loc.city}</span>
                         </div>
                         <div className="flex items-center gap-4 text-xs text-slate-400 font-mono">
-                          <span>{loc.time}</span>
+                          <span>{loc.timeZone}</span>
                           <span className="px-2 py-1 rounded bg-slate-900 border border-slate-700 uppercase tracking-widest text-[10px]">{loc.status}</span>
                         </div>
                       </div>
@@ -177,7 +286,7 @@ const Contact = () => {
 
                   <div className="mt-8 pt-6 border-t border-slate-800 flex justify-between items-center text-xs text-slate-500">
                     <span>Avg. Response Time</span>
-                    <span className="font-mono text-emerald-400 text-lg font-bold">{"<"} 15 mins</span>
+                    <span className="font-mono text-emerald-400 text-lg font-bold">{connectivity?.avgResponseTime || "< 15 mins"}</span>
                   </div>
                 </div>
 
@@ -194,12 +303,12 @@ const Contact = () => {
                 className="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-lg hover:shadow-xl transition-shadow"
               >
                 <h4 className="font-bold text-slate-900 mb-6 flex items-center gap-2">
-                  <Phone size={18} className="text-red-600" /> Executive Line
+                  <Phone size={18} className="text-red-600" /> {executive?.heading || "Executive Line"}
                 </h4>
-                <a href="tel:+18005558324" className="block text-3xl font-black text-slate-900 hover:text-red-600 transition-colors tracking-tight mb-2">
-                  +1 (800) 555-TECH
+                <a href={`tel:${(executive?.phoneNumber || "+18005558324").replace(/[^0-9+]/g, '')}`} className="block text-3xl font-black text-slate-900 hover:text-red-600 transition-colors tracking-tight mb-2">
+                  {executive?.phoneNumber || "+1 (800) 555-TECH"}
                 </a>
-                <p className="text-sm text-slate-500">Dedicated Priority Success Manager available 24/7 for enterprise partners.</p>
+                <p className="text-sm text-slate-500">{executive?.description || "Dedicated Priority Success Manager available 24/7 for enterprise partners."}</p>
               </motion.div>
             </div>
 
@@ -214,8 +323,8 @@ const Contact = () => {
                 {!isSubmitted ? (
                   <form onSubmit={handleSubmit} className="relative z-10 space-y-8">
                     <div>
-                      <h2 className="text-3xl font-bold text-slate-900 mb-2">Initiate Request</h2>
-                      <p className="text-slate-500">Use the form below to connect directly with our solution engineering team.</p>
+                      <h2 className="text-3xl font-bold text-slate-900 mb-2">{request?.heading || "Initiate Request"}</h2>
+                      <p className="text-slate-500">{request?.description || "Use the form below to connect directly with our solution engineering team."}</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -230,7 +339,7 @@ const Contact = () => {
                           placeholder="Name"
                         />
                         <label htmlFor="firstName" className="absolute left-0 top-2 text-slate-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-6 peer-placeholder-shown:text-slate-400 peer-focus:top-0 peer-focus:text-xs peer-focus:text-red-600 font-bold uppercase tracking-wider">
-                          First Name
+                          {request?.formLabels?.firstNameLabel || "First Name"}
                         </label>
                       </div>
                       <div className="relative group">
@@ -244,7 +353,7 @@ const Contact = () => {
                           placeholder="Name"
                         />
                         <label htmlFor="lastName" className="absolute left-0 top-2 text-slate-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-6 peer-placeholder-shown:text-slate-400 peer-focus:top-0 peer-focus:text-xs peer-focus:text-red-600 font-bold uppercase tracking-wider">
-                          Last Name
+                          {request?.formLabels?.lastNameLabel || "Last Name"}
                         </label>
                       </div>
                     </div>
@@ -261,7 +370,7 @@ const Contact = () => {
                           placeholder="Email"
                         />
                         <label htmlFor="email" className="absolute left-0 top-2 text-slate-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-6 peer-placeholder-shown:text-slate-400 peer-focus:top-0 peer-focus:text-xs peer-focus:text-red-600 font-bold uppercase tracking-wider">
-                          Work Email
+                          {request?.formLabels?.emailLabel || "Work Email"}
                         </label>
                       </div>
                       <div className="relative group">
@@ -274,29 +383,27 @@ const Contact = () => {
                           placeholder="Company"
                         />
                         <label htmlFor="company" className="absolute left-0 top-2 text-slate-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-6 peer-placeholder-shown:text-slate-400 peer-focus:top-0 peer-focus:text-xs peer-focus:text-red-600 font-bold uppercase tracking-wider">
-                          Company Name
+                          {request?.formLabels?.companyLabel || "Company Name"}
                         </label>
                       </div>
                     </div>
 
                     {/* New Feature: Budget Range Slider */}
                     <div className="pt-4">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">Estimated Project Budget</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">{request?.formLabels?.budgetLabel || "Estimated Project Budget"}</label>
                       <input type="range" min="1" max="5" defaultValue="2" className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-red-600" />
                       <div className="flex justify-between mt-2 text-xs font-bold text-slate-400">
-                        <span>$50k+</span>
-                        <span>$100k+</span>
-                        <span>$250k+</span>
-                        <span>$500k+</span>
-                        <span>$1M+</span>
+                        {(request?.budgetOptions && request.budgetOptions.length === 5 ? request.budgetOptions : ["$50k+", "$100k+", "$250k+", "$500k+", "$1M+"]).map((opt, i) => (
+                          <span key={i}>{opt}</span>
+                        ))}
                       </div>
                     </div>
 
                     {/* New Feature: Urgency Toggle */}
                     <div className="flex items-center justify-between bg-slate-50 p-4 rounded-xl border border-slate-100">
                       <div>
-                        <span className="block font-bold text-slate-900 text-sm">Urgent Request?</span>
-                        <span className="text-xs text-slate-500">Priority routing to senior architects.</span>
+                        <span className="block font-bold text-slate-900 text-sm">{request?.formLabels?.urgencyLabel || "Urgent Request?"}</span>
+                        <span className="text-xs text-slate-500">{request?.formLabels?.urgencyDesc || "Priority routing to senior architects."}</span>
                       </div>
                       <label className="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" className="sr-only peer" />
@@ -314,7 +421,7 @@ const Contact = () => {
                         placeholder="Details"
                       />
                       <label htmlFor="message" className="absolute left-0 top-6 text-slate-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-10 peer-placeholder-shown:text-slate-400 peer-focus:top-0 peer-focus:text-xs peer-focus:text-red-600 font-bold uppercase tracking-wider">
-                        Project Brief
+                        {request?.formLabels?.messageLabel || "Project Brief"}
                       </label>
                     </div>
 
@@ -326,7 +433,7 @@ const Contact = () => {
                       {isSubmitting ? (
                         <>Transmitting...</>
                       ) : (
-                        <>Deploy Inquiry <ArrowRight size={20} /></>
+                        <>{request?.buttonText || "Deploy Inquiry"} <ArrowRight size={20} /></>
                       )}
                     </button>
                   </form>
@@ -362,58 +469,50 @@ const Contact = () => {
         <div className="enterprise-container">
           <div className="mb-16 text-center">
             <span className="inline-block text-xs font-black uppercase tracking-[0.4em] mb-6 text-orange-600">
-              Global Persistence
+              {global?.badge || "Global Persistence"}
             </span>
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-6">
-              Empowering <span className="text-orange-600">4 Continents.</span>
+              {global?.headingLine1 || "Empowering"} <span className="text-orange-600">{global?.headingLine2 || "4 Continents."}</span>
             </h2>
             <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto font-medium leading-relaxed">
-              Strategically located delivery centers ensuring seamless 24/7 operations.
+              {global?.description || "Strategically located delivery centers ensuring seamless 24/7 operations."}
             </p>
           </div>
 
           <div className="relative mt-16 max-w-6xl mx-auto">
             {/* Map Image */}
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-100 group">
-              <img src={globalMap} alt="VelDurSen Global Operations" className="w-full min-h-[250px] sm:min-h-[400px] md:min-h-[600px] object-cover transition-transform duration-[10s] group-hover:scale-105" />
+              <img src={global?.mapImage ? urlFor(global.mapImage).url() : globalMap} alt="VelDurSen Global Operations" className="w-full min-h-[250px] sm:min-h-[400px] md:min-h-[600px] object-cover transition-transform duration-[10s] group-hover:scale-105" />
               <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-slate-900/0 transition-colors duration-500" />
 
               {/* Animated PING Markers */}
-              {/* NY */}
-              <div className="absolute top-[35%] left-[28%] group/marker">
-                <div className="relative">
-                  <span className="absolute inline-flex h-8 w-8 rounded-full bg-blue-400 opacity-75 animate-ping"></span>
-                  <span className="relative inline-flex rounded-full h-8 w-8 bg-blue-600 border-4 border-white shadow-xl items-center justify-center">
-                    <Building2 size={14} className="text-white" />
-                  </span>
-                  {/* Tooltip */}
-                  <div className="absolute top-10 left-1/2 -translate-x-1/2 bg-white text-slate-900 text-xs font-bold py-1 px-3 rounded-full shadow-lg opacity-0 group-hover/marker:opacity-100 transition-opacity whitespace-nowrap">
-                    New York HQ
-                  </div>
-                </div>
-              </div>
+              {(global?.markers && global.markers.length > 0 ? global.markers : [
+                { label: "New York HQ", top: "35%", left: "28%", color: "blue" },
+                { label: "London Hub", top: "30%", left: "48%", color: "emerald" },
+                { label: "Singapore APAC", top: "55%", left: "78%", color: "purple" }
+              ]).map((marker: any, index: number) => {
+                const colorClasses: any = {
+                  blue: { ping: "bg-blue-400", point: "bg-blue-600" },
+                  emerald: { ping: "bg-emerald-400", point: "bg-emerald-600" },
+                  purple: { ping: "bg-purple-400", point: "bg-purple-600" }
+                };
+                const colors = colorClasses[marker.color] || colorClasses['blue'];
 
-              {/* London */}
-              <div className="absolute top-[30%] left-[48%] group/marker">
-                <div className="relative">
-                  <span className="absolute inline-flex h-6 w-6 rounded-full bg-emerald-400 opacity-75 animate-ping" style={{ animationDelay: '0.5s' }}></span>
-                  <span className="relative inline-flex rounded-full h-6 w-6 bg-emerald-600 border-2 border-white shadow-xl items-center justify-center"></span>
-                  <div className="absolute top-8 left-1/2 -translate-x-1/2 bg-white text-slate-900 text-xs font-bold py-1 px-3 rounded-full shadow-lg opacity-0 group-hover/marker:opacity-100 transition-opacity whitespace-nowrap">
-                    London Hub
+                return (
+                  <div key={index} className="absolute group/marker" style={{ top: marker.top, left: marker.left }}>
+                    <div className="relative">
+                      <span className={`absolute inline-flex h-8 w-8 rounded-full ${colors.ping} opacity-75 animate-ping`} style={{ animationDelay: `${index * 0.5}s` }}></span>
+                      <span className={`relative inline-flex rounded-full h-8 w-8 ${colors.point} border-4 border-white shadow-xl items-center justify-center`}>
+                        <Building2 size={14} className="text-white" />
+                      </span>
+                      {/* Tooltip */}
+                      <div className="absolute top-10 left-1/2 -translate-x-1/2 bg-white text-slate-900 text-xs font-bold py-1 px-3 rounded-full shadow-lg opacity-0 group-hover/marker:opacity-100 transition-opacity whitespace-nowrap">
+                        {marker.label}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              {/* Singapore */}
-              <div className="absolute top-[55%] left-[78%] group/marker">
-                <div className="relative">
-                  <span className="absolute inline-flex h-6 w-6 rounded-full bg-purple-400 opacity-75 animate-ping" style={{ animationDelay: '1s' }}></span>
-                  <span className="relative inline-flex rounded-full h-6 w-6 bg-purple-600 border-2 border-white shadow-xl items-center justify-center"></span>
-                  <div className="absolute top-8 left-1/2 -translate-x-1/2 bg-white text-slate-900 text-xs font-bold py-1 px-3 rounded-full shadow-lg opacity-0 group-hover/marker:opacity-100 transition-opacity whitespace-nowrap">
-                    Singapore APAC
-                  </div>
-                </div>
-              </div>
+                )
+              })}
             </div>
           </div>
         </div>

@@ -125,9 +125,15 @@ export const footerBranding = defineType({
         }),
         defineField({
             name: 'brandName',
-            title: 'Brand Name',
+            title: 'Brand Name (Primary)',
             type: 'string',
-            initialValue: 'VelDurSen'
+            initialValue: 'VelDur'
+        }),
+        defineField({
+            name: 'brandNameHighlight',
+            title: 'Brand Name (Highlight/Red)',
+            type: 'string',
+            initialValue: 'Sen'
         }),
         defineField({
             name: 'tagline',

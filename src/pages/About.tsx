@@ -11,7 +11,6 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Link } from "react-router-dom";
-import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 import PageLayout from "@/components/layout/PageLayout";
 import { client, urlFor } from "@/lib/sanity";
 
@@ -32,39 +31,126 @@ import blog9 from "@/assets/blog-9.png";
 import founder1 from "@/assets/founder1.png";
 import founder2 from "@/assets/founder2.png";
 import founder3 from "@/assets/founder3.png";
-import globalMap from "@/assets/global-map.jpg";
 
-const aboutQuery = `
-  {
-    "hero": *[_type == "aboutSection1"][0],
-    "story": *[_type == "aboutSection2"][0],
-    "vision": *[_type == "aboutSection3"][0],
-    "mission": *[_type == "aboutSection4"][0],
-    "leadership": *[_type == "aboutSection5"][0],
-    "evolution": *[_type == "aboutSection6"][0],
-    "culture": *[_type == "aboutSection7"][0],
-    "values": *[_type == "aboutSection8"][0],
-    "howWeWork": *[_type == "aboutSection9"][0],
-    "teamBTS": *[_type == "aboutSection10"][0]
-  }
-`;
+// --- Sanity Interfaces ---
+interface SanityAboutHero {
+  badge: string;
+  title: string;
+  subtitle: string;
+  video: any;
+  buttonText: string;
+}
 
-type ValueCard = {
-  icon: ComponentType<{ className?: string; size?: number | string }>;
+interface SanityAboutStory {
+  badge: string;
+  titlePrefix: string;
+  mainTitle: string;
+  paragraphs: string[];
+  highlightBox: string;
+  stats: { value: string; label: string; sublabel: string }[];
+}
+
+interface SanityAboutVision {
+  badge: string;
+  title: string;
+  points: { title: string; desc: string }[];
+  image: any;
+}
+
+interface SanityAboutMission {
+  badge: string;
+  title: string;
+  points: { title: string; desc: string }[];
+  image: any;
+}
+
+interface SanityLeaderReport {
+  name: string;
+  role: string;
+  photo: any;
+}
+
+interface SanityLeader {
+  name: string;
+  role: string;
+  image: any;
+  reports: SanityLeaderReport[];
+}
+
+interface SanityAboutLeadership {
+  leadership: SanityLeader[];
+}
+
+interface SanityMilestone {
+  year: string;
   title: string;
   desc: string;
+  highlights: string[];
+  images: any[];
+}
+
+interface SanityAboutEvolution {
+  evolutionJourney: SanityMilestone[];
+}
+
+interface SanityAboutCulture {
+  badge: string;
+  title: string;
+  desc: string;
+  teamHighlights: { title: string; desc: string }[];
+  teamPhotos: { image: any; alt: string; badge: string }[];
+}
+
+interface SanityValueItem {
+  iconName: string;
+  title: string;
+  desc: string;
+}
+
+interface SanityAboutValues {
+  badge: string;
+  title: string;
+  description: string;
+  mainImage: any;
+  highlightTitle: string;
+  highlightHeading: string;
+  highlightDesc: string;
+  valuesList: SanityValueItem[];
+}
+
+interface SanityAboutHowWeWork {
+  title: string;
+  desc: string;
+  points: { title: string; desc: string }[];
+}
+
+interface SanityAboutTeamBTS {
+  title: string;
+  desc: string;
+  images: any[];
+}
+
+interface AboutPageData {
+  hero: SanityAboutHero;
+  story: SanityAboutStory;
+  vision: SanityAboutVision;
+  mission: SanityAboutMission;
+  leadership: SanityAboutLeadership;
+  evolution: SanityAboutEvolution;
+  culture: SanityAboutCulture;
+  values: SanityAboutValues;
+  howWeWork: SanityAboutHowWeWork;
+  teamBTS: SanityAboutTeamBTS;
+}
+
+// Icon Mapping Helper
+const getIcon = (iconName: string) => {
+  const icons: any = { Shield, Target, Leaf, Users, Lightbulb, Globe2, CheckCircle, Zap };
+  return icons[iconName] || Shield;
 };
 
-const coreValues: ValueCard[] = [
-  { icon: Shield, title: "Trust and security", desc: "We safeguard data, uptime, and privacy like our reputation depends on it--because it does." },
-  { icon: Target, title: "Clarity in architecture", desc: "Every build starts with a clear blueprint, so products stay fast, resilient, and easy to evolve." },
-  { icon: Leaf, title: "Sustainable impact", desc: "We make choices that respect people, resources, and the planet while scaling modern systems." },
-  { icon: Users, title: "Customer at the center", desc: "We co-create with clients, measure outcomes, and iterate until the solution truly serves people." },
-  { icon: Lightbulb, title: "Curious by default", desc: "We experiment, learn quickly, and bring emerging tech to market only when it adds real value." },
-  { icon: Globe2, title: "Global craft", desc: "Distributed teams, shared standards, and local insight so software feels right everywhere." },
-];
-
-const stats = [
+// --- Defaults (Fallbacks) ---
+const defaultStats = [
   { value: "250+", label: "Partner teams", sublabel: "Across industries" },
   { value: "180+", label: "Engineers and strategists", sublabel: "Distributed globally" },
   { value: "12", label: "Countries", sublabel: "Where we collaborate" },
@@ -72,14 +158,14 @@ const stats = [
   { value: "220+", label: "Products and rollouts", sublabel: "Shipped with care" },
 ];
 
-const story = [
+const defaultStory = [
   "Veldursen started with two engineers helping a local nonprofit modernize its student portal. The project showed us how thoughtful software can make a day feel easier for real people.",
   "Today we are a distributed team of product thinkers, designers, and engineers who love turning complex ideas into calm, dependable digital experiences. We build products, platforms, and services for startups finding their footing and enterprises scaling to millions of users.",
   "Great software starts with a conversation, not a codebase. We dive deep into your workflow to uncover where digital friction is slowing you down. Then, we architect lean, secure solutions designed to be as kind to your developers as they are helpful to your users, creating true 'breathing room' for your business to grow.",
   "From the classroom to the trading floor to the factory line, we bring a human-centric lens to every industry we touch. We specialize in turning high-stakes workflows into calm, dependable experiences—building the kind of software that users rely on and businesses trust implicitly.",
 ];
 
-const vision = [
+const defaultVision = [
   { title: "Trusted partnership", desc: "Show up as long-term collaborators who care about outcomes, not just launch dates." },
   { title: "Thoughtful ecosystems", desc: "Design connected tools that feel seamless for users and maintainable for teams." },
   { title: "Responsible innovation", desc: "Adopt AI and emerging tech only when it is safe, transparent, and useful." },
@@ -87,7 +173,7 @@ const vision = [
   { title: "Inclusive impact", desc: "Build software that works for different backgrounds, abilities, and contexts." },
 ];
 
-const mission = [
+const defaultMission = [
   { title: "Make technology approachable", desc: "Translate complex systems into clear, comfortable experiences for users." },
   { title: "Protect every interaction", desc: "Bake in security, privacy, and compliance from discovery through launch." },
   { title: "Ship with confidence", desc: "Pair solid architecture with reliable delivery so teams can move faster." },
@@ -95,99 +181,7 @@ const mission = [
   { title: "Grow people and products", desc: "Coach teams, share playbooks, and leave clients stronger than we found them." },
 ];
 
-const teamHighlights = [
-  { title: "A cohort that stays curious", desc: "Engineers, designers, and operators who learn together and ship together." },
-  { title: "Real workshops, real smiles", desc: "Captured during our IITM Research Park deep-dive and onsite build weeks." },
-  { title: "Hands-on delivery", desc: "We pair strategy with sleeves-rolled-up execution for every release." },
-  { title: "Community-first energy", desc: "Mentorship circles, peer reviews, and open playbooks keep us sharp." },
-];
-
-const teamPhotos = [
-  { src: "/team/1.jpeg", alt: "VelDurSen team in the war-room", badge: "Workshop Day" },
-  { src: "/team/2.jpeg", alt: "Team huddle in the studio", badge: "Sprint Retro" },
-  { src: "/team/3.jpeg", alt: "Crew at IITM Research Park", badge: "IITM Research Park" },
-  { src: "/team/4.jpeg", alt: "Team on the terrace", badge: "Offsite" },
-];
-
-const TeamCarousel = ({ data = teamPhotos }: { data?: any[] }) => {
-  const [idx, setIdx] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const current = data[idx % data.length];
-
-  useEffect(() => {
-    if (paused || data.length === 0) return;
-    const id = setInterval(() => setIdx((prev) => (prev + 1) % data.length), 4200);
-    return () => clearInterval(id);
-  }, [paused, data]);
-
-  const goTo = (next: number) => setIdx((next + data.length) % data.length);
-
-  return (
-    <div
-      className="relative overflow-hidden rounded-2xl md:rounded-3xl border border-slate-200 bg-white shadow-[0_20px_50px_-25px_rgba(15,23,42,0.35)] w-full max-w-3xl lg:max-w-4xl mx-auto group"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onClick={() => goTo(idx + 1)}
-    >
-      <motion.div
-        key={current.src || current.asset} // Use src or asset key
-        initial={{ opacity: 0.3, scale: 1 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.35 }}
-        className="relative aspect-[16/10] w-full"
-      >
-        <img src={current.src ? current.src : (current.asset ? urlFor(current).url() : teamPhotos[0].src)} alt={current.alt || "Team photo"} className="w-full h-full object-cover" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent" />
-        <div className="absolute top-4 left-4 right-4 text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur border border-white/15 text-[11px] font-semibold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            {current.badge} · {current.alt}
-          </div>
-        </div>
-        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-semibold">
-          <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur text-white border border-white/20">{current.badge}</span>
-          <span className="text-amber-200/90">{String(idx + 1).padStart(2, "0")}</span>
-        </div>
-      </motion.div>
-
-      <div className="absolute inset-x-0 bottom-0 pb-4 flex items-center justify-center gap-2">
-        {data.map((photo: any, i: number) => (
-          <button
-            key={photo.src || photo.asset || i}
-            onClick={(e) => {
-              e.stopPropagation();
-              goTo(i);
-            }}
-            className={`h-2.5 rounded-full transition-all duration-300 ${i === idx ? "w-8 bg-amber-300" : "w-2.5 bg-white/40 hover:bg-white/70"}`}
-            aria-label={`Show team photo ${i + 1}`}
-          />
-        ))}
-      </div>
-
-      <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-3 text-white/80 text-sm pointer-events-none">
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            goTo(idx - 1);
-          }}
-          className="h-10 w-10 rounded-full bg-black/40 backdrop-blur border border-white/10 hover:bg-black/55 pointer-events-auto"
-        >
-          ‹
-        </button>
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            goTo(idx + 1);
-          }}
-          className="h-10 w-10 rounded-full bg-black/40 backdrop-blur border border-white/10 hover:bg-black/55 pointer-events-auto"
-        >
-          ›
-        </button>
-      </div>
-    </div>
-  );
-};
-
-const leadership = [
+const defaultLeadership = [
   {
     name: "Ananya Patel",
     role: "CEO",
@@ -222,7 +216,7 @@ const leadership = [
   },
 ];
 
-const milestones = [
+const defaultMilestones = [
   {
     year: "2023",
     title: "Expanding virtual assistant capabilities",
@@ -268,34 +262,114 @@ const milestones = [
     images: [blog7, blog10, aboutImage2],
   },
 ];
-const valuesPoints = [
-  {
-    title: "Build with people in mind",
-    desc: "We consider the humans behind every workflow--customers, operators, and the future teammates who will maintain the product.",
-  },
-  {
-    title: "Keep promises small and steady",
-    desc: "We prefer honest timelines, transparent tradeoffs, and iterative releases over ilic crunches.",
-  },
-  {
-    title: "Stay curious",
-    desc: "We test ideas quickly, learn from users, and bring only the right technologies into the stack.",
-  },
-  {
-    title: "Share what we know",
-    desc: "We document, pair, and coach so our partners own the solution--not just the deliverable.",
-  },
-  {
-    title: "Protect trust",
-    desc: "Security, accessibility, and reliability are non-negotiable; we treat them as features, not fine print.",
-  },
-  {
-    title: "Celebrate progress",
-    desc: "We recognize the small wins that move teams forward and keep projects fun, even when the problems are tough.",
-  },
+
+const defaultTeamPhotos = [
+  { image: aboutTeam, alt: "VelDurSen team in the war-room", badge: "Workshop Day" }, // Use image key to match sanitized structure if possible, or support src
+  { image: blog1, alt: "Team huddle in the studio", badge: "Sprint Retro" },
+  { image: blog2, alt: "Crew at IITM Research Park", badge: "IITM Research Park" },
+  { image: blog3, alt: "Team on the terrace", badge: "Offsite" },
 ];
 
-const MilestonesInteractive = ({ data = milestones }: { data?: any[] }) => {
+const defaultValues = [
+  { iconName: "Shield", title: "Trust and security", desc: "We safeguard data, uptime, and privacy like our reputation depends on it--because it does." },
+  { iconName: "Target", title: "Clarity in architecture", desc: "Every build starts with a clear blueprint, so products stay fast, resilient, and easy to evolve." },
+  { iconName: "Leaf", title: "Sustainable impact", desc: "We make choices that respect people, resources, and the planet while scaling modern systems." },
+  { iconName: "Users", title: "Customer at the center", desc: "We co-create with clients, measure outcomes, and iterate until the solution truly serves people." },
+  { iconName: "Lightbulb", title: "Curious by default", desc: "We experiment, learn quickly, and bring emerging tech to market only when it adds real value." },
+  { iconName: "Globe2", title: "Global craft", desc: "Distributed teams, shared standards, and local insight so software feels right everywhere." },
+];
+
+const TeamCarousel = ({ data = defaultTeamPhotos }: { data?: any[] }) => {
+  const [idx, setIdx] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const current = data[idx % data.length];
+
+  useEffect(() => {
+    if (paused || data.length === 0) return;
+    const id = setInterval(() => setIdx((prev) => (prev + 1) % data.length), 4200);
+    return () => clearInterval(id);
+  }, [paused, data]);
+
+  const goTo = (next: number) => setIdx((next + data.length) % data.length);
+
+  // Helper to decide src
+  const getImageSrc = (item: any) => {
+    if (item.src) return item.src; // old format
+    if (item.image) return typeof item.image === 'string' ? item.image : urlFor(item.image).url();
+    return defaultTeamPhotos[0].image; // final fallback
+  };
+
+  return (
+    <div
+      className="relative overflow-hidden rounded-2xl md:rounded-3xl border border-slate-200 bg-white shadow-[0_20px_50px_-25px_rgba(15,23,42,0.35)] w-full max-w-3xl lg:max-w-4xl mx-auto group"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onClick={() => goTo(idx + 1)}
+    >
+      <motion.div
+        key={current.src || current.image?.asset?._ref || Math.random()}
+        initial={{ opacity: 0.3, scale: 1 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.35 }}
+        className="relative aspect-[16/10] w-full"
+      >
+        <img
+          src={getImageSrc(current)}
+          alt={current.alt || "Team photo"}
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent" />
+        <div className="absolute top-4 left-4 right-4 text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur border border-white/15 text-[11px] font-semibold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            {current.badge} · {current.alt}
+          </div>
+        </div>
+        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-semibold">
+          <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur text-white border border-white/20">{current.badge}</span>
+          <span className="text-amber-200/90">{String(idx + 1).padStart(2, "0")}</span>
+        </div>
+      </motion.div>
+
+      <div className="absolute inset-x-0 bottom-0 pb-4 flex items-center justify-center gap-2">
+        {data.map((_, i: number) => (
+          <button
+            key={i}
+            onClick={(e) => {
+              e.stopPropagation();
+              goTo(i);
+            }}
+            className={`h-2.5 rounded-full transition-all duration-300 ${i === idx ? "w-8 bg-amber-300" : "w-2.5 bg-white/40 hover:bg-white/70"}`}
+            aria-label={`Show team photo ${i + 1}`}
+          />
+        ))}
+      </div>
+
+      <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-3 text-white/80 text-sm pointer-events-none">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            goTo(idx - 1);
+          }}
+          className="h-10 w-10 rounded-full bg-black/40 backdrop-blur border border-white/10 hover:bg-black/55 pointer-events-auto"
+        >
+          ‹
+        </button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            goTo(idx + 1);
+          }}
+          className="h-10 w-10 rounded-full bg-black/40 backdrop-blur border border-white/10 hover:bg-black/55 pointer-events-auto"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const MilestonesInteractive = ({ data = defaultMilestones }: { data?: any[] }) => {
   const [activeYear, setActiveYear] = useState(data[0]?.year);
   const [slideIdx, setSlideIdx] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -374,13 +448,17 @@ const MilestonesInteractive = ({ data = milestones }: { data?: any[] }) => {
             onMouseLeave={() => setPaused(false)}
             onClick={handleNextImage}
           >
-            <img src={currentImage ? (typeof currentImage === 'string' ? currentImage : urlFor(currentImage).url()) : aboutTeam} alt={active?.title} className="h-full w-full object-cover" />
+            <img
+              src={currentImage ? (typeof currentImage === 'string' ? currentImage : urlFor(currentImage).url()) : aboutTeam}
+              alt={active?.title}
+              className="h-full w-full object-cover"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
           </motion.div>
 
           {hasImages && images.length > 1 && (
             <div className="flex items-center gap-2">
-              {images.map((_, i) => (
+              {images.map((_: any, i: number) => (
                 <button
                   key={`${active.year}-dot-${i}`}
                   onClick={() => setSlideIdx(i)}
@@ -398,19 +476,32 @@ const MilestonesInteractive = ({ data = milestones }: { data?: any[] }) => {
 };
 
 const About = () => {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<AboutPageData | null>(null);
   const [selectedLeader, setSelectedLeader] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    client.fetch(aboutQuery).then((res) => {
+    const query = `{
+            "hero": *[_type == "aboutSection1"][0],
+            "story": *[_type == "aboutSection2"][0],
+            "vision": *[_type == "aboutSection3"][0],
+            "mission": *[_type == "aboutSection4"][0],
+            "leadership": *[_type == "aboutSection5"][0],
+            "evolution": *[_type == "aboutSection6"][0],
+            "culture": *[_type == "aboutSection7"][0],
+            "values": *[_type == "aboutSection8"][0],
+            "howWeWork": *[_type == "aboutSection9"][0],
+            "teamBTS": *[_type == "aboutSection10"][0]
+        }`;
+
+    client.fetch(query).then((res) => {
       setData(res);
       // Pre-select first leader if available
       if (res?.leadership?.leadership?.length > 0) {
         setSelectedLeader(res.leadership.leadership[0].name);
       } else {
         // Fallback or handle empty state
-        setSelectedLeader(leadership[0]?.name ?? null);
+        setSelectedLeader(defaultLeadership[0]?.name ?? null);
       }
     });
   }, []);
@@ -420,8 +511,8 @@ const About = () => {
   const storyData = data?.story;
   const visionData = data?.vision;
   const missionData = data?.mission;
-  const leadershipData = data?.leadership?.leadership || leadership; // Fallback to hardcoded if empty
-  const evolutionData = data?.evolution?.evolutionJourney || milestones;
+  const leadershipData = data?.leadership?.leadership || defaultLeadership;
+  const evolutionData = data?.evolution?.evolutionJourney || defaultMilestones;
   const cultureData = data?.culture;
   const valuesData = data?.values;
   const howWeWorkData = data?.howWeWork;
@@ -462,14 +553,22 @@ const About = () => {
 
   return (
     <PageLayout>
+      {/* 1. HERO SECTION */}
       <section className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] min-h-[450px] md:min-h-[550px] flex items-center overflow-hidden">
         <motion.div
           onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
           className="contents"
         >
-          <video autoPlay muted loop playsInline className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]">
-            <source src={aboutVideo} type="video/mp4" />
-          </video>
+          {heroData?.video?.asset ? (
+            <video autoPlay muted loop playsInline className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]">
+              <source src={urlFor(heroData.video).url()} type="video/mp4" />
+            </video>
+          ) : (
+            <video autoPlay muted loop playsInline className="absolute inset-0 z-0 w-full h-full object-cover transition-transform duration-[10s]">
+              <source src={aboutVideo} type="video/mp4" />
+            </video>
+          )}
+
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent z-10" />
 
           <div className="enterprise-container relative z-20">
@@ -498,6 +597,7 @@ const About = () => {
         </motion.div>
       </section>
 
+      {/* 2. OUR STORY SECTION */}
       <section className="py-8 sm:py-12 md:py-16 bg-white relative overflow-hidden">
         <motion.div
           onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#16a34a' } }))}
@@ -535,7 +635,7 @@ const About = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
               <div className="lg:col-span-7">
                 <div className="space-y-8">
-                  {(storyData?.paragraphs || story).map((text: string) => (
+                  {(storyData?.paragraphs || defaultStory).map((text: string) => (
                     <motion.div
                       key={text}
                       initial={{ opacity: 0.1, x: -30 }}
@@ -565,7 +665,7 @@ const About = () => {
 
               <div className="lg:col-span-5 relative mt-8 lg:mt-4">
                 <div className="lg:sticky lg:top-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5 perspective-[2000px]">
-                  {(storyData?.stats || stats).map((m: any, i: number) => (
+                  {(storyData?.stats || defaultStats).map((m: any, i: number) => (
                     <motion.div
                       key={m.label}
                       initial={{ opacity: 0, rotateX: -45, z: -200, y: 150 }}
@@ -592,6 +692,7 @@ const About = () => {
         </motion.div>
       </section>
 
+      {/* 3 & 4. VISION AND MISSION SECTION */}
       <section className="py-8 sm:py-12 md:py-16 bg-white relative overflow-hidden">
         <motion.div
           onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#2563eb' } }))}
@@ -599,6 +700,7 @@ const About = () => {
           viewport={{ margin: "-10% 0px -70% 0px" }}
           className="enterprise-container relative space-y-16"
         >
+          {/* Vision */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <div className="relative">
               <span className="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-6 block">{visionData?.badge || "The North Star"}</span>
@@ -607,7 +709,7 @@ const About = () => {
               </motion.h2>
 
               <div className="space-y-6">
-                {(visionData?.points || vision).map((item: any, idx: number) => (
+                {(visionData?.points || defaultVision).map((item: any, idx: number) => (
                   <motion.div key={item.title} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: idx * 0.1 }} className="flex gap-6 group">
                     <span className="text-slate-200 font-bold text-sm pt-1">0{idx + 1}</span>
                     <div>
@@ -641,6 +743,7 @@ const About = () => {
             </div>
           </div>
 
+          {/* Mission */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <div className="relative order-last lg:order-first">
               <motion.div initial={{ opacity: 0, scale: 0.9, x: -20 }} whileInView={{ opacity: 1, scale: 1, x: 0 }} viewport={{ once: false, amount: 0.25 }} className="relative group cursor-pointer max-w-md mx-auto lg:mx-0">
@@ -666,7 +769,7 @@ const About = () => {
               </motion.h2>
 
               <div className="space-y-6">
-                {(missionData?.points || mission).map((item: any, idx: number) => (
+                {(missionData?.points || defaultMission).map((item: any, idx: number) => (
                   <motion.div key={item.title} initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: idx * 0.1 }} className="flex gap-6 group">
                     <span className="text-slate-200 font-bold text-sm pt-1">0{idx + 6}</span>
                     <div>
@@ -681,6 +784,7 @@ const About = () => {
         </motion.div>
       </section>
 
+      {/* 5. LEADERSHIP SECTION */}
       <section className="py-8 sm:py-12 md:py-16">
         <motion.div
           onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#f59e0b' } }))}
@@ -754,6 +858,108 @@ const About = () => {
         </motion.div>
       </section>
 
+      {/* 6. EVOLUTION JOURNEY SECTION */}
+      <section className="py-16 md:py-24 bg-slate-50 overflow-hidden">
+        <div className="enterprise-container">
+          <h2 className="text-3xl md:text-5xl font-[900] tracking-tighter text-[#0f172a] mb-12 text-center">
+            Our <span className="text-amber-500">Evolution.</span>
+          </h2>
+          <MilestonesInteractive data={evolutionData} />
+        </div>
+      </section>
+
+      {/* 7. CULTURAL FABRIC SECTION */}
+      <section className="py-16 bg-white overflow-hidden relative">
+        <div className="enterprise-container z-10 relative">
+          <span className="text-xs font-black uppercase tracking-[0.4em] text-purple-600 mb-6 block text-center">
+            {cultureData?.badge || "Cultural Fabric"}
+          </span>
+          <h2 className="text-3xl md:text-5xl font-[900] tracking-tighter text-[#0f172a] mb-6 text-center">
+            {cultureData?.title || "The crew giving VelDurSen Its Spark."}
+          </h2>
+          <p className="text-center text-slate-500 max-w-2xl mx-auto mb-12">
+            {cultureData?.desc || "More than just colleagues."}
+          </p>
+
+          {cultureData?.teamPhotos && cultureData.teamPhotos.length > 0 ? (
+            <TeamCarousel data={cultureData.teamPhotos} />
+          ) : (
+            <TeamCarousel />
+          )}
+        </div>
+      </section>
+
+      {/* 8. CORE VALUES SECTION */}
+      <section className="py-16 bg-slate-900 text-white">
+        <div className="enterprise-container">
+          <div className="flex flex-col md:flex-row gap-12 justify-between items-start mb-16">
+            <div className="max-w-xl">
+              <span className="text-xs font-black uppercase tracking-[0.4em] text-red-500 mb-4 block">
+                {valuesData?.badge || "Core Values"}
+              </span>
+              <h2 className="text-3xl md:text-4xl font-[900] tracking-tighter leading-tight mb-6">
+                {valuesData?.title || "Principles that define us"}
+              </h2>
+              <p className="text-slate-400 text-lg leading-relaxed">
+                {valuesData?.description || "At VelDurSen, our values are not just words on a wall."}
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(valuesData?.valuesList || defaultValues).map((val: any, i: number) => {
+              const Icon = getIcon(val.iconName);
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+                >
+                  <Icon className="text-red-500 mb-4" size={32} />
+                  <h3 className="text-xl font-bold mb-3">{val.title}</h3>
+                  <p className="text-slate-400 leading-relaxed text-sm">{val.desc}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 9. HOW WE WORK & 10. TEAM BTS SECTION */}
+      <section className="py-16 bg-white">
+        <div className="enterprise-container">
+          {/* Just minimalistic rendering for these last schemas to ensure data is used if populated */}
+          {howWeWorkData && (
+            <div className="mb-16 text-center">
+              <h2 className="text-2xl font-bold mb-4">{howWeWorkData.title}</h2>
+              <p className="text-slate-600 max-w-2xl mx-auto mb-8">{howWeWorkData.desc}</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {howWeWorkData.points?.map((p: any, i: number) => (
+                  <div key={i} className="p-6 bg-slate-50 rounded-xl">
+                    <h3 className="font-bold text-lg mb-2">{p.title}</h3>
+                    <p className="text-slate-500 text-sm">{p.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {teamBTSData && teamBTSData.images && (
+            <div className="mt-16">
+              <h3 className="text-center font-bold text-xl mb-6">{teamBTSData.title}</h3>
+              <div className="flex flex-wrap justify-center gap-4">
+                {teamBTSData.images.map((img: any, i: number) => (
+                  <img key={i} src={urlFor(img).url()} alt={`BTS ${i}`} className="h-32 rounded-lg object-cover" />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* LEADERSHIP DIALOG */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-5xl w-[95vw] sm:w-[90vw] md:w-[1100px] max-h-[90vh] !flex !flex-col !gap-0 p-0">
           <DialogHeader className="pb-2 flex-shrink-0 px-6 pt-6">
@@ -799,238 +1005,6 @@ const About = () => {
           </DialogClose>
         </DialogContent>
       </Dialog>
-
-      <section className="py-8 sm:py-12 md:py-16 bg-white text-slate-900 relative overflow-hidden">
-        <motion.div
-          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#16a34a' } }))}
-          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
-          viewport={{ margin: "-10% 0px -70% 0px" }}
-          className="enterprise-container space-y-10"
-        >
-          <div>
-            <span className="text-xs font-black uppercase tracking-[0.4em] text-green-600 mb-6 block">Evolution Journey</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-[900] tracking-tighter leading-tight mb-6 md:mb-8 text-slate-900">09+ Years of Building <span className="text-green-600">Expertise.</span></h2>
-            <p className="text-lg md:text-xl text-slate-500 leading-relaxed max-w-3xl font-medium">Tap a year to see the milestone story, photo, and what changed for our clients.</p>
-          </div>
-
-          <MilestonesInteractive data={evolutionData} />
-        </motion.div>
-      </section>
-
-      <section className="py-8 sm:py-12 md:py-16 bg-white text-slate-900">
-        <motion.div
-          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#2563eb' } }))}
-          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
-          viewport={{ margin: "-10% 0px -70% 0px" }}
-          className="enterprise-container grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
-        >
-          <div className="space-y-6">
-            <span className="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-6 block">{cultureData?.badge || "Cultural Fabric"}</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-[900] leading-tight tracking-tighter mb-6 md:mb-8 italic">
-              {(cultureData?.title || "The crew giving VelDurSen Its Spark.").split("VelDurSen").map((part: string, i: number, arr: string[]) => (
-                <span key={i}>
-                  {part}
-                  {i < arr.length - 1 && <span className="text-blue-600">VelDurSen</span>}
-                </span>
-              ))}
-            </h2>
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl">
-              {cultureData?.desc || "Scenes from the teams you will collaborate with—strategy rooms, research park deep-dives, and the smiles that show up when hard problems finally click."}
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {(cultureData?.teamHighlights || teamHighlights).map((item: any) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.2 }}
-                  transition={{ duration: 0.4 }}
-                  className="rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_15px_40px_-30px_rgba(15,23,42,0.35)]"
-                >
-                  <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-700 mb-2">Team Note</div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-1">{item.title}</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="flex items-center gap-3 text-xs uppercase tracking-[0.25em] font-bold text-amber-700">
-              <span className="h-px w-10 bg-amber-500/60" />
-              Each frame is a real moment with our builders
-            </div>
-          </div>
-
-          <TeamCarousel data={cultureData?.teamCarousel} />
-        </motion.div>
-      </section>
-
-
-
-
-      <section className="py-12 md:py-16 bg-white relative overflow-hidden" id="principles-section">
-        <motion.div
-          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
-          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
-          viewport={{ margin: "-10% 0px -70% 0px" }}
-          className="enterprise-container relative z-10"
-        >
-          <div className="text-center mb-16">
-            <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} className="text-red-600 font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">
-              {valuesData?.badge || "Core Values"}
-            </motion.span>
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl md:text-5xl font-[900] text-[#0f172a] mb-6">
-              {(valuesData?.title || "Principles that define us").split("define us").map((part: string, i: number, arr: string[]) => (
-                <span key={i}>
-                  {part}
-                  {i < arr.length - 1 && <span className="text-[#dc2626]">define us</span>}
-                </span>
-              ))}
-            </motion.h2>
-            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium">
-              {valuesData?.desc || "The values that guide every decision, every system we build, and every relationship we nurture across our global organization."}
-            </motion.p>
-          </div>
-
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="relative rounded-3xl overflow-hidden mb-12 group">
-            <div className="absolute inset-0 z-0">
-              <img src={valuesData?.highlightImage ? urlFor(valuesData.highlightImage).url() : aboutTeam} alt="Teams in action" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-black/75 transition-colors group-hover:bg-black/70" />
-              <div className="absolute inset-0 border-[6px] border-red-500/30 rounded-3xl m-3 pointer-events-none" />
-            </div>
-
-            <div className="relative z-10 p-6 sm:p-8 md:p-16 max-w-3xl drop-shadow-2xl">
-              <span className="text-white/80 font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">{valuesData?.highlightBadge || "Values in action"}</span>
-              <h3 className="text-3xl md:text-4xl font-bold text-sky-200 mb-6 leading-tight">{valuesData?.highlightTitle || "Where strategy, security, and sustainability meet disciplined delivery"}</h3>
-              <p className="text-lg md:text-xl text-sky-100 font-medium leading-relaxed max-w-2xl">
-                {valuesData?.highlightDesc || "A glimpse into the teams that live these principles daily--architecting resilient systems, protecting trust, and driving innovation for enterprises around the world."}
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Note: Icons handling might need a map if they are dynamic string names from Sanity, providing fallback/map here is complex without knowing icon names. Assuming hardcoded icons for now or we map them based on title if needed. For now using existing map with potentially overwritten text. */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {(valuesData?.values || coreValues).map((v: any, i: number) => (
-              <motion.div
-                key={v.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.25 }}
-                transition={{ delay: i * 0.1 }}
-                className="relative p-7 md:p-8 rounded-[1.75rem] border border-slate-200/50 transition-all duration-500 bg-white group overflow-hidden shadow-[0_10px_25px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_25px_50px_-15px_rgba(220,38,38,0.1)] hover:-translate-y-1.5 hover:border-red-100"
-              >
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-red-600/5 blur-[40px] rounded-full group-hover:bg-red-600/10 transition-colors duration-500" />
-
-                <div className="absolute inset-0 z-0 opacity-[0.03] grayscale transition-all duration-700 group-hover:opacity-[0.06] group-hover:scale-105">
-                  <img src={globalMap} alt="" className="w-full h-full object-cover" />
-                </div>
-
-                <div className="relative z-10 flex flex-col h-full">
-                  <div className="mb-6 relative">
-                    <div className="w-12 h-12 rounded-xl bg-sky-600 flex items-center justify-center -rotate-6 group-hover:rotate-0 transition-transform duration-500 shadow-lg shadow-sky-600/20 relative z-10">
-                      {/* Icon mapping strategy or fallback to Shield for dynamic content if icon not present */}
-                      <Shield className="text-white" size={22} />
-                    </div>
-                    <div className="absolute inset-0 w-12 h-12 rounded-xl bg-sky-100 -rotate-12 group-hover:-rotate-6 transition-transform duration-500" />
-                  </div>
-
-                  <h3 className="text-xl font-bold text-sky-700 mb-3 group-hover:text-red-700 transition-colors duration-300">{v.title}</h3>
-
-                  <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-grow">{v.desc}</p>
-
-                  <div className="flex items-center gap-2 text-red-600 font-bold text-[10px] tracking-widest uppercase opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
-                    <span>Principle</span>
-                    <div className="h-px w-6 bg-red-600/30" />
-                    <Zap size={12} className="fill-red-600" />
-                  </div>
-                </div>
-
-                <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-red-600 to-red-400 w-0 group-hover:w-full transition-all duration-700" />
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      <section className="py-12 bg-white relative overflow-hidden">
-        <motion.div
-          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
-          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
-          viewport={{ margin: "-10% 0px -70% 0px" }}
-          className="enterprise-container relative z-10"
-        >
-          <div className="text-center mb-10">
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl md:text-5xl font-[900] text-[#0f172a] mb-4 tracking-tighter">
-              {(howWeWorkData?.title || "The values that guide how we work.").split("guide how we work.").map((part: string, i: number, arr: string[]) => (
-                <span key={i}>
-                  {part}
-                  {i < arr.length - 1 && <span className="text-[#dc2626]">guide how we work.</span>}
-                </span>
-              ))}
-            </motion.h2>
-            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-4xl mx-auto font-medium">
-              {howWeWorkData?.desc || "We want every interaction with Veldursen to feel clear, honest, and thoughtful--whether we are workshopping a product brief or deploying code at midnight."}
-            </motion.p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 max-w-6xl mx-auto">
-            {(howWeWorkData?.points || valuesPoints).map((value: any, i: number) => (
-              <motion.div key={value.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: i * 0.1 }} className="flex gap-4 group">
-                <div className="shrink-0 pt-1">
-                  <CheckCircle className="text-red-600 w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-[#1e3a8a] mb-2 group-hover:text-red-600 transition-colors duration-300 uppercase tracking-wide">{value.title}</h3>
-                  <p className="text-slate-600 leading-relaxed text-sm">{value.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      <section className="py-24 bg-white text-slate-900 overflow-hidden border-t border-slate-50">
-        <motion.div
-          onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: '#dc2626' } }))}
-          onViewportLeave={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
-          viewport={{ margin: "-10% 0px -70% 0px" }}
-        >
-          <div className="enterprise-container mb-16 text-center">
-            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} className="text-4xl md:text-5xl font-[900] text-[#0f172a] mb-6 tracking-tight">
-              {(teamBTSData?.title || "Team behind the scene").split("scene").map((part: string, i: number, arr: string[]) => (
-                <span key={i}>
-                  {part}
-                  {i < arr.length - 1 && <span className="text-[#dc2626]">scene</span>}
-                </span>
-              ))}
-            </motion.h2>
-            <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ delay: 0.1 }} className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto font-medium">
-              {teamBTSData?.desc || "Explore how we have helped companies turn ideas into digital products that convert, scale, and grow."}
-            </motion.p>
-          </div>
-
-          <div className="relative flex flex-col gap-6 overflow-hidden">
-            <div className="flex w-full overflow-hidden">
-              <motion.div animate={{ x: [0, -1920] }} transition={{ duration: 50, repeat: Infinity, ease: "linear" }} className="flex gap-6 shrink-0">
-                {(teamBTSData?.images || [blog1, blog2, blog3, blog4, blog5, blog6, blog7, blog8, blog9, blog10, blog1, blog2, blog3, blog4]).map((img: any, i: number) => (
-                  <div key={`row1-${i}`} className="w-[320px] h-[220px] bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 shrink-0 shadow-sm transition-shadow duration-500 hover:shadow-xl">
-                    <img src={typeof img === 'string' ? img : urlFor(img).url()} alt="Veldursen work" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" />
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-
-            <div className="flex w-full overflow-hidden">
-              <motion.div animate={{ x: [-1920, 0] }} transition={{ duration: 55, repeat: Infinity, ease: "linear" }} className="flex gap-6 shrink-0">
-                {(teamBTSData?.images || [blog5, blog6, blog7, blog8, blog9, blog10, blog1, blog2, blog3, blog4, blog5, blog6, blog7, blog8]).map((img: any, i: number) => (
-                  <div key={`row2-${i}`} className="w-[320px] h-[220px] bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 shrink-0 shadow-sm transition-shadow duration-500 hover:shadow-xl">
-                    <img src={typeof img === 'string' ? img : urlFor(img).url()} alt="Veldursen culture" className="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-700 cursor-pointer" />
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-          </div>
-        </motion.div>
-      </section>
     </PageLayout>
   );
 };

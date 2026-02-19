@@ -1,84 +1,161 @@
 import { Link, useLocation } from "react-router-dom";
-import { Linkedin, Twitter, Youtube, Facebook, Instagram, Github } from "lucide-react";
+import { Linkedin, Twitter, Youtube, Facebook, Instagram, Github, Globe } from "lucide-react";
 import footerBg from "../../assets/footer_new_bg.png";
 import logo from "../../assets/logo.png";
+import { client, urlFor } from "@/lib/sanity";
+import { useEffect, useState } from "react";
 
-// TypeScript interface for footer links
-interface FooterLink {
+// --- Interfaces for Sanity Data ---
+interface SanityFooterLink {
   label: string;
-  path: string;
-  scrollTo?: string | null;
+  link: string;
 }
 
-interface FooterSection {
+interface SanityFooterSection {
   title: string;
-  links: FooterLink[];
+  links: SanityFooterLink[];
 }
 
-// Content Structure based on all actual pages and detailed site map
-const footerSections: FooterSection[] = [
-  {
-    title: "Company",
-    links: [
-      { label: "About Us", path: "/about" },
-      { label: "Careers", path: "/careers" },
-      { label: "Internships", path: "/internships" },
-      { label: "Achievements", path: "/achievements" },
-      { label: "Contact Us", path: "/contact" },
-    ]
-  },
-  {
-    title: "Services",
-    links: [
-      { label: "All Services", path: "/services", scrollTo: "our-services" },
-      { label: "Solutions Architecture", path: "/services", scrollTo: "our-solutions-architecture" },
-      { label: "Technology Pillars", path: "/services", scrollTo: "technology-pillars" },
-      { label: "Engineering Excellence", path: "/services", scrollTo: null },
-      { label: "Performance & Scalability", path: "/services", scrollTo: null },
-    ]
-  },
-  {
-    title: "Industries",
-    links: [
-      { label: "Our Industries", path: "/services", scrollTo: "industries-full-content" },
-      { label: "Healthcare", path: "/services", scrollTo: "industries" },
-      { label: "Education", path: "/services", scrollTo: "industries" },
-      { label: "Manufacturing", path: "/services", scrollTo: "industries" },
-      { label: "Retail", path: "/services", scrollTo: "industries" },
-      { label: "FinTech", path: "/services", scrollTo: "industries" },
-    ]
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Blog & Insights", path: "/blog" },
-      { label: "Sitemap", path: "/sitemap" },
-      { label: "Privacy Policy", path: "/privacy-policy" },
-      { label: "Terms of Service", path: "/terms-of-service" },
-      { label: "Security", path: "/security" },
-    ]
-  }
-];
+interface SanityBranding {
+  logo: any;
+  brandName: string;
+  brandNameHighlight: string;
+  tagline: string;
+  description: string;
+}
 
-const countries = [
-  { name: "INDIA" },
-  { name: "LONDON" },
-  { name: "USA" },
-  { name: "AUSTRALIA" },
-  { name: "UAE" },
-  { name: "EUROPE" },
-  { name: "SINGAPORE" },
-  { name: "NEW ZEALAND" },
-  { name: "CANADA" },
-  { name: "GERMANY" },
-  { name: "JAPAN" },
-  { name: "FRANCE" },
-  { name: "SWITZERLAND" },
-];
+interface SanitySocial {
+  title: string;
+  socialLinks: {
+    platform: string;
+    url: string;
+    iconName: string;
+  }[];
+}
+
+interface SanityMarquee {
+  title: string;
+  countries: string[];
+}
+
+interface FooterData {
+  company: SanityFooterSection;
+  services: SanityFooterSection;
+  industries: SanityFooterSection;
+  resources: { title: string }; // Resources links are fixed in schema
+  branding: SanityBranding;
+  social: SanitySocial;
+  marquee: SanityMarquee;
+}
+
+// Icon Mapping Helper
+const getIcon = (iconName: string) => {
+  const icons: any = { Facebook, Twitter, Linkedin, Instagram, Github, Youtube, Globe };
+  return icons[iconName] || Globe;
+};
 
 const Footer = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+  const [data, setData] = useState<FooterData | null>(null);
+
+  useEffect(() => {
+    const query = `{
+            "company": *[_type == "footerCompany"][0],
+            "services": *[_type == "footerServices"][0],
+            "industries": *[_type == "footerIndustries"][0],
+            "resources": *[_type == "footerResources"][0],
+            "branding": *[_type == "footerBranding"][0],
+            "social": *[_type == "footerSocial"][0],
+            "marquee": *[_type == "footerMarquee"][0]
+        }`;
+
+    client.fetch(query).then(setData).catch(console.error);
+  }, []);
+
+  // --- Data Fallbacks ---
+  const company = data?.company;
+  const services = data?.services;
+  const industries = data?.industries;
+  const resources = data?.resources;
+  const branding = data?.branding;
+  const social = data?.social;
+  const marquee = data?.marquee;
+
+  // Default Sections Structure
+  const defaultFooterSections = [
+    {
+      title: "Company",
+      links: [
+        { label: "About Us", link: "/about" },
+        { label: "Careers", link: "/careers" },
+        { label: "Internships", link: "/internships" },
+        { label: "Achievements", link: "/achievements" },
+        { label: "Contact Us", link: "/contact" },
+      ]
+    },
+    {
+      title: "Services",
+      links: [
+        { label: "All Services", link: "/services" },
+        { label: "Solutions Architecture", link: "/services#our-solutions-architecture" },
+        { label: "Technology Pillars", link: "/services#technology-pillars" },
+        { label: "Engineering Excellence", link: "/services" },
+        { label: "Performance & Scalability", link: "/services" },
+      ]
+    },
+    {
+      title: "Industries",
+      links: [
+        { label: "Our Industries", link: "/services#industries-full-content" },
+        { label: "Healthcare", link: "/services#industries" },
+        { label: "Education", link: "/services#industries" },
+        { label: "Manufacturing", link: "/services#industries" },
+        { label: "Retail", link: "/services#industries" },
+        { label: "FinTech", link: "/services#industries" },
+      ]
+    },
+    {
+      title: "Resources",
+      links: [
+        { label: "Blog & Insights", link: "/blog" },
+        { label: "Sitemap", link: "/sitemap" },
+        { label: "Privacy Policy", link: "/privacy-policy" },
+        { label: "Terms of Service", link: "/terms-of-service" },
+        { label: "Security", link: "/security" },
+      ]
+    }
+  ];
+
+  // Merge Sanity Data with Structure
+  const displaySections = [
+    {
+      title: company?.title || defaultFooterSections[0].title,
+      links: company?.links || defaultFooterSections[0].links
+    },
+    {
+      title: services?.title || defaultFooterSections[1].title,
+      links: services?.links || defaultFooterSections[1].links
+    },
+    {
+      title: industries?.title || defaultFooterSections[2].title,
+      links: industries?.links || defaultFooterSections[2].links
+    },
+    {
+      title: resources?.title || defaultFooterSections[3].title,
+      links: defaultFooterSections[3].links // Resources links are fixed/fallback
+    }
+  ];
+
+  const defaultCountries = [
+    "INDIA", "LONDON", "USA", "AUSTRALIA", "UAE", "EUROPE",
+    "SINGAPORE", "NEW ZEALAND", "CANADA", "GERMANY", "JAPAN",
+    "FRANCE", "SWITZERLAND"
+  ];
+
+  const displayCountries = marquee?.countries || defaultCountries;
+  // Repeat for infinite scroll effect
+  const marqueeList = [...displayCountries, ...displayCountries, ...displayCountries];
 
   return (
     <>
@@ -92,10 +169,10 @@ const Footer = () => {
         <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-slate-50 to-transparent z-30 pointer-events-none" />
 
         <div className="flex animate-scroll hover:pause-animation whitespace-nowrap w-max gap-12 md:gap-20">
-          {[...countries, ...countries, ...countries].map((c, i) => (
+          {marqueeList.map((countryName, i) => (
             <div key={i} className="flex items-center gap-4 cursor-default shrink-0 group/item transition-all duration-300">
               <span className="text-xs md:text-sm font-black text-slate-500 group-hover/item:text-slate-900 uppercase tracking-[0.2em] transition-colors leading-none">
-                {c.name}
+                {countryName}
               </span>
             </div>
           ))}
@@ -116,25 +193,32 @@ const Footer = () => {
 
           {/* Links Grid - Based on actual site pages */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-6">
-            {footerSections.map((section, idx) => (
+            {displaySections.map((section, idx) => (
               <div key={idx} className="flex flex-col">
                 <h4 className="text-white font-bold mb-3 text-[15px]">{section.title}</h4>
                 <ul className="space-y-1">
-                  {section.links.map((link, lIdx) => (
-                    <li key={lIdx}>
-                      <Link
-                        to={link.path}
-                        state={{
-                          fromButton: true,
-                          ...(link.scrollTo && { scrollTo: link.scrollTo })
-                        }}
-                        className={`hover:text-white transition-colors text-[13px] leading-snug block ${currentPath === link.path ? "text-white font-semibold" : ""
-                          }`}
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
+                  {section.links.map((link, lIdx) => {
+                    // Handle link.link containing # for scrolling or plain path
+                    // Simple heuristic: if it contains #, split.
+                    const [path, hash] = link.link.split('#');
+                    const finalPath = path || '/'; // Default to root if empty
+
+                    return (
+                      <li key={lIdx}>
+                        <Link
+                          to={finalPath}
+                          state={{
+                            fromButton: true,
+                            ...(hash && { scrollTo: hash })
+                          }}
+                          className={`hover:text-white transition-colors text-[13px] leading-snug block ${currentPath === finalPath ? "text-white font-semibold" : ""
+                            }`}
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    )
+                  })}
                 </ul>
               </div>
             ))}
@@ -150,36 +234,51 @@ const Footer = () => {
             <div className="max-w-xl">
               {/* Logo */}
               <Link to="/" className="flex items-center gap-3 mb-4 group">
-                <img src={logo} alt="VelDurSen Logo" className="h-10 md:h-12 w-auto" />
+                {branding?.logo ? (
+                  <img src={urlFor(branding.logo).url()} alt="VelDurSen Logo" className="h-10 md:h-12 w-auto" />
+                ) : (
+                  <img src={logo} alt="VelDurSen Logo" className="h-10 md:h-12 w-auto" />
+                )}
                 <div className="flex flex-col">
                   <span className="text-lg md:text-2xl font-black text-white tracking-tighter uppercase leading-none">
-                    VelDur<span className="text-red-600">Sen</span>
+                    {branding?.brandName || "VelDur"}<span className="text-red-600">{branding?.brandNameHighlight || "Sen"}</span>
                   </span>
                   <span className="block text-[7px] md:text-[9px] font-bold text-slate-400 uppercase tracking-[0.4em] mt-1.5 leading-none">
-                    Enterprise Technology Partner
+                    {branding?.tagline || "Enterprise Technology Partner"}
                   </span>
                 </div>
               </Link>
 
               <p className="text-slate-300 text-sm leading-relaxed mb-2 font-medium">
-                VelDurSen hosts a dynamic team of tech enthusiasts and incredibly skilled developers dedicated to creating some of the most bespoke software solutions for a wide variety of businesses and a plethora of industry verticals.
+                {branding?.description || "VelDurSen hosts a dynamic team of tech enthusiasts and incredibly skilled developers dedicated to creating some of the most bespoke software solutions for a wide variety of businesses and a plethora of industry verticals."}
               </p>
             </div>
 
             {/* Social Media & Extra Links - Right Side */}
             <div className="flex flex-col gap-4">
               <div>
-                <h5 className="text-white font-bold mb-2 text-sm">Social Media</h5>
+                <h5 className="text-white font-bold mb-2 text-sm">{social?.title || "Social Media"}</h5>
                 <div className="flex gap-4">
-                  {[Facebook, Twitter, Linkedin, Instagram, Github].map((Icon, i) => (
-                    <a
-                      key={i}
-                      href="#"
-                      className="w-5 h-5 flex items-center justify-center text-white hover:text-blue-500 transition-colors"
-                    >
-                      <Icon size={18} />
-                    </a>
-                  ))}
+                  {(social?.socialLinks && social.socialLinks.length > 0 ? social.socialLinks : [
+                    { iconName: "Facebook", url: "#" },
+                    { iconName: "Twitter", url: "#" },
+                    { iconName: "Linkedin", url: "#" },
+                    { iconName: "Instagram", url: "#" },
+                    { iconName: "Github", url: "#" }
+                  ]).map((item: any, i: number) => {
+                    const Icon = getIcon(item.iconName);
+                    return (
+                      <a
+                        key={i}
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-5 h-5 flex items-center justify-center text-white hover:text-blue-500 transition-colors"
+                      >
+                        <Icon size={18} />
+                      </a>
+                    )
+                  })}
                 </div>
               </div>
             </div>
@@ -187,7 +286,7 @@ const Footer = () => {
 
           {/* Copyright */}
           <div className="border-t border-slate-800/50 mt-4 pt-4 flex justify-end text-[10px] text-slate-400">
-            <span>© 2026 VelDurSen Technologies.</span>
+            <span>© {new Date().getFullYear()} {branding?.brandName || "VelDurSen Technologies"}.</span>
           </div>
         </div>
       </footer>

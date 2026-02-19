@@ -52,6 +52,19 @@ export const blogPost = defineType({
             type: 'text',
         }),
         defineField({
+            name: 'introduction',
+            title: 'Introduction',
+            type: 'text',
+            description: 'The introductory paragraph of the blog post.',
+        }),
+        defineField({
+            name: 'keyTakeaways',
+            title: 'Key Takeaways',
+            type: 'array',
+            of: [{ type: 'string' }],
+            description: 'List of key takeaways to display at the end of the post.',
+        }),
+        defineField({
             name: 'coverImage',
             title: 'Hero Image',
             type: 'image',

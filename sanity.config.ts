@@ -5,8 +5,8 @@ import { schemaTypes } from './src/sanity/schemaTypes'
 
 // Get env variables or use defaults
 // In a real app, these should be in .env
-const projectId = 'kj78qpyy'
-const dataset = 'production'
+const projectId = import.meta.env.VITE_SANITY_PROJECT_ID
+const dataset = import.meta.env.VITE_SANITY_DATASET
 
 export default defineConfig({
     name: 'default',

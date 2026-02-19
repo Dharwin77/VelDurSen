@@ -102,7 +102,8 @@ const Contact = () => {
     lastName: "",
     email: "",
     company: "",
-    interest: "Enterprise AI Solutions",
+    budget: "2", // Default value matching range input
+    urgency: false,
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -111,17 +112,58 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 1500);
+
+    // Construct the payload mapping to the API fields
+    const payload = {
+      name: `${formState.firstName} ${formState.lastName}`.trim(),
+      email: formState.email,
+      message: `
+Company: ${formState.company}
+Budget Level: ${["$50k+", "$100k+", "$250k+", "$500k+", "$1M+"][parseInt(formState.budget) - 1] || "Unknown"}
+Urgent: ${formState.urgency ? 'Yes' : 'No'}
+
+Message:
+${formState.message}
+      `.trim()
+    };
+
+    fetch(import.meta.env.VITE_SUBMITBOX_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+        // Reset form
+        setFormState({
+          firstName: "",
+          lastName: "",
+          email: "",
+          company: "",
+          budget: "2",
+          urgency: false,
+          message: ""
+        });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        setIsSubmitting(false);
+        // Optional: Show error state to user (for now, log it)
+      });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const target = e.target as HTMLInputElement;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+
     setFormState({
       ...formState,
-      [e.target.id]: e.target.value
+      [e.target.id]: value
     });
   };
 
@@ -390,11 +432,19 @@ const Contact = () => {
 
                     {/* New Feature: Budget Range Slider */}
                     <div className="pt-4">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">{request?.formLabels?.budgetLabel || "Estimated Project Budget"}</label>
-                      <input type="range" min="1" max="5" defaultValue="2" className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-red-600" />
+                      <label htmlFor="budget" className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">{request?.formLabels?.budgetLabel || "Estimated Project Budget"}</label>
+                      <input
+                        type="range"
+                        min="1"
+                        max="5"
+                        id="budget"
+                        value={formState.budget}
+                        onChange={handleInputChange}
+                        className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-red-600"
+                      />
                       <div className="flex justify-between mt-2 text-xs font-bold text-slate-400">
                         {(request?.budgetOptions && request.budgetOptions.length === 5 ? request.budgetOptions : ["$50k+", "$100k+", "$250k+", "$500k+", "$1M+"]).map((opt, i) => (
-                          <span key={i}>{opt}</span>
+                          <span key={i} className={i + 1 === parseInt(formState.budget) ? "text-red-600" : ""}>{opt}</span>
                         ))}
                       </div>
                     </div>
@@ -406,7 +456,13 @@ const Contact = () => {
                         <span className="text-xs text-slate-500">{request?.formLabels?.urgencyDesc || "Priority routing to senior architects."}</span>
                       </div>
                       <label className="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" className="sr-only peer" />
+                        <input
+                          type="checkbox"
+                          id="urgency"
+                          checked={formState.urgency}
+                          onChange={handleInputChange}
+                          className="sr-only peer"
+                        />
                         <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
                       </label>
                     </div>

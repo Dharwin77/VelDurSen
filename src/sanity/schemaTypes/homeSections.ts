@@ -224,13 +224,44 @@ export const homeSection16 = createSection('homeSection16', 'Home Section 16 (Au
 
 export const homeSection17 = createSection('homeSection17', 'Home Section 17 (Why Choose)', [
     defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-    defineField({ name: 'features', title: 'Features List', type: 'array', of: [{ type: 'string' }] }),
+    defineField({
+        name: 'reasons',
+        title: 'Reasons',
+        type: 'array',
+        of: [{ type: 'string' }],
+        validation: (Rule) =>
+            Rule.custom((items) => {
+                if (!items) return true
+                const values = (items as string[]).map((item) => (item || '').trim())
+                if (values.some((item) => !item)) return 'Reasons cannot contain empty items'
+                if (new Set(values).size !== values.length) return 'Reasons must be unique'
+                return true
+            })
+    }),
+    defineField({
+        name: 'features',
+        title: 'Features List',
+        type: 'array',
+        of: [{ type: 'string' }],
+        validation: (Rule) =>
+            Rule.custom((items) => {
+                if (!items) return true
+                const values = (items as string[]).map((item) => (item || '').trim())
+                if (values.some((item) => !item)) return 'Features cannot contain empty items'
+                if (new Set(values).size !== values.length) return 'Features must be unique'
+                return true
+            })
+    }),
     defineField({
         name: 'stats', title: 'Stats', type: 'array', of: [{
             type: 'object', fields: [
-                { name: 'label', type: 'string' },
-                { name: 'value', type: 'string' },
-                { name: 'desc', type: 'string' }
+                { name: 'label', title: 'Card Title', type: 'string' },
+                { name: 'value', title: 'Metric 1 Value', type: 'string' },
+                { name: 'desc', title: 'Metric 1 Description', type: 'string' },
+                { name: 'value2', title: 'Metric 2 Value', type: 'string' },
+                { name: 'desc2', title: 'Metric 2 Description', type: 'string' },
+                { name: 'value3', title: 'Metric 3 Value', type: 'string' },
+                { name: 'desc3', title: 'Metric 3 Description', type: 'string' }
             ]
         }]
     })
@@ -290,7 +321,20 @@ export const homeSection22 = createSection('homeSection22', 'Home Section 22 (In
 
 export const homeSection23 = createSection('homeSection23', 'Home Section 23 (Why Choose & Case Studies)', [
     defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-    defineField({ name: 'reasons', title: 'Reasons', type: 'array', of: [{ type: 'string' }] }),
+    defineField({
+        name: 'reasons',
+        title: 'Reasons',
+        type: 'array',
+        of: [{ type: 'string' }],
+        validation: (Rule) =>
+            Rule.custom((items) => {
+                if (!items) return true
+                const values = (items as string[]).map((item) => (item || '').trim())
+                if (values.some((item) => !item)) return 'Reasons cannot contain empty items'
+                if (new Set(values).size !== values.length) return 'Reasons must be unique'
+                return true
+            })
+    }),
     defineField({
         name: 'stats', title: 'Case Study Stats', type: 'array', of: [{
             type: 'object', fields: [

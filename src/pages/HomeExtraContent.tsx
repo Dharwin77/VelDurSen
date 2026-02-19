@@ -687,14 +687,14 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                             </h2>
                             <div className="bg-slate-900 text-white p-8 rounded-2xl relative overflow-hidden">
                                 <div className="relative z-10 space-y-4">
-                                    {(whyChoose?.features?.length > 0 ? whyChoose.features : [
+                                    {((whyChoose?.reasons?.length > 0 ? whyChoose.reasons : whyChoose?.features?.length > 0 ? whyChoose.features : [
                                         "Architecture-first engineering",
                                         "Security-first design",
                                         "Cloud-native scalability",
                                         "Enterprise-grade reliability",
                                         "Long-term product partnership",
                                         "Strategic business alignment"
-                                    ]).map((item: string, i: number) => (
+                                    ])).map((item: string, i: number) => (
                                         <div key={i} className="flex items-center gap-3">
                                             <CheckCircle className="text-red-500 w-5 h-5 shrink-0" />
                                             <span className="font-bold" style={{ fontFamily: "'Inter', sans-serif" }}>{item}</span>
@@ -709,47 +709,47 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                         <motion.div variants={fadeInRight} className="lg:col-span-7">
                             <h3 className="text-2xl font-black tracking-tight text-slate-900 mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>Case Study Snapshots</h3>
                             <div className="space-y-6">
-                                <motion.div whileHover={{ x: 5 }} className="border border-slate-200 p-6 rounded-2xl bg-slate-50 hover:border-red-200 transition-colors">
-                                    <div className="flex justify-between items-start mb-2">
-                                        <h4 className="font-black text-lg text-slate-900 tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>Global FinTech CRM Transformation</h4>
-                                        <TrendingUp className="text-green-600 w-5 h-5" />
-                                    </div>
-                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 text-center">
-                                        <div>
-                                            <div className="text-2xl font-black text-slate-900">42%</div>
-                                            <div className="text-[10px] uppercase font-bold text-slate-600">Faster Response</div>
+                                {(whyChoose?.stats?.length > 0 ? whyChoose.stats : [
+                                    {
+                                        label: "Global FinTech CRM Transformation",
+                                        value: "42%",
+                                        desc: "Faster Response",
+                                        value2: "28%",
+                                        desc2: "Lead Conversion",
+                                        value3: "100%",
+                                        desc3: "Fraud Integrated"
+                                    },
+                                    {
+                                        label: "Manufacturing Process Automation",
+                                        value: "35%",
+                                        desc: "Efficiency Boost",
+                                        value2: "Yes",
+                                        desc2: "Predictive Maint.",
+                                        value3: "Real-time",
+                                        desc3: "Supply Chain"
+                                    }
+                                ]).map((item: any, index: number) => (
+                                    <motion.div key={`${item.label || 'case'}-${index}`} whileHover={{ x: 5 }} className="border border-slate-200 p-6 rounded-2xl bg-slate-50 hover:border-red-200 transition-colors">
+                                        <div className="flex justify-between items-start mb-2">
+                                            <h4 className="font-black text-lg text-slate-900 tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>{item.label || item.title || `Case Study ${index + 1}`}</h4>
+                                            {index % 2 === 0 ? <TrendingUp className="text-green-600 w-5 h-5" /> : <Factory className="text-green-600 w-5 h-5" />}
                                         </div>
-                                        <div>
-                                            <div className="text-2xl font-black text-slate-900">28%</div>
-                                            <div className="text-[10px] uppercase font-bold text-slate-600">Lead Conversion</div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 text-center">
+                                            <div>
+                                                <div className="text-2xl font-black text-slate-900">{item.value || item.val1 || "-"}</div>
+                                                <div className="text-[10px] uppercase font-bold text-slate-600">{item.desc || item.lab1 || "Metric"}</div>
+                                            </div>
+                                            <div>
+                                                <div className="text-2xl font-black text-slate-900">{item.value2 || item.val2 || "-"}</div>
+                                                <div className="text-[10px] uppercase font-bold text-slate-600">{item.desc2 || item.lab2 || "Metric"}</div>
+                                            </div>
+                                            <div>
+                                                <div className="text-2xl font-black text-slate-900">{item.value3 || item.val3 || "-"}</div>
+                                                <div className="text-[10px] uppercase font-bold text-slate-600">{item.desc3 || item.lab3 || "Metric"}</div>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <div className="text-2xl font-black text-slate-900">100%</div>
-                                            <div className="text-[10px] uppercase font-bold text-slate-600">Fraud Integrated</div>
-                                        </div>
-                                    </div>
-                                </motion.div>
-
-                                <motion.div whileHover={{ x: 5 }} className="border border-slate-200 p-6 rounded-2xl bg-slate-50 hover:border-red-200 transition-colors">
-                                    <div className="flex justify-between items-start mb-2">
-                                        <h4 className="font-bold text-lg text-slate-900">Manufacturing Process Automation</h4>
-                                        <Factory className="text-green-600 w-5 h-5" />
-                                    </div>
-                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 text-center">
-                                        <div>
-                                            <div className="text-2xl font-black text-slate-900">35%</div>
-                                            <div className="text-[10px] uppercase font-bold text-slate-600">Efficiency Boost</div>
-                                        </div>
-                                        <div>
-                                            <div className="text-2xl font-black text-slate-900">Yes</div>
-                                            <div className="text-[10px] uppercase font-bold text-slate-600">Predictive Maint.</div>
-                                        </div>
-                                        <div>
-                                            <div className="text-2xl font-black text-slate-900">Real-time</div>
-                                            <div className="text-[10px] uppercase font-bold text-slate-600">Supply Chain</div>
-                                        </div>
-                                    </div>
-                                </motion.div>
+                                    </motion.div>
+                                ))}
                             </div>
                         </motion.div>
                     </motion.div>

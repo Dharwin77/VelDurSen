@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, TrendingUp } from "lucide-react";
+import { urlFor } from "@/lib/sanity";
 import CardSwap, { Card } from "./CardSwap";
 import copter14 from "@/assets/coptercode14.png.jpeg";
 import copter10 from "@/assets/coptercode10.png.jpeg";
@@ -73,7 +74,23 @@ const projects = [
     }
 ];
 
-const DeliveredOutcomes = () => {
+const DeliveredOutcomes = ({ data }: { data?: any }) => {
+    const displayProjects = data?.caseStudies?.map((item: any, i: number) => ({
+        id: i + 5, // Avoid ID conflict
+        title: item.title,
+        category: "CASE STUDY",
+        description: item.description,
+        stats: [
+            { value: item.stat1 || "N/A", label: "Metric 1" },
+            { value: item.stat2 || "N/A", label: "Metric 2" }
+        ],
+        bg: i % 4 === 0 ? "bg-amber-100" : i % 4 === 1 ? "bg-rose-100" : i % 4 === 2 ? "bg-blue-100" : "bg-orange-100",
+        accent: i % 4 === 0 ? "text-amber-900" : i % 4 === 1 ? "text-rose-900" : i % 4 === 2 ? "text-blue-900" : "text-orange-900",
+        buttonBg: i % 4 === 0 ? "bg-amber-900" : i % 4 === 1 ? "bg-rose-900" : i % 4 === 2 ? "bg-blue-900" : "bg-orange-900",
+        buttonText: i % 4 === 0 ? "text-amber-100" : i % 4 === 1 ? "text-rose-100" : i % 4 === 2 ? "text-blue-100" : "text-orange-100",
+        image: item.image // Image handling handled in render
+    })) || projects;
+
     return (
         <section className="section-padding bg-slate-50 overflow-hidden min-h-screen">
             <motion.div
@@ -90,8 +107,8 @@ const DeliveredOutcomes = () => {
                         className="max-w-3xl"
                     >
                         <h2 className="text-4xl md:text-6xl font-black text-slate-900 leading-[1.1] tracking-tighter mb-4">
-                            Enterprise Solutions That <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Deliver Outcomes.</span>
+                            {data?.heading || <>Enterprise Solutions That <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Deliver Outcomes.</span></>}
                         </h2>
                     </motion.div>
 
@@ -117,57 +134,60 @@ const DeliveredOutcomes = () => {
                         pauseOnHover={true}
                         showControls={true}
                     >
-                        {projects.map((project, index) => (
-                            <Card key={project.id} className={`${project.bg} p-6 sm:p-8 md:p-12 lg:p-16 w-full max-w-5xl h-[550px] sm:h-[600px] lg:h-[550px]`}>
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center relative z-10 w-full h-full">
-                                    {/* Content Side */}
-                                    <div className="flex flex-col h-full justify-between order-2 lg:order-1">
-                                        <div>
-                                            <div className="flex items-center gap-3 mb-4 lg:mb-6">
-                                                <span className={`inline-block text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] ${project.accent} opacity-70`}>
-                                                    {project.category}
-                                                </span>
-                                                <div className={`h-px w-10 ${project.accent} opacity-30`} />
+                        {displayProjects.map((project: any, index: number) => {
+                            const imageUrl = project.image ? (typeof project.image === 'string' ? project.image : urlFor(project.image).url()) : copter14;
+                            return (
+                                <Card key={project.id} className={`${project.bg} p-6 sm:p-8 md:p-12 lg:p-16 w-full max-w-5xl h-[550px] sm:h-[600px] lg:h-[550px]`}>
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center relative z-10 w-full h-full">
+                                        {/* Content Side */}
+                                        <div className="flex flex-col h-full justify-between order-2 lg:order-1">
+                                            <div>
+                                                <div className="flex items-center gap-3 mb-4 lg:mb-6">
+                                                    <span className={`inline-block text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] ${project.accent} opacity-70`}>
+                                                        {project.category}
+                                                    </span>
+                                                    <div className={`h-px w-10 ${project.accent} opacity-30`} />
+                                                </div>
+
+                                                <h3 className={`text-2xl sm:text-3xl md:text-5xl font-black mb-4 lg:mb-6 ${project.accent} tracking-tight`}>
+                                                    {project.title}
+                                                </h3>
+                                                <p className={`text-sm sm:text-base md:text-xl font-medium leading-relaxed mb-4 lg:mb-6 ${project.accent} opacity-90 max-w-xl line-clamp-3 sm:line-clamp-none`}>
+                                                    {project.description}
+                                                </p>
                                             </div>
 
-                                            <h3 className={`text-2xl sm:text-3xl md:text-5xl font-black mb-4 lg:mb-6 ${project.accent} tracking-tight`}>
-                                                {project.title}
-                                            </h3>
-                                            <p className={`text-sm sm:text-base md:text-xl font-medium leading-relaxed mb-4 lg:mb-6 ${project.accent} opacity-90 max-w-xl line-clamp-3 sm:line-clamp-none`}>
-                                                {project.description}
-                                            </p>
-                                        </div>
-
-                                        <div className="mt-auto pt-4 lg:pt-6 border-t border-black/5">
-                                            <div className="flex flex-row items-end justify-between gap-6">
-                                                <div className="flex gap-4 sm:gap-8">
-                                                    {project.stats.map((stat, i) => (
-                                                        <div key={i}>
-                                                            <div className={`text-xl sm:text-2xl md:text-4xl font-black mb-1 ${project.accent} tracking-tighter`}>
-                                                                {stat.value}
+                                            <div className="mt-auto pt-4 lg:pt-6 border-t border-black/5">
+                                                <div className="flex flex-row items-end justify-between gap-6">
+                                                    <div className="flex gap-4 sm:gap-8">
+                                                        {project.stats.map((stat: any, i: number) => (
+                                                            <div key={i}>
+                                                                <div className={`text-xl sm:text-2xl md:text-4xl font-black mb-1 ${project.accent} tracking-tighter`}>
+                                                                    {stat.value}
+                                                                </div>
+                                                                <div className={`text-[8px] sm:text-[10px] font-bold uppercase tracking-wider ${project.accent} opacity-70`}>
+                                                                    {stat.label}
+                                                                </div>
                                                             </div>
-                                                            <div className={`text-[8px] sm:text-[10px] font-bold uppercase tracking-wider ${project.accent} opacity-70`}>
-                                                                {stat.label}
-                                                            </div>
-                                                        </div>
-                                                    ))}
+                                                        ))}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    {/* Image Side */}
-                                    <div className="relative h-40 sm:h-64 lg:h-full w-full overflow-hidden rounded-2xl shadow-lg group-hover:shadow-2xl transition-shadow duration-500 order-1 lg:order-2">
-                                        <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent z-10" />
-                                        <img
-                                            src={project.image}
-                                            alt={project.title}
-                                            className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-110"
-                                        />
+                                        {/* Image Side */}
+                                        <div className="relative h-40 sm:h-64 lg:h-full w-full overflow-hidden rounded-2xl shadow-lg group-hover:shadow-2xl transition-shadow duration-500 order-1 lg:order-2">
+                                            <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent z-10" />
+                                            <img
+                                                src={imageUrl}
+                                                alt={project.title}
+                                                className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-110"
+                                            />
+                                        </div>
                                     </div>
-                                </div>
-                            </Card>
-                        ))}
+                                </Card>
+                            )
+                        })}
                     </CardSwap>
                 </div>
             </motion.div>

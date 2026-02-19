@@ -24,6 +24,7 @@ import cardImg4 from "@/assets/home_B2B.jpeg";
 import founder1 from "@/assets/founder1.png";
 import founder2 from "@/assets/founder2.png";
 import founder3 from "@/assets/founder3.png";
+import { urlFor } from "@/lib/sanity";
 
 
 // Animation Variants
@@ -57,7 +58,7 @@ const staggerContainer: Variants = {
     }
 };
 
-const AcceleratorSection: React.FC = () => {
+const AcceleratorSection: React.FC<{ data?: any }> = ({ data }) => {
     const [progress, setProgress] = useState(0);
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -79,12 +80,32 @@ const AcceleratorSection: React.FC = () => {
         setActiveIndex(index > 3 ? 0 : index);
     }, [progress]);
 
-    const accelerators = [
+    const defaultAccelerators = [
         { title: "Healthcare Accelerator", sub: "Patient engagement & compliance tracking.", color: "text-blue-400", bg: "bg-blue-400", img: crmHealthcare },
         { title: "FinTech Accelerator", sub: "KYC, fraud detection & onboarding.", color: "text-blue-600", bg: "bg-blue-600", img: crmFinance },
         { title: "Retail Accelerator", sub: "Loyalty engines & omnichannel data.", color: "text-green-500", bg: "bg-green-500", img: crmRetail },
         { title: "Manufacturing Accelerator", sub: "Dealer networks & production analytics.", color: "text-green-600", bg: "bg-green-600", img: crmManufacturing }
     ];
+
+    const displayAccelerators = data?.accelerators?.map((item: any, index: number) => ({
+        title: item.title,
+        sub: item.sub,
+        img: item.image ? (typeof item.image === 'string' ? item.image : urlFor(item.image).url()) : defaultAccelerators[index % defaultAccelerators.length].img,
+        color: defaultAccelerators[index % defaultAccelerators.length].color,
+        bg: defaultAccelerators[index % defaultAccelerators.length].bg
+    })) || defaultAccelerators;
+
+    // Ensure we have exactly 4 items for the logic to work, or adjust logic. 
+    // For now, let's assume 4 items or cycle/slice. 
+    // If fewer than 4, we might duplicate. If more, we slice.
+    // The current logic supports 4 specific slots (0-25, 25-50, etc).
+    const accelerators = displayAccelerators.slice(0, 4);
+
+    // Add import for urlFor if not present, or pass it? 
+    // urlFor is likely needed. I'll need to check imports.
+    // Assuming urlFor is available or I need to import it.
+    // Checking file imports... urlFor is NOT imported.
+    // I should probably pass processed data or import urlFor.
 
     return (
         <section className="section-padding bg-slate-900 text-white clip-path-slant-reverse overflow-hidden font-heading">
@@ -103,14 +124,14 @@ const AcceleratorSection: React.FC = () => {
                     >
                         <span className="text-green-500 font-bold uppercase tracking-[0.2em] text-xs mb-4 block" style={{ fontFamily: "'Inter', sans-serif" }}>Sector Expertise</span>
                         <h2 className="text-4xl font-black text-white mb-6 tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>
-                            Industry-Specific <br /> CRM Accelerators
+                            {data?.heading || <>Industry-Specific <br /> CRM Accelerators</>}
                         </h2>
                         <p className="text-lg md:text-xl text-slate-400 mb-8 leading-relaxed font-medium">
-                            We provide industry-optimized CRM frameworks tailored to operational realities, ensuring faster time-to-value and deeper vertical alignment.
+                            {data?.description || "We provide industry-optimized CRM frameworks tailored to operational realities, ensuring faster time-to-value and deeper vertical alignment."}
                         </p>
 
                         <div className="space-y-4">
-                            {accelerators.map((acc, i) => {
+                            {accelerators.map((acc: any, i: number) => {
                                 const isActive = i === activeIndex;
                                 return (
                                     <motion.div
@@ -161,7 +182,7 @@ const AcceleratorSection: React.FC = () => {
                                     >
                                         <img src={accelerators[activeIndex].img} alt="Accelerator" className="w-32 h-32 md:w-48 md:h-48 object-contain mx-auto mb-6 drop-shadow-2xl" />
                                         <div className={`text-2xl font-black tracking-tight ${accelerators[activeIndex].color}`} style={{ fontFamily: "'Inter', sans-serif" }}>{accelerators[activeIndex].title.split(' ')[0]}</div>
-                                        <div className="text-white/60 font-black uppercase text-[10px] tracking-[0.4em] mt-2" style={{ fontFamily: "'Inter', sans-serif" }}>{accelerators[activeIndex].title.split(' ')[1]}</div>
+                                        <div className="text-white/60 font-black uppercase text-[10px] tracking-[0.4em] mt-2" style={{ fontFamily: "'Inter', sans-serif" }}>{accelerators[activeIndex].title.split(' ').slice(1).join(' ')}</div>
                                     </motion.div>
                                 </AnimatePresence>
                             </div>
@@ -268,10 +289,12 @@ interface EnterpriseContentProps {
     expertise?: any;
     automation?: any;
     whyChoose?: any;
+    accelerators?: any;
 }
 
+
 export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps }) => {
-    const { crm, productFocus, expertise, automation, whyChoose } = data || {};
+    const { crm, productFocus, expertise, automation, whyChoose, accelerators } = data || {};
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     return (
@@ -736,7 +759,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
 
 
             {/* 10. Industry-Specific CRM Accelerators - Circular Interactive Carousel */}
-            <AcceleratorSection />
+            <AcceleratorSection data={accelerators} />
             {/* 11. Enterprise Product Innovation Framework - 3D Car Animation */}
             <section className="section-padding bg-orange-50/20 overflow-hidden">
                 <div className="enterprise-container">

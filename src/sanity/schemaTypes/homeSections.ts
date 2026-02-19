@@ -119,6 +119,9 @@ export const homeSection9 = createSection('homeSection9', 'Home Section 9 (Achie
         name: 'achievements', title: 'Achievements', type: 'array', of: [{
             type: 'object', fields: [
                 { name: 'title', type: 'string' },
+                { name: 'description', type: 'text' },
+                { name: 'tags', type: 'array', of: [{ type: 'string' }] },
+                { name: 'icon', type: 'string', description: 'Lucide Icon Name (e.g. Trophy, Award)' },
                 { name: 'category', type: 'string' },
                 { name: 'venue', type: 'string' },
                 { name: 'date', type: 'string' },
@@ -157,13 +160,16 @@ export const homeSection11 = createSection('homeSection11', 'Home Section 11 (De
 ])
 
 export const homeSection12 = createSection('homeSection12', 'Home Section 12 (Timeline)', [
+    defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+    defineField({ name: 'description', title: 'Description', type: 'text' }),
     defineField({
         name: 'milestones', title: 'Timeline Milestones', type: 'array', of: [{
             type: 'object', fields: [
                 { name: 'year', type: 'string' },
                 { name: 'title', type: 'string' },
                 { name: 'desc', type: 'text' },
-                { name: 'image', type: 'image' }
+                { name: 'image', type: 'image' },
+                { name: 'icon', type: 'string', description: 'Lucide Icon name (e.g. Rocket, Code)' }
             ]
         }]
     })
@@ -198,7 +204,7 @@ export const homeSection15 = createSection('homeSection15', 'Home Section 15 (Ou
     defineField({ name: 'description', title: 'Description', type: 'text' }),
     defineField({
         name: 'areas', title: 'Areas', type: 'array', of: [{
-            type: 'object', fields: [{ name: 'title', type: 'string' }, { name: 'desc', type: 'text' }, { name: 'icon', type: 'string' }]
+            type: 'object', fields: [{ name: 'title', type: 'string' }, { name: 'desc', type: 'text' }, { name: 'icon', type: 'string' }, { name: 'features', type: 'array', of: [{ type: 'string' }] }]
         }]
     })
 ])
@@ -232,7 +238,15 @@ export const homeSection17 = createSection('homeSection17', 'Home Section 17 (Wh
 
 export const homeSection18 = createSection('homeSection18', 'Home Section 18 (Sector Expertise)', [
     defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-    defineField({ name: 'sectors', title: 'Sectors', type: 'array', of: [{ type: 'string' }] })
+    defineField({
+        name: 'sectors', title: 'Sectors', type: 'array', of: [{
+            type: 'object', fields: [
+                { name: 'name', type: 'string' },
+                { name: 'count', type: 'string' },
+                { name: 'icon', type: 'string' }
+            ]
+        }]
+    })
 ])
 
 export const homeSection19 = createSection('homeSection19', 'Home Section 19 (Innovation)', [

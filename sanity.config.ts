@@ -155,8 +155,18 @@ export default defineConfig({
                                     ])
                             ),
                         S.listItem()
-                            .title('Contact')
-                            .child(S.document().schemaType('contactPage').documentId('contact')),
+                            .title('Contact Page Content')
+                            .child(
+                                S.list()
+                                    .title('Sections')
+                                    .items([
+                                        S.listItem().title('01. Hero').child(S.document().schemaType('contactHero').documentId('contactHero')),
+                                        S.listItem().title('02. Connectivity Status').child(S.document().schemaType('contactConnectivity').documentId('contactConnectivity')),
+                                        S.listItem().title('03. Initiate Request').child(S.document().schemaType('contactRequest').documentId('contactRequest')),
+                                        S.listItem().title('04. Executive Line').child(S.document().schemaType('contactExecutive').documentId('contactExecutive')),
+                                        S.listItem().title('05. Global Persistence').child(S.document().schemaType('contactGlobal').documentId('contactGlobal')),
+                                    ])
+                            ),
 
                     ]),
         }),

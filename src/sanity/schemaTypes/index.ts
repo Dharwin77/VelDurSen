@@ -21,13 +21,14 @@ import * as aboutSections from './aboutSections'
 import * as servicesSections from './servicesSections'
 import * as blogSections from './blogSections'
 import * as careersSections from './careersSections'
+import * as contactSections from './contactSections'
 import { contactPage } from './otherPages'
 
 export const schemaTypes = [
     globalSettings,
     homePage,
 
-    contactPage,
+
     page, // Keeping generic page for now just in case
     blogPost,
     hero,
@@ -48,4 +49,5 @@ export const schemaTypes = [
     ...Object.values(servicesSections),
     ...Object.values(blogSections),
     ...Object.values(careersSections),
+    ...Object.values(contactSections),
 ]

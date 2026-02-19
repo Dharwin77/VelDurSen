@@ -146,7 +146,7 @@ const Contact = () => {
                   <div className="flex justify-between items-start mb-8">
                     <div>
                       <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500 mb-2 block">Connectivity Status</span>
-                      <h3 className="text-2xl font-bold mb-1 tracking-tight">Live Operations</h3>
+                      <h3 className="text-2xl font-bold mb-1 tracking-tight text-red-500">Live Operations</h3>
                       <p className="text-slate-400 text-sm">System Status: <span className="text-emerald-400 font-bold">OPTIMAL</span></p>
                     </div>
                     <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center animate-pulse">

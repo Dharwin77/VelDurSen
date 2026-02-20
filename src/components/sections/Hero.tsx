@@ -22,7 +22,7 @@ export default function Hero({ data, tickerData }: { data: any, tickerData?: any
     // The user schema just has "heading".
 
     return (
-        <section className="relative h-[60vh] sm:h-[80vh] md:h-[90vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden bg-white">
+        <section className="hero-section bg-white">
             <motion.div
                 onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
                 className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[10s] brightness-110 hover:scale-105"
@@ -37,10 +37,10 @@ export default function Hero({ data, tickerData }: { data: any, tickerData?: any
                     animate="visible"
                     className="max-w-4xl"
                 >
-                    <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-600 mb-6 px-4 py-1.5 bg-red-50 rounded-full border border-red-100 backdrop-blur-md shadow-sm">
+                    <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-600 mb-3 sm:mb-6 px-4 py-1.5 bg-red-50 rounded-full border border-red-100 backdrop-blur-md shadow-sm">
                         {subheading}
                     </span>
-                    <h1 className="text-[2.25rem] xs:text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-slate-900 leading-[0.95] mb-8 tracking-tighter break-words hyphens-auto">
+                    <h1 className="text-[1.85rem] xs:text-[2.25rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[6.5rem] font-bold text-slate-900 leading-[0.95] mb-4 sm:mb-8 tracking-tighter break-words hyphens-auto">
                         {/* Hack to style the heading similar to hardcoded version if it matches basic structure, 
                  otherwise just render text */}
                         {data?.heading ? (
@@ -55,7 +55,7 @@ export default function Hero({ data, tickerData }: { data: any, tickerData?: any
                             </>
                         )}
                     </h1>
-                    <p className="text-xl md:text-2xl text-slate-600 font-medium mb-12 max-w-2xl leading-relaxed">
+                    <p className="text-sm sm:text-lg md:text-2xl text-slate-600 font-medium mb-6 sm:mb-12 max-w-2xl leading-relaxed">
                         {description}
                     </p>
 
@@ -63,7 +63,7 @@ export default function Hero({ data, tickerData }: { data: any, tickerData?: any
                         {data?.ctaButtons && data.ctaButtons.length > 0 ? (
                             data.ctaButtons.map((btn: any, i: number) => (
                                 i === 0 ? (
-                                    <Link key={i} to={btn.link} state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-xl shadow-red-600/10">
+                                    <Link key={i} to={btn.link} state={{ fromButton: true }} className="btn-enterprise py-3 sm:py-5 px-8 sm:px-12 text-sm sm:text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-xl shadow-red-600/10">
                                         {btn.label} <ArrowRight size={18} className="ml-2" />
                                     </Link>
                                 ) : (
@@ -74,7 +74,7 @@ export default function Hero({ data, tickerData }: { data: any, tickerData?: any
                             ))
                         ) : (
                             <>
-                                <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-xl shadow-red-600/10">
+                                <Link to="/contact" state={{ fromButton: true }} className="btn-enterprise py-3 sm:py-5 px-8 sm:px-12 text-sm sm:text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-xl shadow-red-600/10">
                                     Talk to Experts <ArrowRight size={18} className="ml-2" />
                                 </Link>
                                 <div className="flex items-center gap-4 px-6 text-slate-500 font-bold uppercase tracking-widest text-[10px]">

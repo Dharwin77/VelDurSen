@@ -29,7 +29,7 @@ const AchievementDetail = () => {
                 ogImage={achievement.image}
             />
             {/* 1. HERO IMAGE BANNER */}
-            <section className="relative h-[50vh] min-h-[400px]">
+            <section className="relative h-[calc(50vh-5cm)] min-h-[calc(400px-5cm)]">
                 <img
                     src={achievement.image}
                     alt={achievement.title}

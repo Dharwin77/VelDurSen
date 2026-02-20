@@ -206,7 +206,7 @@ const Internships = () => {
       />
 
       {/* HERO SECTION */}
-      <section className="relative h-[50vh] sm:h-[80vh] min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden">
+      <section className="hero-section">
         {hero?.heroImage ? (
           <div className="absolute inset-0 z-0 w-full h-full">
             <img src={urlFor(hero.heroImage).url()} className="w-full h-full object-cover" alt="Internship Hero" />
@@ -232,18 +232,18 @@ const Internships = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl"
           >
-            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+            <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-3 sm:mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
               {hero?.tag || "Internships"}
             </span>
-            <h1 className="text-[2.75rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-white leading-[0.95] mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+            <h1 className="text-[1.85rem] sm:text-[4.5rem] md:text-[6.5rem] font-bold text-white leading-[1] sm:leading-[0.95] mb-4 sm:mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
               {hero?.headingLine1 || "Growing"} <br />
               <span className="text-red-600">{hero?.headingLine2 || "Future Tech."}</span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-300 font-medium mb-12 max-w-2xl leading-relaxed drop-shadow-md">
+            <p className="text-sm sm:text-xl md:text-2xl text-slate-300 font-medium mb-5 sm:mb-12 max-w-2xl leading-relaxed drop-shadow-md">
               {hero?.description || "VelDurSen's commitment to nurturing the next generation of technology professionals through hands-on learning, mentorship, and real CSR engagement."}
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Link to={hero?.primaryButtonLink || "/contact"} state={{ fromButton: true }} className="btn-enterprise py-5 px-12 text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20">
+            <div className="flex flex-wrap gap-3 sm:gap-4">
+              <Link to={hero?.primaryButtonLink || "/contact"} state={{ fromButton: true }} className="btn-enterprise py-3 sm:py-5 px-8 sm:px-12 text-sm sm:text-lg rounded-full bg-red-600 border-red-600 hover:bg-slate-950 hover:text-white transition-all shadow-2xl shadow-red-600/20">
                 {hero?.primaryButtonText || "Apply for Internship"}
               </Link>
               <div className="flex items-center gap-4 px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">

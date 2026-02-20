@@ -118,7 +118,7 @@ const AcceleratorSection: React.FC<{ data?: any }> = ({ data }) => {
                 viewport={{ margin: "-10% 0px -70% 0px" }}
                 className="enterprise-container"
             >
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
                     <motion.div
                         initial="hidden"
                         whileInView="visible"
@@ -126,7 +126,7 @@ const AcceleratorSection: React.FC<{ data?: any }> = ({ data }) => {
                         variants={fadeInLeft}
                     >
                         <span className="text-green-500 font-bold uppercase tracking-[0.2em] text-xs mb-4 block" style={{ fontFamily: "'Inter', sans-serif" }}>Sector Expertise</span>
-                        <h2 className="text-4xl font-black text-white mb-6 tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-6 tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>
                             {data?.heading || <>Industry-Specific <br /> CRM Accelerators</>}
                         </h2>
                         <p className="text-lg md:text-xl text-slate-400 mb-8 leading-relaxed font-medium">
@@ -161,7 +161,7 @@ const AcceleratorSection: React.FC<{ data?: any }> = ({ data }) => {
                         className="relative flex justify-center items-center"
                     >
                         {/* Main Circle Track */}
-                        <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full border border-white/5 flex items-center justify-center">
+                        <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-[450px] md:h-[450px] rounded-full border border-white/5 flex items-center justify-center">
                             {/* Rotating Dot Container */}
                             <div
                                 className="absolute inset-0 w-full h-full rounded-full"
@@ -173,7 +173,7 @@ const AcceleratorSection: React.FC<{ data?: any }> = ({ data }) => {
                             </div>
 
                             {/* Center Content - Changing Images */}
-                            <div className="absolute inset-8 rounded-full bg-slate-800/50 backdrop-blur-sm flex items-center justify-center overflow-hidden border border-white/10">
+                            <div className="absolute inset-4 sm:inset-8 rounded-full bg-slate-800/50 backdrop-blur-sm flex items-center justify-center overflow-hidden border border-white/10">
                                 <AnimatePresence mode="wait">
                                     <motion.div
                                         key={activeIndex}
@@ -181,9 +181,9 @@ const AcceleratorSection: React.FC<{ data?: any }> = ({ data }) => {
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 1.1 }}
                                         transition={{ duration: 0.5 }}
-                                        className="text-center p-8 active-acc-content"
+                                        className="text-center p-4 sm:p-8 active-acc-content"
                                     >
-                                        <img src={currentAccelerator.img} alt="Accelerator" className="w-32 h-32 md:w-48 md:h-48 object-contain mx-auto mb-6 drop-shadow-2xl" />
+                                        <img src={currentAccelerator.img} alt="Accelerator" className="w-24 h-24 md:w-48 md:h-48 object-contain mx-auto mb-6 drop-shadow-2xl" />
                                         <div className={`text-2xl font-black tracking-tight ${currentAccelerator.color}`} style={{ fontFamily: "'Inter', sans-serif" }}>{currentAccelerator.title.split(' ')[0]}</div>
                                         <div className="text-white/60 font-black uppercase text-[10px] tracking-[0.4em] mt-2" style={{ fontFamily: "'Inter', sans-serif" }}>{currentAccelerator.title.split(' ').slice(1).join(' ')}</div>
                                     </motion.div>
@@ -386,7 +386,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                             <motion.div
                                 whileHover={{ y: -6, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" }}
                                 transition={{ type: "spring", stiffness: 300 }}
-                                className="backdrop-blur-xl bg-white/60 border border-white/50 shadow-xl rounded-[24px] p-8 md:p-10 relative overflow-hidden group"
+                                className="backdrop-blur-xl bg-white/60 border border-white/50 shadow-xl rounded-[24px] p-5 sm:p-8 md:p-10 relative overflow-hidden group"
                             >
                                 <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-50 to-transparent rounded-bl-[100px] -z-10 opacity-50" />
 
@@ -803,7 +803,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                         <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">{innFramework?.subheading || "Structured Software Engineering for Long-Term Scalability."}</p>
                     </motion.div>
 
-                    <div className="relative overflow-visible -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-12 xl:-mx-16 flex flex-col gap-8 pt-8 pb-8">
+                    <div className="relative overflow-hidden flex flex-col gap-8 pt-8 pb-8">
                         {/* The Path Container */}
                         <div className="relative w-full h-3 bg-slate-100 rounded-full shadow-inner overflow-hidden shrink-0">
                             {/* Background Pulse */}
@@ -890,13 +890,13 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                 <div className="enterprise-container relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
                         {/* Map / Node Visualization side */}
-                        <div className="lg:col-span-7 relative h-[450px] md:h-[600px] flex items-center justify-center">
+                        <div className="lg:col-span-7 relative h-72 sm:h-96 md:h-[600px] flex items-center justify-center overflow-hidden">
                             {/* Abstract Orbiting Nodes */}
                             <div className="absolute inset-0 flex items-center justify-center">
                                 <motion.div
                                     animate={{ rotate: 360 }}
                                     transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                                    className="relative w-[400px] h-[400px] md:w-[500px] md:h-[500px] border border-white/5 rounded-full"
+                                    className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-[500px] md:h-[500px] border border-white/5 rounded-full"
                                 >
                                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-blue-500 rounded-full blur-[2px] shadow-[0_0_15px_#3b82f6]" />
                                     <div className="absolute bottom-1/4 left-0 w-2 h-2 bg-indigo-500 rounded-full blur-[2px] shadow-[0_0_10px_#6366f1]" />
@@ -904,7 +904,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                                 <motion.div
                                     animate={{ rotate: -360 }}
                                     transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-                                    className="absolute w-[250px] h-[250px] md:w-[350px] md:h-[350px] border border-white/5 rounded-full"
+                                    className="absolute w-36 h-36 sm:w-48 sm:h-48 md:w-[350px] md:h-[350px] border border-white/5 rounded-full"
                                 >
                                     <div className="absolute top-1/4 right-0 w-2 h-2 bg-emerald-500 rounded-full blur-[1px]" />
                                 </motion.div>
@@ -1018,7 +1018,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                                 <span className="flex h-2 w-2 rounded-full bg-lime-600 animate-pulse"></span>
                                 Modernization Framework
                             </div>
-                            <h2 className="text-5xl lg:text-6xl font-black text-slate-950 mb-8 tracking-tighter leading-none" style={{ fontFamily: "'Inter', sans-serif" }}>
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-slate-950 mb-8 tracking-tighter leading-none" style={{ fontFamily: "'Inter', sans-serif" }}>
                                 Modernize. <br />
                                 <span className="text-lime-600">Don't Just Migrate.</span>
                             </h2>
@@ -1050,7 +1050,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                             variants={scaleUp}
                             className="relative"
                         >
-                            <div className="bg-gradient-to-br from-slate-900 to-slate-800 p-8 md:p-12 rounded-[3rem] shadow-2xl relative overflow-hidden">
+                            <div className="bg-gradient-to-br from-slate-900 to-slate-800 p-6 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[3rem] shadow-2xl relative overflow-hidden">
                                 <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-lime-500 to-emerald-500" />
 
                                 <div className="flex justify-between items-center mb-10">
@@ -1125,9 +1125,9 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                             whileInView="visible"
                             viewport={{ once: false }}
                             variants={fadeInUp}
-                            className="lg:col-span-8 bg-white p-10 md:p-16 rounded-[2.5rem] shadow-sm border border-slate-100 flex flex-col justify-center"
+                            className="lg:col-span-8 bg-white p-6 sm:p-10 md:p-16 rounded-[2rem] sm:rounded-[2.5rem] shadow-sm border border-slate-100 flex flex-col justify-center"
                         >
-                            <h2 className="text-4xl md:text-6xl font-black text-slate-950 mb-6 tracking-tighter leading-none" style={{ fontFamily: "'Inter', sans-serif" }}>
+                            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black text-slate-950 mb-6 tracking-tighter leading-none" style={{ fontFamily: "'Inter', sans-serif" }}>
                                 Beyond Deployment. <br />
                                 <span className="text-blue-600">Continuous Evolution.</span>
                             </h2>
@@ -1142,7 +1142,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                             whileInView="visible"
                             viewport={{ once: false }}
                             variants={fadeInRight}
-                            className="lg:col-span-4 bg-[#0a0f1e] text-white p-10 rounded-[2.5rem] shadow-xl relative overflow-hidden group"
+                            className="lg:col-span-4 bg-[#0a0f1e] text-white p-6 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] shadow-xl relative overflow-hidden group"
                         >
                             <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl -z-0" />
                             <Lock className="w-12 h-12 text-blue-500 mb-8 relative z-10" />
@@ -1178,7 +1178,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                                     viewport={{ once: false }}
                                     transition={{ delay: i * 0.1 }}
                                     whileHover={{ y: -5 }}
-                                    className={`${item.color} p-8 rounded-[2rem] border border-transparent hover:border-blue-200 transition-all duration-300 group`}
+                                    className={`${item.color} p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-transparent hover:border-blue-200 transition-all duration-300 group`}
                                 >
                                     <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                         <item.icon className="w-6 h-6 text-slate-900" />
@@ -1206,7 +1206,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                             <span className="text-blue-400 font-bold uppercase tracking-[0.2em] text-xs mb-4 block">
                                 {advisory?.subheading || "Strategic Consulting."}
                             </span>
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-[1.1] tracking-tight">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-8 leading-[1.1] tracking-tight">
                                 {advisory?.heading || "Advisory & Leadership"}
                             </h2>
                             <p className="text-lg md:text-xl text-slate-400 leading-relaxed font-medium mb-8">
@@ -1351,7 +1351,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                                 variants={fadeInUp}
                             >
                                 <span className="text-indigo-600 font-black uppercase tracking-[0.3em] text-[10px] mb-4 block" style={{ fontFamily: "'Inter', sans-serif" }}>Commercial Resilience</span>
-                                <h2 className="text-4xl lg:text-6xl font-black text-slate-950 mb-6 tracking-tighter leading-none" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black text-slate-950 mb-6 tracking-tighter leading-none" style={{ fontFamily: "'Inter', sans-serif" }}>
                                     Revenue <br />
                                     <span className="text-indigo-600">Acceleration.</span>
                                 </h2>
@@ -1385,7 +1385,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                                 viewport={{ once: false }}
                                 transition={{ delay: i * 0.1 }}
                                 whileHover={{ y: -12 }}
-                                className="relative group p-10 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm transition-all duration-500 overflow-hidden"
+                                className="relative group p-6 sm:p-10 bg-white rounded-[1.5rem] sm:rounded-[2.5rem] border border-slate-100 shadow-sm transition-all duration-500 overflow-hidden"
                             >
                                 <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${item.gradient} opacity-5 -mr-12 -mt-12 rounded-full transition-all group-hover:opacity-10 group-hover:scale-150 duration-700`} />
                                 <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-8 shadow-lg`}>
@@ -1446,12 +1446,12 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.9, x: 20 }}
                                 whileInView={{ opacity: 1, scale: 1, x: 0 }}
-                                className="bg-slate-900/50 backdrop-blur-sm border border-white/5 p-10 rounded-[3rem] relative overflow-hidden group hover:border-red-500/30 transition-all duration-700"
+                                className="bg-slate-900/50 backdrop-blur-sm border border-white/5 p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] relative overflow-hidden group hover:border-red-500/30 transition-all duration-700"
                             >
                                 <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-100 transition-opacity">
                                     <Terminal className="w-24 h-24 text-red-600 -rotate-12" />
                                 </div>
-                                <div className="text-6xl font-black mb-2 tracking-tighter" style={{ fontFamily: "'Inter', sans-serif" }}>50+</div>
+                                <div className="text-4xl sm:text-6xl font-black mb-2 tracking-tighter" style={{ fontFamily: "'Inter', sans-serif" }}>50+</div>
                                 <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">Core Engineers</div>
                                 <div className="mt-8 pt-8 border-t border-white/5">
                                     <div className="text-[10px] text-slate-400 uppercase tracking-[0.3em]">Status: Engineering Forge Active</div>
@@ -1462,12 +1462,12 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                                 initial={{ opacity: 0, scale: 0.9, x: 20 }}
                                 whileInView={{ opacity: 1, scale: 1, x: 0 }}
                                 transition={{ delay: 0.2 }}
-                                className="bg-red-600 p-10 rounded-[3rem] shadow-2xl relative overflow-hidden group"
+                                className="bg-red-600 p-6 sm:p-10 rounded-[2rem] sm:rounded-[3rem] shadow-2xl relative overflow-hidden group"
                             >
                                 <div className="absolute bottom-0 right-0 p-6 opacity-20">
                                     <Zap className="w-24 h-24 text-white rotate-12" />
                                 </div>
-                                <div className="text-5xl font-black mb-2 text-white tracking-tighter" style={{ fontFamily: "'Inter', sans-serif" }}>Weekly</div>
+                                <div className="text-3xl sm:text-5xl font-black mb-2 text-white tracking-tighter" style={{ fontFamily: "'Inter', sans-serif" }}>Weekly</div>
                                 <div className="text-xs font-bold text-red-100 uppercase tracking-widest">Production Deploys</div>
                                 <div className="mt-8 pt-8 border-t border-white/10 text-red-100/50 text-xs font-medium">
                                     Accelerated CD/CI pipelines with zero-latency overhead.
@@ -1493,7 +1493,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                                 viewport={{ once: false }}
                                 variants={fadeInLeft}
                             >
-                                <h2 className="text-5xl font-black text-white mb-8 leading-tight tracking-tighter" style={{ fontFamily: "'Inter', sans-serif" }}>
+                                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-8 leading-tight tracking-tighter" style={{ fontFamily: "'Inter', sans-serif" }}>
                                     Enterprise <br />
                                     <span className="text-emerald-500">Data Command.</span>
                                 </h2>
@@ -1514,7 +1514,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                                 initial="hidden"
                                 whileInView="visible"
                                 variants={fadeInUp}
-                                className="bg-gradient-to-br from-slate-900 to-slate-950 border border-white/5 rounded-[3rem] p-8 md:p-12 shadow-2xl relative overflow-hidden"
+                                className="bg-gradient-to-br from-slate-900 to-slate-950 border border-white/5 rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-8 md:p-12 shadow-2xl relative overflow-hidden"
                             >
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl" />
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 relative z-10">
@@ -1555,7 +1555,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
             {/* 23. Scalable SaaS Infrastructure - Sovereign Cloud */}
             <section className="section-padding bg-white relative overflow-hidden">
                 <div className="enterprise-container relative z-10">
-                    <div className="flex flex-col lg:flex-row gap-24 items-center">
+                    <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-center">
                         <motion.div
                             initial="hidden"
                             whileInView="visible"
@@ -1597,7 +1597,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                             >
                                 <div className="absolute inset-0 bg-blue-600/5 rounded-full animate-pulse" />
                                 <div className="absolute inset-10 bg-white rounded-full shadow-2xl border-8 border-slate-50 flex flex-col items-center justify-center text-center">
-                                    <div className="text-7xl font-black text-slate-950 tracking-tighter" style={{ fontFamily: "'Inter', sans-serif" }}>99.99<span className="text-blue-600">%</span></div>
+                                    <div className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-950 tracking-tighter" style={{ fontFamily: "'Inter', sans-serif" }}>99.99<span className="text-blue-600">%</span></div>
                                     <div className="text-xs font-bold text-slate-400 uppercase tracking-[0.3em] mt-2">SLA Uptime Registry</div>
                                     <div className="mt-8 px-6 py-2 bg-slate-950 text-white rounded-full text-[10px] font-bold uppercase tracking-widest">Enterprise Validated</div>
                                 </div>
@@ -1653,7 +1653,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                                 whileInView="visible"
                                 variants={fadeInUp}
                                 transition={{ delay: i * 0.1 }}
-                                className="group p-8 bg-white border border-blue-100 rounded-[2rem] hover:shadow-xl hover:border-blue-300 transition-all duration-500 text-center"
+                                className="group p-5 sm:p-8 bg-white border border-blue-100 rounded-[1.5rem] sm:rounded-[2rem] hover:shadow-xl hover:border-blue-300 transition-all duration-500 text-center"
                             >
                                 <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                                     <s.icon className="w-6 h-6 text-blue-600" />
@@ -1708,13 +1708,13 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                                     whileInView="visible"
                                     variants={scaleUp}
                                     transition={{ delay: i * 0.1 }}
-                                    className="p-10 bg-emerald-50/50 border border-emerald-100/50 rounded-[3rem] hover:bg-emerald-100/50 transition-all duration-500 overflow-hidden relative group"
+                                    className="p-6 sm:p-10 bg-emerald-50/50 border border-emerald-100/50 rounded-[2rem] sm:rounded-[3rem] hover:bg-emerald-100/50 transition-all duration-500 overflow-hidden relative group"
                                 >
                                     <div className="absolute -right-8 -bottom-8 opacity-10 group-hover:opacity-20 transition-opacity">
                                         <Leaf className="w-32 h-32 text-emerald-600" />
                                     </div>
                                     <div className="text-[10px] text-slate-500 uppercase tracking-[0.4em] font-black mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>{item.label}</div>
-                                    <div className="text-5xl font-black text-emerald-600 mb-2 tracking-tighter" style={{ fontFamily: "'Inter', sans-serif" }}>{item.v}</div>
+                                    <div className="text-3xl sm:text-5xl font-black text-emerald-600 mb-2 tracking-tighter" style={{ fontFamily: "'Inter', sans-serif" }}>{item.v}</div>
                                     <div className="text-sm text-slate-600 font-medium">{item.d}</div>
                                 </motion.div>
                             ))}

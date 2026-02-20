@@ -1,4 +1,52 @@
 {
+    "redirects": [
+        {
+            "source": "/:path*",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "www.veldursen.com"
+                }
+            ],
+            "destination": "https://veldursen.com/:path*",
+            "permanent": true
+        },
+        {
+            "source": "/assets",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/assets/",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/public",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/public/",
+            "destination": "/",
+            "permanent": true
+        }
+    ],
+    "headers": [
+        {
+            "source": "/(.*)\\.(png|jpg|jpeg|gif|webp|svg|ico)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                },
+                {
+                    "key": "Expires",
+                    "value": "Tue, 19 Jan 2038 03:14:07 GMT"
+                }
+            ]
+        }
+    ],
     "rewrites": [
         {
             "source": "/(.*)",

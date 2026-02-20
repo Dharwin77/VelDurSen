@@ -554,7 +554,7 @@ const About = () => {
   return (
     <PageLayout>
       {/* 1. HERO SECTION */}
-      <section className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] min-h-[450px] md:min-h-[550px] flex items-center overflow-hidden">
+      <section className="hero-section">
         <motion.div
           onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
           className="contents"
@@ -573,13 +573,13 @@ const About = () => {
 
           <div className="enterprise-container relative z-20">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl">
-              <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+              <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-3 sm:mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
                 {heroData?.badge || "About Veldursen"}
               </span>
-              <h1 className="text-[2.25rem] xs:text-[2.75rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] font-bold text-amber-200 leading-[1.05] mb-6 md:mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+              <h1 className="text-[1.85rem] xs:text-[2.25rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] font-bold text-amber-200 leading-[1.1] mb-3 sm:mb-6 md:mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
                 {heroData?.title || "Software with a human heartbeat."}
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-slate-300 font-medium mb-8 md:mb-12 max-w-3xl leading-relaxed drop-shadow-md">
+              <p className="text-sm sm:text-base md:text-xl text-slate-300 font-medium mb-5 sm:mb-8 md:mb-12 max-w-3xl leading-relaxed drop-shadow-md">
                 {heroData?.subtitle || "The Visionary Vibe: We are a remote-first team of product experts dedicated to replacing digital friction with focus. Whether you are a founder launching a dream or a large-scale enterprise reaching millions, we craft the dependable software that keeps you moving forward."}
               </p>
               <div className="flex flex-col sm:flex-row flex-wrap gap-4">
@@ -589,6 +589,12 @@ const About = () => {
                 <div className="flex items-center justify-center sm:justify-start gap-4 px-6 text-slate-400 font-bold uppercase tracking-widest text-[10px]">
                   <Globe2 size={16} className="text-red-600 shadow-sm" /> Remote-first, worldwide
                 </div>
+              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-3 text-[10px] font-black uppercase tracking-widest">
+                <Link className="px-4 py-2 rounded-full border border-white/20 text-white/80 hover:text-slate-950 hover:bg-white transition-colors" to="/services">Services</Link>
+                <Link className="px-4 py-2 rounded-full border border-white/20 text-white/80 hover:text-slate-950 hover:bg-white transition-colors" to="/careers">Careers</Link>
+                <Link className="px-4 py-2 rounded-full border border-white/20 text-white/80 hover:text-slate-950 hover:bg-white transition-colors" to="/blog">Blog</Link>
+                <Link className="px-4 py-2 rounded-full border border-white/20 text-white/80 hover:text-slate-950 hover:bg-white transition-colors" to="/security">Security</Link>
               </div>
             </motion.div>
           </div>
@@ -726,18 +732,7 @@ const About = () => {
                 <div className="absolute inset-0 bg-red-100/40 rounded-full blur-3xl -z-10 group-hover:bg-red-200/60 transition-colors duration-700 animate-pulse" />
                 <div className="relative overflow-hidden rounded-2xl group-hover:rounded-2xl aspect-square shadow-2xl shadow-red-200/50 border-4 border-white/50 backdrop-blur-sm transition-all duration-1000">
                   <img src={visionData?.image ? urlFor(visionData.image).url() : "/team/vis.jpg"} alt="Vision" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent p-8 flex flex-col justify-between">
-                    <div className="text-white text-right self-end -rotate-3 group-hover:rotate-0 transition-transform duration-500">
-                      <span className="block font-['Dancing_Script'] text-3xl md:text-4xl drop-shadow-md">Dharwin</span>
-                      <div className="text-[10px] font-black uppercase tracking-widest mt-1">Dharwin</div>
-                      <div className="text-[9px] font-bold opacity-80">Co-founder, CTO</div>
-                    </div>
-                    <div className="text-slate-900 bg-white/40 backdrop-blur-md p-4 rounded-2xl w-fit rotate-3 group-hover:rotate-0 transition-transform duration-500">
-                      <span className="block font-['Dancing_Script'] text-3xl md:text-4xl">Senthil</span>
-                      <div className="text-[10px] font-black uppercase tracking-widest mt-1">Senthil Kumar</div>
-                      <div className="text-[9px] font-bold opacity-80">Co-founder, CEO</div>
-                    </div>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
               </motion.div>
             </div>
@@ -750,14 +745,7 @@ const About = () => {
                 <div className="absolute inset-0 bg-slate-100/40 rounded-full blur-3xl -z-10 group-hover:bg-slate-200/60 transition-colors duration-700 animate-pulse" />
                 <div className="relative overflow-hidden rounded-2xl group-hover:rounded-2xl aspect-square shadow-2xl shadow-slate-200/50 border-4 border-white/50 backdrop-blur-sm transition-all duration-1000">
                   <img src={missionData?.image ? urlFor(missionData.image).url() : "/team/miss.jpg"} alt="Mission" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent p-8 flex flex-col justify-between">
-                    <div className="text-white text-right self-end -rotate-3 group-hover:rotate-0 transition-transform duration-500">
-                      <span className="block font-['Dancing_Script'] text-3xl md:text-4xl drop-shadow-md">Innovation.</span>
-                    </div>
-                    <div className="text-slate-900 bg-white/40 backdrop-blur-md p-4 rounded-2xl w-fit rotate-3 group-hover:rotate-0 transition-transform duration-500 font-bold uppercase tracking-widest text-[10px]">
-                      Mission focused
-                    </div>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
               </motion.div>
             </div>
@@ -897,10 +885,10 @@ const About = () => {
               <span className="text-xs font-black uppercase tracking-[0.4em] text-red-500 mb-4 block">
                 {valuesData?.badge || "Core Values"}
               </span>
-              <h2 className="text-3xl md:text-4xl font-[900] tracking-tighter leading-tight mb-6">
+              <h2 className="text-3xl md:text-4xl font-[900] tracking-tighter leading-tight mb-6 text-white">
                 {valuesData?.title || "Principles that define us"}
               </h2>
-              <p className="text-slate-400 text-lg leading-relaxed">
+              <p className="text-white/80 text-lg leading-relaxed">
                 {valuesData?.description || "At VelDurSen, our values are not just words on a wall."}
               </p>
             </div>
@@ -918,8 +906,8 @@ const About = () => {
                   className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
                 >
                   <Icon className="text-red-500 mb-4" size={32} />
-                  <h3 className="text-xl font-bold mb-3">{val.title}</h3>
-                  <p className="text-slate-400 leading-relaxed text-sm">{val.desc}</p>
+                  <h3 className="text-xl font-bold mb-3 text-white">{val.title}</h3>
+                  <p className="text-white/75 leading-relaxed text-sm">{val.desc}</p>
                 </motion.div>
               );
             })}

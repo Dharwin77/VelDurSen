@@ -960,14 +960,6 @@ const Services = () => {
         icon: getIcon(a.iconName)
     })) || [];
 
-    // Auto-rotate Pillars
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setActivePillar((prev) => (prev === null || prev === pillars.length - 1 ? 0 : prev + 1));
-        }, 5000);
-        return () => clearInterval(interval);
-    }, []);
-
     // Auto-rotate Labs
     useEffect(() => {
         const interval = setInterval(() => {
@@ -994,7 +986,7 @@ const Services = () => {
                 </Helmet>
 
                 {/* 1. HERO SECTION - Keeping Original Video Style as requested */}
-                <section id="our-services" className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
+                <section id="our-services" className="hero-section">
                     <motion.div
                         onViewportEnter={() => window.dispatchEvent(new CustomEvent('navbar-theme-change', { detail: { color: null } }))}
                         className="contents"
@@ -1017,10 +1009,10 @@ const Services = () => {
                 transition={{ duration: 0.8 }}
                 className="max-w-4xl"
               >
-                <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+                <span className="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-red-500 mb-3 sm:mb-6 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]">
                   {heroData?.badge || "Our Services"}
                 </span>
-                <h1 className="text-[2.0rem] xs:text-[2.5rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] font-bold text-amber-200 leading-[1.05] mb-6 md:mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+                <h1 className="text-[2.0rem] xs:text-[2.5rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] font-bold text-amber-200 leading-[1.05] mb-3 sm:mb-6 md:mb-8 tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
                   {heroData?.titleLine1 || "Enterprise"} <br />
                   <span className="text-amber-100">{heroData?.titleLine2 || "Performance."}</span>
                 </h1>
@@ -1268,6 +1260,13 @@ const Services = () => {
         <div className="mb-12 text-center">
             <span className="text-green-600 font-black uppercase tracking-widest text-xs mb-4 block">{technologyPillarsData?.badge || "Core Competencies"}</span>
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">{technologyPillarsData?.title || "Technology"} <span className="text-green-600">Pillars.</span></h2>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs font-black uppercase tracking-widest">
+                <Link className="px-4 py-2 rounded-full border border-slate-200 text-slate-700 hover:text-white hover:bg-slate-900 transition-colors" to="/about">About</Link>
+                <Link className="px-4 py-2 rounded-full border border-slate-200 text-slate-700 hover:text-white hover:bg-slate-900 transition-colors" to="/careers">Careers</Link>
+                <Link className="px-4 py-2 rounded-full border border-slate-200 text-slate-700 hover:text-white hover:bg-slate-900 transition-colors" to="/internships">Internships</Link>
+                <Link className="px-4 py-2 rounded-full border border-slate-200 text-slate-700 hover:text-white hover:bg-slate-900 transition-colors" to="/blog">Blog</Link>
+                <Link className="px-4 py-2 rounded-full border border-slate-200 text-slate-700 hover:text-white hover:bg-slate-900 transition-colors" to="/contact">Contact</Link>
+            </div>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-6 h-auto lg:h-[550px]">

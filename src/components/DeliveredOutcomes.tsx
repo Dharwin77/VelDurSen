@@ -81,8 +81,8 @@ const DeliveredOutcomes = ({ data }: { data?: any }) => {
         category: "CASE STUDY",
         description: item.description,
         stats: [
-            { value: item.stat1 || "N/A", label: "Metric 1" },
-            { value: item.stat2 || "N/A", label: "Metric 2" }
+            { value: item.stat1 || "0%", label: item.stat1Label || "Metric 1" },
+            { value: item.stat2 || "0%", label: item.stat2Label || "Metric 2" }
         ],
         bg: i % 4 === 0 ? "bg-amber-100" : i % 4 === 1 ? "bg-rose-100" : i % 4 === 2 ? "bg-blue-100" : "bg-orange-100",
         accent: i % 4 === 0 ? "text-amber-900" : i % 4 === 1 ? "text-rose-900" : i % 4 === 2 ? "text-blue-900" : "text-orange-900",
@@ -117,8 +117,8 @@ const DeliveredOutcomes = ({ data }: { data?: any }) => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                     >
-                        <a href="/work" className="text-indigo-600 font-bold hover:underline underline-offset-4 flex items-center text-lg">
-                            Explore All Case Studies <ArrowRight className="ml-2 w-5 h-5" />
+                        <a href={data?.buttonLink || "/about"} className="text-indigo-600 font-bold hover:underline underline-offset-4 flex items-center text-lg">
+                            {data?.buttonText || "Explore All Case Studies"} <ArrowRight className="ml-2 w-5 h-5" />
                         </a>
                     </motion.div>
                 </div>
@@ -135,7 +135,7 @@ const DeliveredOutcomes = ({ data }: { data?: any }) => {
                         showControls={true}
                     >
                         {displayProjects.map((project: any, index: number) => {
-                            const imageUrl = project.image ? (typeof project.image === 'string' ? project.image : urlFor(project.image).url()) : copter14;
+                            const imageUrl = project.image ? (typeof project.image === 'string' ? project.image : urlFor(project.image).url()) : (index === 0 ? copter14 : index === 1 ? copter10 : index === 2 ? copter9 : copter2);
                             return (
                                 <Card key={project.id} className={`${project.bg} p-6 sm:p-8 md:p-12 lg:p-16 w-full max-w-5xl h-[550px] sm:h-[600px] lg:h-[550px]`}>
                                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center relative z-10 w-full h-full">

@@ -1,0 +1,48 @@
+{
+  "_createdAt": "2026-02-20T14:09:51Z",
+  "_id": "homeSection13",
+  "_rev": "IZvZjyf7Iz3y6dNGWfLgnZ",
+  "_type": "homeSection13",
+  "_updatedAt": "2026-02-20T14:37:31Z",
+  "buttonLink": "/about",
+  "buttonText": "Explore All Case Studies",
+  "caseStudies": [
+    {
+      "_key": "1",
+      "description": "AI-powered banking core processing millions of transactions with real-time fraud detection.",
+      "stat1Label": "Fraud Detection",
+      "stat1Value": "99.9%",
+      "stat2Label": "Faster Onboarding",
+      "stat2Value": "40%",
+      "title": "FinGuard Core"
+    },
+    {
+      "_key": "2",
+      "description": "Telehealth platform connecting patients with specialists in under 2 minutes with integrated EHR.",
+      "stat1Label": "Patient Engagement",
+      "stat1Value": "300%",
+      "stat2Label": "Wait Time Reduction",
+      "stat2Value": "15m",
+      "title": "MediSync Pro"
+    },
+    {
+      "_key": "3",
+      "description": "Predictive AI optimizing global fleet routes, reducing fuel consumption across 50+ countries.",
+      "stat1Label": "Cost Reduction",
+      "stat1Value": "25%",
+      "stat2Label": "Global Visibility",
+      "stat2Value": "Real-time",
+      "title": "LogiChain AI"
+    },
+    {
+      "_key": "4",
+      "description": "Omni-channel platform unifying online and offline customer data to drive personalized loyalty.",
+      "stat1Label": "Sales Increase",
+      "stat1Value": "40%",
+      "stat2Label": "Customer Retention",
+      "stat2Value": "2x",
+      "title": "RetailFlow"
+    }
+  ],
+  "heading": "Enterprise Solutions That Deliver Outcomes."
+}

@@ -178,13 +178,18 @@ export const homeSection12 = createSection('homeSection12', 'Home Section 12 (Ti
 // Using existing types wrapped in documents for the rest where appropriate, or simple placeholders
 export const homeSection13 = createSection('homeSection13', 'Home Section 13 (Delivered Outcomes)', [
     defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+    defineField({ name: 'buttonText', title: 'Button Text', type: 'string' }),
+    defineField({ name: 'buttonLink', title: 'Button Link', type: 'string' }),
     defineField({
         name: 'caseStudies', title: 'Case Studies', type: 'array', of: [{
             type: 'object', fields: [
-                { name: 'title', type: 'string' },
-                { name: 'description', type: 'text' },
-                { name: 'stat1', type: 'string' },
-                { name: 'stat2', type: 'string' }
+                { name: 'title', type: 'string', title: 'Title' },
+                { name: 'description', type: 'text', title: 'Description' },
+                { name: 'image', type: 'image', title: 'Image', options: { hotspot: true } },
+                { name: 'stat1', type: 'string', title: 'Stat 1 Value (e.g. 99.9%)' },
+                { name: 'stat1Label', type: 'string', title: 'Stat 1 Label (e.g. Fraud Detection)' },
+                { name: 'stat2', type: 'string', title: 'Stat 2 Value (e.g. 40%)' },
+                { name: 'stat2Label', type: 'string', title: 'Stat 2 Label (e.g. Faster Onboarding)' }
             ]
         }]
     })

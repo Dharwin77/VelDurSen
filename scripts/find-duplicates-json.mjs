@@ -26,24 +26,15 @@ const types = [
     "homeSection40", "homeSection41", "globalSettings"
 ];
 
-async function checkDuplicates() {
-    console.log('--- START DUPLICATE CHECK ---');
-    let duplicateCount = 0;
+async function findDuplicates() {
+    const report = {};
     for (const type of types) {
         const docs = await client.fetch(`*[_type == "${type}"] | order(_updatedAt desc) { _id, _updatedAt }`);
         if (docs.length > 1) {
-            duplicateCount++;
-            console.log(`[!] Type: ${type} (${docs.length} documents found)`);
-            docs.forEach((d, i) => {
-                console.log(`    ${i === 0 ? '-> CURRENT (Picked by frontend)' : '   '} ID: ${d._id} | Updated: ${d._updatedAt}`);
-            });
+            report[type] = docs;
         }
     }
-    if (duplicateCount === 0) {
-        console.log('--- NO DUPLICATES FOUND ---');
-    } else {
-        console.log(`--- FOUND ${duplicateCount} TYPES WITH DUPLICATES ---`);
-    }
+    console.log(JSON.stringify(report, null, 2));
 }
 
-checkDuplicates().catch(err => console.error('❌ Error:', err.message));
+findDuplicates().catch(err => console.error('❌ Error:', err.message));

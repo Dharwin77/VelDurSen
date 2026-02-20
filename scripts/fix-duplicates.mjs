@@ -26,24 +26,40 @@ const types = [
     "homeSection40", "homeSection41", "globalSettings"
 ];
 
-async function checkDuplicates() {
-    console.log('--- START DUPLICATE CHECK ---');
-    let duplicateCount = 0;
+async function fixDuplicates() {
+    console.log('🧹 Starting cleanup of duplicate Sanity documents...');
+    let totalDeleted = 0;
+
     for (const type of types) {
+        // Fetch all documents of this type, including drafts
         const docs = await client.fetch(`*[_type == "${type}"] | order(_updatedAt desc) { _id, _updatedAt }`);
+
         if (docs.length > 1) {
-            duplicateCount++;
-            console.log(`[!] Type: ${type} (${docs.length} documents found)`);
-            docs.forEach((d, i) => {
-                console.log(`    ${i === 0 ? '-> CURRENT (Picked by frontend)' : '   '} ID: ${d._id} | Updated: ${d._updatedAt}`);
-            });
+            console.log(`[!] Found ${docs.length} documents for type "${type}".`);
+
+            // The first one in the list (sorted by updatedAt) is our "source of truth"
+            const sourceOfTruth = docs[0];
+            const toDelete = docs.slice(1);
+
+            console.log(`    Source of Truth: ${sourceOfTruth._id} (Last updated: ${sourceOfTruth._updatedAt})`);
+
+            for (const doc of toDelete) {
+                console.log(`    Deleting duplicate: ${doc._id} (Last updated: ${doc._updatedAt})`);
+                try {
+                    await client.delete(doc._id);
+                    totalDeleted++;
+                } catch (err) {
+                    console.error(`    ❌ Failed to delete ${doc._id}: ${err.message}`);
+                }
+            }
         }
     }
-    if (duplicateCount === 0) {
-        console.log('--- NO DUPLICATES FOUND ---');
+
+    if (totalDeleted === 0) {
+        console.log('✅ No duplicates found to clean up.');
     } else {
-        console.log(`--- FOUND ${duplicateCount} TYPES WITH DUPLICATES ---`);
+        console.log(`✅ Cleanup complete. Deleted ${totalDeleted} redundant documents.`);
     }
 }
 
-checkDuplicates().catch(err => console.error('❌ Error:', err.message));
+fixDuplicates().catch(err => console.error('❌ Error:', err.message));

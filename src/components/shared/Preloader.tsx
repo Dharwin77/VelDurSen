@@ -4,11 +4,28 @@ import logo from "@/assets/logo.png";
 import loadingBg from "@/assets/loading.png";
 import loadingLeft from "@/assets/coptercode8.png.jpeg";
 import loadingRight from "@/assets/coptercode7.png.jpeg";
+import { client, urlFor } from "@/lib/sanity";
 
 const Preloader = () => {
     const [loading, setLoading] = useState(true);
+    const [settings, setSettings] = useState<any>(null);
 
     useEffect(() => {
+        // Fetch global settings
+        const fetchSettings = async () => {
+            try {
+                const data = await client.fetch(`*[_type == "globalSettings"][0]{
+                    loadingImages,
+                    loadingText
+                }`);
+                if (data) setSettings(data);
+            } catch (error) {
+                console.error("Failed to fetch loading settings:", error);
+            }
+        };
+
+        fetchSettings();
+
         // Artificial loading delay
         const timer = setTimeout(() => {
             setLoading(false);
@@ -16,6 +33,30 @@ const Preloader = () => {
 
         return () => clearTimeout(timer);
     }, []);
+
+    // Helper to get image URL or fallback
+    const getImage = (index: number, fallback: string) => {
+        if (settings?.loadingImages && settings.loadingImages[index]) {
+            return urlFor(settings.loadingImages[index]).url();
+        }
+        return fallback;
+    };
+
+    // Helper to render text with split color if it matches default pattern, else full text
+    const renderText = () => {
+        const text = settings?.loadingText || "Welcome to VelDurSen";
+        if (text.includes("VelDurSen")) {
+            const parts = text.split("VelDurSen");
+            return (
+                <>
+                    <span className="text-white text-3xl md:text-4xl font-['Inter'] font-black tracking-tighter mr-3">{parts[0]}</span>
+                    <span className="text-red-600 text-3xl md:text-4xl font-['Inter'] font-black tracking-tighter">VelDurSen</span>
+                    {parts[1]}
+                </>
+            );
+        }
+        return <span className="text-white text-3xl md:text-4xl font-['Inter'] font-black tracking-tighter">{text}</span>;
+    };
 
     return (
         <AnimatePresence>
@@ -33,14 +74,14 @@ const Preloader = () => {
                         {/* Left Panel - Hidden on mobile */}
                         <div
                             className="hidden md:flex flex-1 bg-cover bg-center bg-no-repeat border-r border-white/5"
-                            style={{ backgroundImage: `url(${loadingLeft})` }}
+                            style={{ backgroundImage: `url(${getImage(0, loadingLeft)})` }}
                         />
 
                         {/* Center Panel (Main Building) - Full width on mobile, centered on desktop */}
                         <div
                             className="flex-1 md:flex-[1.5] bg-cover bg-center bg-no-repeat"
                             style={{
-                                backgroundImage: `url(${loadingBg})`,
+                                backgroundImage: `url(${getImage(1, loadingBg)})`,
                                 backgroundPosition: 'center center',
                                 backgroundSize: 'cover'
                             }}
@@ -49,7 +90,7 @@ const Preloader = () => {
                         {/* Right Panel - Hidden on mobile */}
                         <div
                             className="hidden md:flex flex-1 bg-cover bg-center bg-no-repeat border-l border-white/5"
-                            style={{ backgroundImage: `url(${loadingRight})` }}
+                            style={{ backgroundImage: `url(${getImage(2, loadingRight)})` }}
                         />
                     </div>
 
@@ -79,8 +120,7 @@ const Preloader = () => {
                                 transition={{ delay: 0.5, duration: 0.8, ease: "circOut" }}
                                 className="text-center drop-shadow-lg"
                             >
-                                <span className="text-white text-3xl md:text-4xl font-['Inter'] font-black tracking-tighter mr-3">Welcome to</span>
-                                <span className="text-red-600 text-3xl md:text-4xl font-['Inter'] font-black tracking-tighter">VelDurSen</span>
+                                {renderText()}
                             </motion.h1>
                         </div>
 

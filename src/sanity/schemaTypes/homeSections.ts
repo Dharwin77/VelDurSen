@@ -204,7 +204,14 @@ export const homeSection15 = createSection('homeSection15', 'Home Section 15 (Ou
     defineField({ name: 'description', title: 'Description', type: 'text' }),
     defineField({
         name: 'areas', title: 'Areas', type: 'array', of: [{
-            type: 'object', fields: [{ name: 'title', type: 'string' }, { name: 'desc', type: 'text' }, { name: 'icon', type: 'string' }, { name: 'features', type: 'array', of: [{ type: 'string' }] }]
+            type: 'object', fields: [
+                { name: 'title', type: 'string', title: 'Title' },
+                { name: 'desc', type: 'text', title: 'Description' },
+                { name: 'icon', type: 'string', title: 'Icon Name (unused, kept for compat)' },
+                { name: 'features', type: 'array', title: 'Features', of: [{ type: 'string' }] },
+                { name: 'image', type: 'image', title: 'Avatar Image (main photo)', options: { hotspot: true } },
+                { name: 'cardIcon', type: 'image', title: 'Card Icon (floating icon image)', options: { hotspot: true } },
+            ]
         }]
     })
 ])
@@ -289,7 +296,17 @@ export const homeSection20 = createSection('homeSection20', 'Home Section 20 (Pr
     defineField({ name: 'heading', title: 'Heading', type: 'string' }),
     defineField({ name: 'subheading', title: 'Subheading', type: 'string' }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
-    defineField({ name: 'features', title: 'Features', type: 'array', of: [{ type: 'string' }] })
+    defineField({ name: 'features', title: 'Features (Right Side List)', type: 'array', of: [{ type: 'string' }] }),
+    defineField({
+        name: 'cards', title: 'Feature Cards (Left Side Tiles)', type: 'array', of: [{
+            type: 'object', fields: [
+                { name: 'label', type: 'string', title: 'Card Label' },
+                { name: 'desc', type: 'text', title: 'Card Description' },
+                { name: 'icon', type: 'string', title: 'Icon Name (e.g. Users, Workflow, BarChart, Activity)' },
+                { name: 'color', type: 'string', title: 'Icon Color Class (e.g. text-blue-600)' },
+            ]
+        }]
+    })
 ])
 
 export const homeSection21 = createSection('homeSection21', 'Home Section 21 (CRM Use Cases)', [
@@ -363,11 +380,13 @@ export const homeSection24 = createSection('homeSection24', 'Home Section 24 (Se
 
 export const homeSection25 = createSection('homeSection25', 'Home Section 25 (Innovation Framework)', [
     defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+    defineField({ name: 'subheading', title: 'Subheading', type: 'string' }),
     defineField({
         name: 'phases', title: 'Phases', type: 'array', of: [{
             type: 'object', fields: [
-                { name: 'step', type: 'string' },
-                { name: 'title', type: 'string' }
+                { name: 'step', type: 'string', title: 'Step Number (e.g. 01)' },
+                { name: 'title', type: 'string', title: 'Phase Title' },
+                { name: 'icon', type: 'string', title: 'Icon Name (e.g. Code, Server, Shield, Rocket, RefreshCcw)' }
             ]
         }]
     })
@@ -376,6 +395,8 @@ export const homeSection25 = createSection('homeSection25', 'Home Section 25 (In
 // New 11 Sections
 export const homeSection26 = createSection('homeSection26', 'Home Section 26 (Global Delivery Ecosystem)', [
     defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+    defineField({ name: 'badge', title: 'Badge Label (e.g. Global Presence)', type: 'string' }),
+    defineField({ name: 'description', title: 'Description', type: 'text' }),
     defineField({ name: 'regions', title: 'Regions List', type: 'array', of: [{ type: 'string' }] }),
     defineField({ name: 'features', title: 'Features', type: 'array', of: [{ type: 'object', fields: [{ name: 'title', type: 'string' }, { name: 'desc', type: 'text' }] }] })
 ])
@@ -396,7 +417,10 @@ export const homeSection28 = createSection('homeSection28', 'Home Section 28 (Be
 
 export const homeSection29 = createSection('homeSection29', 'Home Section 29 (Advisory)', [
     defineField({ name: 'heading', title: 'Heading', type: 'string' }), // "Advisory & Leadership"
+    defineField({ name: 'subheading', title: 'Subheading', type: 'string' }),
+    defineField({ name: 'description', title: 'Description', type: 'text' }),
     defineField({ name: 'quote', title: 'Quote', type: 'text' }),
+    defineField({ name: 'author', title: 'Quote Author', type: 'string' }),
     defineField({ name: 'initiatives', title: 'Initiatives', type: 'array', of: [{ type: 'object', fields: [{ name: 'title', type: 'string' }, { name: 'desc', type: 'string' }] }] })
 ])
 
@@ -464,8 +488,11 @@ export const homeSection38 = createSection('homeSection38', 'Home Section 38 (Do
 ])
 
 export const homeSection39 = createSection('homeSection39', 'Home Section 39 (Professional Assistance)', [
-    defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-    defineField({ name: 'description', title: 'Description', type: 'text' })
+    defineField({ name: 'heading1', title: 'Heading Line 1', type: 'string' }), // "Give your business the"
+    defineField({ name: 'heading2', title: 'Highlighted Text', type: 'string' }), // "Professional Assistance"
+    defineField({ name: 'heading3', title: 'Heading Line 2', type: 'string' }), // "it requires with our team"
+    defineField({ name: 'description', title: 'Description', type: 'text' }),
+    defineField({ name: 'image', title: 'Team Image', type: 'image', options: { hotspot: true } })
 ])
 
 export const homeSection40 = createSection('homeSection40', 'Home Section 40 (Video Section)', [

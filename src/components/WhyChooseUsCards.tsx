@@ -1,13 +1,21 @@
 import { motion } from "framer-motion";
+import { urlFor } from "@/lib/sanity";
 
 interface Benefit {
     title: string;
     description: string;
-    image: string;
+    image: any;
     rotation: number;
 }
 
-const benefits: Benefit[] = [
+interface WhyChooseUsCardsProps {
+    heading?: string;
+    subHeading?: string;
+    description?: string;
+    cards?: any[];
+}
+
+const defaultBenefits: Benefit[] = [
     {
         title: "Scalable teams for sustainable growth",
         description: "Expand confidently with teams built for long-term success and cost efficiency. We create the ideal structure and ensure effortless scaling to match your evolving business goals.",
@@ -34,7 +42,18 @@ const benefits: Benefit[] = [
     }
 ];
 
-const WhyChooseUsCards = () => {
+const WhyChooseUsCards = ({ heading, subHeading, description, cards }: WhyChooseUsCardsProps) => {
+    const benefits = (cards && cards.length > 0) ? cards.map((card: any, i: number) => ({
+        title: card.title || "",
+        description: card.description || "",
+        image: card.image?.asset ? urlFor(card.image).url() : (defaultBenefits[i]?.image || ""),
+        rotation: card.rotation ?? (defaultBenefits[i]?.rotation || 0),
+    })) : defaultBenefits;
+
+    const displayHeading = subHeading || "Our Approach";
+    const displaySubHeading = heading || <>Why Choose Us for Software <span className="text-red-600">Development.</span></>;
+    const displayDescription = description || "Fueling lasting growth by aligning talent, process excellence, and measurable performance.";
+
     return (
         <section className="py-16 bg-white relative overflow-hidden">
             {/* Background decorative elements */}
@@ -50,19 +69,19 @@ const WhyChooseUsCards = () => {
                     viewport={{ once: true }}
                     className="text-center mb-8"
                 >
-                    <span className="text-red-600 font-bold text-xs uppercase tracking-[0.2em]">Our Approach</span>
+                    <span className="text-red-600 font-bold text-xs uppercase tracking-[0.2em]">{displayHeading}</span>
                     <h2 className="text-4xl md:text-5xl font-black mt-4 mb-6 text-slate-900 tracking-tighter">
-                        Why Choose Us for Software <span className="text-red-600">Development.</span>
+                        {typeof displaySubHeading === 'string' ? displaySubHeading : displaySubHeading}
                     </h2>
                     <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                        Fueling lasting growth by aligning talent, process excellence, and measurable performance.
+                        {displayDescription}
                     </p>
                 </motion.div>
 
                 {/* Polaroid Cards Container */}
                 <div className="relative flex items-center justify-center min-h-[600px] py-12">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 max-w-7xl w-full">
-                        {benefits.map((benefit, index) => (
+                        {benefits.map((benefit: any, index: number) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, y: 50, rotateZ: 0 }}
@@ -94,7 +113,7 @@ const WhyChooseUsCards = () => {
                                     {/* Image Container */}
                                     <div className="relative w-full aspect-[4/3] bg-slate-200 rounded-md overflow-hidden mb-4">
                                         <img
-                                            src={benefit.image}
+                                            src={typeof benefit.image === 'string' ? benefit.image : ''}
                                             alt={benefit.title}
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                         />
@@ -125,3 +144,4 @@ const WhyChooseUsCards = () => {
 };
 
 export default WhyChooseUsCards;
+

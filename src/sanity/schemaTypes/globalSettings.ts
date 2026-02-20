@@ -24,11 +24,19 @@ export const globalSettings = defineType({
             options: { hotspot: true },
         }),
         defineField({
-            name: 'loadingImage',
-            title: 'Loading Screen Image',
-            description: 'Image displayed during page loading.',
-            type: 'image',
-            options: { hotspot: true },
+            name: 'loadingImages',
+            title: 'Loading Screen Images',
+            description: 'Upload 3 images for the split-screen loading background (Left, Center, Right).',
+            type: 'array',
+            of: [{ type: 'image', options: { hotspot: true } }],
+            validation: Rule => Rule.max(3)
+        }),
+        defineField({
+            name: 'loadingText',
+            title: 'Loading Screen Text',
+            description: 'Text to display (e.g., "Welcome to VelDurSen").',
+            type: 'string',
+            initialValue: 'Welcome to VelDurSen'
         }),
         // Main Nav could stay here or move to a separate Menu document, keeping here for now as simpler global setting
         defineField({

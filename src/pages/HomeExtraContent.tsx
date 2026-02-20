@@ -293,11 +293,14 @@ interface EnterpriseContentProps {
     automation?: any;
     whyChoose?: any;
     accelerators?: any;
+    innFramework?: any;
+    globalDelivery?: any;
+    advisory?: any;
 }
 
 
 export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps }) => {
-    const { crm, productFocus, expertise, automation, whyChoose, accelerators } = data || {};
+    const { crm, productFocus, expertise, automation, whyChoose, accelerators, innFramework, globalDelivery, advisory } = data || {};
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     return (
@@ -436,28 +439,42 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                                 {/* Decorative Blur Behind Tiles */}
                                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/10 blur-[80px] rounded-full -z-10" />
 
-                                {[
-                                    { label: "CRM Platforms", desc: "Enterprise-ready customer intelligence systems.", icon: Users, color: "text-blue-600", delay: 0 },
-                                    { label: "Workflow Automation", desc: "Streamlined cross-department orchestration.", icon: Workflow, color: "text-blue-700", delay: 0.2, className: "lg:translate-y-12" },
-                                    { label: "Enterprise Dashboards", desc: "Executive-level visibility & real-time monitoring.", icon: BarChart, color: "text-blue-800", delay: 0.1 },
-                                    { label: "BI Systems", desc: "Data modeling and predictive analytics built for decisions.", icon: Activity, color: "text-red-600", delay: 0.3, className: "lg:translate-y-12" },
-                                ].map((item, i) => (
-                                    <motion.div
-                                        key={i}
-                                        initial={{ opacity: 0, y: 30, rotate: -2 }}
-                                        whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: item.delay, duration: 0.6 }}
-                                        whileHover={{ y: -10, rotate: 1, boxShadow: "0 20px 40px -10px rgba(0,0,0,0.1)" }}
-                                        className={`bg-white p-6 rounded-2xl border border-slate-100 shadow-xl flex flex-col items-start text-left h-full min-h-[180px] ${item.className || ""}`}
-                                    >
-                                        <div className={`p-3 rounded-xl bg-slate-50 mb-4 ${item.color}`}>
-                                            <item.icon className="w-8 h-8" />
-                                        </div>
-                                        <h4 className="font-black text-slate-900 text-lg mb-2 tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>{item.label}</h4>
-                                        <p className="text-sm text-slate-500 leading-relaxed font-medium">{item.desc}</p>
-                                    </motion.div>
-                                ))}
+                                {(() => {
+                                    const iconMap: Record<string, any> = { Users, Workflow, BarChart, Activity, Code, Server, Database, Cpu, Layers, Shield, Lock, Rocket, MonitorCheck, Brain, Globe, RefreshCcw, Layout, PieChart, FileText, Terminal, Cloud };
+                                    const defaultCards = [
+                                        { label: "CRM Platforms", desc: "Enterprise-ready customer intelligence systems.", icon: Users, color: "text-blue-600", delay: 0 },
+                                        { label: "Workflow Automation", desc: "Streamlined cross-department orchestration.", icon: Workflow, color: "text-blue-700", delay: 0.2, className: "lg:translate-y-12" },
+                                        { label: "Enterprise Dashboards", desc: "Executive-level visibility & real-time monitoring.", icon: BarChart, color: "text-blue-800", delay: 0.1 },
+                                        { label: "BI Systems", desc: "Data modeling and predictive analytics built for decisions.", icon: Activity, color: "text-red-600", delay: 0.3, className: "lg:translate-y-12" },
+                                    ];
+                                    const cards = (productFocus?.cards?.length > 0)
+                                        ? productFocus.cards.map((card: any, i: number) => ({
+                                            label: card.label || defaultCards[i]?.label || "",
+                                            desc: card.desc || defaultCards[i]?.desc || "",
+                                            icon: iconMap[card.icon] || defaultCards[i]?.icon || Users,
+                                            color: card.color || defaultCards[i]?.color || "text-blue-600",
+                                            delay: i % 2 === 0 ? (i === 0 ? 0 : 0.1) : (i === 1 ? 0.2 : 0.3),
+                                            className: i % 2 !== 0 ? "lg:translate-y-12" : "",
+                                        }))
+                                        : defaultCards;
+                                    return cards.map((item: any, i: number) => (
+                                        <motion.div
+                                            key={i}
+                                            initial={{ opacity: 0, y: 30, rotate: -2 }}
+                                            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: item.delay, duration: 0.6 }}
+                                            whileHover={{ y: -10, rotate: 1, boxShadow: "0 20px 40px -10px rgba(0,0,0,0.1)" }}
+                                            className={`bg-white p-6 rounded-2xl border border-slate-100 shadow-xl flex flex-col items-start text-left h-full min-h-[180px] ${item.className || ""}`}
+                                        >
+                                            <div className={`p-3 rounded-xl bg-slate-50 mb-4 ${item.color}`}>
+                                                <item.icon className="w-8 h-8" />
+                                            </div>
+                                            <h4 className="font-black text-slate-900 text-lg mb-2 tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>{item.label}</h4>
+                                            <p className="text-sm text-slate-500 leading-relaxed font-medium">{item.desc}</p>
+                                        </motion.div>
+                                    ));
+                                })()}
                             </div>
                         </motion.div>
 
@@ -565,40 +582,47 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                     </motion.div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10">
-                        {(expertise?.areas?.length > 0 ? expertise.areas.map((area: any) => ({
-                            title: area.title,
-                            desc: area.desc,
-                            // Cycle through default images/icons if not provided in schema
-                            avatar: cardImg1,
-                            fluentIcon: crmHealthcare
-                        })) : [
-                            {
-                                title: "Healthcare CRM",
-                                desc: "Managing patient engagement, appointment workflows, HIPAA compliance, and analytics securely with cross-region reliability.",
-                                avatar: cardImg1,
-                                fluentIcon: crmHealthcare
-                            },
-                            {
-                                title: "Financial CRM",
-                                desc: "Customer lifecycle management, fraud detection, regulatory dashboards, and real-time reporting for global banking operations.",
-                                avatar: cardImg2,
-                                fluentIcon: crmFinance
-                            },
-                            {
-                                title: "Retail & E-commerce",
-                                desc: "Omnichannel tracking, personalized engagement, inventory integration, and automated marketing across global markets.",
-                                avatar: cardImg3,
-                                fluentIcon: crmRetail
-                            },
-                            {
-                                title: "Manufacturing B2B",
-                                desc: "Supply chain visibility, dealer network management, demand forecasting, and performance dashboards for large scale industries.",
-                                avatar: cardImg4,
-                                fluentIcon: crmManufacturing
-                            }
-                        ]).map((useCase: any, i: number) => (
-                            <CRMUseCaseCard key={i} useCase={useCase} index={i} />
-                        ))}
+                        {(() => {
+                            const defaultAvatars = [cardImg1, cardImg2, cardImg3, cardImg4];
+                            const defaultIcons = [crmHealthcare, crmFinance, crmRetail, crmManufacturing];
+                            const defaultAreas = [
+                                {
+                                    title: "Healthcare CRM",
+                                    desc: "Managing patient engagement, appointment workflows, HIPAA compliance, and analytics securely with cross-region reliability.",
+                                    avatar: cardImg1,
+                                    fluentIcon: crmHealthcare
+                                },
+                                {
+                                    title: "Financial CRM",
+                                    desc: "Customer lifecycle management, fraud detection, regulatory dashboards, and real-time reporting for global banking operations.",
+                                    avatar: cardImg2,
+                                    fluentIcon: crmFinance
+                                },
+                                {
+                                    title: "Retail & E-commerce",
+                                    desc: "Omnichannel tracking, personalized engagement, inventory integration, and automated marketing across global markets.",
+                                    avatar: cardImg3,
+                                    fluentIcon: crmRetail
+                                },
+                                {
+                                    title: "Manufacturing B2B",
+                                    desc: "Supply chain visibility, dealer network management, demand forecasting, and performance dashboards for large scale industries.",
+                                    avatar: cardImg4,
+                                    fluentIcon: crmManufacturing
+                                }
+                            ];
+                            const areas = (expertise?.areas?.length > 0)
+                                ? expertise.areas.map((area: any, i: number) => ({
+                                    title: area.title,
+                                    desc: area.desc,
+                                    avatar: area.image?.asset ? urlFor(area.image).url() : (defaultAvatars[i] || defaultAvatars[0]),
+                                    fluentIcon: area.cardIcon?.asset ? urlFor(area.cardIcon).url() : (defaultIcons[i] || defaultIcons[0]),
+                                }))
+                                : defaultAreas;
+                            return areas.map((useCase: any, i: number) => (
+                                <CRMUseCaseCard key={i} useCase={useCase} index={i} />
+                            ));
+                        })()}
                     </div>
                 </div>
             </section>
@@ -774,9 +798,9 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                         className="text-center max-w-4xl mx-auto mb-8"
                     >
                         <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 mb-6">
-                            Enterprise Product Innovation <span className="text-orange-600">Framework</span>
+                            {innFramework?.heading || <>Enterprise Product Innovation <span className="text-orange-600">Framework</span></>}
                         </h2>
-                        <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">Structured Software Engineering for Long-Term Scalability.</p>
+                        <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">{innFramework?.subheading || "Structured Software Engineering for Long-Term Scalability."}</p>
                     </motion.div>
 
                     <div className="relative overflow-visible -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-12 xl:-mx-16 flex flex-col gap-8 pt-8 pb-8">
@@ -819,13 +843,24 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
 
                         {/* The Dropping Cards Container - Synced with High Speed */}
                         <div className="w-full px-4 grid grid-cols-1 md:grid-cols-5 gap-4">
-                            {[
-                                { step: "01", title: "Blueprinting", icon: Code },
-                                { step: "02", title: "Microservices", icon: Server },
-                                { step: "03", title: "Secure DevOps", icon: Shield },
-                                { step: "04", title: "Rollouts", icon: Rocket },
-                                { step: "05", title: "Iteration", icon: RefreshCcw }
-                            ].map((phase, i) => (
+                            {(() => {
+                                const phaseIconMap: Record<string, any> = { Code, Server, Shield, Rocket, RefreshCcw, Brain, Globe, Database, Cpu, Layers, Lock, Users, Workflow, BarChart, Activity, MonitorCheck, Terminal, Cloud };
+                                const defaultPhases = [
+                                    { step: "01", title: "Blueprinting", icon: Code },
+                                    { step: "02", title: "Microservices", icon: Server },
+                                    { step: "03", title: "Secure DevOps", icon: Shield },
+                                    { step: "04", title: "Rollouts", icon: Rocket },
+                                    { step: "05", title: "Iteration", icon: RefreshCcw }
+                                ];
+                                const phases = (innFramework?.phases?.length > 0)
+                                    ? innFramework.phases.map((p: any, i: number) => ({
+                                        step: p.step || defaultPhases[i]?.step || String(i + 1).padStart(2, '0'),
+                                        title: p.title || defaultPhases[i]?.title || '',
+                                        icon: phaseIconMap[p.icon] || defaultPhases[i]?.icon || Code,
+                                    }))
+                                    : defaultPhases;
+                                return phases;
+                            })().map((phase: any, i: number) => (
                                 <motion.div
                                     key={i}
                                     initial={{ opacity: 0, y: -50, scale: 0.5 }}
@@ -919,20 +954,20 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                                 viewport={{ once: false }}
                                 variants={fadeInRight}
                             >
-                                <span className="inline-block px-4 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 font-black uppercase tracking-[0.2em] text-[10px] mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>Global Presence</span>
+                                <span className="inline-block px-4 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 font-black uppercase tracking-[0.2em] text-[10px] mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>{globalDelivery?.badge || "Global Presence"}</span>
                                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-white mb-8 tracking-tighter leading-[1.1]" style={{ fontFamily: "'Inter', sans-serif" }}>
-                                    Global Delivery Ecosystem <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">24/7 Connectivity</span>
+                                    {globalDelivery?.heading || <>Global Delivery Ecosystem <br />
+                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">24/7 Connectivity</span></>}
                                 </h2>
                                 <p className="text-lg md:text-xl text-slate-400 leading-relaxed mb-10 font-medium">
-                                    Our distributed technology centers enable <span className="text-white italic">"Follow-the-Sun"</span> engineering cycles, ensuring uninterrupted innovation benchmarks and rapid response scalability across every timezone.
+                                    {globalDelivery?.description || <>Our distributed technology centers enable <span className="text-white italic">"Follow-the-Sun"</span> engineering cycles, ensuring uninterrupted innovation benchmarks and rapid response scalability across every timezone.</>}
                                 </p>
 
                                 <div className="space-y-6">
-                                    {[
+                                    {(globalDelivery?.features?.length > 0 ? globalDelivery.features : [
                                         { title: "Sustained Operational Uptime", desc: "Redundant governance ensuring system continuity." },
                                         { title: "Localized Compliance Hubs", desc: "Data residency and regional regulatory alignment." }
-                                    ].map((item, idx) => (
+                                    ]).map((item: any, idx: number) => (
                                         <div key={idx} className="flex gap-6 group">
                                             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600/20 to-indigo-600/20 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-blue-500/50 transition-colors">
                                                 <Zap className="w-6 h-6 text-blue-400" />
@@ -1157,72 +1192,60 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                 </div>
             </section>
 
-            {/* 17. Strategic Consulting & 18. Thought Leadership - Advisory Intelligence */}
-            <section className="section-padding bg-white relative overflow-visible">
-                <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-50/50 -skew-x-6 translate-x-12"></div>
-
+            {/* 19. Advisory & Leadership - Strategic Consulting */}
+            <section className="section-padding bg-slate-900 text-white relative overflow-hidden">
+                <div className="absolute inset-0 bg-blue-900/10 pointer-events-none" />
                 <div className="enterprise-container relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-                        <div className="lg:col-span-5">
-                            <motion.div
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: false }}
-                                variants={fadeInLeft}
-                            >
-                                <div className="inline-block px-4 py-1.5 bg-indigo-50 border border-indigo-100 rounded-full text-indigo-600 font-black uppercase tracking-[0.2em] text-[10px] mb-6" style={{ fontFamily: "'Inter', sans-serif" }}>Advisory & Leadership</div>
-                                <h2 className="text-4xl lg:text-5xl font-black text-slate-950 mb-8 tracking-tighter leading-[1]" style={{ fontFamily: "'Inter', sans-serif" }}>
-                                    Strategic <br />
-                                    <span className="text-indigo-600">Consulting.</span>
-                                </h2>
-                                <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-10 font-medium">
-                                    We align multi-decade technology roadmaps with immediate business performance, navigating the complexity of global digital transformation.
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: false }}
+                            variants={fadeInUp}
+                        >
+                            <span className="text-blue-400 font-bold uppercase tracking-[0.2em] text-xs mb-4 block">
+                                {advisory?.subheading || "Strategic Consulting."}
+                            </span>
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-[1.1] tracking-tight">
+                                {advisory?.heading || "Advisory & Leadership"}
+                            </h2>
+                            <p className="text-lg md:text-xl text-slate-400 leading-relaxed font-medium mb-8">
+                                {advisory?.description || "We align multi-decade technology roadmaps with immediate business performance, navigating the complexity of global digital transformation."}
+                            </p>
+
+                            {/* Quote Block */}
+                            <div className="bg-white/5 border border-white/10 p-8 rounded-2xl relative">
+                                <div className="absolute top-0 left-0 text-7xl text-blue-500/20 font-serif leading-none -translate-x-4 -translate-y-4">“</div>
+                                <p className="text-xl text-white font-serif italic leading-relaxed relative z-10">
+                                    {advisory?.quote || "Strategy is useless without the engineering depth to execute it. VelDurSen bridges that gap."}
                                 </p>
+                                <div className="mt-4 text-sm font-bold text-blue-400 uppercase tracking-widest">— {advisory?.author || "Visionary Execution"}</div>
+                            </div>
+                        </motion.div>
 
-                                <div className="relative p-8 bg-slate-950 rounded-[2rem] text-white overflow-hidden group">
-                                    <div className="absolute -right-4 -bottom-4 w-32 h-32 bg-indigo-500/20 rounded-full blur-3xl group-hover:bg-indigo-500/40 transition-colors" />
-                                    <h4 className="text-2xl font-black mb-4 relative z-10 text-white tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>Visionary Execution</h4>
-                                    <p className="text-slate-200 text-base leading-relaxed relative z-10 font-medium opacity-90">
-                                        "Strategy is useless without the engineering depth to execute it. VelDurSen bridges that gap."
-                                    </p>
-                                    <div className="mt-8 flex items-center gap-4 relative z-10">
-                                        <div className="w-10 h-10 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500" />
-                                        <div>
-                                            <div className="text-xs font-bold text-white uppercase tracking-widest">Office of the CTO</div>
-                                            <div className="text-[10px] text-slate-400 font-bold">Advisory Council</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        </div>
-
-                        <div className="lg:col-span-1" />
-
-                        <div className="lg:col-span-6 grid grid-cols-1 gap-6">
-                            {[
-                                { title: "Digital Strategy", desc: "Restructuring digital operations for risk resilience.", icon: PieChart, color: "bg-blue-500" },
-                                { title: "CRM Transformation", desc: "Enterprise-wide adoption roadmaps and optimization.", icon: Workflow, color: "bg-indigo-600" },
-                                { title: "AI Integration", desc: "Strategic implementation of predictive models.", icon: Brain, color: "bg-purple-600" }
-                            ].map((item, i) => (
+                        <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: false }}
+                            variants={fadeInRight}
+                            className="space-y-4"
+                        >
+                            {(advisory?.initiatives?.length > 0 ? advisory.initiatives : [
+                                { title: "Office of the CTO", desc: "Advisory Council" },
+                                { title: "Digital Strategy", desc: "Restructuring digital operations for risk resilience." },
+                                { title: "CRM Transformation", desc: "Enterprise-wide adoption roadmaps and optimization." },
+                                { title: "AI Integration", desc: "Strategic implementation of predictive models." }
+                            ]).map((item: any, idx: number) => (
                                 <motion.div
-                                    key={i}
-                                    variants={fadeInUp}
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: false }}
-                                    transition={{ delay: i * 0.1 }}
-                                    className="group flex items-start gap-8 p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-indigo-100 transition-all duration-500"
+                                    key={idx}
+                                    whileHover={{ x: 10 }}
+                                    className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-blue-500/30 transition-all duration-300 group cursor-default"
                                 >
-                                    <div className={`w-14 h-14 rounded-2xl ${item.color} flex items-center justify-center shrink-0 shadow-lg group-hover:scale-110 transition-transform`}>
-                                        <item.icon className="w-6 h-6 text-white" />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-xl md:text-2xl font-black text-slate-950 mb-3 tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>{item.title}</h3>
-                                        <p className="text-slate-500 leading-relaxed font-medium">{item.desc}</p>
-                                    </div>
+                                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{item.title}</h3>
+                                    <p className="text-slate-400 font-medium">{item.desc}</p>
                                 </motion.div>
                             ))}
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>
@@ -1314,6 +1337,7 @@ export const EnterpriseCRMContent = ({ data }: { data: EnterpriseContentProps })
                     </div>
                 </div>
             </section>
+
 
             {/* 20. Digital Revenue Acceleration Framework - High Velocity Engine */}
             <section className="section-padding bg-slate-50 relative overflow-visible">

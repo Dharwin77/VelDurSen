@@ -860,7 +860,10 @@ const Index = () => {
                     expertise: sanityData?.expertise,
                     automation: sanityData?.automation,
                     whyChoose: sanityData?.whyChoose,
-                    accelerators: sanityData?.accelerators
+                    accelerators: sanityData?.accelerators,
+                    innFramework: sanityData?.innFramework,
+                    globalDelivery: sanityData?.globalDelivery,
+                    advisory: sanityData?.advisory
                 }} />
 
 
@@ -900,7 +903,9 @@ const Index = () => {
                             className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16"
                         >
                             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-8 leading-[1.15] tracking-tight">
-                                {sanityData?.assistance?.heading || <>Give your business the <br /> <span className="text-blue-600">Professional Assistance</span> <br /> it requires with our team</>}
+                                {sanityData?.assistance?.heading1 || "Give your business the"} <br />
+                                <span className="text-blue-600">{sanityData?.assistance?.heading2 || "Professional Assistance"}</span> <br />
+                                {sanityData?.assistance?.heading3 || "it requires with our team"}
                             </h2>
                             <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
                                 {sanityData?.assistance?.description || "Your vision is our starting point. Our team of expert developers, with 16+ years of experience, harmoniously collaborates with your team to create the custom software solution you aspire to."}
@@ -914,7 +919,11 @@ const Index = () => {
                             variants={scaleUp}
                             className="w-full max-w-5xl h-[250px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-3xl overflow-hidden shadow-2xl relative group cursor-pointer"
                         >
-                            <img src={copter5} alt="Team Culture" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                            <img
+                                src={sanityData?.assistance?.image ? urlFor(sanityData.assistance.image).url() : copter5}
+                                alt="Team Culture"
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all duration-500" />
                         </motion.div>
                     </div>
